@@ -68,10 +68,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
         
+        // CRM Leads Management
+        Route::get('/leads', [\App\Http\Controllers\Admin\ConsultationLeadController::class, 'index'])->name('leads.index');
+        Route::get('/leads/{id}', [\App\Http\Controllers\Admin\ConsultationLeadController::class, 'show'])->name('leads.show');
+        Route::patch('/leads/{id}/status', [\App\Http\Controllers\Admin\ConsultationLeadController::class, 'updateStatus'])->name('leads.status');
+        Route::delete('/leads/{id}', [\App\Http\Controllers\Admin\ConsultationLeadController::class, 'destroy'])->name('leads.destroy');
+
         // Placeholder routes for subsequent tasks to prevent route error in sidebar
-        Route::get('/leads', function () {
-            return redirect()->route('admin.dashboard');
-        })->name('leads.index');
 
         Route::get('/products', function () {
             return redirect()->route('admin.dashboard');

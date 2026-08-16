@@ -53,4 +53,23 @@ class ConsultationService
 
         return "https://wa.me/{$cleanWa}?text=" . urlencode($msg);
     }
+
+    public function generateAdminFollowUpWhatsAppUrl(ConsultationLead $lead): string
+    {
+        $phone = preg_replace('/[^0-9]/', '', $lead->phone_number);
+        if (str_starts_with($phone, '0')) {
+            $phone = '62' . substr($phone, 1);
+        }
+
+        $msg = "Halo Bpk/Ibu *{$lead->full_name}*,\n\n"
+             . "Kami dari Tim Medis *Klinik Ortotik & Prostetik Indonesia* menindaklanjuti permintaan konsultasi Anda melalui website resmi.\n\n"
+             . "📋 *Ringkasan Permintaan:*\n"
+             . "• Keluhan: {$lead->complaint_type}\n"
+             . ($lead->preferred_date ? "• Rencana Tanggal: {$lead->preferred_date->format('d F Y')}\n" : "")
+             . ($lead->branch ? "• Pilihan Cabang: {$lead->branch->name}\n" : "")
+             . "\nApakah ada waktu yang nyaman untuk kami bantu jadwalkan pemeriksaan langsung dengan spesialis kami?\n\n"
+             . "Salam sehat,\nTim Medis Klinik Ortotik & Prostetik";
+
+        return "https://wa.me/{$phone}?text=" . urlencode($msg);
+    }
 }

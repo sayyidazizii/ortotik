@@ -48,3 +48,50 @@ Route::get('/about', function () {
 Route::get('/about-us', function () {
     return view('pages.about');
 })->name('about-us');
+
+/*
+|--------------------------------------------------------------------------
+| Admin Authentication Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/login', [\App\Http\Controllers\Admin\AuthController::class, 'showLoginForm'])->name('login');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [\App\Http\Controllers\Admin\AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [\App\Http\Controllers\Admin\AuthController::class, 'login'])->name('login.submit');
+    Route::post('/logout', [\App\Http\Controllers\Admin\AuthController::class, 'logout'])->name('logout');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Protected Admin Routes (Requires auth and admin role)
+    |--------------------------------------------------------------------------
+    */
+    Route::middleware(['auth', 'admin'])->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+        
+        // Placeholder routes for subsequent tasks to prevent route error in sidebar
+        Route::get('/leads', function () {
+            return redirect()->route('admin.dashboard');
+        })->name('leads.index');
+
+        Route::get('/products', function () {
+            return redirect()->route('admin.dashboard');
+        })->name('products.index');
+
+        Route::get('/services', function () {
+            return redirect()->route('admin.dashboard');
+        })->name('services.index');
+
+        Route::get('/articles', function () {
+            return redirect()->route('admin.dashboard');
+        })->name('articles.index');
+
+        Route::get('/branches', function () {
+            return redirect()->route('admin.dashboard');
+        })->name('branches.index');
+
+        Route::get('/settings', function () {
+            return redirect()->route('admin.dashboard');
+        })->name('settings.index');
+    });
+});
+

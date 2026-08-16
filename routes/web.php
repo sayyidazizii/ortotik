@@ -74,27 +74,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::patch('/leads/{id}/status', [\App\Http\Controllers\Admin\ConsultationLeadController::class, 'updateStatus'])->name('leads.status');
         Route::delete('/leads/{id}', [\App\Http\Controllers\Admin\ConsultationLeadController::class, 'destroy'])->name('leads.destroy');
 
-        // Placeholder routes for subsequent tasks to prevent route error in sidebar
+        // CMS Products (E-Katalog)
+        Route::resource('products', \App\Http\Controllers\Admin\ProductController::class)->except(['show']);
 
-        Route::get('/products', function () {
-            return redirect()->route('admin.dashboard');
-        })->name('products.index');
+        // CMS Services (Layanan Medis)
+        Route::resource('services', \App\Http\Controllers\Admin\MedicalServiceController::class)->except(['show']);
 
-        Route::get('/services', function () {
-            return redirect()->route('admin.dashboard');
-        })->name('services.index');
+        // CMS Articles (Edukasi & Blog)
+        Route::resource('articles', \App\Http\Controllers\Admin\ArticleController::class)->except(['show']);
 
-        Route::get('/articles', function () {
-            return redirect()->route('admin.dashboard');
-        })->name('articles.index');
+        // CMS Branches (Cabang Klinik)
+        Route::resource('branches', \App\Http\Controllers\Admin\BranchController::class)->except(['show']);
 
-        Route::get('/branches', function () {
-            return redirect()->route('admin.dashboard');
-        })->name('branches.index');
-
-        Route::get('/settings', function () {
-            return redirect()->route('admin.dashboard');
-        })->name('settings.index');
+        // CMS Settings (Pengaturan Klinik)
+        Route::get('/settings', [\App\Http\Controllers\Admin\SiteSettingController::class, 'index'])->name('settings.index');
+        Route::put('/settings', [\App\Http\Controllers\Admin\SiteSettingController::class, 'update'])->name('settings.update');
     });
 });
 

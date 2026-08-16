@@ -38,6 +38,26 @@ class MedicalService extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function getNameAttribute(): string
+    {
+        return $this->title ?? '';
+    }
+
+    public function getShortDescriptionAttribute(): string
+    {
+        return $this->summary ?? '';
+    }
+
+    public function getDescriptionAttribute(): string
+    {
+        return $this->content ?? '';
+    }
+
+    public function getIconAttribute(): ?string
+    {
+        return $this->icon_name ?? 'activity';
+    }
+
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);

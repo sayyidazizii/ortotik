@@ -1,148 +1,205 @@
 @extends('layouts.app')
 
-@section('title', $product->name . ' - E-Katalog Klinik Ortotik')
+@section('title', $product->name . ' - Precision Orthotics & Prosthetics')
 @section('meta_description', strip_tags($product->excerpt ?? $product->description))
 
 @section('content')
 
-<!-- Breadcrumbs -->
-<div class="bg-sky-50/50 py-3.5 border-b border-sky-100 text-xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 text-slate-500">
-        <a href="{{ route('home') }}" class="hover:text-medical-600">Beranda</a>
+<!-- Sub-Nav Breadcrumb -->
+<div class="bg-canvas border-b border-hairline-soft py-3 px-4 sm:px-6 lg:px-8 text-xs text-mute font-medium">
+    <div class="max-w-[1440px] mx-auto flex items-center gap-2">
+        <a href="{{ route('home') }}" class="hover:text-ink">Beranda</a>
         <span>/</span>
-        <a href="{{ route('products.index') }}" class="hover:text-medical-600">E-Katalog</a>
+        <a href="{{ route('products.index') }}" class="hover:text-ink">E-Katalog</a>
         <span>/</span>
-        <span class="text-slate-800 font-bold">{{ $product->name }}</span>
+        <span class="text-ink font-semibold">{{ $product->name }}</span>
     </div>
 </div>
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
         
-        <!-- Image Gallery (Left) -->
-        <div class="lg:col-span-6 space-y-4" x-data="{ mainImage: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80' }">
-            <div class="bg-white rounded-3xl border border-slate-200/80 p-4 shadow-card overflow-hidden h-[420px] flex items-center justify-center">
-                <img :src="mainImage" alt="{{ $product->name }}" class="max-h-full max-w-full object-contain rounded-2xl">
+        <!-- Left: PDP Gallery (Vertical Thumbnail Rail + Main 1:1 Image on soft-cloud) -->
+        <div class="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-4" x-data="{ mainImage: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1000&q=85' }">
+            <!-- Vertical Thumbnail Rail -->
+            <div class="flex sm:flex-col gap-2 shrink-0 overflow-x-auto sm:overflow-visible">
+                <button @click="mainImage = 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1000&q=85'"
+                    class="w-16 h-16 bg-soft-cloud border border-ink p-0.5 overflow-hidden shrink-0">
+                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover">
+                </button>
+                <button @click="mainImage = 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1000&q=85'"
+                    class="w-16 h-16 bg-soft-cloud border border-hairline hover:border-ink p-0.5 overflow-hidden shrink-0 transition">
+                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover">
+                </button>
+                <button @click="mainImage = 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=85'"
+                    class="w-16 h-16 bg-soft-cloud border border-hairline hover:border-ink p-0.5 overflow-hidden shrink-0 transition">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover">
+                </button>
             </div>
-            
-            <div class="flex items-center gap-3">
-                <button @click="mainImage = 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80'" class="w-20 h-20 rounded-xl border-2 border-medical-600 p-1 bg-white overflow-hidden shadow-xs">
-                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover rounded-lg">
-                </button>
-                <button @click="mainImage = 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80'" class="w-20 h-20 rounded-xl border border-slate-200 hover:border-medical-600 p-1 bg-white overflow-hidden shadow-xs transition">
-                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover rounded-lg">
-                </button>
+
+            <!-- Main Product Image (1:1 aspect ratio on soft-cloud) -->
+            <div class="relative bg-soft-cloud aspect-square w-full flex items-center justify-center overflow-hidden">
+                <img :src="mainImage" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                <span class="absolute top-4 left-4 bg-canvas border border-hairline text-ink text-xs font-semibold px-3 py-1 rounded-full shadow-xs">
+                    {{ $product->category->name ?? 'Ortotik Medis' }}
+                </span>
             </div>
         </div>
 
-        <!-- Product Information (Right) -->
-        <div class="lg:col-span-6 space-y-6">
+        <!-- Right: Product Purchase & Information Details -->
+        <div class="lg:col-span-5 space-y-6">
             <div>
-                <div class="flex items-center gap-2 mb-2">
-                    <span class="bg-sky-50 text-sky-800 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider border border-sky-100">{{ $product->category->name ?? 'Medis' }}</span>
-                    <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 border border-emerald-200">
-                        <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
-                        <span>Ready Stock / Medis Terdaftar</span>
-                    </span>
-                </div>
-                <h1 class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">{{ $product->name }}</h1>
+                <!-- Category Subtitle ({typography.caption-md} mute) -->
+                <span class="text-xs font-semibold text-mute uppercase tracking-widest block mb-1">
+                    {{ $product->category->name ?? 'Alat Bantu Ortopedi' }} &bull; Ready Stock
+                </span>
+
+                <!-- Product Name ({typography.heading-xl}: 32px 500) -->
+                <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink uppercase font-sans leading-tight">
+                    {{ $product->name }}
+                </h1>
+
+                <!-- SKU & Rating Snippet -->
                 @if($product->sku)
-                <p class="text-xs text-slate-400 mt-1">SKU Produk: <span class="font-mono font-bold text-slate-600">{{ $product->sku }}</span></p>
+                <p class="text-xs text-mute mt-1 font-mono">Kode SKU: {{ $product->sku }}</p>
                 @endif
             </div>
 
-            <!-- Price Card -->
-            <div class="p-6 rounded-2xl bg-sky-50/50 border border-sky-100 flex items-baseline gap-4">
-                <span class="text-3xl font-black text-slate-900">{{ $product->formatted_price }}</span>
+            <!-- Price Row ({typography.heading-lg}: 24px 500) -->
+            <div class="flex items-baseline gap-3 pb-4 border-b border-hairline-soft">
+                <span class="text-2xl font-bold text-ink">{{ $product->formatted_price }}</span>
                 @if($product->formatted_discount_price)
-                <span class="text-base text-slate-400 line-through">{{ $product->formatted_discount_price }}</span>
-                <span class="text-xs font-bold text-red-600 bg-red-50 px-2.5 py-1 rounded-md border border-red-100">Promo</span>
+                <span class="text-sm text-mute line-through">{{ $product->formatted_discount_price }}</span>
+                <span class="text-xs font-bold text-sale">Diskon Promo</span>
                 @endif
             </div>
 
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">{{ $product->excerpt }}</p>
+            <!-- Swatch Picker (Concentric active ring) -->
+            <div class="space-y-2">
+                <label class="text-xs font-semibold uppercase text-ink tracking-wider block">Pilihan Varian / Ukuran:</label>
+                <div class="flex items-center gap-2">
+                    <span class="w-5 h-5 rounded-full bg-ink ring-2 ring-ink ring-offset-2 cursor-pointer"></span>
+                    <span class="w-5 h-5 rounded-full bg-mute ring-1 ring-hairline cursor-pointer"></span>
+                    <span class="w-5 h-5 rounded-full bg-hairline-soft ring-1 ring-hairline cursor-pointer"></span>
+                </div>
+            </div>
 
-            <!-- Call to Action Buttons -->
+            <!-- Excerpt -->
+            <p class="text-xs text-mute font-normal leading-relaxed">
+                {{ $product->excerpt ?? strip_tags($product->description) }}
+            </p>
+
+            <!-- Two-Tone CTA Hierarchy ({component.button-primary} vs {component.button-secondary}) -->
             <div class="space-y-3 pt-2">
+                <!-- Primary Action: Black Pill -->
                 <a href="{{ $waUrl }}" target="_blank"
-                    class="w-full inline-flex justify-center items-center gap-2.5 py-4 px-6 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white text-sm font-extrabold shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5">
-                    <i data-lucide="message-circle" class="w-5 h-5"></i>
-                    <span>Order / Konsultasi Ukuran via WhatsApp</span>
+                    class="w-full flex items-center justify-center bg-ink hover:bg-charcoal text-canvas text-sm font-medium h-12 rounded-full btn-pill-tap shadow-lg transition">
+                    <i data-lucide="message-circle" class="w-4 h-4 mr-2"></i>
+                    <span>Order / Konsultasi via WhatsApp</span>
                 </a>
+
+                <!-- Secondary Action: Soft Cloud Pill -->
                 <a href="{{ route('consultation.create') }}?medical_service_id={{ $product->medical_service_id }}"
-                    class="w-full inline-flex justify-center items-center gap-2 py-3.5 px-6 rounded-xl bg-medical-600 hover:bg-medical-700 text-white text-xs font-bold shadow-xs transition">
-                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                    class="w-full flex items-center justify-center bg-soft-cloud hover:bg-hairline-soft text-ink text-sm font-medium h-12 rounded-full btn-pill-tap transition">
+                    <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
                     <span>Jadwalkan Fitting di Klinik</span>
                 </a>
             </div>
 
-            <!-- Benefits Guarantee -->
-            <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-200 text-xs text-slate-600">
+            <!-- Service Guarantee Icons -->
+            <div class="grid grid-cols-2 gap-4 pt-4 border-t border-hairline-soft text-xs text-mute font-medium">
                 <div class="flex items-center gap-2">
-                    <i data-lucide="truck" class="w-4 h-4 text-medical-600"></i>
-                    <span>Pengiriman Aman Seluruh Indonesia</span>
+                    <i data-lucide="shield-check" class="w-4 h-4 text-ink shrink-0"></i>
+                    <span>100% Standar Medis Kemenkes</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-medical-600"></i>
-                    <span>100% Original Standar Medis</span>
+                    <i data-lucide="refresh-cw" class="w-4 h-4 text-ink shrink-0"></i>
+                    <span>Garansi Penyetelan Pas</span>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Product Tab Details -->
-    <div class="mt-16 bg-white rounded-3xl border border-slate-200/80 p-8 shadow-card" x-data="{ tab: 'desc' }">
-        <div class="flex border-b border-slate-200 gap-8 mb-6">
-            <button @click="tab = 'desc'" :class="tab === 'desc' ? 'border-b-2 border-medical-600 text-medical-600 font-extrabold' : 'text-slate-500 font-semibold'" class="pb-3 text-xs uppercase tracking-wider transition">Deskripsi Lengkap</button>
-            <button @click="tab = 'indications'" :class="tab === 'indications' ? 'border-b-2 border-medical-600 text-medical-600 font-extrabold' : 'text-slate-500 font-semibold'" class="pb-3 text-xs uppercase tracking-wider transition">Indikasi Medis</button>
-            <button @click="tab = 'specs'" :class="tab === 'specs' ? 'border-b-2 border-medical-600 text-medical-600 font-extrabold' : 'text-slate-500 font-semibold'" class="pb-3 text-xs uppercase tracking-wider transition">Spesifikasi & Material</button>
-        </div>
-
-        <div x-show="tab === 'desc'" class="prose prose-slate max-w-none text-xs leading-relaxed text-slate-600">
-            {!! $product->description !!}
-        </div>
-
-        <div x-show="tab === 'indications'" x-cloak class="text-xs text-slate-600 space-y-3">
-            <h4 class="font-bold text-slate-900">Alat ini direkomendasikan dokter untuk penanganan:</h4>
-            <p class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl text-amber-900 font-medium leading-relaxed">
-                {{ $product->medical_indications ?? 'Indikasi cedera sendi, immobilisasi ortopedi, atau pasca operasi bedah tulang.' }}
-            </p>
-        </div>
-
-        <div x-show="tab === 'specs'" x-cloak class="text-xs text-slate-600">
-            @if($product->specifications && is_array($product->specifications))
-            <div class="divide-y divide-slate-100 border border-slate-200 rounded-xl overflow-hidden">
-                @foreach($product->specifications as $key => $val)
-                <div class="grid grid-cols-3 p-3 text-xs">
-                    <span class="font-bold text-slate-700">{{ $key }}</span>
-                    <span class="col-span-2 text-slate-600">{{ $val }}</span>
+            <!-- Stacked PDP Disclosure Accordions ({component.pdp-disclosure-row}) -->
+            <div class="divide-y divide-hairline pt-4">
+                <!-- Disclosure 1 -->
+                <div class="py-4" x-data="{ open: true }">
+                    <button @click="open = !open" class="w-full flex justify-between items-center text-left">
+                        <span class="text-sm font-bold text-ink uppercase tracking-wider">Deskripsi & Fitur Medis</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-ink transition transform" :class="open ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="open" class="text-xs text-mute leading-relaxed pt-3">
+                        {!! $product->description !!}
+                    </div>
                 </div>
-                @endforeach
+
+                <!-- Disclosure 2 -->
+                <div class="py-4" x-data="{ open: false }">
+                    <button @click="open = !open" class="w-full flex justify-between items-center text-left">
+                        <span class="text-sm font-bold text-ink uppercase tracking-wider">Indikasi Penanganan Medis</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-ink transition transform" :class="open ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="open" x-cloak class="text-xs text-mute leading-relaxed pt-3">
+                        {{ $product->medical_indications ?? 'Indikasi cedera sendi, immobilisasi ortopedi, pasca operasi bedah tulang, atau pemulihan kelainan postur.' }}
+                    </div>
+                </div>
+
+                <!-- Disclosure 3 -->
+                <div class="py-4" x-data="{ open: false }">
+                    <button @click="open = !open" class="w-full flex justify-between items-center text-left">
+                        <span class="text-sm font-bold text-ink uppercase tracking-wider">Spesifikasi Material & Komponen</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-ink transition transform" :class="open ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="open" x-cloak class="text-xs text-mute leading-relaxed pt-3">
+                        @if($product->specifications && is_array($product->specifications))
+                        <div class="space-y-1.5">
+                            @foreach($product->specifications as $key => $val)
+                            <div class="flex justify-between py-1 border-b border-hairline-soft">
+                                <span class="font-semibold text-ink">{{ $key }}:</span>
+                                <span>{{ $val }}</span>
+                            </div>
+                            @endforeach
+                        </div>
+                        @else
+                        Material medis komposit berkualitas tinggi, breathable, ergonomis, dan tahan lama untuk aktivitas harian.
+                        @endif
+                    </div>
+                </div>
             </div>
-            @else
-            <p>Material medis berkualifikasi internasional, non-alergenik, ringan, dan dapat disesuaikan (adjustable).</p>
-            @endif
+
         </div>
+
     </div>
 
-    <!-- Related Products -->
+    <!-- Related Products 4-up Grid -->
     @if($relatedProducts->isNotEmpty())
-    <div class="mt-16">
-        <h3 class="text-xl font-black text-slate-900 mb-6">Produk Terkait Lainnya</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="mt-16 pt-12 border-t border-hairline-soft">
+        <h3 class="text-2xl font-medium tracking-tight text-ink uppercase font-sans mb-6">
+            Produk Terkait Lainnya
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
             @foreach($relatedProducts as $rel)
-            <div class="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-card hover:shadow-card-hover hover:border-sky-300 transition flex flex-col justify-between">
+            <div class="bg-canvas border border-hairline-soft p-0 flex flex-col justify-between group">
                 <div>
-                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80" alt="{{ $rel->name }}" class="w-full h-36 object-cover rounded-xl mb-3">
-                    <h4 class="font-bold text-xs text-slate-900 line-clamp-2">{{ $rel->name }}</h4>
-                    <span class="text-sm font-black text-slate-900 block mt-2">{{ $rel->formatted_price }}</span>
+                    <div class="relative bg-soft-cloud aspect-square flex items-center justify-center overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80" alt="{{ $rel->name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-4 space-y-1">
+                        <h4 class="text-sm font-medium text-ink leading-snug line-clamp-1">
+                            <a href="{{ route('products.show', $rel->slug) }}">{{ $rel->name }}</a>
+                        </h4>
+                        <span class="text-sm font-bold text-ink block">{{ $rel->formatted_price }}</span>
+                    </div>
                 </div>
-                <a href="{{ route('products.show', $rel->slug) }}" class="mt-3 block text-center py-2 rounded-xl bg-sky-50 hover:bg-medical-600 hover:text-white text-medical-700 text-xs font-bold transition">Lihat Detail</a>
+                <div class="p-4 pt-0">
+                    <a href="{{ route('products.show', $rel->slug) }}" class="flex items-center justify-center bg-soft-cloud hover:bg-hairline-soft text-ink text-xs font-medium h-9 rounded-full btn-pill-tap transition">
+                        Detail
+                    </a>
+                </div>
             </div>
             @endforeach
         </div>
     </div>
     @endif
+
 </div>
 
 @endsection

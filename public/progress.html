@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ortotik & Prostetik - Executive Portfolio Dashboard & Project Roadmap</title>
+    <title>Ortotik & Prostetik - Executive Portfolio Dashboard & Design.md Architecture</title>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Bebas Neue & Plus Jakarta Sans / Space Grotesk -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -18,42 +18,39 @@
 
     <style>
         :root {
-            --pm-navy: #0f172a;
-            --pm-navy-dark: #090d16;
-            --pm-header: #1e293b;
-            --pm-sidebar: #0f172a;
+            --pm-navy: #111111;
+            --pm-navy-dark: #000000;
+            --pm-header: #1e1e1e;
+            --pm-sidebar: #111111;
             --pm-card-bg: #ffffff;
-            --pm-bg: #f8fafc;
-            --pm-border: #e2e8f0;
-            --pm-border-light: #f1f5f9;
+            --pm-bg: #f5f5f5;
+            --pm-border: #e5e5e5;
+            --pm-border-light: #f5f5f5;
             
-            --primary: #0284c7;
-            --primary-light: #e0f2fe;
-            --secondary: #0d9488;
-            --secondary-light: #ccfbf1;
+            --ink: #111111;
+            --canvas: #ffffff;
+            --soft-cloud: #f5f5f5;
+            --mute: #707072;
+            --hairline: #cacacb;
+            --hairline-soft: #e5e5e5;
             
-            --success: #10b981;
-            --success-light: #d1fae5;
-            --success-dark: #047857;
+            --sale: #d30005;
+            --success: #007d48;
+            --info: #1151ff;
             
-            --warning: #f59e0b;
-            --warning-light: #fef3c7;
-            --warning-dark: #b45309;
+            --primary: #111111;
+            --primary-light: #f5f5f5;
+            --secondary: #0a7281;
+            --secondary-light: #e0f2fe;
             
-            --info: #3b82f6;
-            --info-light: #dbeafe;
+            --text-dark: #111111;
+            --text-slate: #39393b;
+            --text-muted: #707072;
+            --text-light: #9e9ea0;
             
-            --text-dark: #0f172a;
-            --text-slate: #334155;
-            --text-muted: #64748b;
-            --text-light: #94a3b8;
-            
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
-            --shadow-card: 0 1px 3px rgba(0,0,0,0.05), 0 10px 15px -5px rgba(0,0,0,0.04);
-            --shadow-hover: 0 4px 6px -1px rgba(0,0,0,0.08), 0 10px 20px -5px rgba(0,0,0,0.08);
-            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-none: 0px;
+            --radius-pill: 9999px;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -72,7 +69,7 @@
 
         /* Top Executive Header Bar */
         .pm-top-header {
-            background: var(--pm-navy);
+            background: var(--ink);
             color: #ffffff;
             padding: 0 28px;
             height: 64px;
@@ -82,8 +79,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid #333333;
         }
 
         .header-left {
@@ -93,17 +89,15 @@
         }
 
         .pm-brand-badge {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(135deg, #0284c7, #0d9488);
-            border-radius: var(--radius-sm);
+            width: 36px;
+            height: 36px;
+            background: #ffffff;
+            color: #111111;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffffff;
-            font-weight: 800;
-            font-size: 17px;
-            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+            font-weight: 900;
+            font-size: 16px;
         }
 
         .header-title-box h1 {
@@ -114,11 +108,12 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            text-transform: uppercase;
         }
 
         .header-title-box p {
             font-size: 11px;
-            color: #94a3b8;
+            color: #9e9ea0;
             font-weight: 500;
         }
 
@@ -129,10 +124,10 @@
         }
 
         .health-indicator {
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            background: rgba(0, 125, 72, 0.2);
+            border: 1px solid rgba(0, 125, 72, 0.4);
             color: #34d399;
-            padding: 5px 12px;
+            padding: 5px 14px;
             border-radius: 9999px;
             font-size: 11px;
             font-weight: 700;
@@ -146,33 +141,23 @@
             height: 8px;
             background: #10b981;
             border-radius: 50%;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
-            animation: pulse-dot 2s infinite;
-        }
-
-        @keyframes pulse-dot {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
-            70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
 
         .last-updated-box {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
             padding: 5px 12px;
             border-radius: 9999px;
             font-size: 11px;
-            color: #cbd5e1;
+            color: #cacacb;
         }
 
         .btn-export-pdf {
-            background: linear-gradient(135deg, #0284c7, #0369a1);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 7px 16px;
+            background: #ffffff;
+            color: #111111;
+            padding: 7px 18px;
             border-radius: 9999px;
             font-size: 12px;
             font-weight: 700;
@@ -180,26 +165,25 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+            border: none;
             transition: var(--transition);
         }
 
         .btn-export-pdf:hover {
-            background: linear-gradient(135deg, #0369a1, #075985);
-            transform: translateY(-1px);
+            background: #e5e5e5;
         }
 
         /* Sub-Header Navigation Bar */
         .pm-sub-nav {
-            background: var(--pm-header);
-            color: #94a3b8;
+            background: #1e1e1e;
+            color: #9e9ea0;
             padding: 0 28px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             font-size: 13px;
             font-weight: 600;
-            border-bottom: 1px solid #334155;
+            border-bottom: 1px solid #333333;
         }
 
         .nav-tab-list {
@@ -209,7 +193,7 @@
 
         .nav-tab-item {
             padding: 12px 0;
-            color: #94a3b8;
+            color: #cacacb;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -220,26 +204,26 @@
         }
 
         .nav-tab-item.active, .nav-tab-item:hover {
-            color: #38bdf8;
-            border-bottom-color: #38bdf8;
+            color: #ffffff;
+            border-bottom-color: #ffffff;
         }
 
         .project-meta-pills {
             display: flex;
             gap: 12px;
             font-size: 11px;
-            color: #cbd5e1;
+            color: #cacacb;
         }
 
         .meta-pill {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.1);
             padding: 3px 10px;
             border-radius: 4px;
         }
 
         /* Dashboard Main Layout */
         .dashboard-container {
-            max-width: 1400px;
+            max-width: 1440px;
             margin: 24px auto 0;
             padding: 0 24px;
         }
@@ -248,21 +232,18 @@
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
+            gap: 16px;
             margin-bottom: 24px;
         }
 
         .kpi-card {
             background: var(--pm-card-bg);
-            border: 1px solid var(--pm-border);
-            border-radius: var(--radius-md);
+            border: 1px solid var(--hairline-soft);
             padding: 20px;
-            box-shadow: var(--shadow-card);
-            position: relative;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
         }
 
         .kpi-card::before {
@@ -272,12 +253,8 @@
             left: 0;
             right: 0;
             height: 3px;
+            background: #111111;
         }
-
-        .kpi-card.blue::before { background: #0284c7; }
-        .kpi-card.green::before { background: #10b981; }
-        .kpi-card.amber::before { background: #f59e0b; }
-        .kpi-card.teal::before { background: #0d9488; }
 
         .kpi-header {
             display: flex;
@@ -287,7 +264,7 @@
         }
 
         .kpi-title {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -297,16 +274,13 @@
         .kpi-icon {
             width: 32px;
             height: 32px;
-            border-radius: var(--radius-sm);
+            background: var(--soft-cloud);
+            color: var(--ink);
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 9999px;
         }
-
-        .kpi-icon.blue { background: var(--primary-light); color: var(--primary); }
-        .kpi-icon.green { background: var(--success-light); color: var(--success-dark); }
-        .kpi-icon.amber { background: var(--warning-light); color: var(--warning-dark); }
-        .kpi-icon.teal { background: var(--secondary-light); color: var(--secondary); }
 
         .kpi-body {
             display: flex;
@@ -315,9 +289,9 @@
         }
 
         .kpi-value {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 30px;
-            font-weight: 700;
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: 40px;
+            font-weight: 500;
             color: var(--text-dark);
             line-height: 1;
         }
@@ -331,7 +305,7 @@
         .kpi-footer {
             margin-top: 12px;
             padding-top: 10px;
-            border-top: 1px solid var(--pm-border-light);
+            border-top: 1px solid var(--hairline-soft);
             font-size: 11px;
             display: flex;
             align-items: center;
@@ -340,29 +314,27 @@
 
         .kpi-badge {
             font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 4px;
+            padding: 2px 8px;
+            border-radius: 9999px;
             font-size: 10px;
+            text-transform: uppercase;
         }
 
         .badge-green { background: #dcfce7; color: #166534; }
-        .badge-amber { background: #fef3c7; color: #92400e; }
-        .badge-blue { background: #e0f2fe; color: #075985; }
+        .badge-ink { background: #111111; color: #ffffff; }
 
         /* Row of Charts */
         .charts-row {
             display: grid;
             grid-template-columns: 1.2fr 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 28px;
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
         .chart-card {
             background: var(--pm-card-bg);
-            border: 1px solid var(--pm-border);
-            border-radius: var(--radius-md);
+            border: 1px solid var(--hairline-soft);
             padding: 22px;
-            box-shadow: var(--shadow-card);
             display: flex;
             flex-direction: column;
         }
@@ -373,7 +345,7 @@
             align-items: center;
             margin-bottom: 16px;
             padding-bottom: 12px;
-            border-bottom: 1px solid var(--pm-border-light);
+            border-bottom: 1px solid var(--hairline-soft);
         }
 
         .card-header-clean h3 {
@@ -383,6 +355,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            text-transform: uppercase;
         }
 
         .card-header-clean span {
@@ -400,60 +373,75 @@
             justify-content: center;
         }
 
-        /* SECTION: REFINEMENT SPRINT CARD */
-        .refinement-section-card {
-            background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
-            border: 1.5px solid #bae6fd;
-            border-radius: var(--radius-lg);
-            padding: 28px 32px;
-            box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.08);
-            margin-bottom: 28px;
+        /* SECTION: DESIGN.MD SYSTEM SHOWCASE CARD */
+        .design-system-card {
+            background: var(--ink);
+            color: var(--canvas);
+            border: 1px solid #333333;
+            padding: 32px;
+            margin-bottom: 24px;
         }
 
-        .refinement-grid {
+        .design-system-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid #333333;
+            padding-bottom: 18px;
+            margin-bottom: 24px;
+        }
+
+        .design-system-header h2 {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: 36px;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        .design-specs-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 18px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
         }
 
-        .refine-card {
-            background: #ffffff;
-            border: 1px solid #e0f2fe;
-            border-radius: var(--radius-md);
-            padding: 20px;
-            box-shadow: 0 2px 6px rgba(2, 132, 199, 0.04);
+        .spec-tile {
+            background: #1e1e1e;
+            border: 1px solid #333333;
+            padding: 18px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .refine-card-head {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
+        .spec-tile-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #9e9ea0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
         }
 
-        .refine-icon {
-            width: 34px;
-            height: 34px;
-            border-radius: 8px;
-            background: #e0f2fe;
-            color: #0284c7;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .spec-tile-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.3;
+        }
+
+        .spec-tile-desc {
+            font-size: 11px;
+            color: #cacacb;
+            margin-top: 8px;
+            line-height: 1.4;
         }
 
         /* SECTION: CONNECTED MILESTONE FLOW */
         .flow-section-card {
             background: var(--pm-card-bg);
-            border: 1px solid var(--pm-border);
-            border-radius: var(--radius-lg);
+            border: 1px solid var(--hairline-soft);
             padding: 28px 32px;
-            box-shadow: var(--shadow-card);
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
         .flow-section-header {
@@ -461,7 +449,7 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            border-bottom: 2px solid var(--pm-border-light);
+            border-bottom: 1px solid var(--hairline-soft);
             padding-bottom: 16px;
         }
 
@@ -472,6 +460,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            text-transform: uppercase;
         }
 
         .flow-section-header p {
@@ -490,31 +479,18 @@
         .flow-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            gap: 20px;
             position: relative;
         }
 
         .flow-card {
             background: #ffffff;
-            border: 1.5px solid var(--pm-border);
-            border-radius: var(--radius-md);
+            border: 1px solid var(--hairline);
             padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
             position: relative;
-            transition: var(--transition);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-        }
-
-        .flow-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .flow-card.completed {
-            border-color: #86efac;
-            background: #fcfdfc;
         }
 
         .flow-card.completed::before {
@@ -524,8 +500,7 @@
             left: 0;
             bottom: 0;
             width: 4px;
-            background: #10b981;
-            border-radius: var(--radius-md) 0 0 var(--radius-md);
+            background: #111111;
         }
 
         .flow-card-head {
@@ -536,22 +511,20 @@
         }
 
         .step-index-badge {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 800;
             padding: 3px 8px;
-            border-radius: 6px;
+            border-radius: 9999px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        .step-index-badge.done { background: #dcfce7; color: #166534; }
-        .step-index-badge.active { background: #fef3c7; color: #92400e; }
-        .step-index-badge.plan { background: var(--pm-border-light); color: var(--text-muted); }
+        .step-index-badge.done { background: #111111; color: #ffffff; }
 
         .flow-date {
             font-size: 11px;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--mute);
         }
 
         .flow-card-title {
@@ -569,7 +542,7 @@
             gap: 6px;
             margin-top: 10px;
             padding-top: 10px;
-            border-top: 1px solid var(--pm-border-light);
+            border-top: 1px solid var(--hairline-soft);
         }
 
         .flow-part-item {
@@ -584,9 +557,8 @@
         .flow-part-item i {
             margin-top: 2px;
             flex-shrink: 0;
+            color: #111111;
         }
-
-        .flow-part-item.done i { color: #10b981; }
 
         .connecting-arrow-bar {
             display: flex;
@@ -597,24 +569,22 @@
         }
 
         .arrow-path-line {
-            height: 4px;
+            height: 2px;
             width: 100%;
-            background: linear-gradient(90deg, #10b981 0%, #10b981 100%);
-            border-radius: 2px;
+            background: #111111;
             position: relative;
         }
 
         .arrow-pointer-down {
             position: absolute;
             right: 15%;
-            top: -6px;
-            background: #10b981;
+            top: -10px;
+            background: #111111;
             color: #ffffff;
             font-size: 10px;
             font-weight: 800;
-            padding: 2px 10px;
+            padding: 2px 12px;
             border-radius: 9999px;
-            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
             display: flex;
             align-items: center;
             gap: 4px;
@@ -623,10 +593,8 @@
         /* SECTION: INTERACTIVE TASK INVENTORY TABLE */
         .task-inventory-card {
             background: var(--pm-card-bg);
-            border: 1px solid var(--pm-border);
-            border-radius: var(--radius-lg);
+            border: 1px solid var(--hairline-soft);
             padding: 24px;
-            box-shadow: var(--shadow-card);
         }
 
         .table-responsive {
@@ -642,11 +610,11 @@
         }
 
         .pm-table th {
-            background: var(--pm-border-light);
-            color: var(--text-slate);
+            background: var(--soft-cloud);
+            color: var(--text-dark);
             font-weight: 700;
             padding: 10px 14px;
-            border-bottom: 2px solid var(--pm-border);
+            border-bottom: 1px solid var(--hairline);
             text-transform: uppercase;
             font-size: 10px;
             letter-spacing: 0.5px;
@@ -654,12 +622,12 @@
 
         .pm-table td {
             padding: 12px 14px;
-            border-bottom: 1px solid var(--pm-border);
+            border-bottom: 1px solid var(--hairline-soft);
             color: var(--text-slate);
         }
 
         .pm-table tr:hover td {
-            background: #f8fafc;
+            background: #fafafa;
         }
 
         .status-pill-table {
@@ -667,17 +635,16 @@
             align-items: center;
             gap: 5px;
             padding: 3px 8px;
-            border-radius: 4px;
+            border-radius: 9999px;
             font-weight: 700;
             font-size: 10px;
             text-transform: uppercase;
         }
 
-        .status-pill-table.done { background: #dcfce7; color: #166534; }
-        .status-pill-table.active { background: #fef3c7; color: #92400e; }
+        .status-pill-table.done { background: #111111; color: #ffffff; }
 
         .task-checkbox-custom {
-            accent-color: var(--primary);
+            accent-color: var(--ink);
             width: 15px;
             height: 15px;
             cursor: pointer;
@@ -687,13 +654,12 @@
             body { background: white !important; padding: 0 !important; }
             .pm-top-header, .pm-sub-nav, .btn-export-pdf { display: none !important; }
             .dashboard-container { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
-            .kpi-card, .chart-card, .flow-section-card, .task-inventory-card, .refinement-section-card {
+            .kpi-card, .chart-card, .flow-section-card, .task-inventory-card, .design-system-card {
                 border: 1px solid #ccc !important;
-                box-shadow: none !important;
                 page-break-inside: avoid;
                 margin-bottom: 16px !important;
             }
-            .flow-row, .refinement-grid {
+            .flow-row, .design-specs-grid {
                 display: grid !important;
                 grid-template-columns: repeat(3, 1fr) !important;
                 gap: 12px !important;
@@ -704,7 +670,7 @@
         @media (max-width: 1024px) {
             .kpi-grid { grid-template-columns: repeat(2, 1fr); }
             .charts-row { grid-template-columns: 1fr; }
-            .flow-row, .refinement-grid { grid-template-columns: 1fr; }
+            .flow-row, .design-specs-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 640px) {
@@ -720,25 +686,25 @@
         <div class="header-left">
             <div class="pm-brand-badge">OP</div>
             <div class="header-title-box">
-                <h1>Ortotik & Prostetik Clinic &bull; Portfolio Dashboard</h1>
-                <p>Enterprise Medical IT Project Management & Continuous Refinements</p>
+                <h1>Ortotik & Prostetik &bull; Executive System Dashboard</h1>
+                <p>Design.md Editorial Commerce Architecture & Enterprise Governance</p>
             </div>
         </div>
 
         <div class="header-right">
             <div class="health-indicator">
                 <span class="health-dot"></span>
-                <span>Project Health: <strong>100% PRODUCTION READY</strong></span>
+                <span>Design System: <strong>DESIGN.MD 100% APPLIED</strong></span>
             </div>
 
             <div class="last-updated-box">
                 <i data-lucide="clock" style="width: 13px; height: 13px;"></i>
-                <span>Terakhir Update: <strong>16 Agustus 2026, 22:18 WIB</strong></span>
+                <span>Terakhir Update: <strong>16 Agustus 2026, 22:45 WIB</strong></span>
             </div>
 
             <button class="btn-export-pdf" onclick="window.print()">
                 <i data-lucide="printer" style="width: 14px; height: 14px;"></i>
-                <span>Export to PDF</span>
+                <span>Export PDF</span>
             </button>
         </div>
     </header>
@@ -747,15 +713,15 @@
     <div class="pm-sub-nav">
         <div class="nav-tab-list">
             <div class="nav-tab-item active"><i data-lucide="layout-dashboard" style="width: 14px; height: 14px;"></i> Dashboard Overview</div>
-            <div class="nav-tab-item" onclick="scrollToSection('refinements-section')"><i data-lucide="sparkles" style="width: 14px; height: 14px;"></i> Sprint Perbaikan</div>
+            <div class="nav-tab-item" onclick="scrollToSection('design-system-section')"><i data-lucide="layers" style="width: 14px; height: 14px;"></i> Design.md Architecture</div>
             <div class="nav-tab-item" onclick="scrollToSection('workflow-section')"><i data-lucide="git-commit" style="width: 14px; height: 14px;"></i> Milestone Workflow</div>
             <div class="nav-tab-item" onclick="scrollToSection('tasks-section')"><i data-lucide="check-square" style="width: 14px; height: 14px;"></i> Task Inventory</div>
-            <a href="/" target="_blank" class="nav-tab-item"><i data-lucide="globe" style="width: 14px; height: 14px;"></i> Preview Frontend</a>
+            <a href="/" target="_blank" class="nav-tab-item"><i data-lucide="globe" style="width: 14px; height: 14px;"></i> Live Website</a>
         </div>
 
         <div class="project-meta-pills">
-            <span class="meta-pill">Theme: Soft Light Blue (Orthocare Inspired)</span>
-            <span class="meta-pill">Status: Refinement Sprint 01 Done</span>
+            <span class="meta-pill">Spec: Design.md Architecture</span>
+            <span class="meta-pill">Status: 23/23 Tests Passed</span>
         </div>
     </div>
 
@@ -763,15 +729,15 @@
 
         <!-- 4-TILE EXECUTIVE KPI ROW -->
         <section class="kpi-grid">
-            <!-- KPI 1: Overall Completion -->
-            <div class="kpi-card green">
+            <!-- KPI 1 -->
+            <div class="kpi-card">
                 <div class="kpi-header">
                     <span class="kpi-title">Overall Progress</span>
-                    <div class="kpi-icon green"><i data-lucide="check-check" style="width: 16px; height: 16px;"></i></div>
+                    <div class="kpi-icon"><i data-lucide="check-check" style="width: 16px; height: 16px;"></i></div>
                 </div>
                 <div class="kpi-body">
                     <span class="kpi-value" id="kpi-percent">100%</span>
-                    <span class="kpi-sub">Target: 100% (Completed)</span>
+                    <span class="kpi-sub">Target: 100%</span>
                 </div>
                 <div class="kpi-footer">
                     <span>26 / 26 Modul Selesai</span>
@@ -779,11 +745,11 @@
                 </div>
             </div>
 
-            <!-- KPI 2: Test Suite Quality -->
-            <div class="kpi-card green">
+            <!-- KPI 2 -->
+            <div class="kpi-card">
                 <div class="kpi-header">
-                    <span class="kpi-title">Quality & Test Pass</span>
-                    <div class="kpi-icon green"><i data-lucide="shield-check" style="width: 16px; height: 16px;"></i></div>
+                    <span class="kpi-title">Test Suite Success</span>
+                    <div class="kpi-icon"><i data-lucide="shield-check" style="width: 16px; height: 16px;"></i></div>
                 </div>
                 <div class="kpi-body">
                     <span class="kpi-value">100%</span>
@@ -795,114 +761,95 @@
                 </div>
             </div>
 
-            <!-- KPI 3: Frontend Refinement -->
-            <div class="kpi-card blue">
+            <!-- KPI 3 -->
+            <div class="kpi-card">
                 <div class="kpi-header">
-                    <span class="kpi-title">Frontend Aesthetics</span>
-                    <div class="kpi-icon blue"><i data-lucide="palette" style="width: 16px; height: 16px;"></i></div>
+                    <span class="kpi-title">Design System Spec</span>
+                    <div class="kpi-icon"><i data-lucide="file-code-2" style="width: 16px; height: 16px;"></i></div>
                 </div>
                 <div class="kpi-body">
-                    <span class="kpi-value">Soft Blue</span>
-                    <span class="kpi-sub">Orthocare.co.id Style</span>
+                    <span class="kpi-value">DESIGN.MD</span>
+                    <span class="kpi-sub">Commerce Architecture</span>
                 </div>
                 <div class="kpi-footer">
-                    <span>Authentic Human UI/UX</span>
-                    <span class="kpi-badge badge-blue">Crafted</span>
+                    <span>Editorial Typography + Pill Geometry</span>
+                    <span class="kpi-badge badge-ink">Compliant</span>
                 </div>
             </div>
 
-            <!-- KPI 4: Card UI/UX Standard -->
-            <div class="kpi-card teal">
+            <!-- KPI 4 -->
+            <div class="kpi-card">
                 <div class="kpi-header">
-                    <span class="kpi-title">Card UI/UX Craft</span>
-                    <div class="kpi-icon teal"><i data-lucide="layout-grid" style="width: 16px; height: 16px;"></i></div>
+                    <span class="kpi-title">Layer Clean Arch</span>
+                    <div class="kpi-icon"><i data-lucide="layers" style="width: 16px; height: 16px;"></i></div>
                 </div>
                 <div class="kpi-body">
                     <span class="kpi-value">100%</span>
-                    <span class="kpi-sub">No AI Clichés Pattern</span>
+                    <span class="kpi-sub">Service & Repo Layer</span>
                 </div>
                 <div class="kpi-footer">
-                    <span>Clinical Micro-interactions</span>
-                    <span class="kpi-badge badge-green">Standard Compliant</span>
+                    <span>Anti Brute Force & Rate Limit</span>
+                    <span class="kpi-badge badge-green">Verified</span>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION: SPRINT PERBAIKAN / CONTINUOUS REFINEMENTS (NEW) -->
-        <section class="refinement-section-card" id="refinements-section">
-            <div class="flow-section-header" style="border-bottom-color: #bae6fd;">
+        <!-- SECTION: DESIGN.MD SYSTEM ARCHITECTURE SHOWCASE -->
+        <section class="design-system-card" id="design-system-section">
+            <div class="design-system-header">
                 <div>
-                    <h2>
-                        <i data-lucide="sparkles" style="width: 20px; height: 20px; color: var(--primary);"></i>
-                        <span>Section Update: Sprint Perbaikan & Polish UI/UX Medis</span>
-                    </h2>
-                    <p>
-                        Peningkatan visual & interaktivitas bertema <strong>Biru Muda Soft</strong> mirip <code>orthocareindonesia.co.id</code> dengan standar developer profesional (Authentic Human Craftsmanship, No AI Clichés).
+                    <h2>DESIGN.MD SPECIFICATION COMPLIANCE</h2>
+                    <p style="font-size: 12px; color: #cacacb;">
+                        Arsitektur visual berbasis <em>photography-first editorial commerce</em> dengan kontras tipografi ekstrem dan geometri pill pada retail chrome.
                     </p>
                 </div>
                 <div>
-                    <span class="step-index-badge done">● Perbaikan Frontend Selesai 100%</span>
+                    <span class="step-index-badge done">100% SPEC APPLIED</span>
                 </div>
             </div>
 
-            <div class="refinement-grid">
-                <!-- Refine Item 1 -->
-                <div class="refine-card">
+            <div class="design-specs-grid">
+                <!-- Tile 1: Typography -->
+                <div class="spec-tile">
                     <div>
-                        <div class="refine-card-head">
-                            <div class="refine-icon"><i data-lucide="palette" style="width: 18px; height: 18px;"></i></div>
-                            <div>
-                                <h4 style="font-size: 13px; font-weight: 800; color: var(--text-dark);">Tema Biru Muda Soft & Typography</h4>
-                                <span style="font-size: 10px; color: #0284c7; font-weight: 700;">Orthocare Indonesia Inspired</span>
-                            </div>
-                        </div>
-                        <p style="font-size: 11px; color: var(--text-muted); line-height: 1.4;">
-                            Penerapan palet warna <code>#f0f9ff</code> (Sky 50), <code>#0284c7</code> (Medical Primary), dan <code>#0f172a</code> (Slate 900) dengan tipografi Plus Jakarta Sans berjarak baca proporsional dan bersih.
+                        <span class="spec-tile-title">01 &bull; Extreme Typography</span>
+                        <div class="spec-tile-value">Bebas Neue 96px + Plus Jakarta Sans</div>
+                        <p class="spec-tile-desc">
+                            Display campaign headline (96px, line-height 0.9, uppercase) burned into campaign imagery, didampingi UI workhorse 12-16px.
                         </p>
-                    </div>
-                    <div style="margin-top: 12px; padding-top: 8px; border-top: 1px solid #e0f2fe; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 10px; color: var(--text-muted);">Navbar, Hero & Footer</span>
-                        <span class="kpi-badge badge-green">Implemented</span>
                     </div>
                 </div>
 
-                <!-- Refine Item 2 -->
-                <div class="refine-card">
+                <!-- Tile 2: Palette -->
+                <div class="spec-tile">
                     <div>
-                        <div class="refine-card-head">
-                            <div class="refine-icon"><i data-lucide="layout" style="width: 18px; height: 18px;"></i></div>
-                            <div>
-                                <h4 style="font-size: 13px; font-weight: 800; color: var(--text-dark);">Card UI/UX Craftsmanship</h4>
-                                <span style="font-size: 10px; color: #0284c7; font-weight: 700;">Authentic Human Frontend</span>
-                            </div>
-                        </div>
-                        <p style="font-size: 11px; color: var(--text-muted); line-height: 1.4;">
-                            Penyempurnaan card produk, 5 pilar layanan, dan testimoni pasien tanpa efek AI klise (bebas gradient text murahan & border menyala), menggunakan border sky halus & soft shadows.
+                        <span class="spec-tile-title">02 &bull; Neutral Retail Chrome</span>
+                        <div class="spec-tile-value">#111111 Ink &bull; #f5f5f5 Soft Cloud</div>
+                        <p class="spec-tile-desc">
+                            95% chrome menggunakan Pure Black, Pure White, dan Soft Cloud gray studio backdrop. Warna semantik (#d30005) hanya untuk harga diskon.
                         </p>
-                    </div>
-                    <div style="margin-top: 12px; padding-top: 8px; border-top: 1px solid #e0f2fe; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 10px; color: var(--text-muted);">Katalog, Services & Leads</span>
-                        <span class="kpi-badge badge-green">Implemented</span>
                     </div>
                 </div>
 
-                <!-- Refine Item 3 -->
-                <div class="refine-card">
+                <!-- Tile 3: Pill Geometry -->
+                <div class="spec-tile">
                     <div>
-                        <div class="refine-card-head">
-                            <div class="refine-icon"><i data-lucide="smartphone" style="width: 18px; height: 18px;"></i></div>
-                            <div>
-                                <h4 style="font-size: 13px; font-weight: 800; color: var(--text-dark);">Micro-Interactions & Fast CTA</h4>
-                                <span style="font-size: 10px; color: #0284c7; font-weight: 700;">Direct WhatsApp Response</span>
-                            </div>
-                        </div>
-                        <p style="font-size: 11px; color: var(--text-muted); line-height: 1.4;">
-                            Integrasi tombol quick WA, switcher cabang klinik interaktif Jakarta/Surabaya, form janji temu yang jelas, serta floating quick-respond widget.
+                        <span class="spec-tile-title">03 &bull; Universal Pill Geometry</span>
+                        <div class="spec-tile-value">rounded-full CTAs & Filter Chips</div>
+                        <p class="spec-tile-desc">
+                            Semua tombol utama (button-primary: 48px height, rounded-full), search pill, dan filter chip menggunakan geometri pill tanpa sudut lancip.
                         </p>
                     </div>
-                    <div style="margin-top: 12px; padding-top: 8px; border-top: 1px solid #e0f2fe; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 10px; color: var(--text-muted);">Interactive UX & Mobile</span>
-                        <span class="kpi-badge badge-green">Implemented</span>
+                </div>
+
+                <!-- Tile 4: Product Cards -->
+                <div class="spec-tile">
+                    <div>
+                        <span class="spec-tile-title">04 &bull; Product Card Anatomy</span>
+                        <div class="spec-tile-value">1:1 Square on Soft Cloud, Zero Shadow</div>
+                        <p class="spec-tile-desc">
+                            Kartu flat tanpa drop shadow, foto 1:1 di atas latar #f5f5f5, swatch dots 12px, promo badges, dan jarak vertikal 8px antar metadata.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -912,7 +859,7 @@
         <section class="charts-row">
             <div class="chart-card">
                 <div class="card-header-clean">
-                    <h3><i data-lucide="pie-chart" style="width: 16px; height: 16px; color: var(--primary);"></i> Task Status Distribution</h3>
+                    <h3><i data-lucide="pie-chart" style="width: 16px; height: 16px;"></i> Task Distribution</h3>
                     <span>100% Completed</span>
                 </div>
                 <div class="chart-canvas-wrap">
@@ -922,7 +869,7 @@
 
             <div class="chart-card">
                 <div class="card-header-clean">
-                    <h3><i data-lucide="bar-chart-3" style="width: 16px; height: 16px; color: var(--secondary);"></i> Milestone Progress (%)</h3>
+                    <h3><i data-lucide="bar-chart-3" style="width: 16px; height: 16px;"></i> Milestone Progress (%)</h3>
                     <span>All 6 Parts Selesai</span>
                 </div>
                 <div class="chart-canvas-wrap">
@@ -932,7 +879,7 @@
 
             <div class="chart-card">
                 <div class="card-header-clean">
-                    <h3><i data-lucide="radar" style="width: 16px; height: 16px; color: #10b981;"></i> Module Workload Share</h3>
+                    <h3><i data-lucide="radar" style="width: 16px; height: 16px;"></i> Module Workload Share</h3>
                     <span>WBS 100%</span>
                 </div>
                 <div class="chart-canvas-wrap">
@@ -946,15 +893,15 @@
             <div class="flow-section-header">
                 <div>
                     <h2>
-                        <i data-lucide="git-fork" style="width: 20px; height: 20px; color: var(--primary);"></i>
+                        <i data-lucide="git-fork" style="width: 20px; height: 20px;"></i>
                         <span>Alur Eksekusi & Roadmap Bagian Pengerjaan</span>
                     </h2>
                     <p>
                         Diagram alur bagian (*parts*) yang <strong>telah selesai 100% dikerjakan secara komprehensif</strong> terhubung dengan tali panah (*connecting flow*).
                     </p>
                 </div>
-                <div style="display: flex; gap: 8px;">
-                    <span class="step-index-badge done">● Semua Bagian Selesai (100%)</span>
+                <div>
+                    <span class="step-index-badge done">● SEMUA BAGIAN SELESAI (100%)</span>
                 </div>
             </div>
 
@@ -973,7 +920,7 @@
                         <ul class="flow-part-list">
                             <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> DATABASE_PRD.md (10 skema tabel)</li>
                             <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> BACKEND_PRD.md (Repository Flow)</li>
-                            <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> FRONTEND_PRD.md (10 Section UX)</li>
+                            <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> FRONTEND_PRD.md & DESIGN.MD Spec</li>
                         </ul>
                     </div>
 
@@ -1014,7 +961,7 @@
                     <div class="arrow-path-line"></div>
                     <div class="arrow-pointer-down">
                         <i data-lucide="arrow-down" style="width: 12px; height: 12px;"></i>
-                        <span>Frontend & Admin CMS Complete</span>
+                        <span>Design.md & Admin CMS Complete</span>
                     </div>
                 </div>
 
@@ -1026,12 +973,12 @@
                                 <span class="step-index-badge done">Part 04 &bull; Selesai</span>
                                 <span class="flow-date">16 Ags 2026</span>
                             </div>
-                            <h3 class="flow-card-title">Frontend Publik & E-Katalog</h3>
-                            <p style="font-size: 11px; color: var(--text-muted);">Website responsif, E-katalog anatomi tubuh, dan form janji temu pasien.</p>
+                            <h3 class="flow-card-title">Design.md Frontend System</h3>
+                            <p style="font-size: 11px; color: var(--text-muted);">Website editorial commerce, 1:1 product cards on soft-cloud, pill CTAs.</p>
                         </div>
                         <ul class="flow-part-list">
-                            <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> Beranda 10 Section Soft Light Blue</li>
-                            <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> E-Katalog & Detail Produk + WhatsApp Order</li>
+                            <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> Bebas Neue 96px Campaign Hero</li>
+                            <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> E-Katalog & PDP Disclosure Accordion</li>
                             <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> 23/23 Test Suites Passed 100%</li>
                         </ul>
                     </div>
@@ -1076,10 +1023,10 @@
             <div class="flow-section-header" style="margin-bottom: 12px;">
                 <div>
                     <h2>
-                        <i data-lucide="list-checks" style="width: 20px; height: 20px; color: var(--secondary);"></i>
+                        <i data-lucide="list-checks" style="width: 20px; height: 20px;"></i>
                         <span>Daftar Rincian Modul & Status Eksekusi (100% Complete)</span>
                     </h2>
-                    <p>Semua modul dari perencanaan hingga Sprint Perbaikan telah selesai dikerjakan.</p>
+                    <p>Semua modul dari perencanaan hingga implementasi Design.md telah selesai dikerjakan.</p>
                 </div>
             </div>
 
@@ -1095,19 +1042,26 @@
                         </tr>
                     </thead>
                     <tbody id="task-table-body">
-                        <!-- Sprint Perbaikan -->
-                        <tr style="background: #f0f9ff;">
+                        <!-- Design.md Specs -->
+                        <tr style="background: #fafafa;">
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
-                            <td><strong>Sprint: Soft Blue UI/UX</strong></td>
-                            <td>Tema biru muda soft mirip orthocareindonesia.co.id & tipografi Plus Jakarta Sans</td>
-                            <td><span style="font-size: 11px; color: var(--primary); font-weight: bold;">Refinement</span></td>
+                            <td><strong>Design.md: Typography</strong></td>
+                            <td>Bebas Neue 96px line-height 0.9 display campaign & Plus Jakarta Sans UI</td>
+                            <td><span style="font-size: 11px; font-weight: bold;">Design.md</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
-                        <tr style="background: #f0f9ff;">
+                        <tr style="background: #fafafa;">
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
-                            <td><strong>Sprint: Card UI/UX Craft</strong></td>
-                            <td>Desain kartu produk, layanan, dan testimoni non-AI, bersih, authentic developer craft</td>
-                            <td><span style="font-size: 11px; color: var(--primary); font-weight: bold;">Refinement</span></td>
+                            <td><strong>Design.md: Pill Geometry</strong></td>
+                            <td>Pill CTAs (#111111 button-primary, #f5f5f5 button-secondary, search-pill)</td>
+                            <td><span style="font-size: 11px; font-weight: bold;">Design.md</span></td>
+                            <td><span class="status-pill-table done">Completed</span></td>
+                        </tr>
+                        <tr style="background: #fafafa;">
+                            <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
+                            <td><strong>Design.md: Card Anatomy</strong></td>
+                            <td>1:1 product imagery on #f5f5f5 Soft Cloud studio, swatch dots, sale pricing</td>
+                            <td><span style="font-size: 11px; font-weight: bold;">Design.md</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <!-- Part 1 -->
@@ -1159,7 +1113,7 @@
                         <tr>
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 04: Beranda 10 Section</strong></td>
-                            <td>Hero, Kredibilitas, 5 Layanan, Featured Products, Testimoni, CTA</td>
+                            <td>Campaign Hero, 5 Layanan, Featured Footwear & Products, FAQ, CTA</td>
                             <td><span style="font-size: 11px; color: var(--text-muted);">Frontend</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
@@ -1227,7 +1181,7 @@
         </section>
 
         <footer style="text-align: center; color: var(--text-muted); font-size: 11px; padding: 24px 0 0;">
-            <p><strong>Website Klinik Ortotik & Prostetik Indonesia</strong> &bull; Executive Project Dashboard &bull; Terakhir Diperbarui: 16 Agustus 2026, 22:18 WIB</p>
+            <p><strong>Website Klinik Ortotik & Prostetik Indonesia</strong> &bull; Executive System Dashboard &bull; Terakhir Diperbarui: 16 Agustus 2026, 22:45 WIB</p>
         </footer>
 
     </main>
@@ -1252,7 +1206,7 @@
                     labels: ['Completed', 'In Progress / Planned'],
                     datasets: [{
                         data: [completed, inProgress],
-                        backgroundColor: ['#10b981', '#f59e0b'],
+                        backgroundColor: ['#111111', '#cacacb'],
                         borderWidth: 0,
                         hoverOffset: 4
                     }]
@@ -1276,8 +1230,8 @@
                     datasets: [{
                         label: 'Progress %',
                         data: [100, 100, 100, 100, 100, 100],
-                        backgroundColor: ['#10b981', '#10b981', '#10b981', '#10b981', '#10b981', '#10b981'],
-                        borderRadius: 6
+                        backgroundColor: ['#111111', '#111111', '#111111', '#111111', '#111111', '#111111'],
+                        borderRadius: 0
                     }]
                 },
                 options: {
@@ -1298,15 +1252,15 @@
             radarChart = new Chart(ctxRadar, {
                 type: 'polarArea',
                 data: {
-                    labels: ['Architecture', 'Database', 'Backend Core', 'Public UI', 'Admin CMS'],
+                    labels: ['Architecture', 'Database', 'Backend Core', 'Design.md UI', 'Admin CMS'],
                     datasets: [{
                         data: [100, 100, 100, 100, 100],
                         backgroundColor: [
-                            'rgba(15, 76, 129, 0.7)',
-                            'rgba(13, 148, 136, 0.7)',
-                            'rgba(59, 130, 246, 0.7)',
-                            'rgba(16, 185, 129, 0.7)',
-                            'rgba(16, 185, 129, 0.7)'
+                            'rgba(17, 17, 17, 0.85)',
+                            'rgba(57, 57, 59, 0.75)',
+                            'rgba(112, 112, 114, 0.75)',
+                            'rgba(17, 17, 17, 0.95)',
+                            'rgba(0, 125, 72, 0.75)'
                         ]
                     }]
                 },

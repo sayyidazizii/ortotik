@@ -48,7 +48,7 @@ class AdminCmsContentManagementTest extends TestCase
         $postData = [
             'name' => 'AFO Dynamic Carbon Test',
             'category_id' => $category->id,
-            'sku' => 'AFO-TEST-' . rand(100, 999),
+            'sku' => 'AFO-TEST-' . uniqid(),
             'price' => 3500000,
             'stock_status' => 'ready_stock',
             'short_description' => 'AFO carbon ringan untuk drop foot',

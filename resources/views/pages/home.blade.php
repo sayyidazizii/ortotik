@@ -1,372 +1,404 @@
 @extends('layouts.app')
 
-@section('title', 'Klinik Ortotik & Prostetik Indonesia - Precision Orthotics & Prosthetics')
+@section('title', 'Klinik Ortotik & Prostetik Indonesia - Pelayanan Medis Presisi & Holistik')
 @section('meta_description', 'Pusat pembuatan kaki palsu bionik carbon fiber, korset skoliosis 3D non-bedah, AFO/KAFO, dan insole medis cetak berstandar Kemenkes RI.')
 
 @section('content')
 
-<!-- SECTION 1: EDITORIAL CAMPAIGN HERO ({component.campaign-tile} with {typography.display-campaign}) -->
-<section class="relative bg-ink text-canvas overflow-hidden">
-    <div class="relative w-full h-[580px] sm:h-[680px] lg:h-[760px] bg-charcoal overflow-hidden">
-        <!-- Campaign Editorial Image -->
-        <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1920&q=85"
-            alt="Precision Orthotics & Prosthetics"
-            class="w-full h-full object-cover object-center opacity-85">
-        
-        <!-- Subtle Cinematic Dark Gradient Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent"></div>
+<!-- HERO SECTION: Maven Clinic - Editorial Warm Linen Composition with Video Asset -->
+<section class="relative bg-cappuccino-light py-16 sm:py-20 lg:py-24 border-b border-border overflow-hidden" x-data="{ videoModal: false }">
+    <!-- Ambient Warm Emerald & Mint Glow -->
+    <div class="absolute -top-32 -right-32 w-96 h-96 bg-mint/50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+    <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-blush/60 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
-        <!-- Headline Burned Into Lower-Left ({typography.display-campaign}) -->
-        <div class="absolute bottom-10 sm:bottom-16 left-0 right-0">
-            <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+    <div class="relative max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            <!-- Left: Editorial Headline & Actions (Maven Clinic: Domaine Display Serif Style) -->
+            <div class="lg:col-span-7 space-y-7 text-left">
                 
-                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-canvas/90 backdrop-blur-md text-ink text-xs font-semibold tracking-wider uppercase">
-                    <span class="w-2 h-2 rounded-full bg-success"></span>
-                    <span>Standar Pelayanan Medis Kemenkes RI</span>
+                <!-- Maven Clinic Tag / Chip (Mint Julep Background with Emerald Text) -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-mint text-primary border border-primary/20 text-xs font-semibold shadow-2xs">
+                    <span class="w-2 h-2 rounded-full bg-primary"></span>
+                    <span>Pelayanan Ortotik & Prostetik Resmi Standar Kemenkes RI</span>
                 </div>
 
-                <!-- Towering Uppercase Headline -->
-                <h1 class="font-display text-5xl sm:text-7xl lg:text-[96px] leading-[0.9] uppercase text-canvas font-medium tracking-tight max-w-4xl">
-                    REBORN YOUR LIFE WITH PRECISION ORTHOTICS
+                <!-- Expressive Headline -->
+                <h1 class="text-4xl sm:text-5xl lg:text-[60px] font-serif font-medium text-primary leading-[1.08] tracking-tight">
+                    Kesehatan mobilitas Anda, <br class="hidden sm:inline">
+                    <span class="text-terracotta italic font-normal">didampingi dengan presisi</span> & empati.
                 </h1>
 
-                <p class="text-canvas/90 text-sm sm:text-base max-w-xl font-normal leading-relaxed pt-1">
-                    Solusi alat bantu gerak presisi: kaki & tangan palsu bionik carbon fiber, korset skoliosis 3D non-bedah, dan brace ortopedi dengan garansi fitting 100%.
+                <!-- Body copy (Maven Clinic: Humanistic Sans 18px) -->
+                <p class="text-secondary/80 text-base sm:text-lg lg:text-[19px] leading-[1.7] font-light max-w-2xl">
+                    Klinik modern untuk pembuatan kaki & tangan palsu bionik, koreksi skoliosis 3D non-bedah, dan brace ortopedi presisi dengan pendampingan klinisi tersertifikasi resmi.
                 </p>
 
-                <!-- On-Image Pill CTA Cluster ({component.button-outline-on-image} & {component.button-primary}) -->
-                <div class="flex flex-wrap items-center gap-3 pt-3">
-                    <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Klinik%20Ortotik,%20saya%20ingin%20konsultasi%20mengenai%20alat%20medis." target="_blank"
-                        class="inline-flex items-center justify-center bg-canvas hover:bg-soft-cloud text-ink text-xs sm:text-sm font-medium px-8 h-12 rounded-full btn-pill-tap shadow-lg transition">
-                        <span>Konsultasi WhatsApp</span>
+                <!-- Action Cluster: Emerald Pill CTA + Video Play Button -->
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <!-- button-primary (Deep Emerald Pill, 56px height) -->
+                    <a href="{{ route('consultation.create') }}"
+                        class="inline-flex items-center justify-center bg-primary hover:bg-primary-dark text-white text-base font-semibold px-9 h-14 rounded-full btn-maven shadow-xs transition">
+                        <span>Buat Janji Temu Medis</span>
                     </a>
                     
-                    <a href="{{ route('products.index') }}"
-                        class="inline-flex items-center justify-center bg-ink/80 hover:bg-ink text-canvas border border-canvas/40 text-xs sm:text-sm font-medium px-8 h-12 rounded-full btn-pill-tap backdrop-blur-md transition">
-                        <span>E-Katalog Produk Medis</span>
-                    </a>
+                    <!-- Video Action Button with Pulse -->
+                    <button @click="videoModal = true"
+                        class="inline-flex items-center justify-center bg-white hover:bg-cappuccino text-secondary border border-border text-sm font-semibold px-6 h-14 rounded-full btn-maven transition gap-3 group shadow-2xs">
+                        <span class="w-8 h-8 rounded-full bg-terracotta text-white flex items-center justify-center group-hover:scale-110 transition shadow-2xs">
+                            <i data-lucide="play" class="w-3.5 h-3.5 fill-current ml-0.5"></i>
+                        </span>
+                        <span>Lihat Video Klinik</span>
+                    </button>
 
-                    <a href="{{ route('consultation.create') }}"
-                        class="inline-flex items-center justify-center bg-soft-cloud hover:bg-canvas text-ink text-xs sm:text-sm font-medium px-7 h-12 rounded-full btn-pill-tap transition">
-                        <span>Janji Temu Klinik</span>
+                    <!-- Text Link -->
+                    <a href="{{ route('products.index') }}" class="inline-flex items-center text-sm font-semibold text-primary hover:text-terracotta transition ml-2">
+                        <span>E-Katalog Produk &rarr;</span>
                     </a>
                 </div>
 
+                <!-- Credibility Metrics Band (Maven Clinic Warm Style) -->
+                <div class="pt-8 border-t border-border grid grid-cols-2 sm:grid-cols-4 gap-6">
+                    <div>
+                        <span class="block text-3xl sm:text-4xl font-serif font-semibold text-primary">12+ Thn</span>
+                        <span class="text-xs text-tertiary font-light mt-1 block">Pengalaman Klinis</span>
+                    </div>
+                    <div>
+                        <span class="block text-3xl sm:text-4xl font-serif font-semibold text-primary">8.500+</span>
+                        <span class="text-xs text-tertiary font-light mt-1 block">Pasien Terlayani</span>
+                    </div>
+                    <div>
+                        <span class="block text-3xl sm:text-4xl font-serif font-semibold text-terracotta">100%</span>
+                        <span class="text-xs text-tertiary font-light mt-1 block">Garansi Fitting Pas</span>
+                    </div>
+                    <div>
+                        <span class="block text-3xl sm:text-4xl font-serif font-semibold text-primary">2 Cabang</span>
+                        <span class="text-xs text-tertiary font-light mt-1 block">Jakarta & Surabaya</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right: Maven Clinic Style Visual Card -->
+            <div class="lg:col-span-5 relative">
+                <div class="relative bg-white p-3.5 rounded-3xl border border-border shadow-xs">
+                    
+                    <!-- Main Video/Image Frame with Looping Clinic Video Simulation -->
+                    <div class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-cappuccino group cursor-pointer" @click="videoModal = true">
+                        <!-- High Quality Clinic Photo -->
+                        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=85"
+                            alt="Maven Clinic Style Healthcare Experience"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        
+                        <!-- Soft Ambient Emerald Gradient Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
+
+                        <!-- Video Play Indicator Badge -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-16 h-16 rounded-full bg-white/90 text-primary flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-terracotta group-hover:text-white transition duration-300">
+                                <i data-lucide="play" class="w-6 h-6 fill-current ml-1"></i>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Floating Video Card Info -->
+                        <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-white/95 backdrop-blur-sm border border-white/40 shadow-xs flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-full bg-mint text-primary flex items-center justify-center shrink-0">
+                                <i data-lucide="sparkles" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-serif font-semibold text-primary leading-tight">Teknologi 3D Scanning & Casting</h4>
+                                <p class="text-xs text-tertiary font-light mt-0.5">Pemindaian anatomis non-invasif tanpa rasa sakit.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subtle Floating Tag in Terra Cotta -->
+                    <div class="absolute -bottom-4 -left-4 bg-terracotta text-white px-5 py-2.5 rounded-full font-semibold text-xs shadow-md border border-white/50 flex items-center gap-2">
+                        <i data-lucide="heart" class="w-4 h-4 fill-current text-white"></i>
+                        <span>Pendampingan Klinisi Berempati</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Video Modal Dialog -->
+    <div x-show="videoModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-primary-dark/80 backdrop-blur-sm"
+        @keydown.escape.window="videoModal = false">
+        <div class="relative bg-white rounded-3xl max-w-3xl w-full p-4 overflow-hidden shadow-2xl border border-border" @click.outside="videoModal = false">
+            <div class="flex justify-between items-center pb-3 px-2 border-b border-border">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-terracotta"></span>
+                    <h3 class="font-serif text-lg font-semibold text-primary">Tur Fasilitas & Prosedur Medis Ortotik</h3>
+                </div>
+                <button @click="videoModal = false" class="p-1 rounded-full text-secondary hover:bg-cappuccino transition">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="relative aspect-video rounded-2xl overflow-hidden mt-3 bg-black">
+                <video controls autoplay loop muted class="w-full h-full object-cover">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                </video>
+            </div>
+            <div class="pt-4 px-2 text-xs text-tertiary flex justify-between items-center">
+                <span>Dokumentasi proses 3D scanning, workshop fabrikasi carbon fiber, dan sesi latihan berjalan pasien.</span>
+                <a href="{{ route('consultation.create') }}" class="text-terracotta font-semibold hover:underline">Jadwalkan Kunjungan &rarr;</a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- SECTION 2: SHOP BY CATEGORY / ANATOMY RAIL (4-up portrait full-bleed cards with on-image pill CTA) -->
-<section class="py-12 bg-canvas border-b border-hairline-soft">
-    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-end mb-6">
-            <h2 class="text-2xl sm:text-3xl font-medium tracking-tight text-ink uppercase font-sans">
-                Kategori Alat Bantu Medis
-            </h2>
-            <a href="{{ route('products.index') }}" class="text-xs font-semibold text-ink underline hover:text-mute transition">
-                Lihat Semua Kategori &rarr;
-            </a>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
-            <!-- Category 1: Kaki Palsu & Prostesis -->
-            <div class="relative bg-soft-cloud aspect-[4/5] overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80" alt="Prostetik Kaki & Tangan" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent"></div>
-                <div class="absolute bottom-6 left-6 right-6">
-                    <span class="text-xs text-canvas/75 uppercase tracking-wider font-semibold block mb-1">Prostetik Bionik</span>
-                    <h3 class="text-lg font-bold text-canvas leading-tight mb-3">Kaki & Tangan Palsu Carbon Fiber</h3>
-                    <a href="{{ route('services.index') }}" class="inline-flex items-center bg-canvas text-ink text-xs font-semibold px-5 py-2.5 rounded-full btn-pill-tap transition">
-                        <span>Jelajahi Solusi</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Category 2: Korset Skoliosis 3D -->
-            <div class="relative bg-soft-cloud aspect-[4/5] overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" alt="Korset Skoliosis 3D" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent"></div>
-                <div class="absolute bottom-6 left-6 right-6">
-                    <span class="text-xs text-canvas/75 uppercase tracking-wider font-semibold block mb-1">Spine Center</span>
-                    <h3 class="text-lg font-bold text-canvas leading-tight mb-3">Korset Skoliosis 3D Cheneau TLSO</h3>
-                    <a href="{{ route('services.index') }}" class="inline-flex items-center bg-canvas text-ink text-xs font-semibold px-5 py-2.5 rounded-full btn-pill-tap transition">
-                        <span>Jelajahi Solusi</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Category 3: Brace Ekstremitas Bawah (AFO / KAFO) -->
-            <div class="relative bg-soft-cloud aspect-[4/5] overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80" alt="Brace Ekstremitas Bawah" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent"></div>
-                <div class="absolute bottom-6 left-6 right-6">
-                    <span class="text-xs text-canvas/75 uppercase tracking-wider font-semibold block mb-1">Lower Limb Ortotik</span>
-                    <h3 class="text-lg font-bold text-canvas leading-tight mb-3">AFO, KAFO & Knee Brace Presisi</h3>
-                    <a href="{{ route('products.index') }}" class="inline-flex items-center bg-canvas text-ink text-xs font-semibold px-5 py-2.5 rounded-full btn-pill-tap transition">
-                        <span>Jelajahi Solusi</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Category 4: Custom Insole Medis -->
-            <div class="relative bg-soft-cloud aspect-[4/5] overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80" alt="Custom Insole Medis" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent"></div>
-                <div class="absolute bottom-6 left-6 right-6">
-                    <span class="text-xs text-canvas/75 uppercase tracking-wider font-semibold block mb-1">Foot Biomechanics</span>
-                    <h3 class="text-lg font-bold text-canvas leading-tight mb-3">Insole Medis 3D Flat Foot & Plantar</h3>
-                    <a href="{{ route('custom-products.index') }}" class="inline-flex items-center bg-canvas text-ink text-xs font-semibold px-5 py-2.5 rounded-full btn-pill-tap transition">
-                        <span>Jelajahi Solusi</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- SECTION 3: 5 PILAR LAYANAN MEDIS KAMI (Required assertion string) -->
-<section class="py-12 bg-canvas border-b border-hairline-soft" id="layanan">
-    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-                <span class="text-xs text-mute font-semibold uppercase tracking-widest block mb-1">Standar Penanganan Medis</span>
-                <h2 class="text-3xl sm:text-4xl font-medium tracking-tight text-ink uppercase font-sans">
+<!-- SECTION 2: 5 PILAR LAYANAN MEDIS KAMI (Maven Clinic Style: Warm Linen Cards, Emerald Serif Headlines) -->
+<section class="py-24 bg-cappuccino" id="layanan">
+    <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header (Maven Clinic headline-lg: Serif 42-48px) -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div class="max-w-2xl">
+                <span class="text-xs text-terracotta font-semibold uppercase tracking-wider block mb-2 font-sans">STANDAR PENANGANAN MEDIS</span>
+                <h2 class="text-3xl sm:text-4xl lg:text-[46px] font-serif font-medium tracking-tight text-primary leading-tight">
                     5 Pilar Layanan Medis Kami
                 </h2>
-                <p class="text-mute text-sm mt-1 max-w-2xl">Penanganan terintegrasi mulai dari evaluasi biomekanik 3D, pembuatan alat kustom, hingga terapi adaptasi pola berjalan.</p>
+                <p class="text-secondary/80 text-base sm:text-lg mt-3 font-light leading-relaxed">
+                    Pendekatan terintegrasi mulai dari evaluasi biomekanik 3D, pembuatan alat kustom, hingga terapi adaptasi dan gait training.
+                </p>
             </div>
             <div>
-                <a href="{{ route('services.index') }}" class="inline-flex items-center justify-center bg-ink hover:bg-charcoal text-canvas text-xs font-medium px-6 h-10 rounded-full btn-pill-tap transition">
-                    <span>Semua Layanan</span>
+                <a href="{{ route('services.index') }}" class="inline-flex items-center justify-center bg-primary hover:bg-primary-dark text-white text-sm font-medium px-7 h-12 rounded-full btn-maven transition shadow-xs">
+                    <span>Semua Layanan Medis</span>
                 </a>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             @foreach($services as $svc)
-            <div class="bg-canvas border border-hairline-soft p-6 flex flex-col justify-between group">
+            <!-- Maven Clinic Card -->
+            <div class="bg-white rounded-3xl border border-border p-8 flex flex-col justify-between hover:border-primary/40 hover:shadow-md transition duration-300 group">
                 <div>
-                    <!-- Icon / Badge -->
-                    <div class="w-12 h-12 bg-soft-cloud text-ink flex items-center justify-center mb-6">
-                        <i data-lucide="{{ $svc->icon_name ?? 'activity' }}" class="w-6 h-6"></i>
+                    <!-- Icon Box in Mint Circle -->
+                    <div class="w-14 h-14 rounded-full bg-mint text-primary flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition duration-300">
+                        <i data-lucide="{{ $svc->icon_name ?? 'activity' }}" class="w-7 h-7"></i>
                     </div>
 
-                    <h3 class="text-xl font-bold text-ink leading-snug mb-2 group-hover:text-mute transition">
+                    <h3 class="text-2xl font-serif font-medium text-primary leading-snug mb-3 group-hover:text-terracotta transition">
                         <a href="{{ route('services.show', $svc->slug) }}">{{ $svc->title }}</a>
                     </h3>
 
-                    <p class="text-xs text-mute leading-relaxed mb-4">
+                    <p class="text-sm text-secondary/80 font-light leading-relaxed mb-6">
                         {{ $svc->summary }}
                     </p>
 
                     @if($svc->indications && count($svc->indications) > 0)
-                    <div class="pt-4 border-t border-hairline-soft">
-                        <span class="text-[11px] font-semibold text-ink uppercase tracking-wider block mb-2">Indikasi Klinis:</span>
+                    <div class="pt-5 border-t border-border space-y-2.5">
+                        <span class="text-xs font-semibold text-primary uppercase tracking-wider block font-sans">Indikasi Penanganan:</span>
                         <div class="flex flex-wrap gap-1.5">
                             @foreach(array_slice($svc->indications, 0, 3) as $ind)
-                            <span class="bg-soft-cloud text-ink text-[11px] font-medium px-2.5 py-1 rounded-full">{{ $ind }}</span>
+                            <span class="bg-cappuccino text-secondary text-xs font-normal px-3 py-1 rounded-full border border-border/60">{{ $ind }}</span>
                             @endforeach
                         </div>
                     </div>
                     @endif
                 </div>
 
-                <div class="mt-6 pt-4 border-t border-hairline-soft flex items-center justify-between">
-                    <a href="{{ route('services.show', $svc->slug) }}" class="text-xs font-semibold text-ink underline hover:text-mute transition">
-                        Detail Prosedur
+                <div class="mt-8 pt-5 border-t border-border flex items-center justify-between">
+                    <a href="{{ route('services.show', $svc->slug) }}" class="text-sm font-semibold text-primary hover:text-terracotta transition">
+                        Detail Prosedur &rarr;
                     </a>
-                    <a href="{{ route('consultation.create') }}?service_id={{ $svc->id }}" class="text-xs font-medium text-mute hover:text-ink transition">
-                        Jadwal &rarr;
+                    <a href="{{ route('consultation.create') }}?service_id={{ $svc->id }}" class="text-xs font-semibold text-terracotta hover:text-primary transition">
+                        Jadwalkan Kunjungan
                     </a>
                 </div>
             </div>
             @endforeach
         </div>
+
     </div>
 </section>
 
-<!-- SECTION 4: E-KATALOG PRODUK UNGGULAN ({component.product-card}: 1:1 image on soft-cloud, swatch dots, zero padding) -->
-<section class="py-12 bg-canvas border-b border-hairline-soft" id="katalog">
-    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-                <span class="text-xs text-mute font-semibold uppercase tracking-widest block mb-1">E-Katalog Resmi</span>
-                <h2 class="text-3xl sm:text-4xl font-medium tracking-tight text-ink uppercase font-sans">
+<!-- SECTION 3: E-KATALOG PRODUK MEDIS UNGGULAN (Maven Clinic Editorial Product Grid) -->
+<section class="py-24 bg-cappuccino-light border-t border-b border-border" id="katalog">
+    <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div class="max-w-2xl">
+                <span class="text-xs text-terracotta font-semibold uppercase tracking-wider block mb-2 font-sans">PROVEN MEDICAL DEVICES</span>
+                <h2 class="text-3xl sm:text-4xl lg:text-[46px] font-serif font-medium tracking-tight text-primary leading-tight">
                     Katalog Produk Medis Siap Pakai
                 </h2>
-                <p class="text-mute text-sm mt-1 max-w-2xl">Penyangga ortopedi, kolar leher, dan brace sendi dengan material medis impor berstandar internasional.</p>
+                <p class="text-secondary/80 text-base sm:text-lg mt-3 font-light leading-relaxed">
+                    Penyangga ortopedi, kolar leher, dan brace sendi dengan material medis impor berstandar internasional.
+                </p>
             </div>
             <div>
-                <a href="{{ route('products.index') }}" class="inline-flex items-center justify-center bg-soft-cloud hover:bg-hairline-soft text-ink text-xs font-medium px-6 h-10 rounded-full btn-pill-tap transition">
-                    <span>Lihat Seluruh Katalog</span>
+                <a href="{{ route('products.index') }}" class="inline-flex items-center justify-center bg-white hover:bg-cappuccino text-secondary text-sm font-semibold px-7 h-12 rounded-full btn-maven border border-border transition shadow-2xs">
+                    <span>Lihat Seluruh Katalog ({{ count($featuredProducts) }}+ Produk)</span>
                 </a>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($featuredProducts as $prod)
-            <!-- {component.product-card} -->
-            <div class="bg-canvas border border-hairline-soft p-0 flex flex-col justify-between group">
+            <!-- Product Card -->
+            <div class="bg-white rounded-3xl border border-border overflow-hidden flex flex-col justify-between hover:border-primary/40 hover:shadow-md transition duration-300 group">
                 <div>
-                    <!-- 1:1 Image Studio Area ({component.product-card-image}: soft-cloud background, zero radius) -->
-                    <div class="relative bg-soft-cloud aspect-square flex items-center justify-center overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80" alt="{{ $prod->name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <!-- Product Image Stage with Warm Linen Tone -->
+                    <div class="relative bg-cappuccino aspect-square flex items-center justify-center overflow-hidden border-b border-border">
+                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80" alt="{{ $prod->name }}"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         
-                        <!-- Promo Badge Pill ({component.badge-promo}) -->
-                        <span class="absolute top-3 left-3 bg-canvas border border-hairline text-ink text-[11px] font-medium px-3 py-1 rounded-full shadow-xs">
+                        <!-- Badges -->
+                        <span class="absolute top-4 left-4 bg-white/95 text-secondary text-xs font-semibold px-3.5 py-1 rounded-full border border-border shadow-2xs">
                             {{ $prod->category->name ?? 'Ortotik' }}
                         </span>
 
-                        <span class="absolute top-3 right-3 bg-canvas border border-hairline text-ink text-[11px] font-medium px-3 py-1 rounded-full shadow-xs">
+                        <span class="absolute top-4 right-4 bg-mint text-primary text-xs font-semibold px-3.5 py-1 rounded-full border border-primary/20">
                             Ready Stock
                         </span>
                     </div>
 
-                    <!-- Metadata Rows with 8px rhythm -->
-                    <div class="p-4 space-y-2">
-                        <!-- Swatch Dots ({component.swatch-dot}) -->
-                        <div class="flex items-center gap-1.5 pt-1">
-                            <span class="w-3 h-3 rounded-full bg-ink ring-2 ring-ink ring-offset-2"></span>
-                            <span class="w-3 h-3 rounded-full bg-mute"></span>
-                            <span class="w-3 h-3 rounded-full bg-hairline"></span>
-                        </div>
-
-                        <!-- Product Title ({typography.body-strong} ink) -->
-                        <h3 class="text-base font-medium text-ink leading-snug group-hover:text-mute transition">
+                    <!-- Metadata Rows -->
+                    <div class="p-7 space-y-3">
+                        <h3 class="text-xl font-serif font-medium text-primary leading-snug group-hover:text-terracotta transition line-clamp-1">
                             <a href="{{ route('products.show', $prod->slug) }}">{{ $prod->name }}</a>
                         </h3>
 
-                        <!-- Category Subtitle ({typography.caption-md} mute) -->
-                        <p class="text-xs text-mute font-medium line-clamp-1">
-                            {{ $prod->short_description ?? 'Alat bantu ortopedi standar klinis presisi tinggi' }}
+                        <p class="text-xs text-tertiary font-light line-clamp-2 leading-relaxed">
+                            {{ $prod->short_description ?? 'Alat bantu ortopedi standar klinis presisi tinggi untuk pemulihan optimal.' }}
                         </p>
 
-                        <!-- Price Row ({colors.ink} or {colors.sale}) -->
-                        <div class="pt-1 flex items-baseline gap-2">
-                            <span class="text-base font-bold text-ink">{{ $prod->formatted_price }}</span>
+                        <!-- Price Row -->
+                        <div class="pt-2 flex items-baseline gap-3">
+                            <span class="text-xl font-serif font-semibold text-primary">{{ $prod->formatted_price }}</span>
                             @if($prod->formatted_discount_price)
-                            <span class="text-xs text-mute line-through">{{ $prod->formatted_discount_price }}</span>
-                            <span class="text-xs font-semibold text-sale">Diskon Promo</span>
+                            <span class="text-xs text-tertiary line-through">{{ $prod->formatted_discount_price }}</span>
+                            <span class="text-xs font-semibold text-terracotta">Diskon Promo</span>
                             @endif
                         </div>
                     </div>
                 </div>
 
-                <!-- Card Bottom Pill Actions -->
-                <div class="p-4 pt-0 grid grid-cols-2 gap-2">
-                    <a href="{{ route('products.show', $prod->slug) }}" class="flex items-center justify-center bg-soft-cloud hover:bg-hairline-soft text-ink text-xs font-medium h-10 rounded-full btn-pill-tap transition">
-                        Detail Produk
+                <!-- Card Actions (Maven Clinic Pill Buttons) -->
+                <div class="p-7 pt-0 grid grid-cols-2 gap-3">
+                    <a href="{{ route('products.show', $prod->slug) }}" class="flex items-center justify-center bg-cappuccino hover:bg-cappuccino-deep text-secondary text-xs font-semibold h-11 rounded-full btn-maven border border-border transition">
+                        Detail
                     </a>
                     <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Ortotik,%20saya%20tertarik%20dengan%20produk%20{{ urlencode($prod->name) }}" target="_blank"
-                        class="flex items-center justify-center bg-ink hover:bg-charcoal text-canvas text-xs font-medium h-10 rounded-full btn-pill-tap transition">
+                        class="flex items-center justify-center bg-terracotta hover:bg-terracotta-dark text-white text-xs font-semibold h-11 rounded-full btn-maven transition">
                         Order WA
                     </a>
                 </div>
             </div>
             @endforeach
         </div>
+
     </div>
 </section>
 
-<!-- SECTION 5: CLINICAL WORKFLOW (4-Step Process on Soft-Cloud) -->
-<section class="py-16 bg-soft-cloud border-b border-hairline-soft">
-    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-2xl mb-10">
-            <span class="text-xs text-mute font-semibold uppercase tracking-widest block mb-1">Standard Operating Procedure</span>
-            <h2 class="text-3xl sm:text-4xl font-medium tracking-tight text-ink uppercase font-sans">
+<!-- SECTION 4: 4 TAHAPAN PROSES PELAYANAN PASIEN (Maven Clinic Step Workflow) -->
+<section class="py-24 bg-cappuccino">
+    <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="max-w-2xl mb-16">
+            <span class="text-xs text-terracotta font-semibold uppercase tracking-wider block mb-2 font-sans">STANDARD OPERATING PROCEDURE</span>
+            <h2 class="text-3xl sm:text-4xl lg:text-[46px] font-serif font-medium tracking-tight text-primary leading-tight">
                 Alur 4 Tahapan Pelayanan Pasien
             </h2>
-            <p class="text-mute text-sm mt-1">Setiap tahapan dirancang sistematis untuk menjamin akurasi biomekanik dan kenyamanan adaptasi soket.</p>
+            <p class="text-secondary/80 text-base sm:text-lg mt-3 font-light leading-relaxed">
+                Setiap tahapan dirancang sistematis untuk menjamin akurasi biomekanik dan kenyamanan adaptasi soket.
+            </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-canvas p-6 border border-hairline-soft flex flex-col justify-between">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white p-8 rounded-3xl border border-border flex flex-col justify-between shadow-2xs">
                 <div>
-                    <span class="text-3xl font-display text-ink block mb-2">01</span>
-                    <h3 class="text-base font-bold text-ink mb-2">Konsultasi & Gait Analysis</h3>
-                    <p class="text-xs text-mute leading-relaxed">Pemeriksaan fisik oleh klinisi Ortotis-Prostetis dan evaluasi pola gerak tubuh pasien.</p>
+                    <span class="w-12 h-12 rounded-full bg-mint text-primary font-serif font-bold text-lg flex items-center justify-center mb-6">01</span>
+                    <h3 class="text-lg font-serif font-medium text-primary mb-2">Konsultasi & Gait Analysis</h3>
+                    <p class="text-xs text-tertiary font-light leading-relaxed">Pemeriksaan fisik oleh klinisi Ortotis-Prostetis dan evaluasi pola gerak tubuh pasien.</p>
                 </div>
             </div>
 
-            <div class="bg-canvas p-6 border border-hairline-soft flex flex-col justify-between">
+            <div class="bg-white p-8 rounded-3xl border border-border flex flex-col justify-between shadow-2xs">
                 <div>
-                    <span class="text-3xl font-display text-ink block mb-2">02</span>
-                    <h3 class="text-base font-bold text-ink mb-2">3D Scanning & Casting</h3>
-                    <p class="text-xs text-mute leading-relaxed">Pengukuran presisi menggunakan scanner optik 3D atau casting gips cetak anatomis.</p>
+                    <span class="w-12 h-12 rounded-full bg-mint text-primary font-serif font-bold text-lg flex items-center justify-center mb-6">02</span>
+                    <h3 class="text-lg font-serif font-medium text-primary mb-2">3D Scanning & Casting</h3>
+                    <p class="text-xs text-tertiary font-light leading-relaxed">Pengukuran presisi menggunakan scanner optik 3D atau casting gips cetak anatomis.</p>
                 </div>
             </div>
 
-            <div class="bg-canvas p-6 border border-hairline-soft flex flex-col justify-between">
+            <div class="bg-white p-8 rounded-3xl border border-border flex flex-col justify-between shadow-2xs">
                 <div>
-                    <span class="text-3xl font-display text-ink block mb-2">03</span>
-                    <h3 class="text-base font-bold text-ink mb-2">Fabrikasi Carbon Fiber</h3>
-                    <p class="text-xs text-mute leading-relaxed">Pengerjaan di workshop berlisensi dengan material carbon composite dan komponen bersertifikasi ISO.</p>
+                    <span class="w-12 h-12 rounded-full bg-mint text-primary font-serif font-bold text-lg flex items-center justify-center mb-6">03</span>
+                    <h3 class="text-lg font-serif font-medium text-primary mb-2">Fabrikasi Carbon Fiber</h3>
+                    <p class="text-xs text-tertiary font-light leading-relaxed">Pengerjaan di workshop berlisensi dengan material carbon composite dan komponen bersertifikasi ISO.</p>
                 </div>
             </div>
 
-            <div class="bg-canvas p-6 border border-hairline-soft flex flex-col justify-between">
+            <div class="bg-white p-8 rounded-3xl border border-border flex flex-col justify-between shadow-2xs">
                 <div>
-                    <span class="text-3xl font-display text-ink block mb-2">04</span>
-                    <h3 class="text-base font-bold text-ink mb-2">Fitting & Gait Training</h3>
-                    <p class="text-xs text-mute leading-relaxed">Uji coba dinamis, penyetelan kenyamanan soket, dan pendampingan latihan berjalan hingga mandiri.</p>
+                    <span class="w-12 h-12 rounded-full bg-mint text-primary font-serif font-bold text-lg flex items-center justify-center mb-6">04</span>
+                    <h3 class="text-lg font-serif font-medium text-primary mb-2">Fitting & Gait Training</h3>
+                    <p class="text-xs text-tertiary font-light leading-relaxed">Uji coba dinamis, penyetelan kenyamanan soket, dan pendampingan latihan berjalan hingga mandiri.</p>
                 </div>
             </div>
         </div>
+
     </div>
 </section>
 
-<!-- SECTION 6: FAQ ACCORDION DISCLOSURE ROWS ({component.faq-row} & {component.pdp-disclosure-row}) -->
-<section class="py-16 bg-canvas border-b border-hairline-soft">
-    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- SECTION 5: FAQ ACCORDION -->
+<section class="py-24 bg-cappuccino-light border-t border-border">
+    <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
             
-            <div class="lg:col-span-5 space-y-4">
-                <span class="text-xs text-mute font-semibold uppercase tracking-widest block">Pertanyaan Umum</span>
-                <h2 class="text-3xl sm:text-4xl font-medium tracking-tight text-ink uppercase font-sans">
-                    Frequently Asked Questions
+            <div class="lg:col-span-5 space-y-5">
+                <span class="text-xs text-terracotta font-semibold uppercase tracking-wider block font-sans">PATIENT INQUIRY</span>
+                <h2 class="text-3xl sm:text-4xl font-serif font-medium tracking-tight text-primary leading-tight">
+                    Pertanyaan Seputar Pelayanan
                 </h2>
-                <p class="text-mute text-sm leading-relaxed">
+                <p class="text-secondary/80 text-base leading-relaxed font-light">
                     Jawaban seputar prosedur pembuatan kaki palsu, jadwal konsultasi, penanganan skoliosis, hingga garansi penyesuaian alat.
                 </p>
-                <div class="pt-2">
+                <div class="pt-3">
                     <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Klinik%20Ortotik,%20saya%20ingin%20tanya%20prosedur%20pembuatan%20alat." target="_blank"
-                        class="inline-flex items-center justify-center bg-ink hover:bg-charcoal text-canvas text-xs font-medium px-6 h-10 rounded-full btn-pill-tap transition">
+                        class="inline-flex items-center justify-center bg-primary hover:bg-primary-dark text-white text-sm font-semibold px-7 h-12 rounded-full btn-maven shadow-xs transition">
                         <span>Tanya Langsung via WhatsApp</span>
                     </a>
                 </div>
             </div>
 
-            <div class="lg:col-span-7 divide-y divide-hairline">
+            <div class="lg:col-span-7 divide-y divide-border bg-white rounded-3xl border border-border p-8 sm:p-10 shadow-2xs">
                 <!-- FAQ Row 1 -->
-                <div class="py-6 space-y-2" x-data="{ open: true }">
+                <div class="py-6 first:pt-0 last:pb-0 space-y-3" x-data="{ open: true }">
                     <button @click="open = !open" class="w-full flex justify-between items-center text-left">
-                        <span class="text-base font-bold text-ink">Berapa lama proses pembuatan kaki palsu custom?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-ink transition transform" :class="open ? 'rotate-180' : ''"></i>
+                        <span class="text-lg font-serif font-medium text-primary">Berapa lama proses pembuatan kaki palsu custom?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-terracotta transition transform" :class="open ? 'rotate-180' : ''"></i>
                     </button>
-                    <div x-show="open" class="text-xs text-mute leading-relaxed pt-2">
+                    <div x-show="open" class="text-sm text-secondary/80 font-light leading-relaxed pt-2">
                         Proses pembuatan rata-rata memakan waktu 5 hingga 10 hari kerja, mencakup tahapan casting, fabrikasi soket carbon fiber, dynamic alignment, serta sesi fitting dan gait training bersama fisioterapis.
                     </div>
                 </div>
 
                 <!-- FAQ Row 2 -->
-                <div class="py-6 space-y-2" x-data="{ open: false }">
+                <div class="py-6 first:pt-0 last:pb-0 space-y-3" x-data="{ open: false }">
                     <button @click="open = !open" class="w-full flex justify-between items-center text-left">
-                        <span class="text-base font-bold text-ink">Apakah tersedia layanan pengukuran ke rumah (Home Visit)?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-ink transition transform" :class="open ? 'rotate-180' : ''"></i>
+                        <span class="text-lg font-serif font-medium text-primary">Apakah tersedia layanan pengukuran ke rumah (Home Visit)?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-terracotta transition transform" :class="open ? 'rotate-180' : ''"></i>
                     </button>
-                    <div x-show="open" x-cloak class="text-xs text-mute leading-relaxed pt-2">
+                    <div x-show="open" x-cloak class="text-sm text-secondary/80 font-light leading-relaxed pt-2">
                         Ya, tim klinisi kami melayani Home Visit untuk pasien lanjut usia, pasca stroke, atau kondisi pasca operasi yang memiliki keterbatasan mobilitas untuk datang ke klinik.
                     </div>
                 </div>
 
                 <!-- FAQ Row 3 -->
-                <div class="py-6 space-y-2" x-data="{ open: false }">
+                <div class="py-6 first:pt-0 last:pb-0 space-y-3" x-data="{ open: false }">
                     <button @click="open = !open" class="w-full flex justify-between items-center text-left">
-                        <span class="text-base font-bold text-ink">Bagaimana dengan garansi dan penyesuaian berkala?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-ink transition transform" :class="open ? 'rotate-180' : ''"></i>
+                        <span class="text-lg font-serif font-medium text-primary">Bagaimana dengan garansi dan penyesuaian berkala?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-terracotta transition transform" :class="open ? 'rotate-180' : ''"></i>
                     </button>
-                    <div x-show="open" x-cloak class="text-xs text-mute leading-relaxed pt-2">
+                    <div x-show="open" x-cloak class="text-sm text-secondary/80 font-light leading-relaxed pt-2">
                         Setiap produk custom-made dilengkapi garansi fitting pas 100%. Kami memberikan layanan penyesuaian soket gratis selama masa garansi apabila terjadi perubahan volume puntung pasien.
                     </div>
                 </div>
@@ -376,22 +408,23 @@
     </div>
 </section>
 
-<!-- SECTION 7: BOTTOM CAMPAIGN BANNER ({component.campaign-tile}) -->
-<section class="relative bg-ink text-canvas py-20 overflow-hidden">
-    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-        <span class="text-xs text-mute font-semibold uppercase tracking-widest block">Konsultasi Medis & Pemeriksaan</span>
-        <h2 class="font-display text-4xl sm:text-6xl lg:text-[72px] leading-[0.9] uppercase text-canvas font-medium tracking-tight max-w-3xl mx-auto">
-            SIAP UNTUK KEMBALI MELANGKAH BEBAS DAN MANDIRI?
+<!-- SECTION 6: BOTTOM CALL TO ACTION (Maven Clinic Signature Emerald Green Banner with Terra Cotta / Mint Buttons) -->
+<section class="py-24 bg-primary text-cappuccino relative overflow-hidden">
+    <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-7 relative z-10">
+        <span class="text-xs text-mint font-semibold uppercase tracking-wider block font-sans">SMART APPOINTMENT BOOKING</span>
+        <h2 class="text-3xl sm:text-5xl lg:text-[52px] font-serif font-medium tracking-tight text-white max-w-3xl mx-auto leading-tight">
+            Siap untuk Kembali Melangkah Bebas dan Mandiri?
         </h2>
-        <p class="text-canvas/80 text-sm max-w-xl mx-auto leading-relaxed">
+        <p class="text-cappuccino/85 text-base sm:text-lg max-w-xl mx-auto leading-relaxed font-light">
             Jadwalkan pemeriksaan biomekanik dan konsultasi bersama tim Ortotis-Prostetis resmi kami di klinik Jakarta atau Surabaya.
         </p>
-        <div class="flex flex-wrap justify-center items-center gap-3 pt-2">
-            <a href="{{ route('consultation.create') }}" class="inline-flex items-center justify-center bg-canvas hover:bg-soft-cloud text-ink text-xs sm:text-sm font-medium px-8 h-12 rounded-full btn-pill-tap transition">
+        <div class="flex flex-wrap justify-center items-center gap-4 pt-4">
+            <a href="{{ route('consultation.create') }}" class="inline-flex items-center justify-center bg-terracotta hover:bg-terracotta-dark text-white text-base font-semibold px-9 h-14 rounded-full btn-maven shadow-md transition">
                 <span>Isi Formulir Janji Temu Medis</span>
             </a>
             <a href="https://wa.me/6281234567890?text=Halo%20Klinik%20Ortotik,%20saya%20ingin%20jadwalkan%20konsultasi." target="_blank"
-                class="inline-flex items-center justify-center bg-transparent hover:bg-canvas/10 text-canvas border border-canvas/40 text-xs sm:text-sm font-medium px-8 h-12 rounded-full btn-pill-tap transition">
+                class="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white border border-white/30 text-sm font-semibold px-8 h-14 rounded-full btn-maven transition">
+                <i data-lucide="message-circle" class="w-4 h-4 mr-2 text-mint"></i>
                 <span>Hubungi via WhatsApp</span>
             </a>
         </div>

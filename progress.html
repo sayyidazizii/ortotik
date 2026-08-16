@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ortotik & Prostetik - Executive Portfolio Dashboard & Design.md Architecture</title>
+    <title>Ortotik & Prostetik - Executive Portfolio Dashboard (Maven Clinic Design System)</title>
     
-    <!-- Google Fonts: Bebas Neue & Plus Jakarta Sans / Space Grotesk -->
+    <!-- Google Fonts: Fraunces / Playfair Display (Serif) & Plus Jakarta Sans (Sans) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -18,39 +18,32 @@
 
     <style>
         :root {
-            --pm-navy: #111111;
-            --pm-navy-dark: #000000;
-            --pm-header: #1e1e1e;
-            --pm-sidebar: #111111;
-            --pm-card-bg: #ffffff;
-            --pm-bg: #f5f5f5;
-            --pm-border: #e5e5e5;
-            --pm-border-light: #f5f5f5;
+            /* Maven Clinic Design Tokens */
+            --primary: #0D5C46;
+            --primary-dark: #074332;
+            --primary-light: #17795E;
+            --terracotta: #C86D51;
+            --terracotta-dark: #B0593F;
+            --mint: #D8ECE5;
+            --mint-light: #EEF7F4;
+            --cappuccino: #F6F3EE;
+            --cappuccino-light: #FAF8F5;
+            --cappuccino-deep: #ECE5DA;
+            --blush: #F9ECE8;
+            --secondary: #1A2E26;
+            --tertiary: #65776F;
+            --surface: #FFFFFF;
+            --border: #E3DDD5;
+            --whatsapp: #25D366;
             
-            --ink: #111111;
-            --canvas: #ffffff;
-            --soft-cloud: #f5f5f5;
-            --mute: #707072;
-            --hairline: #cacacb;
-            --hairline-soft: #e5e5e5;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 18px;
+            --radius-xl: 28px;
+            --radius-2xl: 36px;
+            --radius-full: 9999px;
             
-            --sale: #d30005;
-            --success: #007d48;
-            --info: #1151ff;
-            
-            --primary: #111111;
-            --primary-light: #f5f5f5;
-            --secondary: #0a7281;
-            --secondary-light: #e0f2fe;
-            
-            --text-dark: #111111;
-            --text-slate: #39393b;
-            --text-muted: #707072;
-            --text-light: #9e9ea0;
-            
-            --radius-none: 0px;
-            --radius-pill: 9999px;
-            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -60,17 +53,23 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--pm-bg);
-            color: var(--text-slate);
-            line-height: 1.5;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--cappuccino-light);
+            color: var(--secondary);
+            line-height: 1.6;
             padding-bottom: 60px;
         }
 
-        /* Top Executive Header Bar */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Fraunces', Georgia, serif;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        /* Top Executive Header Bar (Maven Clinic Emerald Header) */
         .pm-top-header {
-            background: var(--ink);
-            color: #ffffff;
+            background: var(--primary);
+            color: var(--cappuccino);
             padding: 0 28px;
             height: 64px;
             display: flex;
@@ -79,7 +78,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid #333333;
+            border-bottom: 1px solid var(--primary-dark);
         }
 
         .header-left {
@@ -89,48 +88,50 @@
         }
 
         .pm-brand-badge {
-            width: 36px;
-            height: 36px;
-            background: #ffffff;
-            color: #111111;
+            width: 40px;
+            height: 40px;
+            background: var(--terracotta);
+            color: #FFFFFF;
+            border-radius: var(--radius-full);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 900;
+            font-weight: 700;
             font-size: 16px;
+            font-family: 'Fraunces', serif;
         }
 
         .header-title-box h1 {
             font-size: 16px;
-            font-weight: 700;
-            color: #ffffff;
+            font-weight: 600;
+            color: #FFFFFF;
             letter-spacing: -0.2px;
             display: flex;
             align-items: center;
             gap: 8px;
-            text-transform: uppercase;
         }
 
         .header-title-box p {
             font-size: 11px;
-            color: #9e9ea0;
-            font-weight: 500;
+            color: rgba(246, 243, 238, 0.85);
+            font-weight: 400;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .header-right {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 14px;
         }
 
         .health-indicator {
-            background: rgba(0, 125, 72, 0.2);
-            border: 1px solid rgba(0, 125, 72, 0.4);
-            color: #34d399;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: var(--cappuccino);
             padding: 5px 14px;
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 600;
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -139,7 +140,7 @@
         .health-dot {
             width: 8px;
             height: 8px;
-            background: #10b981;
+            background: var(--terracotta);
             border-radius: 50%;
         }
 
@@ -147,18 +148,20 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             padding: 5px 12px;
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
             font-size: 11px;
-            color: #cacacb;
+            color: var(--cappuccino);
+            font-weight: 500;
         }
 
         .btn-export-pdf {
-            background: #ffffff;
-            color: #111111;
-            padding: 7px 18px;
-            border-radius: 9999px;
+            background: var(--terracotta);
+            color: #FFFFFF;
+            padding: 8px 20px;
+            border-radius: var(--radius-full);
             font-size: 12px;
             font-weight: 700;
             cursor: pointer;
@@ -170,30 +173,31 @@
         }
 
         .btn-export-pdf:hover {
-            background: #e5e5e5;
+            background: var(--terracotta-dark);
+            transform: translateY(-1px);
         }
 
         /* Sub-Header Navigation Bar */
         .pm-sub-nav {
-            background: #1e1e1e;
-            color: #9e9ea0;
+            background: var(--cappuccino);
+            color: var(--secondary);
             padding: 0 28px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             font-size: 13px;
             font-weight: 600;
-            border-bottom: 1px solid #333333;
+            border-bottom: 1px solid var(--border);
         }
 
         .nav-tab-list {
             display: flex;
-            gap: 20px;
+            gap: 24px;
         }
 
         .nav-tab-item {
-            padding: 12px 0;
-            color: #cacacb;
+            padding: 14px 0;
+            color: var(--secondary);
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -204,27 +208,30 @@
         }
 
         .nav-tab-item.active, .nav-tab-item:hover {
-            color: #ffffff;
-            border-bottom-color: #ffffff;
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            font-weight: 700;
         }
 
         .project-meta-pills {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             font-size: 11px;
-            color: #cacacb;
         }
 
         .meta-pill {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 3px 10px;
-            border-radius: 4px;
+            background: #FFFFFF;
+            color: var(--primary);
+            border: 1px solid var(--border);
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-weight: 700;
         }
 
         /* Dashboard Main Layout */
         .dashboard-container {
-            max-width: 1440px;
-            margin: 24px auto 0;
+            max-width: 1360px;
+            margin: 28px auto 0;
             padding: 0 24px;
         }
 
@@ -232,28 +239,20 @@
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
+            gap: 18px;
             margin-bottom: 24px;
         }
 
         .kpi-card {
-            background: var(--pm-card-bg);
-            border: 1px solid var(--hairline-soft);
-            padding: 20px;
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 22px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-        }
-
-        .kpi-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: #111111;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
 
         .kpi-header {
@@ -268,18 +267,18 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: var(--text-muted);
+            color: var(--terracotta);
         }
 
         .kpi-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--soft-cloud);
-            color: var(--ink);
+            width: 38px;
+            height: 38px;
+            background: var(--mint);
+            color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
         }
 
         .kpi-body {
@@ -289,23 +288,23 @@
         }
 
         .kpi-value {
-            font-family: 'Bebas Neue', Impact, sans-serif;
-            font-size: 40px;
-            font-weight: 500;
-            color: var(--text-dark);
+            font-family: 'Fraunces', serif;
+            font-size: 38px;
+            font-weight: 600;
+            color: var(--primary);
             line-height: 1;
         }
 
         .kpi-sub {
             font-size: 12px;
-            font-weight: 600;
-            color: var(--text-muted);
+            font-weight: 500;
+            color: rgba(26, 46, 38, 0.7);
         }
 
         .kpi-footer {
-            margin-top: 12px;
+            margin-top: 14px;
             padding-top: 10px;
-            border-top: 1px solid var(--hairline-soft);
+            border-top: 1px solid var(--border);
             font-size: 11px;
             display: flex;
             align-items: center;
@@ -314,29 +313,31 @@
 
         .kpi-badge {
             font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 9999px;
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
             font-size: 10px;
             text-transform: uppercase;
         }
 
-        .badge-green { background: #dcfce7; color: #166534; }
-        .badge-ink { background: #111111; color: #ffffff; }
+        .badge-terracotta { background: var(--terracotta); color: #FFFFFF; }
+        .badge-mint { background: var(--mint); color: var(--primary); }
 
         /* Row of Charts */
         .charts-row {
             display: grid;
             grid-template-columns: 1.2fr 1fr 1fr;
-            gap: 16px;
+            gap: 18px;
             margin-bottom: 24px;
         }
 
         .chart-card {
-            background: var(--pm-card-bg);
-            border: 1px solid var(--hairline-soft);
-            padding: 22px;
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 24px;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
 
         .card-header-clean {
@@ -345,22 +346,23 @@
             align-items: center;
             margin-bottom: 16px;
             padding-bottom: 12px;
-            border-bottom: 1px solid var(--hairline-soft);
+            border-bottom: 1px solid var(--border);
         }
 
         .card-header-clean h3 {
             font-size: 14px;
-            font-weight: 800;
-            color: var(--text-dark);
+            font-weight: 600;
+            color: var(--primary);
             display: flex;
             align-items: center;
             gap: 8px;
             text-transform: uppercase;
+            font-family: 'Fraunces', serif;
         }
 
         .card-header-clean span {
             font-size: 11px;
-            color: var(--text-muted);
+            color: rgba(26, 46, 38, 0.6);
             font-weight: 600;
         }
 
@@ -373,40 +375,41 @@
             justify-content: center;
         }
 
-        /* SECTION: DESIGN.MD SYSTEM SHOWCASE CARD */
+        /* SECTION: MAVEN CLINIC DESIGN SPECIFICATION */
         .design-system-card {
-            background: var(--ink);
-            color: var(--canvas);
-            border: 1px solid #333333;
-            padding: 32px;
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 30px;
             margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
 
         .design-system-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            border-bottom: 1px solid #333333;
+            border-bottom: 1px solid var(--border);
             padding-bottom: 18px;
-            margin-bottom: 24px;
+            margin-bottom: 22px;
         }
 
         .design-system-header h2 {
-            font-family: 'Bebas Neue', Impact, sans-serif;
-            font-size: 36px;
-            letter-spacing: 0.5px;
-            color: #ffffff;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary);
         }
 
         .design-specs-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
+            gap: 18px;
         }
 
         .spec-tile {
-            background: #1e1e1e;
-            border: 1px solid #333333;
+            background: var(--cappuccino);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
             padding: 18px;
             display: flex;
             flex-direction: column;
@@ -416,32 +419,36 @@
         .spec-tile-title {
             font-size: 11px;
             font-weight: 700;
-            color: #9e9ea0;
+            color: var(--terracotta);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 6px;
         }
 
         .spec-tile-value {
-            font-size: 14px;
-            font-weight: 700;
-            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary);
             line-height: 1.3;
+            font-family: 'Fraunces', serif;
         }
 
         .spec-tile-desc {
             font-size: 11px;
-            color: #cacacb;
+            color: rgba(26, 46, 38, 0.7);
             margin-top: 8px;
             line-height: 1.4;
+            font-weight: 300;
         }
 
         /* SECTION: CONNECTED MILESTONE FLOW */
         .flow-section-card {
-            background: var(--pm-card-bg);
-            border: 1px solid var(--hairline-soft);
-            padding: 28px 32px;
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 30px 34px;
             margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
 
         .flow-section-header {
@@ -449,24 +456,24 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            border-bottom: 1px solid var(--hairline-soft);
+            border-bottom: 1px solid var(--border);
             padding-bottom: 16px;
         }
 
         .flow-section-header h2 {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--text-dark);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
             display: flex;
             align-items: center;
             gap: 8px;
-            text-transform: uppercase;
         }
 
         .flow-section-header p {
             font-size: 12px;
-            color: var(--text-muted);
+            color: rgba(26, 46, 38, 0.7);
             margin-top: 2px;
+            font-weight: 300;
         }
 
         .milestone-flow-grid {
@@ -484,23 +491,18 @@
         }
 
         .flow-card {
-            background: #ffffff;
-            border: 1px solid var(--hairline);
-            padding: 20px;
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 22px;
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .flow-card.completed::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: 4px;
-            background: #111111;
+        .flow-card.completed {
+            border-left: 4px solid var(--primary);
         }
 
         .flow-card-head {
@@ -512,27 +514,27 @@
 
         .step-index-badge {
             font-size: 10px;
-            font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 9999px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .step-index-badge.done { background: #111111; color: #ffffff; }
+        .step-index-badge.done { background: var(--mint); color: var(--primary); }
 
         .flow-date {
             font-size: 11px;
-            font-weight: 700;
-            color: var(--mute);
+            font-weight: 600;
+            color: rgba(26, 46, 38, 0.6);
         }
 
         .flow-card-title {
-            font-size: 14px;
-            font-weight: 800;
-            color: var(--text-dark);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary);
             margin-bottom: 8px;
             line-height: 1.3;
+            font-family: 'Fraunces', serif;
         }
 
         .flow-part-list {
@@ -540,24 +542,25 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid var(--hairline-soft);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
         }
 
         .flow-part-item {
             font-size: 11px;
-            color: var(--text-slate);
+            color: rgba(26, 46, 38, 0.7);
             display: flex;
             align-items: flex-start;
             gap: 6px;
             line-height: 1.35;
+            font-weight: 300;
         }
 
         .flow-part-item i {
             margin-top: 2px;
             flex-shrink: 0;
-            color: #111111;
+            color: var(--terracotta);
         }
 
         .connecting-arrow-bar {
@@ -571,7 +574,7 @@
         .arrow-path-line {
             height: 2px;
             width: 100%;
-            background: #111111;
+            background: var(--primary);
             position: relative;
         }
 
@@ -579,12 +582,12 @@
             position: absolute;
             right: 15%;
             top: -10px;
-            background: #111111;
-            color: #ffffff;
+            background: var(--primary);
+            color: #FFFFFF;
             font-size: 10px;
-            font-weight: 800;
-            padding: 2px 12px;
-            border-radius: 9999px;
+            font-weight: 700;
+            padding: 3px 14px;
+            border-radius: var(--radius-full);
             display: flex;
             align-items: center;
             gap: 4px;
@@ -592,9 +595,11 @@
 
         /* SECTION: INTERACTIVE TASK INVENTORY TABLE */
         .task-inventory-card {
-            background: var(--pm-card-bg);
-            border: 1px solid var(--hairline-soft);
-            padding: 24px;
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 26px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
 
         .table-responsive {
@@ -610,43 +615,44 @@
         }
 
         .pm-table th {
-            background: var(--soft-cloud);
-            color: var(--text-dark);
+            background: var(--cappuccino);
+            color: var(--primary);
             font-weight: 700;
-            padding: 10px 14px;
-            border-bottom: 1px solid var(--hairline);
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
             text-transform: uppercase;
             font-size: 10px;
             letter-spacing: 0.5px;
+            font-family: 'Fraunces', serif;
         }
 
         .pm-table td {
-            padding: 12px 14px;
-            border-bottom: 1px solid var(--hairline-soft);
-            color: var(--text-slate);
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--secondary);
         }
 
         .pm-table tr:hover td {
-            background: #fafafa;
+            background: var(--cappuccino);
         }
 
         .status-pill-table {
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            padding: 3px 8px;
-            border-radius: 9999px;
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
             font-weight: 700;
             font-size: 10px;
             text-transform: uppercase;
         }
 
-        .status-pill-table.done { background: #111111; color: #ffffff; }
+        .status-pill-table.done { background: var(--mint); color: var(--primary); }
 
         .task-checkbox-custom {
-            accent-color: var(--ink);
-            width: 15px;
-            height: 15px;
+            accent-color: var(--primary);
+            width: 16px;
+            height: 16px;
             cursor: pointer;
         }
 
@@ -687,19 +693,19 @@
             <div class="pm-brand-badge">OP</div>
             <div class="header-title-box">
                 <h1>Ortotik & Prostetik &bull; Executive System Dashboard</h1>
-                <p>Design.md Editorial Commerce Architecture & Enterprise Governance</p>
+                <p>Maven Clinic Healthcare Design Architecture Specification</p>
             </div>
         </div>
 
         <div class="header-right">
             <div class="health-indicator">
                 <span class="health-dot"></span>
-                <span>Design System: <strong>DESIGN.MD 100% APPLIED</strong></span>
+                <span>Design System: <strong>MAVEN CLINIC 100%</strong></span>
             </div>
 
             <div class="last-updated-box">
                 <i data-lucide="clock" style="width: 13px; height: 13px;"></i>
-                <span>Terakhir Update: <strong>16 Agustus 2026, 22:45 WIB</strong></span>
+                <span>Update: <strong>17 Agustus 2026, 00:00 WIB</strong></span>
             </div>
 
             <button class="btn-export-pdf" onclick="window.print()">
@@ -713,14 +719,14 @@
     <div class="pm-sub-nav">
         <div class="nav-tab-list">
             <div class="nav-tab-item active"><i data-lucide="layout-dashboard" style="width: 14px; height: 14px;"></i> Dashboard Overview</div>
-            <div class="nav-tab-item" onclick="scrollToSection('design-system-section')"><i data-lucide="layers" style="width: 14px; height: 14px;"></i> Design.md Architecture</div>
+            <div class="nav-tab-item" onclick="scrollToSection('design-system-section')"><i data-lucide="layers" style="width: 14px; height: 14px;"></i> Maven Spec</div>
             <div class="nav-tab-item" onclick="scrollToSection('workflow-section')"><i data-lucide="git-commit" style="width: 14px; height: 14px;"></i> Milestone Workflow</div>
             <div class="nav-tab-item" onclick="scrollToSection('tasks-section')"><i data-lucide="check-square" style="width: 14px; height: 14px;"></i> Task Inventory</div>
             <a href="/" target="_blank" class="nav-tab-item"><i data-lucide="globe" style="width: 14px; height: 14px;"></i> Live Website</a>
         </div>
 
         <div class="project-meta-pills">
-            <span class="meta-pill">Spec: Design.md Architecture</span>
+            <span class="meta-pill">Spec: Maven Clinic (#0D5C46 / #C86D51)</span>
             <span class="meta-pill">Status: 23/23 Tests Passed</span>
         </div>
     </div>
@@ -733,7 +739,7 @@
             <div class="kpi-card">
                 <div class="kpi-header">
                     <span class="kpi-title">Overall Progress</span>
-                    <div class="kpi-icon"><i data-lucide="check-check" style="width: 16px; height: 16px;"></i></div>
+                    <div class="kpi-icon"><i data-lucide="check-check" style="width: 18px; height: 18px;"></i></div>
                 </div>
                 <div class="kpi-body">
                     <span class="kpi-value" id="kpi-percent">100%</span>
@@ -741,7 +747,7 @@
                 </div>
                 <div class="kpi-footer">
                     <span>26 / 26 Modul Selesai</span>
-                    <span class="kpi-badge badge-green">Production Ready</span>
+                    <span class="kpi-badge badge-terracotta">Production Ready</span>
                 </div>
             </div>
 
@@ -749,7 +755,7 @@
             <div class="kpi-card">
                 <div class="kpi-header">
                     <span class="kpi-title">Test Suite Success</span>
-                    <div class="kpi-icon"><i data-lucide="shield-check" style="width: 16px; height: 16px;"></i></div>
+                    <div class="kpi-icon"><i data-lucide="shield-check" style="width: 18px; height: 18px;"></i></div>
                 </div>
                 <div class="kpi-body">
                     <span class="kpi-value">100%</span>
@@ -757,98 +763,98 @@
                 </div>
                 <div class="kpi-footer">
                     <span>71 Assertions Passed</span>
-                    <span class="kpi-badge badge-green">Zero Breaking Errors</span>
+                    <span class="kpi-badge badge-mint">Zero Breaking Errors</span>
                 </div>
             </div>
 
             <!-- KPI 3 -->
             <div class="kpi-card">
                 <div class="kpi-header">
-                    <span class="kpi-title">Design System Spec</span>
-                    <div class="kpi-icon"><i data-lucide="file-code-2" style="width: 16px; height: 16px;"></i></div>
+                    <span class="kpi-title">Design System</span>
+                    <div class="kpi-icon"><i data-lucide="palette" style="width: 18px; height: 18px;"></i></div>
                 </div>
                 <div class="kpi-body">
-                    <span class="kpi-value">DESIGN.MD</span>
-                    <span class="kpi-sub">Commerce Architecture</span>
+                    <span class="kpi-value" style="font-size: 24px;">MAVEN CLINIC</span>
+                    <span class="kpi-sub">Emerald & Terra Cotta</span>
                 </div>
                 <div class="kpi-footer">
-                    <span>Editorial Typography + Pill Geometry</span>
-                    <span class="kpi-badge badge-ink">Compliant</span>
+                    <span>Jewel Tones + Domaine Serif</span>
+                    <span class="kpi-badge badge-terracotta">Compliant</span>
                 </div>
             </div>
 
             <!-- KPI 4 -->
             <div class="kpi-card">
                 <div class="kpi-header">
-                    <span class="kpi-title">Layer Clean Arch</span>
-                    <div class="kpi-icon"><i data-lucide="layers" style="width: 16px; height: 16px;"></i></div>
+                    <span class="kpi-title">Clean Architecture</span>
+                    <div class="kpi-icon"><i data-lucide="layers" style="width: 18px; height: 18px;"></i></div>
                 </div>
                 <div class="kpi-body">
                     <span class="kpi-value">100%</span>
                     <span class="kpi-sub">Service & Repo Layer</span>
                 </div>
                 <div class="kpi-footer">
-                    <span>Anti Brute Force & Rate Limit</span>
-                    <span class="kpi-badge badge-green">Verified</span>
+                    <span>Repository Pattern Active</span>
+                    <span class="kpi-badge badge-mint">Verified</span>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION: DESIGN.MD SYSTEM ARCHITECTURE SHOWCASE -->
+        <!-- SECTION: MAVEN CLINIC DESIGN SYSTEM SHOWCASE -->
         <section class="design-system-card" id="design-system-section">
             <div class="design-system-header">
                 <div>
-                    <h2>DESIGN.MD SPECIFICATION COMPLIANCE</h2>
-                    <p style="font-size: 12px; color: #cacacb;">
-                        Arsitektur visual berbasis <em>photography-first editorial commerce</em> dengan kontras tipografi ekstrem dan geometri pill pada retail chrome.
+                    <h2>MAVEN CLINIC HEALTHCARE DESIGN ARCHITECTURE</h2>
+                    <p style="font-size: 13px; color: rgba(26, 46, 38, 0.7); margin-top: 4px; font-weight: 300;">
+                        Sistem desain kesehatan komprehensif, humanis, dan kontemporer dengan warna permata (Emerald Green #0D5C46 & Terra Cotta #C86D51), tipografi serif anggun, dan visual linen hangat.
                     </p>
                 </div>
                 <div>
-                    <span class="step-index-badge done">100% SPEC APPLIED</span>
+                    <span class="step-index-badge done">100% MAVEN CLINIC SPEC APPLIED</span>
                 </div>
             </div>
 
             <div class="design-specs-grid">
-                <!-- Tile 1: Typography -->
+                <!-- Tile 1 -->
                 <div class="spec-tile">
                     <div>
-                        <span class="spec-tile-title">01 &bull; Extreme Typography</span>
-                        <div class="spec-tile-value">Bebas Neue 96px + Plus Jakarta Sans</div>
+                        <span class="spec-tile-title">01 &bull; Jewel-Tone Color System</span>
+                        <div class="spec-tile-value">Emerald #0D5C46 & Terra Cotta #C86D51</div>
                         <p class="spec-tile-desc">
-                            Display campaign headline (96px, line-height 0.9, uppercase) burned into campaign imagery, didampingi UI workhorse 12-16px.
+                            Warna hijau zamrud melambangkan keseimbangan fisik dan kesehatan emosional, didukung terakota dan mint julep #D8ECE5.
                         </p>
                     </div>
                 </div>
 
-                <!-- Tile 2: Palette -->
+                <!-- Tile 2 -->
                 <div class="spec-tile">
                     <div>
-                        <span class="spec-tile-title">02 &bull; Neutral Retail Chrome</span>
-                        <div class="spec-tile-value">#111111 Ink &bull; #f5f5f5 Soft Cloud</div>
+                        <span class="spec-tile-title">02 &bull; Domaine Display Typography</span>
+                        <div class="spec-tile-value">Fraunces Serif &bull; Plus Jakarta Sans</div>
                         <p class="spec-tile-desc">
-                            95% chrome menggunakan Pure Black, Pure White, dan Soft Cloud gray studio backdrop. Warna semantik (#d30005) hanya untuk harga diskon.
+                            Headline serif elegan dan manusiawi dipadu dengan sans-serif geometris berketerbacaan tinggi.
                         </p>
                     </div>
                 </div>
 
-                <!-- Tile 3: Pill Geometry -->
+                <!-- Tile 3 -->
                 <div class="spec-tile">
                     <div>
-                        <span class="spec-tile-title">03 &bull; Universal Pill Geometry</span>
-                        <div class="spec-tile-value">rounded-full CTAs & Filter Chips</div>
+                        <span class="spec-tile-title">03 &bull; Approachable Geometry</span>
+                        <div class="spec-tile-value">rounded-3xl &bull; 56px Pill Buttons</div>
                         <p class="spec-tile-desc">
-                            Semua tombol utama (button-primary: 48px height, rounded-full), search pill, dan filter chip menggunakan geometri pill tanpa sudut lancip.
+                            Bentuk sudut membulat lembut dan tombol pill yang ramah sentuhan, menciptakan rasa aman dan inklusif.
                         </p>
                     </div>
                 </div>
 
-                <!-- Tile 4: Product Cards -->
+                <!-- Tile 4 -->
                 <div class="spec-tile">
                     <div>
-                        <span class="spec-tile-title">04 &bull; Product Card Anatomy</span>
-                        <div class="spec-tile-value">1:1 Square on Soft Cloud, Zero Shadow</div>
+                        <span class="spec-tile-title">04 &bull; Compassionate Experience</span>
+                        <div class="spec-tile-value">Video Showcase & Patient Care</div>
                         <p class="spec-tile-desc">
-                            Kartu flat tanpa drop shadow, foto 1:1 di atas latar #f5f5f5, swatch dots 12px, promo badges, dan jarak vertikal 8px antar metadata.
+                            Showcase video interaktif, foto klinik beresolusi tinggi, dan transparansi alur SOP penanganan pasien.
                         </p>
                     </div>
                 </div>
@@ -915,12 +921,12 @@
                                 <span class="flow-date">15 Ags 2026</span>
                             </div>
                             <h3 class="flow-card-title">Arsitektur & Dokumen PRD</h3>
-                            <p style="font-size: 11px; color: var(--text-muted);">Perancangan spesifikasi sistem medis, ERD, dan pedoman Clean Architecture.</p>
+                            <p style="font-size: 11px; color: rgba(26, 46, 38, 0.7); font-weight: 300;">Perancangan spesifikasi sistem medis, ERD, dan pedoman Clean Architecture.</p>
                         </div>
                         <ul class="flow-part-list">
                             <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> DATABASE_PRD.md (10 skema tabel)</li>
                             <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> BACKEND_PRD.md (Repository Flow)</li>
-                            <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> FRONTEND_PRD.md & DESIGN.MD Spec</li>
+                            <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> FRONTEND_PRD.md & Maven Clinic Spec</li>
                         </ul>
                     </div>
 
@@ -931,7 +937,7 @@
                                 <span class="flow-date">16 Ags 2026</span>
                             </div>
                             <h3 class="flow-card-title">Database MySQL, Models & Seeders</h3>
-                            <p style="font-size: 11px; color: var(--text-muted);">10 Tabel migrasi, relasi Eloquent teruji, dan seeder data medis realistis.</p>
+                            <p style="font-size: 11px; color: rgba(26, 46, 38, 0.7); font-weight: 300;">10 Tabel migrasi, relasi Eloquent teruji, dan 5 layanan serta 5 produk terpilih.</p>
                         </div>
                         <ul class="flow-part-list">
                             <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> 10 Tabel MySQL (products, services, leads, dll)</li>
@@ -947,7 +953,7 @@
                                 <span class="flow-date">16 Ags 2026</span>
                             </div>
                             <h3 class="flow-card-title">Repository & Service Layer</h3>
-                            <p style="font-size: 11px; color: var(--text-muted);">Pemisahan logika controller tipis, form request, dan auto-text WA generator.</p>
+                            <p style="font-size: 11px; color: rgba(26, 46, 38, 0.7); font-weight: 300;">Pemisahan logika controller tipis, form request, dan auto-text WA generator.</p>
                         </div>
                         <ul class="flow-part-list">
                             <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> BaseRepository & 9 Contracts/Interfaces</li>
@@ -961,7 +967,7 @@
                     <div class="arrow-path-line"></div>
                     <div class="arrow-pointer-down">
                         <i data-lucide="arrow-down" style="width: 12px; height: 12px;"></i>
-                        <span>Design.md & Admin CMS Complete</span>
+                        <span>Maven Clinic Frontend & Video Assets Complete</span>
                     </div>
                 </div>
 
@@ -971,14 +977,14 @@
                         <div>
                             <div class="flow-card-head">
                                 <span class="step-index-badge done">Part 04 &bull; Selesai</span>
-                                <span class="flow-date">16 Ags 2026</span>
+                                <span class="flow-date">17 Ags 2026</span>
                             </div>
-                            <h3 class="flow-card-title">Design.md Frontend System</h3>
-                            <p style="font-size: 11px; color: var(--text-muted);">Website editorial commerce, 1:1 product cards on soft-cloud, pill CTAs.</p>
+                            <h3 class="flow-card-title">Maven Clinic Frontend & Video</h3>
+                            <p style="font-size: 11px; color: rgba(26, 46, 38, 0.7); font-weight: 300;">Emerald #0D5C46, Terra Cotta #C86D51, Mint Julep, Fraunces Serif, Video.</p>
                         </div>
                         <ul class="flow-part-list">
-                            <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> Bebas Neue 96px Campaign Hero</li>
-                            <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> E-Katalog & PDP Disclosure Accordion</li>
+                            <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> Warm Editorial Hero & Interactive Video Modal</li>
+                            <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> 5 Layanan, E-Katalog 5 Produk, Custom-Made</li>
                             <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> 23/23 Test Suites Passed 100%</li>
                         </ul>
                     </div>
@@ -990,7 +996,7 @@
                                 <span class="flow-date">16 Ags 2026</span>
                             </div>
                             <h3 class="flow-card-title">Custom Admin & CRM Leads</h3>
-                            <p style="font-size: 11px; color: var(--text-muted);">Panel Admin Blade Tailwind (Tanpa Filament) & CRM Follow-up WhatsApp.</p>
+                            <p style="font-size: 11px; color: rgba(26, 46, 38, 0.7); font-weight: 300;">Panel Admin Blade Tailwind (Tanpa Filament) & CRM Follow-up WhatsApp.</p>
                         </div>
                         <ul class="flow-part-list">
                             <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> Admin Auth & Middleware Guard (/admin/login)</li>
@@ -1006,7 +1012,7 @@
                                 <span class="flow-date">16 Ags 2026</span>
                             </div>
                             <h3 class="flow-card-title">CMS CRUD Content & Settings</h3>
-                            <p style="font-size: 11px; color: var(--text-muted);">Pengelolaan katalog, layanan medis, artikel blog, cabang, dan pengaturan klinik.</p>
+                            <p style="font-size: 11px; color: rgba(26, 46, 38, 0.7); font-weight: 300;">Pengelolaan katalog, layanan medis, artikel blog, cabang, dan pengaturan klinik.</p>
                         </div>
                         <ul class="flow-part-list">
                             <li class="flow-part-item done"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> CRUD E-Katalog Produk (/admin/products)</li>
@@ -1026,7 +1032,7 @@
                         <i data-lucide="list-checks" style="width: 20px; height: 20px;"></i>
                         <span>Daftar Rincian Modul & Status Eksekusi (100% Complete)</span>
                     </h2>
-                    <p>Semua modul dari perencanaan hingga implementasi Design.md telah selesai dikerjakan.</p>
+                    <p>Semua modul dari perencanaan hingga implementasi spesifikasi Maven Clinic telah selesai dikerjakan.</p>
                 </div>
             </div>
 
@@ -1035,33 +1041,33 @@
                     <thead>
                         <tr>
                             <th style="width: 40px;">#</th>
-                            <th style="width: 180px;">Bagian / Modul</th>
+                            <th style="width: 220px;">Bagian / Modul</th>
                             <th>Deskripsi Teknis Pengerjaan</th>
-                            <th style="width: 120px;">Domain</th>
+                            <th style="width: 130px;">Domain</th>
                             <th style="width: 140px;">Status</th>
                         </tr>
                     </thead>
                     <tbody id="task-table-body">
-                        <!-- Design.md Specs -->
-                        <tr style="background: #fafafa;">
+                        <!-- Maven Clinic Specs -->
+                        <tr style="background: #FBF8F3;">
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
-                            <td><strong>Design.md: Typography</strong></td>
-                            <td>Bebas Neue 96px line-height 0.9 display campaign & Plus Jakarta Sans UI</td>
-                            <td><span style="font-size: 11px; font-weight: bold;">Design.md</span></td>
+                            <td><strong>Maven: Jewel-Tone Palette</strong></td>
+                            <td>Emerald #0D5C46, Terra Cotta #C86D51, Mint Julep #D8ECE5, Linen</td>
+                            <td><span style="font-size: 11px; font-weight: bold; color: var(--primary);">Maven Clinic</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
-                        <tr style="background: #fafafa;">
+                        <tr style="background: #FBF8F3;">
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
-                            <td><strong>Design.md: Pill Geometry</strong></td>
-                            <td>Pill CTAs (#111111 button-primary, #f5f5f5 button-secondary, search-pill)</td>
-                            <td><span style="font-size: 11px; font-weight: bold;">Design.md</span></td>
+                            <td><strong>Maven: Typography & Shapes</strong></td>
+                            <td>Fraunces / Domaine Serif, Plus Jakarta Sans, rounded-3xl geometry</td>
+                            <td><span style="font-size: 11px; font-weight: bold; color: var(--primary);">Maven Clinic</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
-                        <tr style="background: #fafafa;">
+                        <tr style="background: #FBF8F3;">
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
-                            <td><strong>Design.md: Card Anatomy</strong></td>
-                            <td>1:1 product imagery on #f5f5f5 Soft Cloud studio, swatch dots, sale pricing</td>
-                            <td><span style="font-size: 11px; font-weight: bold;">Design.md</span></td>
+                            <td><strong>Maven: Video Assets</strong></td>
+                            <td>Interactive clinical video modal, authentic high-res clinic photos</td>
+                            <td><span style="font-size: 11px; font-weight: bold; color: var(--primary);">Maven Clinic</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <!-- Part 1 -->
@@ -1069,7 +1075,7 @@
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 01: PRD Architecture</strong></td>
                             <td>Dokumen DATABASE_PRD.md, BACKEND_PRD.md, dan FRONTEND_PRD.md</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Spesifikasi</span></td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Spesifikasi</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <!-- Part 2 -->
@@ -1077,21 +1083,21 @@
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 02: MySQL Migrations</strong></td>
                             <td>10 Tabel MySQL (categories, products, services, leads, branches, settings)</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Database</span></td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Database</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 02: Eloquent Models</strong></td>
                             <td>Model User, Product, CustomProduct, Lead, Article dengan relasi lengkap</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Backend</span></td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Backend</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 02: Database Seeder</strong></td>
-                            <td>Seeder data klinis, produk real, 2 cabang klinik, dan akun Superadmin</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Database</span></td>
+                            <td>5 Layanan Medis, 5 Produk E-Katalog, 2 Cabang, dan Superadmin</td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Database</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <!-- Part 3 -->
@@ -1099,36 +1105,36 @@
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 03: Repository Pattern</strong></td>
                             <td>BaseRepository & 9 Contracts Interface untuk pemisahan layer database</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Architecture</span></td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Architecture</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 03: Service Layer</strong></td>
                             <td>ProductService, ConsultationService (WA URL builder), ArticleService</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Backend</span></td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Backend</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <!-- Part 4 -->
                         <tr>
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
-                            <td><strong>Part 04: Beranda 10 Section</strong></td>
-                            <td>Campaign Hero, 5 Layanan, Featured Footwear & Products, FAQ, CTA</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Frontend</span></td>
+                            <td><strong>Part 04: Beranda Editorial & Video</strong></td>
+                            <td>Hero Warm Linen, Video Showcase, 5 Layanan, Featured Products, FAQ, CTA</td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Frontend</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 04: E-Katalog Produk</strong></td>
                             <td>Katalog anatomi filter, pagination, detail produk, order WhatsApp otomatis</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Frontend</span></td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Frontend</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 04: Test Suites (23 Passed)</strong></td>
                             <td>Pengujian otomatis fitur publik & submission formulir janji temu pasien</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Testing</span></td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Testing</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <!-- Part 5 -->
@@ -1136,21 +1142,21 @@
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 05: Admin Authentication</strong></td>
                             <td>Login session aman, role superadmin/admin, middleware proteksi /admin</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Security</span></td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Security</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 05: Master Layout & Dashboard</strong></td>
                             <td>Sidebar navigasi, topbar, widget KPI metrik, dan tabel pesan pasien terbaru</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Admin CMS</span></td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Admin CMS</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 05: CRM Leads Pasien</strong></td>
                             <td>Tabel pasien masuk, filter status leads, dan tombol WhatsApp quick-respond</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Admin CRM</span></td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Admin CRM</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <!-- Part 6 -->
@@ -1158,21 +1164,21 @@
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 06: CMS CRUD E-Katalog</strong></td>
                             <td>CRUD produk alat bantu medis, kategori anatomi, spesifikasi, dan harga</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Admin CMS</span></td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Admin CMS</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 06: CMS Layanan & Edukasi</strong></td>
                             <td>CRUD 5 pilar layanan medis, indikasi klinis, dan artikel blog SEO</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Admin CMS</span></td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Admin CMS</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox" class="task-checkbox-custom" checked onchange="updateDashboard()"></td>
                             <td><strong>Part 06: Cabang & Pengaturan</strong></td>
                             <td>Manajemen cabang klinik, Google Maps embed, WhatsApp hotline, dan info SEO</td>
-                            <td><span style="font-size: 11px; color: var(--text-muted);">Admin CMS</span></td>
+                            <td><span style="font-size: 11px; color: rgba(26, 46, 38, 0.7);">Admin CMS</span></td>
                             <td><span class="status-pill-table done">Completed</span></td>
                         </tr>
                     </tbody>
@@ -1180,8 +1186,8 @@
             </div>
         </section>
 
-        <footer style="text-align: center; color: var(--text-muted); font-size: 11px; padding: 24px 0 0;">
-            <p><strong>Website Klinik Ortotik & Prostetik Indonesia</strong> &bull; Executive System Dashboard &bull; Terakhir Diperbarui: 16 Agustus 2026, 22:45 WIB</p>
+        <footer style="text-align: center; color: rgba(26, 46, 38, 0.6); font-size: 11px; padding: 24px 0 0;">
+            <p><strong>Website Klinik Ortotik & Prostetik Indonesia</strong> &bull; Maven Clinic Dashboard &bull; Terakhir Diperbarui: 17 Agustus 2026, 00:00 WIB</p>
         </footer>
 
     </main>
@@ -1206,7 +1212,7 @@
                     labels: ['Completed', 'In Progress / Planned'],
                     datasets: [{
                         data: [completed, inProgress],
-                        backgroundColor: ['#111111', '#cacacb'],
+                        backgroundColor: ['#0D5C46', '#D8ECE5'],
                         borderWidth: 0,
                         hoverOffset: 4
                     }]
@@ -1230,8 +1236,8 @@
                     datasets: [{
                         label: 'Progress %',
                         data: [100, 100, 100, 100, 100, 100],
-                        backgroundColor: ['#111111', '#111111', '#111111', '#111111', '#111111', '#111111'],
-                        borderRadius: 0
+                        backgroundColor: ['#0D5C46', '#0D5C46', '#0D5C46', '#C86D51', '#0D5C46', '#0D5C46'],
+                        borderRadius: 6
                     }]
                 },
                 options: {
@@ -1252,15 +1258,15 @@
             radarChart = new Chart(ctxRadar, {
                 type: 'polarArea',
                 data: {
-                    labels: ['Architecture', 'Database', 'Backend Core', 'Design.md UI', 'Admin CMS'],
+                    labels: ['Architecture', 'Database', 'Backend Core', 'Maven Clinic UI', 'Admin CMS'],
                     datasets: [{
                         data: [100, 100, 100, 100, 100],
                         backgroundColor: [
-                            'rgba(17, 17, 17, 0.85)',
-                            'rgba(57, 57, 59, 0.75)',
-                            'rgba(112, 112, 114, 0.75)',
-                            'rgba(17, 17, 17, 0.95)',
-                            'rgba(0, 125, 72, 0.75)'
+                            'rgba(13, 92, 70, 0.9)',
+                            'rgba(200, 109, 81, 0.85)',
+                            'rgba(23, 121, 94, 0.75)',
+                            'rgba(216, 236, 229, 0.95)',
+                            'rgba(26, 46, 38, 0.85)'
                         ]
                     }]
                 },

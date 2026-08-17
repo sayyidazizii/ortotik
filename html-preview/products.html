@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>E-Katalog Produk Ortotik & Prostetik - PT. Orthocare Indonesia</title>
+    <meta name="description" content="Katalog resmi alat bantu ortopedi ready stock, penyangga ligamen lutut, cervical collar, walker boot, dan custom insole medis."/>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#306D29",
+                        "secondary": "#006a63",
+                        "background-subtle": "#F8FAFC",
+                        "surface-white": "#FFFFFF",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container": "#e6eeff",
+                        "surface-container-high": "#dde9ff",
+                        "on-surface": "#0d1c2f",
+                        "on-surface-variant": "#3d4947",
+                        "on-background": "#0d1c2f",
+                        "outline-variant": "#bcc9c6",
+                        "secondary-container": "#99efe5",
+                        "primary-fixed": "#89f5e7"
+                    },
+                    spacing: {
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "container-max": "1280px"
+                    },
+                    fontFamily: {
+                        "sans": ["'Plus Jakarta Sans'", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .shadow-1 { box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04); }
+        .shadow-hover { box-shadow: 0px 12px 32px rgba(48, 109, 41, 0.12); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; vertical-align: middle; line-height: 1; }
+    </style>
+</head>
+<body class="bg-background-subtle text-on-surface font-sans antialiased selection:bg-primary/20 selection:text-primary flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-surface-white sticky top-0 w-full z-50 border-b border-outline-variant/30 shadow-sm">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+            <a href="index.html" class="text-xl md:text-2xl font-extrabold text-primary uppercase tracking-tighter hover:opacity-90 transition">
+                PT. Orthocare Indonesia
+            </a>
+            <nav class="hidden md:flex gap-6 items-center">
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="index.html">Beranda</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="services.html">Layanan</a>
+                <a class="text-primary border-b-2 border-primary font-bold pb-1 text-sm transition" href="products.html">Product</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="custom-products.html">Alur Pasien</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="articles.html">Edukasi</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="about.html">Tentang Kami</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="contact.html">Kontak</a>
+            </nav>
+            <div class="hidden md:flex items-center gap-2">
+                <a href="consultation.html" class="bg-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-secondary transition shadow-sm">
+                    Consultation
+                </a>
+            </div>
+            <button class="md:hidden text-primary p-2" id="mobile-menu-btn" aria-label="Buka Menu">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="fixed inset-y-0 right-0 w-80 z-[60] bg-white shadow-2xl flex flex-col h-full p-6 transform translate-x-full transition-transform duration-300 md:hidden" id="mobile-nav">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-primary font-bold text-lg">PT. Orthocare Indonesia</h2>
+            <button class="text-on-surface-variant p-1 hover:text-primary" id="close-mobile-nav"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <nav class="flex-1 flex flex-col gap-2">
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="index.html"><span class="material-symbols-outlined">home</span> Beranda</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="services.html"><span class="material-symbols-outlined">medical_services</span> Layanan</a>
+            <a class="flex items-center gap-4 p-3 bg-secondary-container text-on-background font-bold rounded-xl text-sm" href="products.html"><span class="material-symbols-outlined">inventory_2</span> Product</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="custom-products.html"><span class="material-symbols-outlined">mobile_share_stack</span> Alur Pasien</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="articles.html"><span class="material-symbols-outlined">menu_book</span> Edukasi</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="about.html"><span class="material-symbols-outlined">info</span> Tentang Kami</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="contact.html"><span class="material-symbols-outlined">mail</span> Kontak</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- Banner -->
+        <div class="bg-surface-container-low border-b border-outline-variant/30 py-12 px-margin-mobile md:px-margin-desktop text-center">
+            <div class="max-w-container-max mx-auto space-y-3">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-primary"></span>
+                    E-Katalog Ready Stock
+                </span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-on-background tracking-tight">
+                    Katalog Alat Bantu & Penyangga Ortopedi
+                </h1>
+                <p class="text-sm sm:text-base text-on-surface-variant max-w-xl mx-auto">
+                    Temukan produk ortopedi berkualitas medis berstandar Kemenkes RI dengan garansi resmi dan konsultasi penyesuaian ukuran gratis.
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 space-y-8">
+            <!-- Filter Bar -->
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-outline-variant/20">
+                <div class="flex flex-wrap gap-2">
+                    <button data-filter="all" class="px-4 py-2 rounded-xl text-xs font-semibold bg-primary text-white shadow-sm transition">
+                        Semua Kategori
+                    </button>
+                    <button data-filter="knee" class="px-4 py-2 rounded-xl text-xs font-semibold bg-surface-white text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30 transition">
+                        Lutut (Knee)
+                    </button>
+                    <button data-filter="cervical" class="px-4 py-2 rounded-xl text-xs font-semibold bg-surface-white text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30 transition">
+                        Leher (Cervical)
+                    </button>
+                    <button data-filter="ankle" class="px-4 py-2 rounded-xl text-xs font-semibold bg-surface-white text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30 transition">
+                        Kaki & Ankle
+                    </button>
+                    <button data-filter="spine" class="px-4 py-2 rounded-xl text-xs font-semibold bg-surface-white text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/30 transition">
+                        Punggung (Spine)
+                    </button>
+                </div>
+                <div class="text-xs text-on-surface-variant font-medium">
+                    Menampilkan <strong>6</strong> Produk Terverifikasi
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Product 1 -->
+                <div data-category="knee" class="bg-surface-white rounded-3xl p-5 border border-outline-variant/30 shadow-1 hover:shadow-hover transition-all duration-300 flex flex-col group hover:-translate-y-1">
+                    <a href="product-detail.html" class="aspect-square bg-slate-50 rounded-2xl mb-4 relative overflow-hidden flex items-center justify-center p-6">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRX96KTlDSHiomGN3OyOvDA8gmpFo6nH9DuQJ13zV-uwYj0On4T643XIIvI7ZfTgEHlGNMCnzLWygdnoChDtXh3HKQ3iKaxsBs2SXt9HZXR5pM7Qtw8KzFBwh-xAkBI6kBHJNij2YKEAiHE2MhApvaIyUSmfo0V7MtHqYRgFzaU3IRMw5FPuoduXReXEcCNbLjLVDm5pEO5HM2XWxQXW-P6GZ1bJoBKdVpdMOPdViOhKinS3glyd4" 
+                             alt="DonJoy Armor Knee Brace" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition duration-500"/>
+                        <span class="absolute top-3 left-3 bg-primary/10 text-primary text-xs font-bold px-2.5 py-1 rounded-full">Lutut (Knee)</span>
+                        <span class="absolute top-3 right-3 bg-red-50 text-red-600 text-xs font-bold px-2 py-0.5 rounded-full">-6%</span>
+                    </a>
+                    <h3 class="font-bold text-base text-on-background mb-2 line-clamp-2">
+                        <a href="product-detail.html" class="hover:text-primary transition">DonJoy Armor Knee Brace with FourcePoint</a>
+                    </h3>
+                    <p class="text-xs text-on-surface-variant mb-4 line-clamp-2 leading-relaxed">
+                        Brace pelindung ligamen lutut grade kompetisi untuk stabilitas maksimal pasca rekonstruksi ACL/PCL/MCL.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-outline-variant/15 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400 line-through block">Rp 9.500.000</span>
+                            <span class="text-base text-primary font-extrabold">Rp 8.900.000</span>
+                        </div>
+                        <a href="product-detail.html" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1 transition shadow-sm">
+                            Detail <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div data-category="cervical" class="bg-surface-white rounded-3xl p-5 border border-outline-variant/30 shadow-1 hover:shadow-hover transition-all duration-300 flex flex-col group hover:-translate-y-1">
+                    <a href="product-detail.html" class="aspect-square bg-slate-50 rounded-2xl mb-4 relative overflow-hidden flex items-center justify-center p-6">
+                        <img src="https://lh3.googleusercontent.com/aida/AP1WRLvP5_T_X177T_O2m4uL3n9fG_2bW8mG7z28Z6n1x9Y_X04K51Z36_V61E7tV9U6V_l5w9Q5D2k5B5q8X93zH7n6O_E0G5K35Q4v0R8G8V9P_7R7w8D2U1uL9P8S_2O6D5oK9Q9G_F3I4M7L2K0dF7pQ0qK6G_5dZ9F_X8I" 
+                             alt="ASPEN Vista Cervical Collar" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition duration-500"/>
+                        <span class="absolute top-3 left-3 bg-primary/10 text-primary text-xs font-bold px-2.5 py-1 rounded-full">Leher (Cervical)</span>
+                    </a>
+                    <h3 class="font-bold text-base text-on-background mb-2 line-clamp-2">
+                        <a href="product-detail.html" class="hover:text-primary transition">ASPEN Vista Adjustable Cervical Collar</a>
+                    </h3>
+                    <p class="text-xs text-on-surface-variant mb-4 line-clamp-2 leading-relaxed">
+                        Kolar leher medis premium dengan 6 tingkat penyesuaian tinggi untuk imobilisasi servikal presisi.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-outline-variant/15 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400 line-through block">Rp 1.850.000</span>
+                            <span class="text-base text-primary font-extrabold">Rp 1.650.000</span>
+                        </div>
+                        <a href="product-detail.html" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1 transition shadow-sm">
+                            Detail <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div data-category="ankle" class="bg-surface-white rounded-3xl p-5 border border-outline-variant/30 shadow-1 hover:shadow-hover transition-all duration-300 flex flex-col group hover:-translate-y-1">
+                    <a href="product-detail.html" class="aspect-square bg-slate-50 rounded-2xl mb-4 relative overflow-hidden flex items-center justify-center p-6">
+                        <img src="https://lh3.googleusercontent.com/aida/AP1WRLt9R2Z_K8mN1_yJ6n3A_4cZ0Q_1H7B3T9tV_7V5t_G0oO9wM1W6c4V3rG2D_wO_H4tN2H2_rG0V6M4U4Y6wE4O8A9Y1qU_5lH6qC_D2O8L_t5E3zW0oU6sZ9I6xQ5nN_7K9oQ_tH0Q_T4_K1rO1qI9cO9uI_9eL" 
+                             alt="AirCast Walker Boot" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition duration-500"/>
+                        <span class="absolute top-3 left-3 bg-primary/10 text-primary text-xs font-bold px-2.5 py-1 rounded-full">Ankle & Foot</span>
+                    </a>
+                    <h3 class="font-bold text-base text-on-background mb-2 line-clamp-2">
+                        <a href="product-detail.html" class="hover:text-primary transition">AirCast AirSelect Elite Fracture Walker Boot</a>
+                    </h3>
+                    <p class="text-xs text-on-surface-variant mb-4 line-clamp-2 leading-relaxed">
+                        Boot gips modern dengan pompa kompresi udara terintegrasi untuk pemulihan patah tulang ankle.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-outline-variant/15 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400 line-through block">Rp 3.200.000</span>
+                            <span class="text-base text-primary font-extrabold">Rp 2.950.000</span>
+                        </div>
+                        <a href="product-detail.html" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1 transition shadow-sm">
+                            Detail <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div data-category="ankle" class="bg-surface-white rounded-3xl p-5 border border-outline-variant/30 shadow-1 hover:shadow-hover transition-all duration-300 flex flex-col group hover:-translate-y-1">
+                    <a href="product-detail.html" class="aspect-square bg-slate-50 rounded-2xl mb-4 relative overflow-hidden flex items-center justify-center p-6">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAomziuJgJ2pOhXZgdUea70UNAeDJWO2fp4tlHGaJSsRZzvuRuB2Kc2_T2okGTeJOAS_3ltSSAEzvli_BLT0dtUyfNpv15k7BgkIBMyvxqNj-Xi7vFkNO0qsQv4XOcHozbKjNAJ4gxdbqLkV_DzX5TZ_AFikagGERipBHIk8EDYY16XTxgkTLlp3BZ0z-fE9hJrv4zTlytToR1ap0wVxS0FT9t2cVYYuPOu67YgO1nGdYVm8x2gSS0" 
+                             alt="Custom Insole 3D" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition duration-500"/>
+                        <span class="absolute top-3 left-3 bg-primary/10 text-primary text-xs font-bold px-2.5 py-1 rounded-full">Foot 3D</span>
+                    </a>
+                    <h3 class="font-bold text-base text-on-background mb-2 line-clamp-2">
+                        <a href="product-detail.html" class="hover:text-primary transition">Custom Insole Medis 3D Scan Orthotic</a>
+                    </h3>
+                    <p class="text-xs text-on-surface-variant mb-4 line-clamp-2 leading-relaxed">
+                        Sol sepatu ortopedi cetak custom berbasis pemindaian dinamika telapak kaki 3D komputerisasi.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-outline-variant/15 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400 line-through block">Rp 2.200.000</span>
+                            <span class="text-base text-primary font-extrabold">Rp 1.950.000</span>
+                        </div>
+                        <a href="product-detail.html" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1 transition shadow-sm">
+                            Detail <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div data-category="spine" class="bg-surface-white rounded-3xl p-5 border border-outline-variant/30 shadow-1 hover:shadow-hover transition-all duration-300 flex flex-col group hover:-translate-y-1">
+                    <a href="product-detail.html" class="aspect-square bg-slate-50 rounded-2xl mb-4 relative overflow-hidden flex items-center justify-center p-6">
+                        <img src="https://lh3.googleusercontent.com/aida/AP1WRLvP5_T_X177T_O2m4uL3n9fG_2bW8mG7z28Z6n1x9Y_X04K51Z36_V61E7tV9U6V_l5w9Q5D2k5B5q8X93zH7n6O_E0G5K35Q4v0R8G8V9P_7R7w8D2U1uL9P8S_2O6D5oK9Q9G_F3I4M7L2K0dF7pQ0qK6G_5dZ9F_X8I" 
+                             alt="Cybertech Spine TLSO" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition duration-500"/>
+                        <span class="absolute top-3 left-3 bg-primary/10 text-primary text-xs font-bold px-2.5 py-1 rounded-full">Spine & Lumbar</span>
+                    </a>
+                    <h3 class="font-bold text-base text-on-background mb-2 line-clamp-2">
+                        <a href="product-detail.html" class="hover:text-primary transition">Cybertech Spinal Posture TLSO Support</a>
+                    </h3>
+                    <p class="text-xs text-on-surface-variant mb-4 line-clamp-2 leading-relaxed">
+                        Penyangga tulang belakang torakolumbal dengan pulley system mekanik bertenaga tinggi untuk dekompresi HNP.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-outline-variant/15 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400 line-through block">Rp 4.500.000</span>
+                            <span class="text-base text-primary font-extrabold">Rp 4.200.000</span>
+                        </div>
+                        <a href="product-detail.html" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1 transition shadow-sm">
+                            Detail <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div data-category="knee" class="bg-surface-white rounded-3xl p-5 border border-outline-variant/30 shadow-1 hover:shadow-hover transition-all duration-300 flex flex-col group hover:-translate-y-1">
+                    <a href="product-detail.html" class="aspect-square bg-slate-50 rounded-2xl mb-4 relative overflow-hidden flex items-center justify-center p-6">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRX96KTlDSHiomGN3OyOvDA8gmpFo6nH9DuQJ13zV-uwYj0On4T643XIIvI7ZfTgEHlGNMCnzLWygdnoChDtXh3HKQ3iKaxsBs2SXt9HZXR5pM7Qtw8KzFBwh-xAkBI6kBHJNij2YKEAiHE2MhApvaIyUSmfo0V7MtHqYRgFzaU3IRMw5FPuoduXReXEcCNbLjLVDm5pEO5HM2XWxQXW-P6GZ1bJoBKdVpdMOPdViOhKinS3glyd4" 
+                             alt="Advanced Knee Orthosis" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition duration-500"/>
+                        <span class="absolute top-3 left-3 bg-primary/10 text-primary text-xs font-bold px-2.5 py-1 rounded-full">Lutut (Knee)</span>
+                    </a>
+                    <h3 class="font-bold text-base text-on-background mb-2 line-clamp-2">
+                        <a href="product-detail.html" class="hover:text-primary transition">Advanced Articulating Post-Op Knee Brace</a>
+                    </h3>
+                    <p class="text-xs text-on-surface-variant mb-4 line-clamp-2 leading-relaxed">
+                        Penyangga sendi lutut pasca operasi dengan engsel pembatas sudut fleksi/ekstensi derajat presisi.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-outline-variant/15 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400 line-through block">Rp 2.400.000</span>
+                            <span class="text-base text-primary font-extrabold">Rp 2.100.000</span>
+                        </div>
+                        <a href="product-detail.html" class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1 transition shadow-sm">
+                            Detail <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative bg-on-background text-slate-300 w-full py-16">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto text-sm">
+            <div class="col-span-1 md:col-span-2">
+                <div class="text-white mb-4 text-2xl font-bold">PT. Orthocare Indonesia</div>
+                <p class="mb-6 max-w-sm leading-relaxed text-slate-400">Solusi mobilitas modern dengan teknologi ortotik dan prostetik terdepan.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4 uppercase tracking-wider">Tautan</h4>
+                <ul class="flex flex-col gap-3 text-slate-300 text-xs">
+                    <li><a class="hover:text-primary-fixed transition" href="services.html">Layanan Medis</a></li>
+                    <li><a class="hover:text-primary-fixed transition" href="products.html">E-Katalog Produk</a></li>
+                    <li><a class="hover:text-primary-fixed transition" href="custom-products.html">Alur Pasien Custom</a></li>
+                    <li><a class="hover:text-primary-fixed transition" href="contact.html">Kontak & Cabang</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4 uppercase tracking-wider">Kontak</h4>
+                <p class="text-xs text-slate-300">Jl. Kaliurang KM 8.5, Sleman, Yogyakarta<br/>(0274) 889912 / 0812-3456-7890</p>
+            </div>
+        </div>
+        <div class="max-w-container-max mx-auto mt-12 pt-6 border-t border-white/10 text-center text-xs text-slate-400">
+            &copy; 2026 PT. Orthocare Indonesia. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

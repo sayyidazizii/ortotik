@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tentang Kami - PT. Orthocare Indonesia | Profil & Keunggulan</title>
+    <meta name="description" content="Profil dan komitmen PT. Orthocare Indonesia dalam memberikan pelayanan ortotik dan prostetik berteknologi tinggi berstandar Kemenkes RI."/>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#306D29",
+                        "secondary": "#006a63",
+                        "tertiary": "#825100",
+                        "deep-forest": "#1C4F40",
+                        "success-emerald": "#147901",
+                        "background-subtle": "#F8FAFC",
+                        "surface-white": "#FFFFFF",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container": "#e6eeff",
+                        "surface-container-high": "#dde9ff",
+                        "on-surface": "#0d1c2f",
+                        "on-surface-variant": "#3d4947",
+                        "on-background": "#0d1c2f",
+                        "outline-variant": "#bcc9c6",
+                        "secondary-container": "#99efe5",
+                        "primary-fixed": "#89f5e7"
+                    },
+                    spacing: {
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "container-max": "1280px"
+                    },
+                    fontFamily: {
+                        "sans": ["'Plus Jakarta Sans'", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .shadow-1 { box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04); }
+        .shadow-2 { box-shadow: 0px 8px 24px rgba(48, 109, 41, 0.08); }
+        .shadow-hover { box-shadow: 0px 12px 32px rgba(48, 109, 41, 0.12); }
+        .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; vertical-align: middle; line-height: 1; }
+    </style>
+</head>
+<body class="bg-background-subtle text-on-surface font-sans antialiased selection:bg-primary/20 selection:text-primary flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-surface-white sticky top-0 w-full z-50 border-b border-outline-variant/30 shadow-sm">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+            <a href="index.html" class="text-xl md:text-2xl font-extrabold text-primary uppercase tracking-tighter hover:opacity-90 transition">
+                PT. Orthocare Indonesia
+            </a>
+            <nav class="hidden md:flex gap-6 items-center">
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="index.html">Beranda</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="services.html">Layanan</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="products.html">Product</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="custom-products.html">Alur Pasien</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="articles.html">Edukasi</a>
+                <a class="text-primary border-b-2 border-primary font-bold pb-1 text-sm transition" href="about.html">Tentang Kami</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="contact.html">Kontak</a>
+            </nav>
+            <div class="hidden md:flex items-center gap-2">
+                <a href="consultation.html" class="bg-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-secondary transition shadow-sm">
+                    Consultation
+                </a>
+            </div>
+            <button class="md:hidden text-primary p-2" id="mobile-menu-btn" aria-label="Buka Menu">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="fixed inset-y-0 right-0 w-80 z-[60] bg-white shadow-2xl flex flex-col h-full p-6 transform translate-x-full transition-transform duration-300 md:hidden" id="mobile-nav">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-primary font-bold text-lg">PT. Orthocare Indonesia</h2>
+            <button class="text-on-surface-variant p-1 hover:text-primary" id="close-mobile-nav"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <nav class="flex-1 flex flex-col gap-2">
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="index.html"><span class="material-symbols-outlined">home</span> Beranda</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="services.html"><span class="material-symbols-outlined">medical_services</span> Layanan</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="products.html"><span class="material-symbols-outlined">inventory_2</span> Product</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="custom-products.html"><span class="material-symbols-outlined">mobile_share_stack</span> Alur Pasien</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="articles.html"><span class="material-symbols-outlined">menu_book</span> Edukasi</a>
+            <a class="flex items-center gap-4 p-3 bg-secondary-container text-on-background font-bold rounded-xl text-sm" href="about.html"><span class="material-symbols-outlined">info</span> Tentang Kami</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="contact.html"><span class="material-symbols-outlined">mail</span> Kontak</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- Hero Banner -->
+        <section class="relative py-20 md:py-28 px-margin-mobile md:px-margin-desktop overflow-hidden bg-cover bg-center flex items-center justify-center fade-in-up"
+                 style="background-image: linear-gradient(rgba(13, 28, 47, 0.75), rgba(13, 28, 47, 0.75)), url('https://lh3.googleusercontent.com/aida/AP1WRLsQeJ73W2vO0_8Vv2_uR_3cT7-T_u-f_Hq0_80K89kL0_QvT12_29Z_w3-F05W4-B97x6H5k_l7k2uL_t2K0fL0wVp3F2Q1M5s7C5A3Q0T8_m9-l2rZ3W50M1Z2qW9M3Q7x91c0');">
+            <div class="max-w-container-max mx-auto text-center relative z-10 space-y-4">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-primary-fixed border border-white/20 text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
+                    High-Tech Orthopedic Care
+                </span>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+                    Tentang PT. Orthocare Indonesia
+                </h1>
+                <p class="text-base sm:text-lg text-slate-200 max-w-2xl mx-auto leading-relaxed">
+                    Menghadirkan perawatan ortopedi presisi berbasis teknologi tinggi dengan sentuhan kepedulian yang hangat.
+                </p>
+            </div>
+        </section>
+
+        <!-- Vision & Overview -->
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 space-y-16">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-xs font-bold uppercase tracking-wider text-primary">Visi & Dedikasi Kami</span>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-on-background tracking-tight leading-tight">
+                        Mengembalikan Mobilitas & Kualitas Hidup Anda
+                    </h2>
+                    <p class="text-sm md:text-base text-on-surface-variant leading-relaxed">
+                        PT. Orthocare Indonesia adalah pusat layanan ortotik dan prostetik modern yang memadukan keahlian klinis bersertifikasi dengan teknologi digital terkini seperti pemindaian optik 3D dan fabrikasi material komposit carbon fiber.
+                    </p>
+                    <p class="text-sm md:text-base text-on-surface-variant leading-relaxed">
+                        Setiap pasien menerima pendekatan yang dipersonalisasi—mulai dari evaluasi biomekanik mendalam, perancangan soket yang akurat, hingga program latihan adaptasi berjalan (gait training) bersama fisioterapis kami.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/30">
+                            <span class="block text-2xl font-bold text-primary mb-1">100%</span>
+                            <span class="text-xs text-on-surface-variant">Garansi Fitting Pas & Nyaman</span>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/30">
+                            <span class="block text-2xl font-bold text-primary mb-1">Resmi</span>
+                            <span class="text-xs text-on-surface-variant">Sertifikasi Kemenkes RI</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-6 relative rounded-3xl overflow-hidden shadow-2 h-[380px] md:h-[480px] border border-outline-variant/20 group">
+                    <img src="https://lh3.googleusercontent.com/aida/AP1WRLsQeJ73W2vO0_8Vv2_uR_3cT7-T_u-f_Hq0_80K89kL0_QvT12_29Z_w3-F05W4-B97x6H5k_l7k2uL_t2K0fL0wVp3F2Q1M5s7C5A3Q0T8_m9-l2rZ3W50M1Z2qW9M3Q7x91c0" 
+                         alt="Fasilitas Klinik Orthocare" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                </div>
+            </div>
+
+            <!-- 3 Core Values -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-surface-white p-8 rounded-3xl border border-outline-variant/30 shadow-1 space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-2xl">precision_manufacturing</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-on-background">Presisi Digital 3D</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">
+                        Kami mengeliminasi ketidaknyamanan cetak gips konvensional dengan scanner 3D akurasi sub-milimeter untuk soket yang sempurna.
+                    </p>
+                </div>
+                <div class="bg-surface-white p-8 rounded-3xl border border-outline-variant/30 shadow-1 space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-2xl">verified_user</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-on-background">Standar Klinis Kemenkes</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">
+                        Seluruh praktisi ortotis prostetis dan fisioterapis memiliki Surat Tanda Registrasi (STR) resmi dan tersertifikasi kompetensi medis.
+                    </p>
+                </div>
+                <div class="bg-surface-white p-8 rounded-3xl border border-outline-variant/30 shadow-1 space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-2xl">favorite</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-on-background">Pendampingan Purna Pasang</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">
+                        Komitmen kami tidak berhenti saat alat diserahkan. Kami mendampingi latihan berjalan hingga Anda dapat beraktivitas secara mandiri.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Clinical Excellence Doctors -->
+            <div class="bg-surface-container-low rounded-3xl p-8 md:p-12 border border-outline-variant/30 space-y-8">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-primary">Tim Medis Berpengalaman</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-on-background">Dipimpin oleh Dokter & Praktisi Ahli</h2>
+                    <p class="text-sm text-on-surface-variant">Kolaborasi dokter spesialis orthopaedi dan ortotis prostetis bersertifikasi internasional.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-surface-white p-6 rounded-2xl border border-outline-variant/20 text-center space-y-3">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-primary/30">
+                            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=300&q=80" alt="dr. Hendra Pratama" class="w-full h-full object-cover object-top"/>
+                        </div>
+                        <h4 class="font-bold text-base text-on-background">dr. Hendra Pratama, Sp.OT</h4>
+                        <p class="text-xs text-primary font-semibold">Spesialis Orthopaedi & Traumatologi</p>
+                        <p class="text-xs text-on-surface-variant">Fokus pada rekonstruksi biomekanik ekstremitas dan evaluasi penanganan deformitas tulang.</p>
+                    </div>
+                    <div class="bg-surface-white p-6 rounded-2xl border border-outline-variant/20 text-center space-y-3">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-primary/30">
+                            <img src="https://images.unsplash.com/photo-1594824813593-6c6155981774?auto=format&fit=crop&w=300&q=80" alt="Ahmad Fauzi" class="w-full h-full object-cover object-top"/>
+                        </div>
+                        <h4 class="font-bold text-base text-on-background">Ahmad Fauzi, S.Tr.OP</h4>
+                        <p class="text-xs text-primary font-semibold">Head Prosthetist & Orthotist</p>
+                        <p class="text-xs text-on-surface-variant">Berpengalaman 12+ tahun dalam fabrikasi kaki palsu carbon bionik dan korset skoliosis 3D.</p>
+                    </div>
+                    <div class="bg-surface-white p-6 rounded-2xl border border-outline-variant/20 text-center space-y-3">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-primary/30">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=300&q=80" alt="Siti Rahmawati" class="w-full h-full object-cover object-top"/>
+                        </div>
+                        <h4 class="font-bold text-base text-on-background">Siti Rahmawati, S.Ft, Ftr</h4>
+                        <p class="text-xs text-primary font-semibold">Spesialis Gait Training & Fisioterapi</p>
+                        <p class="text-xs text-on-surface-variant">Memandu adaptasi berjalan alami pasca pemasangan kaki palsu dan koreksi postur.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative bg-on-background text-slate-300 w-full py-16">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto text-sm">
+            <div class="col-span-1 md:col-span-2">
+                <div class="text-white mb-4 text-2xl font-bold">PT. Orthocare Indonesia</div>
+                <p class="mb-6 max-w-sm leading-relaxed text-slate-400">Solusi mobilitas modern dengan teknologi ortotik dan prostetik terdepan untuk meningkatkan kualitas hidup Anda.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4 uppercase tracking-wider">Tautan</h4>
+                <ul class="flex flex-col gap-3 text-slate-300 text-xs">
+                    <li><a class="hover:text-primary-fixed transition" href="services.html">Layanan Medis</a></li>
+                    <li><a class="hover:text-primary-fixed transition" href="products.html">E-Katalog Produk</a></li>
+                    <li><a class="hover:text-primary-fixed transition" href="custom-products.html">Alur Pasien Custom</a></li>
+                    <li><a class="hover:text-primary-fixed transition" href="contact.html">Kontak & Cabang</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4 uppercase tracking-wider">Kontak</h4>
+                <p class="text-xs text-slate-300">Jl. Kaliurang KM 8.5, Sleman, Yogyakarta<br/>(0274) 889912 / 0812-3456-7890</p>
+            </div>
+        </div>
+        <div class="max-w-container-max mx-auto mt-12 pt-6 border-t border-white/10 text-center text-xs text-slate-400">
+            &copy; 2026 PT. Orthocare Indonesia. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

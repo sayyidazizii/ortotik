@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Formulir Konsultasi Pasien - PT. Orthocare Indonesia</title>
+    <meta name="description" content="Jadwalkan konsultasi evaluasi awal keluhan kaki palsu, skoliosis, flatfoot, atau kelainan gerak tubuh bersama klinisi spesialis PT. Orthocare Indonesia."/>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#306D29",
+                        "secondary": "#006a63",
+                        "background-subtle": "#F8FAFC",
+                        "surface-white": "#FFFFFF",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container": "#e6eeff",
+                        "on-surface": "#0d1c2f",
+                        "on-surface-variant": "#3d4947",
+                        "on-background": "#0d1c2f",
+                        "outline-variant": "#bcc9c6",
+                        "secondary-container": "#99efe5",
+                        "primary-fixed": "#89f5e7"
+                    },
+                    spacing: {
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "container-max": "1280px"
+                    },
+                    fontFamily: {
+                        "sans": ["'Plus Jakarta Sans'", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .shadow-1 { box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04); }
+        .shadow-2 { box-shadow: 0px 8px 24px rgba(48, 109, 41, 0.08); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; vertical-align: middle; line-height: 1; }
+    </style>
+</head>
+<body class="bg-background-subtle text-on-surface font-sans antialiased selection:bg-primary/20 selection:text-primary flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-surface-white sticky top-0 w-full z-50 border-b border-outline-variant/30 shadow-sm">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+            <a href="index.html" class="text-xl md:text-2xl font-extrabold text-primary uppercase tracking-tighter hover:opacity-90 transition">
+                PT. Orthocare Indonesia
+            </a>
+            <nav class="hidden md:flex gap-6 items-center">
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="index.html">Beranda</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="services.html">Layanan</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="products.html">Product</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="custom-products.html">Alur Pasien</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="articles.html">Edukasi</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="about.html">Tentang Kami</a>
+                <a class="text-on-surface-variant font-medium hover:text-primary text-sm transition" href="contact.html">Kontak</a>
+            </nav>
+            <div class="hidden md:flex items-center gap-2">
+                <a href="consultation.html" class="bg-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-secondary transition shadow-sm">
+                    Consultation
+                </a>
+            </div>
+            <button class="md:hidden text-primary p-2" id="mobile-menu-btn" aria-label="Buka Menu">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="fixed inset-y-0 right-0 w-80 z-[60] bg-white shadow-2xl flex flex-col h-full p-6 transform translate-x-full transition-transform duration-300 md:hidden" id="mobile-nav">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-primary font-bold text-lg">PT. Orthocare Indonesia</h2>
+            <button class="text-on-surface-variant p-1 hover:text-primary" id="close-mobile-nav"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <nav class="flex-1 flex flex-col gap-2">
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="index.html"><span class="material-symbols-outlined">home</span> Beranda</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="services.html"><span class="material-symbols-outlined">medical_services</span> Layanan</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="products.html"><span class="material-symbols-outlined">inventory_2</span> Product</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="custom-products.html"><span class="material-symbols-outlined">mobile_share_stack</span> Alur Pasien</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="articles.html"><span class="material-symbols-outlined">menu_book</span> Edukasi</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="about.html"><span class="material-symbols-outlined">info</span> Tentang Kami</a>
+            <a class="flex items-center gap-4 p-3 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm" href="contact.html"><span class="material-symbols-outlined">mail</span> Kontak</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- Banner -->
+        <div class="bg-surface-container-low border-b border-outline-variant/30 py-16 px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-container-max mx-auto space-y-3">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-primary"></span>
+                    Smart Appointment Booking
+                </span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-on-background leading-tight">
+                    Formulir Janji Temu Konsultasi Pasien
+                </h1>
+                <p class="text-on-surface-variant text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+                    Isi formulir singkat di bawah ini. Tim klinisi kami akan mengonfirmasi jadwal janji temu dan mengirimkan rincian konsultasi ke WhatsApp Anda.
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="bg-surface-white rounded-3xl border border-outline-variant/30 p-8 sm:p-12 space-y-8 shadow-2 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1.5 bg-primary"></div>
+
+                <form data-demo-form="true" class="space-y-6">
+                    <!-- Full Name -->
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-on-surface mb-2">Nama Lengkap Pasien / Wali *</label>
+                        <input type="text" name="full_name" required placeholder="Contoh: Budi Setiawan"
+                            class="w-full px-4 py-3.5 bg-surface-white border border-outline-variant/60 rounded-xl text-sm text-on-surface placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition">
+                    </div>
+
+                    <!-- Phone Number & Email -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-on-surface mb-2">No. WhatsApp / HP *</label>
+                            <input type="tel" name="phone_number" required placeholder="Contoh: 081234567890"
+                                class="w-full px-4 py-3.5 bg-surface-white border border-outline-variant/60 rounded-xl text-sm text-on-surface placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-on-surface mb-2">Email (Opsional)</label>
+                            <input type="email" name="email" placeholder="budi@example.com"
+                                class="w-full px-4 py-3.5 bg-surface-white border border-outline-variant/60 rounded-xl text-sm text-on-surface placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition">
+                        </div>
+                    </div>
+
+                    <!-- Complaint Type & Branch -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-on-surface mb-2">Jenis Keluhan / Kebutuhan *</label>
+                            <select name="complaint_type" required class="w-full px-4 py-3.5 bg-surface-white border border-outline-variant/60 rounded-xl text-sm text-on-surface font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition">
+                                <option value="">-- Pilih Jenis Keluhan --</option>
+                                <option value="Prostetik">Kaki / Tangan Palsu (Prostetik)</option>
+                                <option value="Ortotik">Brace / Penyangga Ortopedi</option>
+                                <option value="Scoliosis">Pusat Koreksi Skoliosis 3D</option>
+                                <option value="Insole">Custom Insole Medis (Flatfoot)</option>
+                                <option value="Fisioterapi">Fisioterapi & Gait Training</option>
+                                <option value="Konsultasi">Konsultasi & Pemeriksaan Medis</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-on-surface mb-2">Pilihan Cabang Klinik</label>
+                            <select name="branch" class="w-full px-4 py-3.5 bg-surface-white border border-outline-variant/60 rounded-xl text-sm text-on-surface font-medium focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition">
+                                <option value="Sleman">Klinik Sleman Yogyakarta (Pusat)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Preferred Date -->
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-on-surface mb-2">Rencana Tanggal Kunjungan</label>
+                        <input type="date" name="preferred_date"
+                            class="w-full px-4 py-3.5 bg-surface-white border border-outline-variant/60 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition">
+                    </div>
+
+                    <!-- Notes -->
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-on-surface mb-2">Catatan Tambahan / Riwayat Medis</label>
+                        <textarea name="notes" rows="3" placeholder="Ceritakan riwayat amputasi, hasil rontgen, atau usia pasien..."
+                            class="w-full px-4 py-3.5 bg-surface-white border border-outline-variant/60 rounded-xl text-sm text-on-surface placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition"></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full h-14 bg-[#E5A500] hover:bg-[#CC9200] text-white font-bold text-base rounded-xl transition flex items-center justify-center gap-2.5 shadow-lg hover:shadow-xl cursor-pointer">
+                        <span class="material-symbols-outlined text-xl">send</span>
+                        <span>Kirim Formulir & Lanjut ke WhatsApp</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative bg-on-background text-slate-300 w-full py-16">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto text-sm">
+            <div class="col-span-1 md:col-span-2">
+                <div class="text-white mb-4 text-2xl font-bold">PT. Orthocare Indonesia</div>
+                <p class="mb-6 max-w-sm leading-relaxed text-slate-400">Solusi mobilitas modern dengan teknologi ortotik dan prostetik terdepan.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4 uppercase tracking-wider">Tautan</h4>
+                <ul class="flex flex-col gap-3 text-slate-300 text-xs">
+                    <li><a class="hover:text-primary-fixed transition" href="services.html">Layanan Medis</a></li>
+                    <li><a class="hover:text-primary-fixed transition" href="products.html">E-Katalog Produk</a></li>
+                    <li><a class="hover:text-primary-fixed transition" href="custom-products.html">Alur Pasien Custom</a></li>
+                    <li><a class="hover:text-primary-fixed transition" href="contact.html">Kontak & Cabang</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4 uppercase tracking-wider">Kontak</h4>
+                <p class="text-xs text-slate-300">Jl. Kaliurang KM 8.5, Sleman, Yogyakarta<br/>(0274) 889912 / 0812-3456-7890</p>
+            </div>
+        </div>
+        <div class="max-w-container-max mx-auto mt-12 pt-6 border-t border-white/10 text-center text-xs text-slate-400">
+            &copy; 2026 PT. Orthocare Indonesia. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

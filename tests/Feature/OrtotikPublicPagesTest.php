@@ -10,8 +10,8 @@ class OrtotikPublicPagesTest extends TestCase
     {
         $response = $this->get('/');
         $response->assertStatus(200);
-        $response->assertSee('ORTOTIK');
-        $response->assertSee('5 Pilar Layanan Medis Kami');
+        $response->assertSee('PT. Orthocare Indonesia');
+        $response->assertSee('Layanan Unggulan Kami');
     }
 
     public function test_products_catalog_loads_successfully(): void
@@ -33,7 +33,7 @@ class OrtotikPublicPagesTest extends TestCase
     {
         $response = $this->get('/services');
         $response->assertStatus(200);
-        $response->assertSee('5 Pilar Layanan Medis Kami');
+        $response->assertSee('Layanan Ortotik & Prostetik Spesialis');
     }
 
     public function test_custom_products_page_loads_successfully(): void
@@ -54,7 +54,7 @@ class OrtotikPublicPagesTest extends TestCase
     {
         $response = $this->get('/consultation');
         $response->assertStatus(200);
-        $response->assertSee('Formulir Konsultasi Pasien');
+        $response->assertSee('Formulir Janji Temu Konsultasi Pasien');
 
         $postResponse = $this->post('/consultation', [
             'full_name' => 'Ahmad Rizki',
@@ -75,6 +75,6 @@ class OrtotikPublicPagesTest extends TestCase
     {
         $response = $this->get('/contact');
         $response->assertStatus(200);
-        $response->assertSee('Kunjungi Klinik Kami');
+        $response->assertSee('Hubungi Kami');
     }
 }

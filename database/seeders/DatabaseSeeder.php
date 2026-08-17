@@ -393,32 +393,18 @@ class DatabaseSeeder extends Seeder
             'is_active' => true,
         ]);
 
-        // 6. Branches
+        // 6. Branches (Single Clinic: Sleman, Yogyakarta)
         Branch::create([
-            'name' => 'Klinik Ortotik Cabang Jakarta Pusat (Pusat)',
-            'city' => 'Jakarta Pusat',
-            'address' => 'Jl. Salemba Raya No. 45, Paseban, Senen, Jakarta Pusat, DKI Jakarta 10440',
-            'phone_number' => '021-3901234',
+            'name' => 'PT. Orthocare Indonesia - Klinik Sleman Yogyakarta',
+            'city' => 'Sleman',
+            'address' => 'Jl. Kaliurang KM 8.5, Sinduharjo, Kec. Ngaglik, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55581',
+            'phone_number' => '(0274) 889912',
             'whatsapp_number' => '6281234567890',
-            'email' => 'jakarta@ortotik.co.id',
-            'google_maps_url' => 'https://maps.google.com/?q=Jakarta',
+            'email' => 'sleman@orthocare.co.id',
+            'google_maps_url' => 'https://maps.google.com/?q=Sleman+Yogyakarta',
             'opening_hours' => 'Senin - Sabtu: 08:30 - 17:00 WIB',
-            'image' => '/images/branches/jakarta.jpg',
+            'image' => '/images/branches/sleman-yogyakarta.jpg',
             'is_main_branch' => true,
-            'is_active' => true,
-        ]);
-
-        Branch::create([
-            'name' => 'Klinik Ortotik Cabang Surabaya',
-            'city' => 'Surabaya',
-            'address' => 'Jl. Dharmahusada No. 88, Mojo, Kec. Gubeng, Surabaya, Jawa Timur 60285',
-            'phone_number' => '031-5901234',
-            'whatsapp_number' => '6281234567891',
-            'email' => 'surabaya@ortotik.co.id',
-            'google_maps_url' => 'https://maps.google.com/?q=Surabaya',
-            'opening_hours' => 'Senin - Sabtu: 08:30 - 17:00 WIB',
-            'image' => '/images/branches/surabaya.jpg',
-            'is_main_branch' => false,
             'is_active' => true,
         ]);
 
@@ -490,12 +476,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // 9. Site Settings
-        SiteSetting::set('site_name', 'Klinik Ortotik & Prostetik Indonesia', 'general');
-        SiteSetting::set('site_tagline', 'Solusi Ortotik & Prostetik Medis Presisi & Modern', 'general');
-        SiteSetting::set('company_phone', '021-3901234', 'contact');
-        SiteSetting::set('company_email', 'info@ortotik.co.id', 'contact');
+        SiteSetting::set('site_name', 'PT. Orthocare Indonesia', 'general');
+        SiteSetting::set('site_tagline', 'High-Tech Orthopedic Care & Precision Prosthetics', 'general');
+        SiteSetting::set('company_phone', '(0274) 889912', 'contact');
+        SiteSetting::set('company_email', 'info@orthocare.co.id', 'contact');
         SiteSetting::set('whatsapp_global', '6281234567890', 'contact');
-        SiteSetting::set('company_address', 'Jl. Salemba Raya No. 45, Jakarta Pusat, DKI Jakarta 10440', 'contact');
+        SiteSetting::set('company_address', 'Jl. Kaliurang KM 8.5, Sinduharjo, Kec. Ngaglik, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55581', 'contact');
         SiteSetting::set('working_hours', 'Senin - Sabtu: 08:30 - 17:00 WIB', 'general');
         SiteSetting::set('facebook_url', 'https://facebook.com/ortotikindonesia', 'social');
         SiteSetting::set('instagram_url', 'https://instagram.com/ortotikindonesia', 'social');

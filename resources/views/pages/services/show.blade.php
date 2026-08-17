@@ -1,54 +1,57 @@
 @extends('layouts.app')
 
-@section('title', $service->title . ' - Precision Orthotics & Prosthetics')
+@section('title', $service->title . ' - PT. Orthocare Indonesia')
 @section('meta_description', $service->summary)
 
 @section('content')
 
 <!-- Sub-Nav Breadcrumb -->
-<div class="bg-cappuccino border-b border-border py-3 px-4 sm:px-6 lg:px-8 text-xs text-tertiary font-medium font-sans">
-    <div class="max-w-[1360px] mx-auto flex items-center gap-2">
-        <a href="{{ route('home') }}" class="hover:text-primary">Beranda</a>
-        <span>/</span>
-        <a href="{{ route('services.index') }}" class="hover:text-primary">5 Layanan Medis</a>
-        <span>/</span>
+<div class="bg-surface-white border-b border-outline-variant/30 py-3.5 px-4 sm:px-6 lg:px-8 text-xs text-on-surface-variant font-medium">
+    <div class="max-w-container-max mx-auto flex items-center gap-2">
+        <a href="{{ route('home') }}" class="hover:text-primary transition-colors">Beranda</a>
+        <span class="text-outline-variant">/</span>
+        <a href="{{ route('services.index') }}" class="hover:text-primary transition-colors">Layanan Medis</a>
+        <span class="text-outline-variant">/</span>
         <span class="text-primary font-semibold">{{ $service->title }}</span>
     </div>
 </div>
 
 <!-- Header Banner -->
-<div class="bg-cappuccino border-b border-border py-16 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-[1360px] mx-auto">
-        <span class="text-xs text-terracotta font-semibold uppercase tracking-wider block mb-2 font-sans">CLINICAL PROCEDURE & EXPERTISE</span>
-        <h1 class="text-3xl sm:text-4xl lg:text-[46px] font-serif font-medium tracking-tight text-primary leading-tight max-w-4xl">
+<div class="bg-surface-container-low border-b border-outline-variant/30 py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div class="max-w-container-max mx-auto relative z-10 space-y-4">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-primary"></span>
+            Prosedur Klinis Spesialis
+        </span>
+        <h1 class="text-3xl sm:text-4xl lg:text-[42px] font-headline-xl font-bold tracking-tight text-on-background leading-tight max-w-4xl">
             {{ $service->title }}
         </h1>
-        <p class="text-secondary/80 text-base sm:text-lg mt-3 max-w-2xl leading-relaxed font-light">
+        <p class="text-on-surface-variant text-base sm:text-lg max-w-3xl leading-relaxed">
             {{ $service->summary }}
         </p>
     </div>
 </div>
 
-<div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
         
         <!-- Main Content (Left) -->
         <div class="lg:col-span-8 space-y-8">
-            <div class="bg-white rounded-3xl border border-border p-8 sm:p-10 space-y-6 shadow-2xs">
-                <div class="prose prose-slate max-w-none text-base text-secondary/85 leading-relaxed space-y-4 font-light">
+            <div class="bg-surface-white rounded-3xl border border-outline-variant/30 p-8 sm:p-10 space-y-6 shadow-1">
+                <div class="prose prose-slate max-w-none text-base text-on-surface-variant leading-relaxed space-y-4">
                     {!! $service->content !!}
                 </div>
 
                 @if($service->indications && count($service->indications) > 0)
-                <div class="p-6 bg-cappuccino rounded-2xl border border-border space-y-3">
-                    <h3 class="font-serif font-medium text-primary text-base uppercase tracking-wider flex items-center gap-2">
-                        <i data-lucide="check-circle" class="w-5 h-5 text-terracotta"></i>
+                <div class="p-6 bg-surface-container-low rounded-2xl border border-outline-variant/30 space-y-3 mt-6">
+                    <h3 class="font-headline-md font-semibold text-primary text-base uppercase tracking-wider flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-xl">fact_check</span>
                         <span>Indikasi Klinis Penanganan:</span>
                     </h3>
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-secondary/80 font-normal">
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm text-on-surface">
                         @foreach($service->indications as $ind)
                         <li class="flex items-center gap-2">
-                            <span class="w-1.5 h-1.5 rounded-full bg-terracotta shrink-0"></span>
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
                             <span>{{ $ind }}</span>
                         </li>
                         @endforeach
@@ -58,45 +61,56 @@
             </div>
 
             <!-- Consultation Banner -->
-            <div class="bg-primary text-cappuccino p-8 sm:p-10 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xs">
+            <div class="bg-primary text-surface-white p-8 rounded-3xl flex flex-col sm:flex-row justify-between items-center gap-6 shadow-2">
                 <div class="space-y-2 text-center sm:text-left">
-                    <span class="text-xs text-mint font-semibold uppercase tracking-wider block font-sans">Janji Temu Klinis</span>
-                    <h3 class="text-2xl sm:text-3xl font-serif font-medium text-white">Jadwalkan Konsultasi & Pengukuran</h3>
-                    <p class="text-xs text-cappuccino/80 max-w-md leading-relaxed font-light">Pemeriksaan biomekanik, evaluasi pola jalan, dan konsultasi fitting bersama tim Ortotis-Prostetis resmi.</p>
+                    <h3 class="font-headline-md text-xl font-bold text-white">Butuh Penanganan Khusus untuk Kondisi Anda?</h3>
+                    <p class="text-xs text-white/85 max-w-md">Konsultasikan keluhan Anda bersama tim ortotis dan prostetis berpengalaman kami hari ini.</p>
                 </div>
-                <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto shrink-0">
-                    <a href="{{ route('consultation.create') }}?service_id={{ $service->id }}"
-                        class="inline-flex items-center justify-center bg-terracotta hover:bg-terracotta-dark text-white text-sm font-semibold px-7 h-12 rounded-full btn-maven transition">
-                        <span>Janji Temu Medis</span>
-                    </a>
-                </div>
+                <a href="{{ route('consultation.create') }}?service_id={{ $service->id }}" class="shrink-0 bg-white hover:bg-slate-100 text-primary text-xs font-bold px-7 py-3.5 rounded-xl transition-all shadow-md hover:shadow-lg flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-sm text-primary">calendar_month</span> Buat Janji Temu
+                </a>
             </div>
         </div>
 
-        <!-- Sidebar Navigation (Right) -->
+        <!-- Sidebar Actions (Right) -->
         <div class="lg:col-span-4 space-y-6">
-            <div class="bg-white rounded-3xl border border-border p-6 space-y-4 shadow-2xs">
-                <h3 class="text-xs font-serif font-semibold uppercase tracking-wider text-primary">5 Layanan Medis</h3>
-                <div class="space-y-1.5 font-sans">
-                    @foreach($allServices as $s)
-                    <a href="{{ route('services.show', $s->slug) }}"
-                        class="flex items-center justify-between px-4 py-3 rounded-full text-xs font-semibold transition {{ $s->id === $service->id ? 'bg-primary text-white font-semibold' : 'text-secondary hover:bg-cappuccino' }}">
-                        <span>{{ $s->title }}</span>
-                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <!-- Booking Card -->
+            <div class="bg-surface-white rounded-3xl border border-outline-variant/30 p-6 space-y-5 shadow-1">
+                <h3 class="font-headline-md font-semibold text-lg text-on-background">Konsultasi Medis</h3>
+                <p class="text-xs text-on-surface-variant leading-relaxed">
+                    Dapatkan evaluasi postur awal dan gait analysis bersama klinisi bersertifikasi.
+                </p>
+                <div class="space-y-3 pt-2">
+                    <a href="{{ route('consultation.create') }}?service_id={{ $service->id }}" 
+                       class="w-full flex items-center justify-center bg-primary hover:bg-secondary text-surface-white text-sm font-semibold h-12 rounded-xl transition shadow-sm">
+                        Buat Janji Temu
                     </a>
-                    @endforeach
+                    <a href="https://wa.me/6281234567890?text=Halo%20PT.%20Orthocare%20Indonesia,%20saya%20ingin%20konsultasi%20layanan%20{{ urlencode($service->title) }}." target="_blank"
+                       class="w-full flex items-center justify-center bg-surface-container-low hover:bg-surface-container-high text-primary text-sm font-semibold h-12 rounded-xl border border-outline-variant/30 transition">
+                        <span class="material-symbols-outlined text-lg mr-2">chat</span> Chat WhatsApp
+                    </a>
                 </div>
             </div>
 
-            <!-- Direct WA Card -->
-            <div class="bg-white rounded-3xl border border-border p-6 space-y-3 shadow-2xs">
-                <span class="text-[10px] font-semibold text-terracotta uppercase tracking-widest block font-sans">Konsultasi Cepat</span>
-                <h4 class="text-lg font-serif font-medium text-primary">Tanya Spesialis via WhatsApp</h4>
-                <p class="text-xs text-tertiary leading-relaxed font-light">Hubungi admin hotline resmi untuk informasi estimasi biaya, jadwal dokter, dan panduan Home Visit.</p>
-                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Ortotik,%20saya%20ingin%20tanya%20layanan%20{{ urlencode($service->title) }}" target="_blank"
-                    class="inline-flex items-center justify-center w-full bg-primary hover:bg-primary-dark text-white text-xs font-semibold h-11 rounded-full btn-maven transition">
-                    <span>Chat WhatsApp Sekarang</span>
-                </a>
+            <!-- Guarantee & Accreditation -->
+            <div class="bg-surface-white rounded-3xl border border-outline-variant/30 p-6 space-y-4 shadow-1">
+                <h4 class="text-xs font-semibold uppercase tracking-wider text-primary">Jaminan Layanan</h4>
+                <div class="space-y-3 text-xs text-on-surface-variant">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-lg mt-0.5">verified</span>
+                        <div>
+                            <strong class="text-on-background block">Standar Kemenkes RI</strong>
+                            <span>Praktisi berlisensi dan tersertifikasi resmi.</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-lg mt-0.5">published_with_changes</span>
+                        <div>
+                            <strong class="text-on-background block">Garansi Penyesuaian Fitting</strong>
+                            <span>Penyesuaian soket gratis selama masa adaptasi pasien.</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

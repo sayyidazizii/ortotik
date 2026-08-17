@@ -1,214 +1,256 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Klinik Ortotik & Prostetik Indonesia - Pelayanan Medis Presisi & Holistik')</title>
-    <meta name="description" content="@yield('meta_description', 'Pusat pembuatan alat bantu ortopedi presisi, kaki palsu bionik carbon fiber, korset skoliosis 3D non-bedah, dan insole medis cetak sesuai standar Kemenkes RI.')">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@yield('title', 'Beranda - PT. Orthocare Indonesia')</title>
+    <meta name="description" content="@yield('meta_description', 'Solusi berteknologi tinggi untuk mobilitas dan kenyamanan Anda. Kami menghadirkan perawatan ortopedi presisi dengan sentuhan hangat berstandar Kemenkes RI.')"/>
     
-    <!-- Google Fonts: Fraunces / Playfair Display (Domaine Display Serif Style) & Plus Jakarta Sans (Humanistic Sans) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Plus Jakarta Sans & Material Symbols Outlined -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+    <!-- Tailwind CSS CDN with Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
         tailwind.config = {
+            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        // Maven Clinic Signature Jewel-Tone Palette
-                        primary: '#0D5C46',          // Hero Emerald Green
-                        'primary-dark': '#074332',   // Deep Forest Emerald
-                        'primary-light': '#17795E',  // Vibrant Emerald
-                        terracotta: '#C86D51',       // Warm Terra Cotta
-                        'terracotta-dark': '#B0593F',// Deep Terra Cotta
-                        mint: '#D8ECE5',             // Mint Julep
-                        'mint-light': '#EEF7F4',     // Soft Mint Wash
-                        cappuccino: '#F6F3EE',       // Warm Linen Cappuccino
-                        'cappuccino-light': '#FAF8F5', // Pale Canvas
-                        'cappuccino-deep': '#ECE5DA', // Darker Neutral
-                        blush: '#F9ECE8',            // Soft Terra Blush
-                        secondary: '#1A2E26',        // Deep Evergreen Charcoal Text
-                        tertiary: '#65776F',         // Muted Slate-Sage
-                        surface: '#FFFFFF',          // Pure Crisp White
-                        border: '#E3DDD5',           // Warm Neutral Divider
-                        accent: '#C86D51',           // Warm Terra Cotta Accent
-                        error: '#D64545',
-                        whatsapp: '#25D366',
-                    },
-                    fontFamily: {
-                        serif: ['"Fraunces"', '"Playfair Display"', 'Georgia', 'serif'],
-                        editorial: ['"Fraunces"', '"Playfair Display"', 'serif'],
-                        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
-                        mono: ['"JetBrains Mono"', 'monospace'],
+                        "primary": "#306D29",
+                        "secondary": "#006a63",
+                        "tertiary": "#825100",
+                        "deep-forest": "#1C4F40",
+                        "success-emerald": "#147901",
+                        "background-subtle": "#F8FAFC",
+                        "surface-white": "#FFFFFF",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#e6eeff",
+                        "surface-container-high": "#dde9ff",
+                        "surface-container-highest": "#d5e3fd",
+                        "on-surface": "#0d1c2f",
+                        "on-surface-variant": "#3d4947",
+                        "on-background": "#0d1c2f",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#f4fffc",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#006f67",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#fffbff",
+                        "outline": "#6d7a77",
+                        "outline-variant": "#bcc9c6",
+                        "secondary-container": "#99efe5",
+                        "primary-fixed": "#89f5e7",
+                        "secondary-fixed": "#9cf2e8",
+                        "tertiary-fixed": "#ffddb8",
+                        "error": "#ba1a1a",
+                        "surface": "#f8f9ff",
+                        "surface-dim": "#ccdbf4",
+                        "surface-bright": "#f8f9ff",
+                        "surface-variant": "#d5e3fd",
+                        "surface-tint": "#006a61",
+                        "inverse-surface": "#233144",
+                        "inverse-on-surface": "#ebf1ff",
+                        "inverse-primary": "#6bd8cb",
+                        "background": "#f8f9ff"
                     },
                     borderRadius: {
-                        'none': '0px',
-                        'sm': '6px',
-                        'md': '10px',
-                        'lg': '18px',
-                        'xl': '28px',
-                        '2xl': '36px',
-                        'full': '9999px',
-                        'pill': '9999px',
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "margin-desktop": "32px",
+                        "container-max": "1280px"
+                    },
+                    fontFamily: {
+                        "sans": ["'Plus Jakarta Sans'", "sans-serif"],
+                        "headline-xl": ["'Plus Jakarta Sans'", "sans-serif"],
+                        "headline-lg": ["'Plus Jakarta Sans'", "sans-serif"],
+                        "headline-md": ["'Plus Jakarta Sans'", "sans-serif"],
+                        "body-lg": ["'Plus Jakarta Sans'", "sans-serif"],
+                        "body-md": ["'Plus Jakarta Sans'", "sans-serif"],
+                        "body-sm": ["'Plus Jakarta Sans'", "sans-serif"],
+                        "label-md": ["'Plus Jakarta Sans'", "sans-serif"],
+                        "label-sm": ["'Plus Jakarta Sans'", "sans-serif"]
+                    },
+                    fontSize: {
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-xl-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
                     }
                 }
             }
         }
     </script>
     
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
     <style>
-        [x-cloak] { display: none !important; }
+        .shadow-1 { box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04); }
+        .shadow-2 { box-shadow: 0px 8px 24px rgba(48, 109, 41, 0.08); }
+        .shadow-hover { box-shadow: 0px 12px 32px rgba(48, 109, 41, 0.12); }
         
-        body {
-            background-color: #FAF8F5;
-            color: #1A2E26;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
-            font-weight: 500;
-            color: #0D5C46;
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-left {
+            animation: fadeInLeft 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateX(-40px);
         }
 
-        /* Maven Clinic Pill Button Motion */
-        .btn-maven {
-            transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        .fade-in-right {
+            animation: fadeInRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateX(40px);
         }
-        .btn-maven:hover {
-            transform: translateY(-1.5px);
+
+        .animate-float {
+            animation: floatSlow 4s ease-in-out infinite;
         }
-        .btn-maven:active {
-            transform: scale(0.98);
+
+        @keyframes fadeInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
+
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes floatSlow {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
     @stack('styles')
 </head>
-<body class="bg-cappuccino-light text-secondary font-sans antialiased flex flex-col min-h-screen selection:bg-mint selection:text-primary">
+<body class="bg-background-subtle text-on-surface font-sans antialiased selection:bg-primary/20 selection:text-primary flex flex-col min-h-screen">
 
-    <!-- Top Announcement Bar (Maven Clinic: Emerald Green Tone with Mint Pill Indicator) -->
-    <div class="bg-primary text-cappuccino text-xs py-2.5 px-4 sm:px-6 lg:px-8 border-b border-primary-dark">
-        <div class="max-w-[1360px] mx-auto flex justify-between items-center">
-            <!-- Left Info -->
-            <div class="flex items-center space-x-6 text-cappuccino/90 font-medium">
-                <span class="flex items-center gap-2 text-white font-medium">
-                    <span class="w-2 h-2 rounded-full bg-terracotta animate-pulse"></span>
-                    <span>Pelayanan Ortotik & Prostetik Berstandar Kemenkes RI</span>
-                </span>
-                <span class="hidden md:inline text-cappuccino/70">Cabang Praktek: Jakarta Pusat & Surabaya</span>
+    <!-- TopAppBar / Header -->
+    <header class="bg-surface-white dark:bg-on-background sticky top-0 w-full z-50 border-b border-outline-variant/30 shadow-sm transition-all duration-300">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+            <a href="{{ route('home') }}" class="text-headline-md font-headline-xl text-primary dark:text-primary-fixed uppercase tracking-tighter hover:opacity-90 transition font-bold">
+                PT. Orthocare Indonesia
+            </a>
+            <nav class="hidden md:flex gap-gutter items-center">
+                <a class="{{ request()->routeIs('home') ? 'text-primary dark:text-primary-fixed border-b-2 border-primary font-bold pb-1' : 'dark:text-on-surface-variant/80 font-medium hover:text-primary text-on-surface-variant' }} font-label-md text-label-md transition-colors duration-200" href="{{ route('home') }}">Beranda</a>
+                <a class="{{ request()->routeIs('services.*') ? 'text-primary dark:text-primary-fixed border-b-2 border-primary font-bold pb-1' : 'dark:text-on-surface-variant/80 font-medium hover:text-primary text-on-surface-variant' }} font-label-md text-label-md transition-colors duration-200" href="{{ route('services.index') }}">Layanan</a>
+                <a class="{{ request()->routeIs('products.*') ? 'text-primary dark:text-primary-fixed border-b-2 border-primary font-bold pb-1' : 'dark:text-on-surface-variant/80 font-medium hover:text-primary text-on-surface-variant' }} font-label-md text-label-md transition-colors duration-200" href="{{ route('products.index') }}">Product</a>
+                <a class="{{ request()->routeIs('custom-products.*') ? 'text-primary dark:text-primary-fixed border-b-2 border-primary font-bold pb-1' : 'dark:text-on-surface-variant/80 font-medium hover:text-primary text-on-surface-variant' }} font-label-md text-label-md transition-colors duration-200" href="{{ route('custom-products.index') }}">Alur Pasien</a>
+                <a class="{{ request()->routeIs('about*') ? 'text-primary dark:text-primary-fixed border-b-2 border-primary font-bold pb-1' : 'dark:text-on-surface-variant/80 font-medium hover:text-primary text-on-surface-variant' }} font-label-md text-label-md transition-colors duration-200" href="{{ route('about') }}">Tentang Kami</a>
+                <a class="{{ request()->routeIs('contact') ? 'text-primary dark:text-primary-fixed border-b-2 border-primary font-bold pb-1' : 'dark:text-on-surface-variant/80 font-medium hover:text-primary text-on-surface-variant' }} font-label-md text-label-md transition-colors duration-200" href="{{ route('contact') }}">Kontak</a>
+            </nav>
+            <div class="hidden md:flex items-center gap-unit">
+                <a href="tel:+62215550123" aria-label="call" class="flex items-center justify-center p-2 text-on-surface-variant hover:text-primary transition-colors duration-200 rounded-full hover:bg-surface-variant">
+                    <span class="material-symbols-outlined">call</span>
+                </a>
+                <a href="https://wa.me/6281234567890" target="_blank" aria-label="whatsapp" class="flex items-center justify-center p-2 text-on-surface-variant hover:text-primary transition-colors duration-200 rounded-full hover:bg-surface-variant">
+                    <span class="material-symbols-outlined">chat</span>
+                </a>
+                <a href="{{ route('consultation.create') }}" class="bg-primary text-on-primary px-5 py-2.5 rounded-lg font-label-md text-label-md hover:bg-secondary hover:shadow-lg transition-all duration-300 ml-2 inline-flex items-center justify-center">Consultation</a>
             </div>
+            <button class="md:hidden text-primary p-2 focus:outline-none" id="mobile-menu-btn" aria-label="Buka Menu">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </header>
 
-            <!-- Right Links -->
-            <div class="flex items-center space-x-5 text-xs font-medium text-cappuccino/90">
-                <a href="{{ route('contact') }}" class="hover:text-terracotta transition">Lokasi Cabang</a>
-                <span class="text-cappuccino/30">|</span>
-                <a href="{{ route('consultation.create') }}" class="hover:text-white transition font-semibold text-mint">Jadwal Janji Temu</a>
-                <span class="text-cappuccino/30">|</span>
-                <a href="/progress.html" class="hover:text-white transition">Dashboard Project</a>
-                <span class="text-cappuccino/30">|</span>
-                <a href="/admin/login" class="text-cappuccino/70 hover:text-white transition">Portal Staf</a>
+    <!-- SideNavBar (Mobile Drawer) -->
+    <div class="fixed inset-y-0 right-0 w-80 z-[60] bg-surface-container-lowest dark:bg-inverse-surface shadow-2xl flex flex-col h-full p-6 transform translate-x-full transition-transform duration-300 md:hidden" id="mobile-nav">
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h2 class="font-headline-md text-primary dark:text-primary-fixed font-bold text-lg">PT. Orthocare Indonesia</h2>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">High-Tech Orthopedic Care</p>
+            </div>
+            <button class="text-on-surface-variant p-1 hover:text-primary" id="close-mobile-nav" aria-label="Tutup Menu">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <nav class="flex-1 flex flex-col gap-2">
+            <a class="flex items-center gap-4 p-3 {{ request()->routeIs('home') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-lg font-body-md text-body-md hover:pl-4 transition-all duration-300" href="{{ route('home') }}">
+                <span class="material-symbols-outlined">home</span> Beranda
+            </a>
+            <a class="flex items-center gap-4 p-3 {{ request()->routeIs('services.*') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-lg font-body-md text-body-md hover:pl-4 transition-all duration-300" href="{{ route('services.index') }}">
+                <span class="material-symbols-outlined">medical_services</span> Layanan
+            </a>
+            <a class="flex items-center gap-4 p-3 {{ request()->routeIs('products.*') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-lg font-body-md text-body-md hover:pl-4 transition-all duration-300" href="{{ route('products.index') }}">
+                <span class="material-symbols-outlined">inventory_2</span> Product
+            </a>
+            <a class="flex items-center gap-4 p-3 {{ request()->routeIs('custom-products.*') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-lg font-body-md text-body-md hover:pl-4 transition-all duration-300" href="{{ route('custom-products.index') }}">
+                <span class="material-symbols-outlined">mobile_share_stack</span> Alur Pasien
+            </a>
+            <a class="flex items-center gap-4 p-3 {{ request()->routeIs('about*') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-lg font-body-md text-body-md hover:pl-4 transition-all duration-300" href="{{ route('about') }}">
+                <span class="material-symbols-outlined">info</span> Tentang Kami
+            </a>
+            <a class="flex items-center gap-4 p-3 {{ request()->routeIs('contact') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-lg font-body-md text-body-md hover:pl-4 transition-all duration-300" href="{{ route('contact') }}">
+                <span class="material-symbols-outlined">mail</span> Kontak
+            </a>
+        </nav>
+        <div class="mt-auto pt-6 border-t border-outline-variant/30 flex flex-col gap-4">
+            <a href="{{ route('consultation.create') }}" class="w-full text-center bg-primary text-on-primary py-3 rounded-lg font-label-md text-label-md hover:bg-secondary transition-colors duration-200 block font-semibold">Hubungi Kami</a>
+            <div class="flex justify-around text-on-surface-variant">
+                <a href="tel:+62215550123" class="flex flex-col items-center gap-1 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">emergency_home</span>
+                    <span class="font-label-sm text-label-sm">Emergency</span>
+                </a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="flex flex-col items-center gap-1 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">chat</span>
+                    <span class="font-label-sm text-label-sm">WhatsApp</span>
+                </a>
             </div>
         </div>
     </div>
-
-    <!-- Primary Navigation Bar (Maven Clinic: Warm Linen Header, Emerald Brand, Terra Cotta CTAs) -->
-    <header class="bg-cappuccino-light/95 backdrop-blur-md sticky top-0 z-50 border-b border-border" x-data="{ mobileOpen: false }">
-        <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                
-                <!-- Brand Logo Cluster -->
-                <a href="{{ route('home') }}" class="flex items-center gap-3 group">
-                    <div class="w-11 h-11 rounded-full bg-primary text-cappuccino flex items-center justify-center font-serif text-lg font-bold shadow-xs group-hover:scale-105 transition">
-                        OP
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-2xl font-serif font-semibold tracking-tight text-primary">ORTOTIK<span class="text-terracotta font-normal">.ID</span></span>
-                            <span class="text-[10px] uppercase font-semibold tracking-wider px-2.5 py-0.5 rounded-full bg-mint text-primary border border-primary/20">Kemenkes RI</span>
-                        </div>
-                        <span class="text-xs text-tertiary block font-light tracking-wide">Pusat Mobilitas & Ortopedi Modern</span>
-                    </div>
-                </a>
-
-                <!-- Desktop Navigation Links (Single-Word Menu Items) -->
-                <nav class="hidden lg:flex items-center space-x-7 text-[15px] font-medium text-secondary">
-                    <a href="{{ route('home') }}" class="hover:text-primary transition py-2 {{ request()->routeIs('home') ? 'text-primary font-semibold border-b-2 border-primary' : '' }}">
-                        Beranda
-                    </a>
-                    <a href="{{ route('services.index') }}" class="hover:text-primary transition py-2 {{ request()->routeIs('services.*') ? 'text-primary font-semibold border-b-2 border-primary' : '' }}">
-                        Layanan
-                    </a>
-                    <a href="{{ route('products.index') }}" class="hover:text-primary transition py-2 {{ request()->routeIs('products.*') ? 'text-primary font-semibold border-b-2 border-primary' : '' }}">
-                        Katalog
-                    </a>
-                    <a href="{{ route('custom-products.index') }}" class="hover:text-primary transition py-2 {{ request()->routeIs('custom-products.*') ? 'text-primary font-semibold border-b-2 border-primary' : '' }}">
-                        Kustom
-                    </a>
-                    <a href="{{ route('articles.index') }}" class="hover:text-primary transition py-2 {{ request()->routeIs('articles.*') ? 'text-primary font-semibold border-b-2 border-primary' : '' }}">
-                        Artikel
-                    </a>
-                    <a href="{{ route('about') }}" class="hover:text-primary transition py-2 {{ request()->routeIs('about*') ? 'text-primary font-semibold border-b-2 border-primary' : '' }}">
-                        Tentang
-                    </a>
-                    <a href="{{ route('contact') }}" class="hover:text-primary transition py-2 {{ request()->routeIs('contact') ? 'text-primary font-semibold border-b-2 border-primary' : '' }}">
-                        Cabang
-                    </a>
-                </nav>
-
-                <!-- Search & Maven Clinic Signature Emerald/Terra Cotta Pill Button -->
-                <div class="hidden sm:flex items-center gap-3">
-                    <!-- Search Pill -->
-                    <form action="{{ route('products.index') }}" method="GET" class="relative">
-                        <div class="flex items-center bg-white rounded-full px-4 h-11 w-44 lg:w-48 transition border border-border focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
-                            <i data-lucide="search" class="w-4 h-4 text-tertiary mr-2 shrink-0"></i>
-                            <input type="text" name="search" placeholder="Cari Alat Medis..." class="bg-transparent text-xs text-secondary placeholder-tertiary focus:outline-none w-full font-normal">
-                        </div>
-                    </form>
-
-                    <!-- Maven Clinic button-primary: Emerald Green with Pill Shape -->
-                    <a href="{{ route('consultation.create') }}" class="inline-flex items-center justify-center bg-primary hover:bg-primary-dark text-white text-sm font-semibold px-7 h-11 rounded-full btn-maven shadow-xs transition">
-                        <span>Janji Temu Medis</span>
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="flex items-center gap-2 lg:hidden">
-                    <button @click="mobileOpen = !mobileOpen" class="p-2 text-secondary hover:text-primary" aria-label="Menu">
-                        <i data-lucide="menu" class="w-6 h-6" x-show="!mobileOpen"></i>
-                        <i data-lucide="x" class="w-6 h-6" x-show="mobileOpen" x-cloak></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Drawer -->
-        <div x-show="mobileOpen" x-cloak class="lg:hidden border-t border-border bg-cappuccino-light px-6 py-6 space-y-3">
-            <nav class="space-y-2 text-base font-medium text-secondary">
-                <a href="{{ route('home') }}" class="block py-2 border-b border-border">Beranda</a>
-                <a href="{{ route('services.index') }}" class="block py-2 border-b border-border">Layanan</a>
-                <a href="{{ route('products.index') }}" class="block py-2 border-b border-border">Katalog</a>
-                <a href="{{ route('custom-products.index') }}" class="block py-2 border-b border-border">Kustom</a>
-                <a href="{{ route('articles.index') }}" class="block py-2 border-b border-border">Artikel</a>
-                <a href="{{ route('about') }}" class="block py-2 border-b border-border">Tentang</a>
-                <a href="{{ route('contact') }}" class="block py-2 border-b border-border">Cabang</a>
-            </nav>
-            <div class="pt-4">
-                <a href="{{ route('consultation.create') }}" class="w-full flex justify-center items-center h-12 bg-primary text-white rounded-full font-semibold text-sm btn-maven">
-                    Buat Janji Temu Medis
-                </a>
-            </div>
-        </div>
-    </header>
 
     <!-- Main Content Area -->
     <main class="flex-grow">
@@ -217,95 +259,87 @@
 
     <!-- Floating Action WhatsApp Button -->
     <aside aria-label="WhatsApp Quick Contact">
-        <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Klinik%20Ortotik,%20saya%20ingin%20konsultasi%20mengenai%20alat%20medis%20dan%20jadwal%20klinik." target="_blank" rel="noopener noreferrer"
-            class="fixed bottom-6 right-6 z-50 bg-primary hover:bg-primary-dark text-white px-6 py-3.5 rounded-full shadow-lg flex items-center gap-3 btn-maven transition group border border-mint/40">
-            <span class="w-2.5 h-2.5 rounded-full bg-whatsapp animate-pulse"></span>
-            <i data-lucide="message-circle" class="w-5 h-5 text-mint"></i>
-            <span class="font-semibold text-xs tracking-tight text-white">Konsultasi WhatsApp</span>
+        <a href="https://wa.me/6281234567890?text=Halo%20PT.%20Orthocare%20Indonesia,%20saya%20ingin%20konsultasi%20mengenai%20alat%20medis%20dan%20jadwal%20klinik." 
+           target="_blank" rel="noopener noreferrer"
+           class="fixed bottom-6 right-6 bg-[#25D366] hover:bg-[#20ba5a] text-white p-3.5 sm:p-4 rounded-full shadow-2 hover:shadow-hover hover:-translate-y-2 transition-all duration-300 z-50 flex items-center justify-center group ring-4 ring-[#25D366]/20 active:scale-95"
+           aria-label="Konsultasi WhatsApp">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.04 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7.02 8.48 7.02 9.68C7.02 10.88 7.9 12.04 8.02 12.2C8.14 12.37 9.73 14.83 12.18 15.88C14.21 16.76 14.63 16.58 15.07 16.54C15.52 16.5 16.5 15.96 16.7 15.39C16.91 14.81 16.91 14.33 16.85 14.22C16.78 14.12 16.62 14.05 16.38 13.94C16.14 13.82 14.96 13.24 14.74 13.16C14.52 13.08 14.36 13.04 14.2 13.28C14.03 13.53 13.57 14.06 13.43 14.22C13.29 14.38 13.15 14.4 12.91 14.28C12.67 14.16 11.9 13.91 10.98 13.09C10.26 12.45 9.78 11.66 9.64 11.42C9.5 11.17 9.62 11.04 9.74 10.92C9.85 10.81 9.99 10.63 10.11 10.49C10.23 10.34 10.28 10.24 10.36 10.08C10.44 9.91 10.4 9.77 10.34 9.66C10.28 9.54 9.8 8.35 9.59 7.86C9.4 7.39 9.2 7.45 9.04 7.44C8.89 7.43 8.71 7.33 8.53 7.33Z"/>
+            </svg>
         </a>
     </aside>
 
-    <!-- Footer (Maven Clinic: Emerald Green Footer with Warm Linen Accents & Editorial Serif) -->
-    <footer class="bg-primary text-cappuccino pt-20 pb-12 border-t border-primary-dark mt-20">
-        <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-white/15">
-                <!-- Column 1: Brand Directory -->
-                <div class="lg:col-span-2 space-y-5">
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-full bg-terracotta text-white flex items-center justify-center font-serif text-lg font-bold">
-                            OP
-                        </div>
-                        <div>
-                            <span class="text-xl font-serif font-semibold tracking-tight text-white block">KLINIK ORTOTIK & PROSTETIK</span>
-                            <span class="text-xs text-mint/90">Pelayanan Medis Presisi & Holistik</span>
-                        </div>
-                    </div>
-                    <p class="text-sm leading-relaxed text-cappuccino/80 max-w-sm font-light">
-                        Pusat pembuatan alat bantu ortopedi presisi, kaki palsu bionik carbon fiber, korset skoliosis 3D non-bedah, dan insole medis cetak sesuai standar Kementerian Kesehatan RI.
-                    </p>
-                    <div class="flex flex-wrap items-center gap-2 pt-2">
-                        <span class="inline-flex items-center px-3.5 py-1 rounded-full bg-white/10 text-white text-xs font-medium border border-white/20">
-                            Izin Kemenkes RI
-                        </span>
-                        <span class="inline-flex items-center px-3.5 py-1 rounded-full bg-white/10 text-white text-xs font-medium border border-white/20">
-                            Garansi Fitting 100%
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Column 2: 5 Layanan Medis -->
-                <div>
-                    <h3 class="text-mint text-sm font-serif font-semibold uppercase tracking-wider mb-5">5 Layanan Medis</h3>
-                    <ul class="space-y-3 text-sm text-cappuccino/80 font-normal">
-                        <li><a href="{{ route('services.index') }}" class="hover:text-terracotta transition">Kaki & Tangan Palsu (Prostetik)</a></li>
-                        <li><a href="{{ route('services.index') }}" class="hover:text-terracotta transition">Brace Ortopedi (AFO & KAFO)</a></li>
-                        <li><a href="{{ route('services.index') }}" class="hover:text-terracotta transition">Pusat Skoliosis 3D Cheneau</a></li>
-                        <li><a href="{{ route('services.index') }}" class="hover:text-terracotta transition">Insole Medis 3D Flat Foot</a></li>
-                        <li><a href="{{ route('services.index') }}" class="hover:text-terracotta transition">Home Visit & Casting Medis</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 3: E-Katalog & Navigasi -->
-                <div>
-                    <h3 class="text-mint text-sm font-serif font-semibold uppercase tracking-wider mb-5">Navigasi Pasien</h3>
-                    <ul class="space-y-3 text-sm text-cappuccino/80 font-normal">
-                        <li><a href="{{ route('products.index') }}" class="hover:text-terracotta transition">E-Katalog Produk Medis</a></li>
-                        <li><a href="{{ route('custom-products.index') }}" class="hover:text-terracotta transition">Alur Produk Custom-Made</a></li>
-                        <li><a href="{{ route('articles.index') }}" class="hover:text-terracotta transition">Artikel & Edukasi Medis</a></li>
-                        <li><a href="{{ route('consultation.create') }}" class="hover:text-terracotta transition">Buat Janji Konsultasi</a></li>
-                        <li><a href="{{ route('about') }}" class="hover:text-terracotta transition">Profil Tim Ortotis-Prostetis</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 4: Lokasi Cabang -->
-                <div>
-                    <h3 class="text-mint text-sm font-serif font-semibold uppercase tracking-wider mb-5">Cabang Klinik</h3>
-                    <div class="space-y-3.5 text-sm text-cappuccino/80 font-light leading-relaxed">
-                        <p><strong class="text-white font-medium font-serif">Jakarta Pusat:</strong><br>Jl. Salemba Raya No. 45, Senen, Jakarta Pusat 10440</p>
-                        <p><strong class="text-white font-medium font-serif">Surabaya:</strong><br>Jl. Dharmahusada No. 88, Gubeng, Surabaya 60285</p>
-                        <p class="pt-2 text-white font-medium">Hotline: 0812-3456-7890<br>Email: info@ortotik.co.id</p>
-                    </div>
+    <!-- Footer -->
+    <footer class="relative bg-on-background text-on-primary-container w-full py-16 pt-16 md:pt-20 mb-0">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto font-body-sm text-body-sm text-surface-variant/70">
+            <div class="col-span-1 md:col-span-2">
+                <div class="font-headline-md text-surface-white mb-6 text-2xl font-bold">PT. Orthocare Indonesia</div>
+                <p class="mb-6 max-w-sm leading-relaxed text-slate-300">Solusi mobilitas modern dengan teknologi ortotik dan prostetik terdepan untuk meningkatkan kualitas hidup Anda.</p>
+                <div class="flex items-center gap-2 text-surface-white font-label-sm text-label-sm bg-surface-white/10 px-4 py-2 rounded-full w-fit border border-surface-white/20">
+                    <span class="material-symbols-outlined text-sm text-primary-fixed">verified</span> KEMENKES Certified
                 </div>
             </div>
-
-            <!-- Fine-Print Legal Row -->
-            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-cappuccino/60 font-light">
-                <p>&copy; {{ date('Y') }} PT Ortotik & Prostetik Medika Indonesia. All rights reserved.</p>
-                <div class="flex space-x-6 font-normal">
-                    <a href="{{ route('about') }}" class="hover:text-white transition">Tentang Kami</a>
-                    <a href="{{ route('contact') }}" class="hover:text-white transition">Hubungi Kami</a>
-                    <a href="/progress.html" class="text-mint hover:underline transition font-medium">Executive Dashboard</a>
-                    <a href="/admin/login" class="text-cappuccino/60 hover:text-white transition">Portal Staf</a>
-                </div>
+            <div class="mt-8 md:mt-0">
+                <h4 class="text-surface-white font-label-md text-label-md mb-6 uppercase tracking-wider font-semibold">Tautan Cepat</h4>
+                <ul class="flex flex-col gap-4 text-slate-300">
+                    <li><a class="hover:text-primary-fixed transition-colors" href="{{ route('services.index') }}">Layanan Medis</a></li>
+                    <li><a class="hover:text-primary-fixed transition-colors" href="{{ route('products.index') }}">E-Katalog Produk</a></li>
+                    <li><a class="hover:text-primary-fixed transition-colors" href="{{ route('custom-products.index') }}">Alur Pasien Custom</a></li>
+                    <li><a class="hover:text-primary-fixed transition-colors" href="{{ route('about') }}">Tentang Kami</a></li>
+                    <li><a class="hover:text-primary-fixed transition-colors" href="{{ route('contact') }}">Cabang & Kontak</a></li>
+                </ul>
             </div>
+            <div class="mt-8 md:mt-0">
+                <h4 class="text-surface-white font-label-md text-label-md mb-6 uppercase tracking-wider font-semibold">Kontak</h4>
+                <ul class="flex flex-col gap-4 text-slate-300">
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-sm mt-1 text-primary-fixed">location_on</span> Jl. Kaliurang KM 8.5, Sinduharjo, Ngaglik, Sleman, D.I. Yogyakarta 55581</li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-sm text-primary-fixed">mail</span> info@orthocare.co.id</li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-sm text-primary-fixed">call</span> (0274) 889912 / 0812-3456-7890</li>
+                </ul>
+            </div>
+        </div>
+        <div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mt-16 pt-8 border-t border-surface-variant/10 text-center font-body-sm text-body-sm text-surface-variant/50 text-slate-400">
+            &copy; {{ date('Y') }} PT. Orthocare Indonesia. KEMENKES Certified. All rights reserved.
         </div>
     </footer>
 
+    <!-- Global Scripts: Mobile Menu & Fade In Animations -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (window.lucide) {
-                window.lucide.createIcons();
-            }
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMobileNav = document.getElementById('close-mobile-nav');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        if (mobileMenuBtn && mobileNav) {
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileNav.classList.remove('translate-x-full');
+            });
+        }
+        
+        if (closeMobileNav && mobileNav) {
+            closeMobileNav.addEventListener('click', function() {
+                mobileNav.classList.add('translate-x-full');
+            });
+        }
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach((el) => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
         });
     </script>
     @stack('scripts')

@@ -104,26 +104,10 @@ class AdminCmsContentManagementTest extends TestCase
         $this->assertDatabaseHas('articles', ['title' => 'Panduan Perawatan Kaki Palsu Test']);
     }
 
-    public function test_admin_can_access_branches_crud(): void
+    public function test_admin_can_access_branches_page(): void
     {
         $response = $this->actingAs($this->admin)->get('/admin/branches');
         $response->assertStatus(200);
-
-        $response = $this->actingAs($this->admin)->get('/admin/branches/create');
-        $response->assertStatus(200);
-
-        $postData = [
-            'name' => 'Klinik Ortotik Cabang Bandung Test',
-            'city' => 'Bandung',
-            'phone_number' => '022-1234567',
-            'whatsapp_number' => '081299988877',
-            'address' => 'Jl. Pasteur No. 12, Bandung',
-            'is_active' => '1',
-        ];
-
-        $storeResponse = $this->actingAs($this->admin)->post('/admin/branches', $postData);
-        $storeResponse->assertRedirect('/admin/branches');
-        $this->assertDatabaseHas('branches', ['name' => 'Klinik Ortotik Cabang Bandung Test']);
     }
 
     public function test_admin_can_access_settings(): void

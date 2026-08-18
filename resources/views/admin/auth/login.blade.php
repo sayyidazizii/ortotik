@@ -37,6 +37,8 @@
             }
         }
     </script>
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -107,20 +109,42 @@
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
                             <i data-lucide="mail" class="w-4 h-4"></i>
                         </div>
-                        <input type="email" name="email" value="{{ old('email') }}" required autofocus placeholder="admin@ortotik.co.id"
+                        <input type="email" name="email" value="{{ old('email') }}" required autofocus placeholder="nama@email.com"
                             class="w-full pl-10 pr-4 py-3 bg-slate-900/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-medical-500 focus:border-medical-500 transition">
                     </div>
                 </div>
 
                 <!-- Password Input -->
-                <div class="space-y-1.5">
+                <div class="space-y-1.5" x-data="{ showPassword: false }">
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">Kata Sandi</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
                             <i data-lucide="lock" class="w-4 h-4"></i>
                         </div>
-                        <input type="password" name="password" required placeholder="••••••••••••"
-                            class="w-full pl-10 pr-4 py-3 bg-slate-900/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-medical-500 focus:border-medical-500 transition">
+                        <input :type="showPassword ? 'text' : 'password'" 
+                               name="password" 
+                               required 
+                               placeholder="••••••••••••"
+                               class="w-full pl-10 pr-11 py-3 bg-slate-900/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-medical-500 focus:border-medical-500 transition">
+                        
+                        <button type="button" 
+                                @click="showPassword = !showPassword"
+                                class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-white transition focus:outline-none"
+                                :title="showPassword ? 'Sembunyikan Kata Sandi' : 'Lihat Kata Sandi'"
+                                aria-label="Lihat / Sembunyikan Kata Sandi">
+                            <!-- Eye Icon (Password hidden) -->
+                            <svg x-show="!showPassword" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            <!-- Eye Off Icon (Password shown) -->
+                            <svg x-show="showPassword" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                                <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
+                                <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/>
+                                <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/>
+                                <line x1="2" x2="22" y1="2" y2="22"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -139,14 +163,6 @@
                     <span>Masuk ke Dashboard</span>
                 </button>
             </form>
-
-            <!-- Demo Hint Box -->
-            <div class="pt-4 border-t border-slate-700/60 text-center">
-                <p class="text-[11px] text-slate-400">
-                    Akun Superadmin Default: <br>
-                    <code class="text-teal-400 bg-slate-900/80 px-2 py-0.5 rounded font-mono">admin@ortotik.co.id</code> / <code class="text-teal-400 bg-slate-900/80 px-2 py-0.5 rounded font-mono">PasswordOrtotik2026!</code>
-                </p>
-            </div>
         </div>
 
         <!-- Back to Website -->

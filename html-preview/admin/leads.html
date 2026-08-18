@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Leads Konsultasi Pasien - Admin Panel</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            50: '#e6f0fa',
+                            100: '#cce1f5',
+                            500: '#0f4c81',
+                            600: '#0c3d67',
+                            700: '#092e50',
+                            800: '#061f36',
+                            900: '#0f172a',
+                        },
+                        tealmed: {
+                            50: '#f0fdfa',
+                            500: '#0d9488',
+                            600: '#0f766e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-100 font-sans text-slate-700 antialiased flex min-h-screen">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-slate-900 text-white flex flex-col justify-between shrink-0 fixed inset-y-0 left-0 z-30 shadow-xl">
+        <div>
+            <!-- Sidebar Brand Header -->
+            <div class="h-16 px-6 flex items-center gap-3 border-b border-slate-800 bg-slate-950/50">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-medical-500 to-tealmed-500 flex items-center justify-center font-extrabold text-base shadow">
+                    OP
+                </div>
+                <div>
+                    <h2 class="font-extrabold text-sm tracking-tight text-white leading-tight">KLINIK ORTOTIK</h2>
+                    <span class="text-[10px] text-teal-400 font-semibold tracking-wider uppercase">Medical Panel</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="p-4 space-y-1.5 text-xs font-semibold">
+                <a href="dashboard.html"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:text-white hover:bg-slate-800/60">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                    <span>Dashboard Overview</span>
+                </a>
+
+                <div class="pt-4 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                    CRM & Konsultasi
+                </div>
+
+                <a href="leads.html"
+                    class="flex items-center justify-between px-3.5 py-2.5 rounded-xl transition bg-medical-600 text-white shadow-md">
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="users" class="w-4 h-4"></i>
+                        <span>Leads Konsultasi</span>
+                    </div>
+                    <span class="bg-rose-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full">2</span>
+                </a>
+
+                <div class="pt-4 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                    Manajemen Konten
+                </div>
+
+                <a href="products.html"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:text-white hover:bg-slate-800/60">
+                    <i data-lucide="box" class="w-4 h-4"></i>
+                    <span>E-Katalog Produk</span>
+                </a>
+
+                <a href="services.html"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:text-white hover:bg-slate-800/60">
+                    <i data-lucide="stethoscope" class="w-4 h-4"></i>
+                    <span>Layanan Medis</span>
+                </a>
+
+                <a href="articles.html"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:text-white hover:bg-slate-800/60">
+                    <i data-lucide="newspaper" class="w-4 h-4"></i>
+                    <span>Artikel & Edukasi</span>
+                </a>
+
+                <div class="pt-4 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                    Sistem & Klinik
+                </div>
+
+                <a href="branches.html"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:text-white hover:bg-slate-800/60">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                    <span>Cabang Klinik</span>
+                </a>
+
+                <a href="settings.html"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:text-white hover:bg-slate-800/60">
+                    <i data-lucide="settings" class="w-4 h-4"></i>
+                    <span>Pengaturan Situs</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Sidebar User Footer -->
+        <div class="p-4 border-t border-slate-800 bg-slate-950/40">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5 overflow-hidden">
+                    <div class="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold text-teal-400 shrink-0">
+                        SA
+                    </div>
+                    <div class="truncate text-left">
+                        <p class="text-xs font-bold text-white truncate">Super Admin Ortotik</p>
+                        <span class="text-[10px] text-slate-400 font-medium capitalize">superadmin</span>
+                    </div>
+                </div>
+
+                <a href="login.html" title="Keluar" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition">
+                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="flex-1 ml-64 flex flex-col min-h-screen">
+        
+        <!-- Top Navbar -->
+        <header class="h-16 bg-white border-b border-slate-200 px-6 sm:px-8 flex items-center justify-between sticky top-0 z-20 shadow-sm">
+            <div class="flex items-center gap-3">
+                <h1 class="text-base font-extrabold text-slate-900">CRM & Leads Konsultasi Pasien</h1>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="../index.html" target="_blank" class="text-xs font-bold text-medical-600 hover:text-tealmed-600 bg-medical-50 hover:bg-medical-100 px-3.5 py-2 rounded-xl transition inline-flex items-center gap-1.5">
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    <span>Lihat Website Publik</span>
+                </a>
+
+                <a href="../../progress.html" target="_blank" class="text-xs font-bold text-tealmed-600 hover:text-tealmed-700 bg-tealmed-50 px-3.5 py-2 rounded-xl transition inline-flex items-center gap-1.5">
+                    <i data-lucide="activity" class="w-3.5 h-3.5"></i>
+                    <span>Roadmap Progress</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Body -->
+        <main class="flex-1 p-6 sm:p-8 space-y-6">
+            
+            <!-- Status Tabs Filter Bar -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 text-xs font-bold">
+                <a href="leads.html"
+                    class="px-4 py-2.5 rounded-xl transition whitespace-nowrap flex items-center gap-2 bg-slate-900 text-white shadow-md">
+                    <span>Semua Leads</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/20 text-white">6</span>
+                </a>
+
+                <a href="leads.html?status=new"
+                    class="px-4 py-2.5 rounded-xl transition whitespace-nowrap flex items-center gap-2 bg-white text-slate-600 hover:bg-rose-50 border border-slate-200">
+                    <span>Baru Masuk</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-rose-100 text-rose-700">2</span>
+                </a>
+
+                <a href="leads.html?status=contacted"
+                    class="px-4 py-2.5 rounded-xl transition whitespace-nowrap flex items-center gap-2 bg-white text-slate-600 hover:bg-amber-50 border border-slate-200">
+                    <span>Sedang Dihubungi</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-amber-100 text-amber-700">2</span>
+                </a>
+
+                <a href="leads.html?status=scheduled"
+                    class="px-4 py-2.5 rounded-xl transition whitespace-nowrap flex items-center gap-2 bg-white text-slate-600 hover:bg-sky-50 border border-slate-200">
+                    <span>Dijadwalkan</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-sky-100 text-sky-700">1</span>
+                </a>
+
+                <a href="leads.html?status=completed"
+                    class="px-4 py-2.5 rounded-xl transition whitespace-nowrap flex items-center gap-2 bg-white text-slate-600 hover:bg-emerald-50 border border-slate-200">
+                    <span>Selesai Konsultasi</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-100 text-emerald-700">1</span>
+                </a>
+
+                <a href="leads.html?status=cancelled"
+                    class="px-4 py-2.5 rounded-xl transition whitespace-nowrap flex items-center gap-2 bg-white text-slate-600 hover:bg-slate-50 border border-slate-200">
+                    <span>Dibatalkan</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-slate-100 text-slate-700">0</span>
+                </a>
+            </div>
+
+            <!-- Search & Filter Controls -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                <form action="leads.html" method="GET" class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                    <!-- Search Input -->
+                    <div class="sm:col-span-6 relative">
+                        <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
+                        <input type="text" name="search" placeholder="Cari nama pasien, no WhatsApp, keluhan medis..."
+                            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-medical-500">
+                    </div>
+
+                    <!-- Branch Dropdown Filter -->
+                    <div class="sm:col-span-4">
+                        <select name="branch_id" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-medical-500">
+                            <option value="">-- Semua Cabang Klinik --</option>
+                            <option value="1">PT. Orthocare Indonesia - Klinik Sleman Yogyakarta</option>
+                        </select>
+                    </div>
+
+                    <!-- Filter Buttons -->
+                    <div class="sm:col-span-2 flex gap-2">
+                        <button type="submit" class="flex-1 py-2.5 px-3 rounded-xl bg-medical-600 hover:bg-medical-700 text-white font-bold text-xs shadow-sm transition">
+                            Filter
+                        </button>
+                        <a href="leads.html" title="Reset Filter" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition flex items-center justify-center">
+                            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Leads Data Table Card -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider text-[10px]">
+                            <tr>
+                                <th class="py-3.5 px-6">Pasien / Kontak</th>
+                                <th class="py-3.5 px-6">Kebutuhan Medis</th>
+                                <th class="py-3.5 px-6">Cabang & Jadwal</th>
+                                <th class="py-3.5 px-6">Status Follow-up</th>
+                                <th class="py-3.5 px-6">Waktu Masuk</th>
+                                <th class="py-3.5 px-6 text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <!-- Row 1 -->
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="py-4 px-6">
+                                    <div class="space-y-0.5">
+                                        <a href="lead-detail.html" class="font-bold text-slate-900 hover:text-medical-600 text-sm">
+                                            Ahmad Fauzan
+                                        </a>
+                                        <p class="text-slate-500 font-mono text-[11px] flex items-center gap-1">
+                                            <i data-lucide="phone" class="w-3 h-3 text-slate-400"></i>
+                                            <span>081298765432</span>
+                                        </p>
+                                        <p class="text-slate-400 text-[10px]">ahmad.fauzan@gmail.com</p>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 max-w-xs">
+                                    <span class="inline-block font-semibold text-slate-800 bg-slate-100 px-2 py-0.5 rounded text-[11px]">
+                                        Prostetik
+                                    </span>
+                                    <p class="text-[11px] text-slate-500 mt-1 line-clamp-2 italic">"Pasca amputasi transtibial 6 bulan lalu, ingin membuat kaki palsu carbon fiber."</p>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <p class="font-semibold text-slate-700">Klinik Sleman Yogyakarta</p>
+                                    <p class="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
+                                        <i data-lucide="calendar" class="w-3 h-3 text-slate-400"></i>
+                                        <span>20 Ags 2026</span>
+                                    </p>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <select class="text-[11px] font-bold px-2.5 py-1 rounded-full border cursor-pointer focus:outline-none transition bg-rose-50 text-rose-700 border-rose-200">
+                                        <option value="new" selected>● BARU MASUK</option>
+                                        <option value="contacted">● DIHUBUNGI</option>
+                                        <option value="scheduled">● DIJADWALKAN</option>
+                                        <option value="completed">● SELESAI</option>
+                                        <option value="cancelled">● DIBATALKAN</option>
+                                    </select>
+                                </td>
+                                <td class="py-4 px-6 text-slate-500 whitespace-nowrap">
+                                    <p class="font-medium">18 Ags 2026</p>
+                                    <p class="text-[10px] text-slate-400">09:15 WIB (Baru saja)</p>
+                                </td>
+                                <td class="py-4 px-6 text-right whitespace-nowrap">
+                                    <div class="inline-flex items-center gap-1.5">
+                                        <a href="https://wa.me/6281298765432?text=Halo%20Bpk/Ibu%20Ahmad%20Fauzan,%20kami%20dari%20Klinik%20Ortotik%20menindaklanjuti%20permintaan%20konsultasi%20Anda." target="_blank" title="Respon WhatsApp Pasien"
+                                            class="p-2 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white transition shadow-sm inline-flex items-center gap-1">
+                                            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                                            <span class="text-[11px] font-bold">Chat WA</span>
+                                        </a>
+                                        <a href="lead-detail.html" title="Lihat Detail Lengkap"
+                                            class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+                                            <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                        </a>
+                                        <button type="button" title="Hapus Data" onclick="alert('Simulasi hapus data')" class="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition">
+                                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Row 2 -->
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="py-4 px-6">
+                                    <div class="space-y-0.5">
+                                        <a href="lead-detail.html" class="font-bold text-slate-900 hover:text-medical-600 text-sm">
+                                            Siti Rahmawati
+                                        </a>
+                                        <p class="text-slate-500 font-mono text-[11px] flex items-center gap-1">
+                                            <i data-lucide="phone" class="w-3 h-3 text-slate-400"></i>
+                                            <span>085712348901</span>
+                                        </p>
+                                        <p class="text-slate-400 text-[10px]">siti.rahma@yahoo.com</p>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 max-w-xs">
+                                    <span class="inline-block font-semibold text-slate-800 bg-slate-100 px-2 py-0.5 rounded text-[11px]">
+                                        Scoliosis
+                                    </span>
+                                    <p class="text-[11px] text-slate-500 mt-1 line-clamp-2 italic">"Putri usia 13 th terdiagnosa skoliosis sudut 28 derajat."</p>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <p class="font-semibold text-slate-700">Klinik Sleman Yogyakarta</p>
+                                    <p class="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
+                                        <i data-lucide="calendar" class="w-3 h-3 text-slate-400"></i>
+                                        <span>22 Ags 2026</span>
+                                    </p>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <select class="text-[11px] font-bold px-2.5 py-1 rounded-full border cursor-pointer focus:outline-none transition bg-rose-50 text-rose-700 border-rose-200">
+                                        <option value="new" selected>● BARU MASUK</option>
+                                        <option value="contacted">● DIHUBUNGI</option>
+                                        <option value="scheduled">● DIJADWALKAN</option>
+                                        <option value="completed">● SELESAI</option>
+                                        <option value="cancelled">● DIBATALKAN</option>
+                                    </select>
+                                </td>
+                                <td class="py-4 px-6 text-slate-500 whitespace-nowrap">
+                                    <p class="font-medium">18 Ags 2026</p>
+                                    <p class="text-[10px] text-slate-400">08:30 WIB (1 jam lalu)</p>
+                                </td>
+                                <td class="py-4 px-6 text-right whitespace-nowrap">
+                                    <div class="inline-flex items-center gap-1.5">
+                                        <a href="https://wa.me/6285712348901?text=Halo%20Bpk/Ibu%20Siti%20Rahmawati,%20kami%20dari%20Klinik%20Ortotik%20menindaklanjuti%20permintaan%20konsultasi%20Anda." target="_blank" title="Respon WhatsApp Pasien"
+                                            class="p-2 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white transition shadow-sm inline-flex items-center gap-1">
+                                            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                                            <span class="text-[11px] font-bold">Chat WA</span>
+                                        </a>
+                                        <a href="lead-detail.html" title="Lihat Detail Lengkap"
+                                            class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+                                            <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                        </a>
+                                        <button type="button" title="Hapus Data" onclick="alert('Simulasi hapus data')" class="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition">
+                                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Row 3 -->
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="py-4 px-6">
+                                    <div class="space-y-0.5">
+                                        <a href="lead-detail.html" class="font-bold text-slate-900 hover:text-medical-600 text-sm">
+                                            Bambang Wicaksono
+                                        </a>
+                                        <p class="text-slate-500 font-mono text-[11px] flex items-center gap-1">
+                                            <i data-lucide="phone" class="w-3 h-3 text-slate-400"></i>
+                                            <span>081345678912</span>
+                                        </p>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 max-w-xs">
+                                    <span class="inline-block font-semibold text-slate-800 bg-slate-100 px-2 py-0.5 rounded text-[11px]">
+                                        Insole (Flatfoot)
+                                    </span>
+                                    <p class="text-[11px] text-slate-500 mt-1 line-clamp-2 italic">"Nyeri tumit plantar fasciitis setiap berdiri lama."</p>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <p class="font-semibold text-slate-700">Klinik Sleman Yogyakarta</p>
+                                    <p class="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
+                                        <i data-lucide="calendar" class="w-3 h-3 text-slate-400"></i>
+                                        <span>19 Ags 2026</span>
+                                    </p>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <select class="text-[11px] font-bold px-2.5 py-1 rounded-full border cursor-pointer focus:outline-none transition bg-amber-50 text-amber-700 border-amber-200">
+                                        <option value="new">● BARU MASUK</option>
+                                        <option value="contacted" selected>● DIHUBUNGI</option>
+                                        <option value="scheduled">● DIJADWALKAN</option>
+                                        <option value="completed">● SELESAI</option>
+                                        <option value="cancelled">● DIBATALKAN</option>
+                                    </select>
+                                </td>
+                                <td class="py-4 px-6 text-slate-500 whitespace-nowrap">
+                                    <p class="font-medium">17 Ags 2026</p>
+                                    <p class="text-[10px] text-slate-400">14:10 WIB (Kemarin)</p>
+                                </td>
+                                <td class="py-4 px-6 text-right whitespace-nowrap">
+                                    <div class="inline-flex items-center gap-1.5">
+                                        <a href="https://wa.me/6281345678912" target="_blank" title="Respon WhatsApp Pasien"
+                                            class="p-2 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white transition shadow-sm inline-flex items-center gap-1">
+                                            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                                            <span class="text-[11px] font-bold">Chat WA</span>
+                                        </a>
+                                        <a href="lead-detail.html" title="Lihat Detail Lengkap"
+                                            class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+                                            <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                        </a>
+                                        <button type="button" title="Hapus Data" onclick="alert('Simulasi hapus data')" class="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition">
+                                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="p-5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                    <span>Menampilkan 1 - 3 dari 6 leads</span>
+                    <div class="flex items-center gap-1">
+                        <button class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-semibold disabled:opacity-50" disabled>Sebelumnya</button>
+                        <button class="px-3 py-1.5 rounded-lg bg-medical-600 text-white font-semibold">1</button>
+                        <button class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-semibold hover:bg-slate-50">2</button>
+                        <button class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-semibold hover:bg-slate-50">Berikutnya</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="py-4 px-8 border-t border-slate-200 bg-white text-center text-xs text-slate-400">
+            &copy; 2026 PT Ortotik & Prostetik Indonesia &bull; Custom Blade Admin Dashboard
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Administrator - Klinik Ortotik & Prostetik</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            50: '#e6f0fa',
+                            500: '#0f4c81',
+                            600: '#0c3d67',
+                            700: '#092e50',
+                            800: '#061f36',
+                            900: '#0f172a',
+                        },
+                        tealmed: {
+                            500: '#0d9488',
+                            600: '#0f766e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-900 font-sans min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+    
+    <!-- Ambient Background Glows -->
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-medical-500/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-tealmed-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="w-full max-w-md relative z-10">
+        <!-- Logo & Header -->
+        <div class="text-center mb-8">
+            <a href="../index.html" class="inline-flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-medical-500 to-tealmed-500 flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-medical-500/30 group-hover:scale-105 transition duration-300">
+                    OP
+                </div>
+                <div class="text-left">
+                    <h1 class="text-xl font-extrabold text-white tracking-tight">KLINIK ORTOTIK</h1>
+                    <p class="text-xs font-semibold text-teal-400">Panel Manajemen Medis</p>
+                </div>
+            </a>
+            <p class="text-slate-400 text-xs mt-3">Masuk dengan kredensial staf medis / administrator resmi.</p>
+        </div>
+
+        <!-- Login Card -->
+        <div class="bg-slate-800/80 backdrop-blur-xl border border-slate-700/80 rounded-3xl p-8 shadow-2xl shadow-black/50 space-y-6">
+            
+            <form action="dashboard.html" method="GET" class="space-y-5">
+
+                <!-- Email Input -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">Email Administrator</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                            <i data-lucide="mail" class="w-4 h-4"></i>
+                        </div>
+                        <input type="email" name="email" value="admin@ortotik.co.id" required autofocus placeholder="admin@ortotik.co.id"
+                            class="w-full pl-10 pr-4 py-3 bg-slate-900/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-medical-500 focus:border-medical-500 transition">
+                    </div>
+                </div>
+
+                <!-- Password Input -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">Kata Sandi</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                            <i data-lucide="lock" class="w-4 h-4"></i>
+                        </div>
+                        <input type="password" name="password" value="PasswordOrtotik2026!" required placeholder="••••••••••••"
+                            class="w-full pl-10 pr-4 py-3 bg-slate-900/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-medical-500 focus:border-medical-500 transition">
+                    </div>
+                </div>
+
+                <!-- Remember Me -->
+                <div class="flex items-center justify-between text-xs">
+                    <label class="flex items-center gap-2 text-slate-400 cursor-pointer select-none">
+                        <input type="checkbox" checked name="remember" class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-medical-500 focus:ring-medical-500 focus:ring-offset-slate-800">
+                        <span>Ingat saya di perangkat ini</span>
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <a href="dashboard.html"
+                    class="w-full py-3.5 px-4 bg-gradient-to-r from-medical-500 to-tealmed-500 hover:from-medical-600 hover:to-tealmed-600 text-white font-bold text-sm rounded-xl shadow-lg shadow-medical-500/25 transition transform active:scale-[0.99] flex items-center justify-center gap-2">
+                    <i data-lucide="log-in" class="w-4 h-4"></i>
+                    <span>Masuk ke Dashboard</span>
+                </a>
+            </form>
+
+            <!-- Demo Hint Box -->
+            <div class="pt-4 border-t border-slate-700/60 text-center">
+                <p class="text-[11px] text-slate-400">
+                    Akun Superadmin Default: <br>
+                    <code class="text-teal-400 bg-slate-900/80 px-2 py-0.5 rounded font-mono">admin@ortotik.co.id</code> / <code class="text-teal-400 bg-slate-900/80 px-2 py-0.5 rounded font-mono">PasswordOrtotik2026!</code>
+                </p>
+            </div>
+        </div>
+
+        <!-- Back to Website -->
+        <div class="text-center mt-6">
+            <a href="../index.html" class="text-xs font-semibold text-slate-400 hover:text-white transition inline-flex items-center gap-1.5">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Kembali ke Website Publik</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>

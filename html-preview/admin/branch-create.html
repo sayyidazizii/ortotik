@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Cabang Klinik Baru - Admin Panel</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            50: '#e6f0fa',
+                            100: '#cce1f5',
+                            500: '#0f4c81',
+                            600: '#0c3d67',
+                            700: '#092e50',
+                            800: '#061f36',
+                            900: '#0f172a',
+                        },
+                        tealmed: {
+                            50: '#f0fdfa',
+                            500: '#0d9488',
+                            600: '#0f766e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-100 font-sans text-slate-700 antialiased flex min-h-screen">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-slate-900 text-white flex flex-col justify-between shrink-0 fixed inset-y-0 left-0 z-30 shadow-xl">
+        <div>
+            <!-- Sidebar Brand Header -->
+            <div class="h-16 px-6 flex items-center gap-3 border-b border-slate-800 bg-slate-950/50">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-medical-500 to-tealmed-500 flex items-center justify-center font-extrabold text-base shadow">
+                    OP
+                </div>
+                <div>
+                    <h2 class="font-extrabold text-sm tracking-tight text-white leading-tight">KLINIK ORTOTIK</h2>
+                    <span class="text-[10px] text-teal-400 font-semibold tracking-wider uppercase">Medical Panel</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="p-4 space-y-1.5 text-xs font-semibold">
+                <a href="dashboard.html"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:text-white hover:bg-slate-800/60">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                    <span>Dashboard Overview</span>
+                </a>
+
+                <div class="pt-4 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                    CRM & Konsultasi
+                </div>
+
+                <a href="leads.html"
+                    class="flex items-center justify-between px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:text-white hover:bg-slate-800/60">
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="users" class="w-4 h-4"></i>
+                        <span>Leads Konsultasi</span>
+                    </div>
+                    <span class="bg-rose-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full">2</span>
+                </a>
+
+                <div class="pt-4 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                    Manajemen Konten
+                </div>
+
+                <a href="products.html"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:text-white hover:bg-slate-800/60">
+                    <i data-lucide="box" class="w-4 h-4"></i>
+                    <span>E-Katalog Produk</span>
+                </a>
+
+                <a href="services.html"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:text-white hover:bg-slate-800/60">
+                    <i data-lucide="stethoscope" class="w-4 h-4"></i>
+                    <span>Layanan Medis</span>
+                </a>
+
+                <a href="articles.html"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:text-white hover:bg-slate-800/60">
+                    <i data-lucide="newspaper" class="w-4 h-4"></i>
+                    <span>Artikel & Edukasi</span>
+                </a>
+
+                <div class="pt-4 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                    Sistem & Klinik
+                </div>
+
+                <a href="branches.html"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition bg-medical-600 text-white shadow-md">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                    <span>Cabang Klinik</span>
+                </a>
+
+                <a href="settings.html"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:text-white hover:bg-slate-800/60">
+                    <i data-lucide="settings" class="w-4 h-4"></i>
+                    <span>Pengaturan Situs</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Sidebar User Footer -->
+        <div class="p-4 border-t border-slate-800 bg-slate-950/40">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5 overflow-hidden">
+                    <div class="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold text-teal-400 shrink-0">
+                        SA
+                    </div>
+                    <div class="truncate text-left">
+                        <p class="text-xs font-bold text-white truncate">Super Admin Ortotik</p>
+                        <span class="text-[10px] text-slate-400 font-medium capitalize">superadmin</span>
+                    </div>
+                </div>
+
+                <a href="login.html" title="Keluar" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition">
+                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="flex-1 ml-64 flex flex-col min-h-screen">
+        
+        <!-- Top Navbar -->
+        <header class="h-16 bg-white border-b border-slate-200 px-6 sm:px-8 flex items-center justify-between sticky top-0 z-20 shadow-sm">
+            <div class="flex items-center gap-3">
+                <h1 class="text-base font-extrabold text-slate-900">Tambah Cabang Klinik Baru</h1>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="../index.html" target="_blank" class="text-xs font-bold text-medical-600 hover:text-tealmed-600 bg-medical-50 hover:bg-medical-100 px-3.5 py-2 rounded-xl transition inline-flex items-center gap-1.5">
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    <span>Lihat Website Publik</span>
+                </a>
+
+                <a href="../../progress.html" target="_blank" class="text-xs font-bold text-tealmed-600 hover:text-tealmed-700 bg-tealmed-50 px-3.5 py-2 rounded-xl transition inline-flex items-center gap-1.5">
+                    <i data-lucide="activity" class="w-3.5 h-3.5"></i>
+                    <span>Roadmap Progress</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Body -->
+        <main class="flex-1 p-6 sm:p-8 space-y-6">
+            
+            <div class="max-w-3xl space-y-6">
+                <div class="flex items-center justify-between">
+                    <a href="branches.html" class="text-xs font-bold text-slate-500 hover:text-medical-600 inline-flex items-center gap-1.5 transition">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        <span>Kembali ke Daftar Cabang</span>
+                    </a>
+                </div>
+
+                <form action="branches.html" method="GET" class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm space-y-6">
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Nama Cabang / Fasilitas <span class="text-rose-500">*</span></label>
+                        <input type="text" name="name" required placeholder="Contoh: PT. Orthocare Indonesia - Klinik Sleman Yogyakarta"
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical-500">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Kota / Wilayah <span class="text-rose-500">*</span></label>
+                            <input type="text" name="city" required placeholder="Contoh: Sleman"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical-500">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Nomor Telepon Kantor</label>
+                            <input type="text" name="phone_number" placeholder="(0274) 889912"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical-500">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Nomor WhatsApp Hotline <span class="text-rose-500">*</span></label>
+                            <input type="text" name="whatsapp_number" required placeholder="6281234567890"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical-500">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Email Cabang</label>
+                            <input type="email" name="email" placeholder="sleman@orthocare.co.id"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical-500">
+                        </div>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Alamat Lengkap <span class="text-rose-500">*</span></label>
+                        <textarea name="address" rows="3" required placeholder="Nama jalan, gedung, nomor, kecamatan, kode pos..."
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical-500"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Link Google Maps</label>
+                            <input type="text" name="google_maps_url" placeholder="https://maps.google.com/?q=..."
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical-500">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Jam Operasional</label>
+                            <input type="text" name="opening_hours" value="Senin - Sabtu: 08:30 - 17:00 WIB"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical-500">
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-slate-100 flex flex-wrap gap-6 text-xs font-bold text-slate-700">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" name="is_main_branch" value="1" class="w-4 h-4 text-medical-600 rounded">
+                            <span>Jadikan Kantor Pusat / Cabang Utama</span>
+                        </label>
+
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" name="is_active" checked value="1" class="w-4 h-4 text-medical-600 rounded">
+                            <span>Aktif / Menerima Pasien</span>
+                        </label>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 flex justify-end gap-3">
+                        <a href="branches.html" class="px-5 py-3 rounded-xl border border-slate-200 text-slate-600 font-bold text-xs hover:bg-slate-50 transition">
+                            Batal
+                        </a>
+                        <button type="button" onclick="alert('Cabang berhasil disimpan!'); window.location.href='branches.html'" class="px-6 py-3 rounded-xl bg-medical-600 hover:bg-medical-700 text-white font-bold text-xs shadow-sm transition">
+                            Simpan Cabang
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="py-4 px-8 border-t border-slate-200 bg-white text-center text-xs text-slate-400">
+            &copy; 2026 PT Ortotik & Prostetik Indonesia &bull; Custom Blade Admin Dashboard
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>

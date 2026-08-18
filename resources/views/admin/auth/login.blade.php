@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Administrator - Klinik Ortotik & Prostetik</title>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -43,7 +43,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="bg-slate-900 font-sans min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
-    
+
     <!-- Ambient Background Glows -->
     <div class="absolute -top-40 -left-40 w-96 h-96 bg-medical-500/20 rounded-full blur-3xl pointer-events-none"></div>
     <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-tealmed-500/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -60,12 +60,12 @@
                     <p class="text-xs font-semibold text-teal-400">Panel Manajemen Medis</p>
                 </div>
             </a>
-            <p class="text-slate-400 text-xs mt-3">Masuk dengan kredensial staf medis / administrator resmi.</p>
+            <p class="text-slate-400 text-xs mt-3">Masuk dengan kredensial</p>
         </div>
 
         <!-- Login Card -->
         <div class="bg-slate-800/80 backdrop-blur-xl border border-slate-700/80 rounded-3xl p-8 shadow-2xl shadow-black/50 space-y-6">
-            
+
             <!-- Session Messages -->
             @if(session('success'))
             <div class="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs flex items-center gap-2">
@@ -121,13 +121,13 @@
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
                             <i data-lucide="lock" class="w-4 h-4"></i>
                         </div>
-                        <input :type="showPassword ? 'text' : 'password'" 
-                               name="password" 
-                               required 
+                        <input :type="showPassword ? 'text' : 'password'"
+                               name="password"
+                               required
                                placeholder="••••••••••••"
                                class="w-full pl-10 pr-11 py-3 bg-slate-900/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-medical-500 focus:border-medical-500 transition">
-                        
-                        <button type="button" 
+
+                        <button type="button"
                                 @click="showPassword = !showPassword"
                                 class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-white transition focus:outline-none"
                                 :title="showPassword ? 'Sembunyikan Kata Sandi' : 'Lihat Kata Sandi'"

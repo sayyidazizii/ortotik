@@ -7,15 +7,15 @@
 <div class="max-w-5xl space-y-6">
 
     <!-- Top Navigation Back -->
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <a href="{{ route('admin.leads.index') }}" class="text-xs font-bold text-slate-500 hover:text-medical-600 inline-flex items-center gap-1.5 transition">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
             <span>Kembali ke Daftar Leads</span>
         </a>
 
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 w-full sm:w-auto">
             <a href="{{ $waReplyUrl }}" target="_blank"
-                class="px-4 py-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-xs rounded-xl shadow-sm inline-flex items-center gap-2 transition">
+                class="w-full sm:w-auto text-center px-4 py-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-xs rounded-xl shadow-sm inline-flex items-center justify-center gap-2 transition">
                 <i data-lucide="message-circle" class="w-4 h-4"></i>
                 <span>Hubungi via WhatsApp Resmi</span>
             </a>
@@ -29,14 +29,14 @@
         <div class="lg:col-span-2 space-y-6">
             
             <!-- Patient Profile Card -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
-                <div class="flex items-start justify-between border-b border-slate-100 pb-5">
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-6">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
                     <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-medical-500 to-tealmed-500 flex items-center justify-center text-white font-extrabold text-xl shadow">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-medical-500 to-tealmed-500 flex items-center justify-center text-white font-extrabold text-xl shadow shrink-0">
                             {{ strtoupper(substr($lead->full_name, 0, 2)) }}
                         </div>
                         <div>
-                            <h2 class="text-xl font-black text-slate-900 leading-tight">{{ $lead->full_name }}</h2>
+                            <h2 class="text-lg sm:text-xl font-black text-slate-900 leading-tight">{{ $lead->full_name }}</h2>
                             <p class="text-xs text-slate-400 mt-0.5">Leads masuk: {{ $lead->created_at->format('d F Y, H:i') }} WIB</p>
                         </div>
                     </div>

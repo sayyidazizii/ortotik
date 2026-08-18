@@ -40,27 +40,50 @@
         }
     </script>
     
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-slate-100 font-sans text-slate-700 antialiased flex min-h-screen">
+<body x-data="{ sidebarOpen: false }" class="bg-slate-100 font-sans text-slate-700 antialiased min-h-screen flex flex-col lg:flex-row">
+
+    <!-- Mobile Sidebar Overlay Backdrop -->
+    <div x-show="sidebarOpen" 
+         x-transition:enter="transition-opacity ease-linear duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition-opacity ease-linear duration-300"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click="sidebarOpen = false" 
+         class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-40 lg:hidden"
+         style="display: none;"></div>
 
     <!-- Sidebar Navigation -->
-    <aside class="w-64 bg-slate-900 text-white flex flex-col justify-between shrink-0 fixed inset-y-0 left-0 z-30 shadow-xl">
+    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
+           class="w-64 bg-slate-900 text-white flex flex-col justify-between shrink-0 fixed inset-y-0 left-0 z-50 shadow-2xl transition-transform duration-300 ease-in-out">
         <div>
             <!-- Sidebar Brand Header -->
-            <div class="h-16 px-6 flex items-center gap-3 border-b border-slate-800 bg-slate-950/50">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-medical-500 to-tealmed-500 flex items-center justify-center font-extrabold text-base shadow">
-                    OP
+            <div class="h-16 px-5 sm:px-6 flex items-center justify-between border-b border-slate-800 bg-slate-950/50">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-medical-500 to-tealmed-500 flex items-center justify-center font-extrabold text-base shadow">
+                        OP
+                    </div>
+                    <div>
+                        <h2 class="font-extrabold text-sm tracking-tight text-white leading-tight">KLINIK ORTOTIK</h2>
+                        <span class="text-[10px] text-teal-400 font-semibold tracking-wider uppercase">Medical Panel</span>
+                    </div>
                 </div>
-                <div>
-                    <h2 class="font-extrabold text-sm tracking-tight text-white leading-tight">KLINIK ORTOTIK</h2>
-                    <span class="text-[10px] text-teal-400 font-semibold tracking-wider uppercase">Medical Panel</span>
-                </div>
+
+                <!-- Close button for mobile -->
+                <button @click="sidebarOpen = false" class="lg:hidden text-slate-400 hover:text-white p-1 rounded-lg transition focus:outline-none" aria-label="Tutup Menu">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
             </div>
 
             <!-- Navigation Links -->
-            <nav class="p-4 space-y-1.5 text-xs font-semibold">
+            <nav class="p-4 space-y-1.5 text-xs font-semibold overflow-y-auto max-h-[calc(100vh-8rem)]">
                 <a href="dashboard.html"
                     class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition bg-medical-600 text-white shadow-md">
                     <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
@@ -133,7 +156,6 @@
                     </div>
                 </div>
 
-                <!-- Logout Link -->
                 <a href="login.html" title="Keluar" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition">
                     <i data-lucide="log-out" class="w-4 h-4"></i>
                 </a>
@@ -142,40 +164,43 @@
     </aside>
 
     <!-- Main Content Wrapper -->
-    <div class="flex-1 ml-64 flex flex-col min-h-screen">
+    <div class="flex-1 lg:ml-64 flex flex-col min-h-screen w-full min-w-0">
         
         <!-- Top Navbar -->
-        <header class="h-16 bg-white border-b border-slate-200 px-6 sm:px-8 flex items-center justify-between sticky top-0 z-20 shadow-sm">
-            <!-- Breadcrumbs / Page Title -->
+        <header class="h-16 bg-white border-b border-slate-200 px-4 sm:px-6 lg:px-8 flex items-center justify-between sticky top-0 z-20 shadow-sm">
+            <!-- Left: Mobile Toggle & Page Title -->
             <div class="flex items-center gap-3">
-                <h1 class="text-base font-extrabold text-slate-900">Dashboard Overview</h1>
+                <button @click="sidebarOpen = true" class="lg:hidden p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition focus:outline-none" aria-label="Buka Menu Sidebar">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+                <h1 class="text-sm sm:text-base font-extrabold text-slate-900 truncate">Dashboard Overview</h1>
             </div>
 
             <!-- Top Header Actions -->
-            <div class="flex items-center gap-4">
-                <a href="../index.html" target="_blank" class="text-xs font-bold text-medical-600 hover:text-tealmed-600 bg-medical-50 hover:bg-medical-100 px-3.5 py-2 rounded-xl transition inline-flex items-center gap-1.5">
+            <div class="flex items-center gap-2 sm:gap-4">
+                <a href="../index.html" target="_blank" class="text-xs font-bold text-medical-600 hover:text-tealmed-600 bg-medical-50 hover:bg-medical-100 p-2 sm:px-3.5 sm:py-2 rounded-xl transition inline-flex items-center gap-1.5" title="Lihat Website Publik">
                     <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                    <span>Lihat Website Publik</span>
+                    <span class="hidden sm:inline">Lihat Website</span>
                 </a>
 
-                <a href="../../progress.html" target="_blank" class="text-xs font-bold text-tealmed-600 hover:text-tealmed-700 bg-tealmed-50 px-3.5 py-2 rounded-xl transition inline-flex items-center gap-1.5">
+                <a href="../../progress.html" target="_blank" class="text-xs font-bold text-tealmed-600 hover:text-tealmed-700 bg-tealmed-50 p-2 sm:px-3.5 sm:py-2 rounded-xl transition inline-flex items-center gap-1.5" title="Roadmap Progress">
                     <i data-lucide="activity" class="w-3.5 h-3.5"></i>
-                    <span>Roadmap Progress</span>
+                    <span class="hidden sm:inline">Roadmap</span>
                 </a>
             </div>
         </header>
 
         <!-- Main Body -->
-        <main class="flex-1 p-6 sm:p-8 space-y-6">
+        <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 max-w-full overflow-x-hidden">
             
             <!-- Welcome Banner -->
-            <div class="bg-gradient-to-r from-medical-700 via-medical-600 to-tealmed-600 rounded-3xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
+            <div class="bg-gradient-to-r from-medical-700 via-medical-600 to-tealmed-600 rounded-3xl p-5 sm:p-8 text-white shadow-lg relative overflow-hidden">
                 <div class="relative z-10 space-y-2 max-w-2xl">
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-teal-300 text-xs font-bold border border-white/20">
                         <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
                         <span>Sistem Manajemen Klinik Medis</span>
                     </span>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Selamat Datang, Super Admin Ortotik!</h2>
+                    <h2 class="text-xl sm:text-3xl font-extrabold tracking-tight">Selamat Datang, Super Admin Ortotik!</h2>
                     <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
                         Pantau pesan masuk konsultasi pasien baru, jadwalkan pemeriksaan ortopedi, dan kelola katalog produk medis klinik Anda.
                     </p>
@@ -183,7 +208,7 @@
             </div>
 
             <!-- 4 KPI Stat Widgets -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
                 <!-- Card 1: New Leads -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition">
                     <div class="flex items-center justify-between">
@@ -259,12 +284,12 @@
 
             <!-- Recent Leads Table -->
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                <div class="p-5 sm:px-6 border-b border-slate-200 flex items-center justify-between">
+                <div class="p-4 sm:p-6 border-b border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                     <div>
                         <h3 class="font-extrabold text-base text-slate-900">Pesan Konsultasi Pasien Terbaru</h3>
                         <p class="text-xs text-slate-400 mt-0.5">Daftar leads janji temu pasien yang masuk melalui formulir online.</p>
                     </div>
-                    <a href="leads.html" class="text-xs font-bold text-medical-600 hover:text-tealmed-600 bg-slate-50 hover:bg-slate-100 border border-slate-200 px-3.5 py-2 rounded-xl transition">
+                    <a href="leads.html" class="text-xs font-bold text-medical-600 hover:text-tealmed-600 bg-slate-50 hover:bg-slate-100 border border-slate-200 px-3.5 py-2 rounded-xl transition self-stretch sm:self-auto text-center">
                         Lihat Semua Leads (6)
                     </a>
                 </div>
@@ -273,34 +298,34 @@
                     <table class="w-full text-left text-xs">
                         <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider text-[10px]">
                             <tr>
-                                <th class="py-3 px-6">Pasien / Kontak</th>
-                                <th class="py-3 px-6">Keluhan Medis</th>
-                                <th class="py-3 px-6">Cabang</th>
-                                <th class="py-3 px-6">Rencana Tanggal</th>
-                                <th class="py-3 px-6">Status</th>
-                                <th class="py-3 px-6 text-right">Aksi Cepat</th>
+                                <th class="py-3 px-4 sm:px-6">Pasien / Kontak</th>
+                                <th class="py-3 px-4 sm:px-6">Keluhan Medis</th>
+                                <th class="py-3 px-4 sm:px-6">Cabang</th>
+                                <th class="py-3 px-4 sm:px-6">Rencana Tanggal</th>
+                                <th class="py-3 px-4 sm:px-6">Status</th>
+                                <th class="py-3 px-4 sm:px-6 text-right">Aksi Cepat</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100">
                             <tr class="hover:bg-slate-50/80 transition">
-                                <td class="py-4 px-6">
+                                <td class="py-4 px-4 sm:px-6">
                                     <p class="font-bold text-slate-900">Ahmad Fauzan</p>
                                     <p class="text-[11px] text-slate-400 font-mono">081298765432</p>
                                 </td>
-                                <td class="py-4 px-6">
+                                <td class="py-4 px-4 sm:px-6">
                                     <span class="inline-block font-semibold text-slate-800">Prostetik (Kaki Palsu Bawah Lutut)</span>
                                     <p class="text-[11px] text-slate-400 truncate max-w-xs">Pasca amputasi transtibial 6 bulan lalu, ingin membuat kaki palsu carbon fiber.</p>
                                 </td>
-                                <td class="py-4 px-6 font-medium text-slate-600">
+                                <td class="py-4 px-4 sm:px-6 font-medium text-slate-600">
                                     Klinik Sleman Yogyakarta
                                 </td>
-                                <td class="py-4 px-6 text-slate-500">
+                                <td class="py-4 px-4 sm:px-6 text-slate-500">
                                     20 Ags 2026
                                 </td>
-                                <td class="py-4 px-6">
+                                <td class="py-4 px-4 sm:px-6">
                                     <span class="px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 font-bold text-[10px] uppercase border border-rose-200">Baru</span>
                                 </td>
-                                <td class="py-4 px-6 text-right space-x-2">
+                                <td class="py-4 px-4 sm:px-6 text-right space-x-2">
                                     <a href="https://wa.me/6281298765432?text=Halo%20Bpk/Ibu%20Ahmad%20Fauzan,%20kami%20dari%20Klinik%20Ortotik%20menindaklanjuti%20permintaan%20konsultasi%20Anda." target="_blank"
                                         class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-[11px] shadow-sm transition">
                                         <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
@@ -309,54 +334,28 @@
                                 </td>
                             </tr>
                             <tr class="hover:bg-slate-50/80 transition">
-                                <td class="py-4 px-6">
+                                <td class="py-4 px-4 sm:px-6">
                                     <p class="font-bold text-slate-900">Siti Rahmawati</p>
                                     <p class="text-[11px] text-slate-400 font-mono">085712348901</p>
                                 </td>
-                                <td class="py-4 px-6">
+                                <td class="py-4 px-4 sm:px-6">
                                     <span class="inline-block font-semibold text-slate-800">Scoliosis 3D Brace</span>
                                     <p class="text-[11px] text-slate-400 truncate max-w-xs">Putri usia 13 th terdiagnosa skoliosis sudut 28 derajat.</p>
                                 </td>
-                                <td class="py-4 px-6 font-medium text-slate-600">
+                                <td class="py-4 px-4 sm:px-6 font-medium text-slate-600">
                                     Klinik Sleman Yogyakarta
                                 </td>
-                                <td class="py-4 px-6 text-slate-500">
+                                <td class="py-4 px-4 sm:px-6 text-slate-500">
                                     22 Ags 2026
                                 </td>
-                                <td class="py-4 px-6">
+                                <td class="py-4 px-4 sm:px-6">
                                     <span class="px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 font-bold text-[10px] uppercase border border-rose-200">Baru</span>
                                 </td>
-                                <td class="py-4 px-6 text-right space-x-2">
+                                <td class="py-4 px-4 sm:px-6 text-right space-x-2">
                                     <a href="https://wa.me/6285712348901?text=Halo%20Bpk/Ibu%20Siti%20Rahmawati,%20kami%20dari%20Klinik%20Ortotik%20menindaklanjuti%20permintaan%20konsultasi%20Anda." target="_blank"
                                         class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-[11px] shadow-sm transition">
                                         <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
                                         <span>Respon WA</span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-slate-50/80 transition">
-                                <td class="py-4 px-6">
-                                    <p class="font-bold text-slate-900">Bambang Wicaksono</p>
-                                    <p class="text-[11px] text-slate-400 font-mono">081345678912</p>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="inline-block font-semibold text-slate-800">Custom Insole Medis (Flatfoot)</span>
-                                    <p class="text-[11px] text-slate-400 truncate max-w-xs">Nyeri tumit plantar fasciitis setiap berdiri lama.</p>
-                                </td>
-                                <td class="py-4 px-6 font-medium text-slate-600">
-                                    Klinik Sleman Yogyakarta
-                                </td>
-                                <td class="py-4 px-6 text-slate-500">
-                                    19 Ags 2026
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 font-bold text-[10px] uppercase border border-amber-200">Dihubungi</span>
-                                </td>
-                                <td class="py-4 px-6 text-right space-x-2">
-                                    <a href="lead-detail.html"
-                                        class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition">
-                                        <i data-lucide="eye" class="w-3.5 h-3.5"></i>
-                                        <span>Detail</span>
                                     </a>
                                 </td>
                             </tr>
@@ -367,7 +366,7 @@
         </main>
 
         <!-- Footer -->
-        <footer class="py-4 px-8 border-t border-slate-200 bg-white text-center text-xs text-slate-400">
+        <footer class="py-4 px-4 sm:px-8 border-t border-slate-200 bg-white text-center text-xs text-slate-400">
             &copy; 2026 PT Ortotik & Prostetik Indonesia &bull; Custom Blade Admin Dashboard
         </footer>
     </div>

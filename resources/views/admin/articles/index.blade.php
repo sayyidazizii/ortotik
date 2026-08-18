@@ -14,7 +14,7 @@
         </div>
 
         <a href="{{ route('admin.articles.create') }}"
-            class="px-4 py-2.5 bg-medical-600 hover:bg-medical-700 text-white font-bold text-xs rounded-xl shadow-sm inline-flex items-center gap-2 transition">
+            class="w-full sm:w-auto justify-center px-4 py-2.5 bg-medical-600 hover:bg-medical-700 text-white font-bold text-xs rounded-xl shadow-sm inline-flex items-center gap-2 transition">
             <i data-lucide="plus-circle" class="w-4 h-4"></i>
             <span>Tulis Artikel Baru</span>
         </a>

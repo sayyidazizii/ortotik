@@ -95,12 +95,12 @@
 
 <!-- Recent Leads Table -->
 <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-    <div class="p-5 sm:px-6 border-b border-slate-200 flex items-center justify-between">
+    <div class="p-4 sm:p-6 border-b border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
             <h3 class="font-extrabold text-base text-slate-900">Pesan Konsultasi Pasien Terbaru</h3>
             <p class="text-xs text-slate-400 mt-0.5">Daftar leads janji temu pasien yang masuk melalui formulir online.</p>
         </div>
-        <a href="{{ route('admin.leads.index') }}" class="text-xs font-bold text-medical-600 hover:text-tealmed-600 bg-slate-50 hover:bg-slate-100 border border-slate-200 px-3.5 py-2 rounded-xl transition">
+        <a href="{{ route('admin.leads.index') }}" class="text-xs font-bold text-medical-600 hover:text-tealmed-600 bg-slate-50 hover:bg-slate-100 border border-slate-200 px-3.5 py-2 rounded-xl transition self-stretch sm:self-auto text-center">
             Lihat Semua Leads ({{ $totalLeads }})
         </a>
     </div>

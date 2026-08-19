@@ -64,16 +64,38 @@
             <!-- Doctor Cutout Card with Smooth Float -->
             <div class="relative w-full max-w-sm md:max-w-md animate-float">
                 <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-surface-white bg-gradient-to-b from-primary/10 via-surface-white/40 to-transparent backdrop-blur-sm">
-                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80" 
-                         alt="Dokter Spesialis Ortotik Prostetik PT. Orthocare Indonesia" 
+                    @php
+                        $heroDoctorImg = $settings['hero_doctor_image'] ?? \App\Models\SiteSetting::get('hero_doctor_image', 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80');
+                        if (empty($heroDoctorImg)) {
+                            $heroDoctorImgUrl = 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80';
+                        } elseif (str_starts_with($heroDoctorImg, 'http://') || str_starts_with($heroDoctorImg, 'https://') || str_starts_with($heroDoctorImg, '//')) {
+                            $heroDoctorImgUrl = $heroDoctorImg;
+                        } elseif (str_starts_with($heroDoctorImg, 'storage/') || str_starts_with($heroDoctorImg, '/storage/')) {
+                            $heroDoctorImgUrl = asset(ltrim($heroDoctorImg, '/'));
+                        } else {
+                            $heroDoctorImgUrl = asset('storage/' . $heroDoctorImg);
+                        }
+
+                        $heroDoctorBadge = $settings['hero_doctor_badge'] ?? \App\Models\SiteSetting::get('hero_doctor_badge', 'Tim Klinis Spesialis');
+                        $heroDoctorName = $settings['hero_doctor_name'] ?? \App\Models\SiteSetting::get('hero_doctor_name', 'dr. Hendra Pratama, Sp.OT');
+                        $heroDoctorTitle = $settings['hero_doctor_title'] ?? \App\Models\SiteSetting::get('hero_doctor_title', 'Praktisi Ortotik & Prostetik Bionik');
+                        $heroDoctorAlt = $settings['hero_doctor_alt'] ?? \App\Models\SiteSetting::get('hero_doctor_alt', 'Dokter Spesialis Ortotik Prostetik PT. Orthocare Indonesia');
+
+                        $badge1Title = $settings['hero_badge_1_title'] ?? \App\Models\SiteSetting::get('hero_badge_1_title', 'Kemenkes RI');
+                        $badge1Subtitle = $settings['hero_badge_1_subtitle'] ?? \App\Models\SiteSetting::get('hero_badge_1_subtitle', 'Tersertifikasi Resmi');
+                        $badge2Title = $settings['hero_badge_2_title'] ?? \App\Models\SiteSetting::get('hero_badge_2_title', '3D CAD/CAM');
+                        $badge2Subtitle = $settings['hero_badge_2_subtitle'] ?? \App\Models\SiteSetting::get('hero_badge_2_subtitle', 'Akurasi Milimeter');
+                    @endphp
+                    <img src="{{ $heroDoctorImgUrl }}" 
+                         alt="{{ $heroDoctorAlt }}" 
                          class="w-full h-[380px] sm:h-[440px] md:h-[480px] object-cover object-top filter contrast-105 brightness-105"/>
                     <div class="absolute inset-0 bg-gradient-to-t from-on-background/75 via-transparent to-transparent flex items-end p-6">
                         <div class="text-white">
                             <span class="text-[11px] uppercase tracking-wider font-semibold text-primary-fixed bg-white/15 px-3 py-1 rounded-full backdrop-blur-md inline-block mb-1.5">
-                                Tim Klinis Spesialis
+                                {{ $heroDoctorBadge }}
                             </span>
-                            <h3 class="text-lg font-bold">dr. Hendra Pratama, Sp.OT</h3>
-                            <p class="text-xs text-slate-200">Praktisi Ortotik & Prostetik Bionik</p>
+                            <h3 class="text-lg font-bold">{{ $heroDoctorName }}</h3>
+                            <p class="text-xs text-slate-200">{{ $heroDoctorTitle }}</p>
                         </div>
                     </div>
                 </div>
@@ -84,8 +106,8 @@
                         <span class="material-symbols-outlined text-xl">verified_user</span>
                     </div>
                     <div>
-                        <span class="text-xs font-bold text-on-background block">Kemenkes RI</span>
-                        <span class="text-[10px] text-primary font-semibold">Tersertifikasi Resmi</span>
+                        <span class="text-xs font-bold text-on-background block">{{ $badge1Title }}</span>
+                        <span class="text-[10px] text-primary font-semibold">{{ $badge1Subtitle }}</span>
                     </div>
                 </div>
 
@@ -95,8 +117,8 @@
                         <span class="material-symbols-outlined text-xl">precision_manufacturing</span>
                     </div>
                     <div>
-                        <span class="text-xs font-bold text-on-background block">3D CAD/CAM</span>
-                        <span class="text-[10px] text-[#E5A500] font-semibold">Akurasi Milimeter</span>
+                        <span class="text-xs font-bold text-on-background block">{{ $badge2Title }}</span>
+                        <span class="text-[10px] text-[#E5A500] font-semibold">{{ $badge2Subtitle }}</span>
                     </div>
                 </div>
             </div>

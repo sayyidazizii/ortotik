@@ -145,6 +145,12 @@
                     <i data-lucide="settings" class="w-4 h-4"></i>
                     <span>Pengaturan Situs</span>
                 </a>
+
+                <a href="{{ route('admin.backup.index') }}"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition {{ request()->routeIs('admin.backup.*') ? 'bg-medical-600 text-white shadow-md' : 'text-slate-400 hover:text-white hover:bg-slate-800/60' }}">
+                    <i data-lucide="database-backup" class="w-4 h-4"></i>
+                    <span>Backup</span>
+                </a>
             </nav>
         </div>
 

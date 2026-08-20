@@ -89,6 +89,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // CMS Settings (Pengaturan Klinik)
         Route::get('/settings', [\App\Http\Controllers\Admin\SiteSettingController::class, 'index'])->name('settings.index');
         Route::put('/settings', [\App\Http\Controllers\Admin\SiteSettingController::class, 'update'])->name('settings.update');
+
+        // Database & Excel Backup & Restore Management
+        Route::prefix('backup')->name('backup.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\BackupController::class, 'index'])->name('index');
+            Route::post('/export-sql', [\App\Http\Controllers\Admin\BackupController::class, 'exportSql'])->name('export-sql');
+            Route::post('/export-excel', [\App\Http\Controllers\Admin\BackupController::class, 'exportExcel'])->name('export-excel');
+            Route::post('/import-sql', [\App\Http\Controllers\Admin\BackupController::class, 'importSql'])->name('import-sql');
+            Route::post('/import-excel', [\App\Http\Controllers\Admin\BackupController::class, 'importExcel'])->name('import-excel');
+            Route::post('/create', [\App\Http\Controllers\Admin\BackupController::class, 'createStored'])->name('create');
+            Route::get('/download/{filename}', [\App\Http\Controllers\Admin\BackupController::class, 'download'])->name('download');
+            Route::post('/restore/{filename}', [\App\Http\Controllers\Admin\BackupController::class, 'restore'])->name('restore');
+            Route::delete('/destroy/{filename}', [\App\Http\Controllers\Admin\BackupController::class, 'destroy'])->name('destroy');
+            Route::delete('/clean-all', [\App\Http\Controllers\Admin\BackupController::class, 'cleanAll'])->name('clean-all');
+        });
     });
 });
 

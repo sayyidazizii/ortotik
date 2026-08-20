@@ -116,14 +116,21 @@
                     $img = $docItem['image'] ?? '';
                     if (empty($img)) {
                         $docItem['image'] = asset('images/client_update/image5.png');
-                    } elseif (str_starts_with($img, 'http://') || str_starts_with($img, 'https://') || str_starts_with($img, '//')) {
-                        // full URL
-                    } elseif (str_starts_with($img, 'images/') || str_starts_with($img, '/images/')) {
-                        $docItem['image'] = asset(ltrim($img, '/'));
-                    } elseif (str_starts_with($img, 'storage/') || str_starts_with($img, '/storage/')) {
-                        $docItem['image'] = asset(ltrim($img, '/'));
                     } else {
-                        $docItem['image'] = asset('storage/' . $img);
+                        // If stored with domain (e.g. http://127.0.0.1:8000/images/...), strip domain
+                        if (preg_match('#(?:https?:)?//[^/]+/(images/.+|storage/.+)#i', $img, $m)) {
+                            $img = $m[1];
+                        }
+
+                        if (str_starts_with($img, 'http://') || str_starts_with($img, 'https://') || str_starts_with($img, '//') || str_starts_with($img, 'data:image/')) {
+                            $docItem['image'] = $img;
+                        } elseif (str_starts_with($img, 'images/') || str_starts_with($img, '/images/')) {
+                            $docItem['image'] = asset(ltrim($img, '/'));
+                        } elseif (str_starts_with($img, 'storage/') || str_starts_with($img, '/storage/')) {
+                            $docItem['image'] = asset(ltrim($img, '/'));
+                        } else {
+                            $docItem['image'] = asset('storage/' . $img);
+                        }
                     }
                 }
                 unset($docItem);
@@ -183,42 +190,44 @@
                 <!-- Main Card Box -->
                 <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-surface-white bg-gradient-to-b from-primary/10 via-surface-white/40 to-transparent backdrop-blur-sm min-h-[420px] sm:min-h-[480px]">
                     
-                    <!-- Doctor Slides Loop -->
-                    <template x-for="(slide, sIdx) in heroSlides" :key="sIdx">
-                        <div x-show="currentHeroSlide === sIdx"
-                             x-transition:enter="transition ease-out duration-700"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100"
-                             x-transition:leave="transition ease-in duration-300"
-                             x-transition:leave-start="opacity-100 scale-100"
-                             x-transition:leave-end="opacity-0 scale-95"
-                             class="absolute inset-0">
-                            <img :src="slide.image" 
-                                 :alt="slide.name" 
-                                 class="w-full h-full object-cover object-top filter contrast-105 brightness-105 select-none"/>
-                            
-                            <!-- Dark Gradient & Doctor Info Overlay -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-on-background/90 via-on-background/25 to-transparent flex items-end p-6 sm:p-7">
-                                <div class="text-white w-full pr-12">
-                                    <span class="text-[10px] sm:text-[11px] uppercase tracking-wider font-bold text-primary-fixed bg-white/15 px-3 py-1 rounded-full backdrop-blur-md inline-block mb-1.5" x-text="slide.badge"></span>
-                                    <h3 class="text-base sm:text-lg font-black leading-snug drop-shadow-sm" x-text="slide.name"></h3>
-                                    <p class="text-xs text-slate-200 mt-0.5 leading-relaxed" x-text="slide.title"></p>
-                                </div>
+                    <!-- Doctor Slides Loop (Direct Blade Rendering with Alpine Reactivity) -->
+                    @foreach($heroDoctorsList as $sIdx => $slide)
+                    <div x-show="currentHeroSlide === {{ $sIdx }}"
+                         @if($sIdx !== 0) style="display: none;" @endif
+                         x-transition:enter="transition ease-out duration-700"
+                         x-transition:enter-start="opacity-0 scale-95"
+                         x-transition:enter-end="opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-300"
+                         x-transition:leave-start="opacity-100 scale-100"
+                         x-transition:leave-end="opacity-0 scale-95"
+                         class="absolute inset-0">
+                        <img src="{{ $slide['image'] }}" 
+                             alt="{{ $slide['name'] }}" 
+                             class="w-full h-full object-cover object-top filter contrast-105 brightness-105 select-none"
+                             onerror="this.onerror=null; this.src='{{ asset('images/client_update/image5.png') }}';"/>
+                        
+                        <!-- Dark Gradient & Doctor Info Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-on-background/90 via-on-background/25 to-transparent flex items-end p-6 sm:p-7">
+                            <div class="text-white w-full pr-12">
+                                <span class="text-[10px] sm:text-[11px] uppercase tracking-wider font-bold text-primary-fixed bg-white/15 px-3 py-1 rounded-full backdrop-blur-md inline-block mb-1.5">{{ $slide['badge'] }}</span>
+                                <h3 class="text-base sm:text-lg font-black leading-snug drop-shadow-sm">{{ $slide['name'] }}</h3>
+                                <p class="text-xs text-slate-200 mt-0.5 leading-relaxed">{{ $slide['title'] }}</p>
                             </div>
                         </div>
-                    </template>
+                    </div>
+                    @endforeach
 
                     <!-- Top-Right Indicator Pill & Slide Counter -->
                     <div class="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-black/45 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 shadow-md">
-                        <template x-for="(slide, sIdx) in heroSlides" :key="sIdx">
-                            <button type="button" 
-                                    @click.stop="goToSlide(sIdx)"
-                                    :class="currentHeroSlide === sIdx ? 'w-4 bg-primary-fixed' : 'w-1.5 bg-white/40 hover:bg-white/80'"
-                                    class="h-1.5 rounded-full transition-all duration-300 focus:outline-none"
-                                    :aria-label="'Pilih slide ' + (sIdx + 1)">
-                            </button>
-                        </template>
-                        <span class="text-[10px] text-white/90 font-mono font-bold ml-1" x-text="(currentHeroSlide + 1) + '/' + totalSlides"></span>
+                        @foreach($heroDoctorsList as $sIdx => $slide)
+                        <button type="button" 
+                                @click.stop="goToSlide({{ $sIdx }})"
+                                :class="currentHeroSlide === {{ $sIdx }} ? 'w-4 bg-primary-fixed' : 'w-1.5 bg-white/40 hover:bg-white/80'"
+                                class="h-1.5 rounded-full transition-all duration-300 focus:outline-none {{ $sIdx === 0 ? 'w-4 bg-primary-fixed' : 'w-1.5 bg-white/40' }}"
+                                aria-label="Pilih slide {{ $sIdx + 1 }}">
+                        </button>
+                        @endforeach
+                        <span class="text-[10px] text-white/90 font-mono font-bold ml-1" x-text="(currentHeroSlide + 1) + '/' + totalSlides">1/{{ count($heroDoctorsList) }}</span>
                     </div>
 
                     <!-- Manual Prev Slide Button -->

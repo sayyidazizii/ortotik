@@ -136,11 +136,35 @@ class SiteSettingController extends Controller
                 $cleanDoctors = [];
                 foreach ($doctors as $doc) {
                     if (!empty($doc['name']) || !empty($doc['image'])) {
+                        $docImage = $doc['image'] ?? 'images/client_update/image5.png';
+
+                        // Handle base64 image uploads from modal
+                        if (is_string($docImage) && str_starts_with($docImage, 'data:image/')) {
+                            if (preg_match('/^data:image\/(\w+);base64,/', $docImage, $type)) {
+                                $b64Data = substr($docImage, strpos($docImage, ',') + 1);
+                                $ext = strtolower($type[1]);
+                                if (!in_array($ext, ['jpg', 'jpeg', 'gif', 'png', 'webp'])) {
+                                    $ext = 'png';
+                                }
+                                $decodedImg = base64_decode($b64Data);
+                                if ($decodedImg !== false) {
+                                    $filename = 'doctor_' . \Illuminate\Support\Str::random(16) . '.' . $ext;
+                                    \Illuminate\Support\Facades\Storage::disk('public')->put('settings/' . $filename, $decodedImg);
+                                    $docImage = 'storage/settings/' . $filename;
+                                }
+                            }
+                        } elseif (is_string($docImage)) {
+                            // Strip hardcoded localhost/127.0.0.1 domain
+                            if (preg_match('#(?:https?:)?//[^/]+/(images/.+|storage/.+)#i', $docImage, $m)) {
+                                $docImage = $m[1];
+                            }
+                        }
+
                         $cleanDoctors[] = [
                             'name'  => $doc['name'] ?? 'Tenaga Medis Spesialis',
                             'title' => $doc['title'] ?? 'Praktisi Ortotik & Prostetik',
                             'badge' => $doc['badge'] ?? 'Tim Klinis Spesialis',
-                            'image' => $doc['image'] ?? asset('images/client_update/image5.png'),
+                            'image' => $docImage,
                         ];
                     }
                 }

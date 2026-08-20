@@ -37,6 +37,28 @@
         ];
     }
 
+    foreach ($initialDoctors as &$docItem) {
+        $img = $docItem['image'] ?? '';
+        if (empty($img)) {
+            $docItem['image'] = asset('images/client_update/image5.png');
+        } else {
+            if (preg_match('#(?:https?:)?//[^/]+/(images/.+|storage/.+)#i', $img, $m)) {
+                $img = $m[1];
+            }
+
+            if (str_starts_with($img, 'http://') || str_starts_with($img, 'https://') || str_starts_with($img, '//') || str_starts_with($img, 'data:image/')) {
+                $docItem['image'] = $img;
+            } elseif (str_starts_with($img, 'images/') || str_starts_with($img, '/images/')) {
+                $docItem['image'] = asset(ltrim($img, '/'));
+            } elseif (str_starts_with($img, 'storage/') || str_starts_with($img, '/storage/')) {
+                $docItem['image'] = asset(ltrim($img, '/'));
+            } else {
+                $docItem['image'] = asset('storage/' . $img);
+            }
+        }
+    }
+    unset($docItem);
+
     $currentTab = request('tab', 'hero_home');
     $currentHeroMedia = $settings['hero_home_media']->value ?? 'https://lh3.googleusercontent.com/aida/AP1WRLu-cYuotNRMpQoNz8xiNuno33F9xSgeFfAKDWqxDogo2VSMvAuCS4QUt2jbop_cQ4e18T36Uqa6an8ezvVtDtXtwih7tYUxTzRHyWrqiqVAcV-b3G6wS_YbGIeB9Bl7tYBFGY4K81YU6TE_o1OvhLPzQstL7r4XrQEGsJ3mWxHjfxXavdzURFHoctGm1HxnTSA9wW180ytfdljOX3A9UWVLpKx5mwhgV3xHx-gbLfAcVFwk-s2AOYLy';
     $currentMediaType = $settings['hero_home_media_type']->value ?? (preg_match('/\.(mp4|webm|ogg|mov)$/i', $currentHeroMedia) ? 'video' : 'image');

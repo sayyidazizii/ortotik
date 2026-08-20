@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $article->title . ' - PT. Orthocare Indonesia')
+@section('title', $article->title . ' - pediOcare')
 @section('meta_description', $article->summary)
 
 @section('content')
@@ -30,7 +30,7 @@
             </h1>
 
             <div class="flex items-center gap-4 text-xs text-on-surface-variant pt-1">
-                <span>Ditulis oleh: <strong class="text-on-background font-semibold">{{ $article->user->name ?? 'Tim Medis PT. Orthocare Indonesia' }}</strong></span>
+                <span>Ditulis oleh: <strong class="text-on-background font-semibold">{{ $article->user->name ?? 'Tim Klinis pediOcare' }}</strong></span>
                 <span>&bull;</span>
                 <span>{{ $article->published_at ? $article->published_at->format('d F Y') : 'Terbaru' }}</span>
                 <span>&bull;</span>

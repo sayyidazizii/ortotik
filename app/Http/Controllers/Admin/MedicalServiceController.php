@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class MedicalServiceController extends Controller
 {
@@ -25,16 +26,18 @@ class MedicalServiceController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'name' => ['nullable', 'string', 'max:255'],
-            'title' => ['nullable', 'string', 'max:255'],
-            'icon' => ['nullable', 'string', 'max:100'],
-            'icon_name' => ['nullable', 'string', 'max:100'],
-            'short_description' => ['nullable', 'string', 'max:500'],
-            'summary' => ['nullable', 'string', 'max:500'],
-            'description' => ['nullable', 'string'],
-            'content' => ['nullable', 'string'],
+            'name'                 => ['nullable', 'string', 'max:255'],
+            'title'                => ['nullable', 'string', 'max:255'],
+            'icon'                 => ['nullable', 'string', 'max:100'],
+            'icon_name'            => ['nullable', 'string', 'max:100'],
+            'image_file'           => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:5120'],
+            'thumbnail'            => ['nullable', 'string', 'max:500'],
+            'short_description'    => ['nullable', 'string', 'max:500'],
+            'summary'              => ['nullable', 'string', 'max:500'],
+            'description'          => ['nullable', 'string'],
+            'content'              => ['nullable', 'string'],
             'consultation_process' => ['nullable', 'string'],
-            'order_position' => ['nullable', 'integer', 'min:0'],
+            'order_position'       => ['nullable', 'integer', 'min:0'],
         ]);
 
         $title = $validated['title'] ?? $validated['name'] ?? 'Layanan Medis Baru';
@@ -45,14 +48,23 @@ class MedicalServiceController extends Controller
             $uniqueSlug = $slug . '-' . $counter++;
         }
 
+        $thumbnail = null;
+        if ($request->hasFile('image_file')) {
+            $path = $request->file('image_file')->store('services', 'public');
+            $thumbnail = 'storage/' . $path;
+        } elseif ($request->filled('thumbnail')) {
+            $thumbnail = $request->input('thumbnail');
+        }
+
         $serviceData = [
-            'title' => $title,
-            'slug' => $uniqueSlug,
-            'summary' => $validated['summary'] ?? $validated['short_description'] ?? '',
-            'content' => $validated['content'] ?? $validated['description'] ?? '',
-            'icon_name' => $validated['icon_name'] ?? $validated['icon'] ?? 'activity',
+            'title'          => $title,
+            'slug'           => $uniqueSlug,
+            'summary'        => $validated['summary'] ?? $validated['short_description'] ?? '',
+            'content'        => $validated['content'] ?? $validated['description'] ?? '',
+            'thumbnail'      => $thumbnail,
+            'icon_name'      => $validated['icon_name'] ?? $validated['icon'] ?? 'activity',
             'order_position' => $validated['order_position'] ?? 0,
-            'is_active' => $request->boolean('is_active'),
+            'is_active'      => $request->boolean('is_active', true),
         ];
 
         MedicalService::create($serviceData);
@@ -71,17 +83,33 @@ class MedicalServiceController extends Controller
         $service = MedicalService::findOrFail($id);
 
         $validated = $request->validate([
-            'name' => ['nullable', 'string', 'max:255'],
-            'title' => ['nullable', 'string', 'max:255'],
-            'icon' => ['nullable', 'string', 'max:100'],
-            'icon_name' => ['nullable', 'string', 'max:100'],
-            'short_description' => ['nullable', 'string', 'max:500'],
-            'summary' => ['nullable', 'string', 'max:500'],
-            'description' => ['nullable', 'string'],
-            'content' => ['nullable', 'string'],
+            'name'                 => ['nullable', 'string', 'max:255'],
+            'title'                => ['nullable', 'string', 'max:255'],
+            'icon'                 => ['nullable', 'string', 'max:100'],
+            'icon_name'            => ['nullable', 'string', 'max:100'],
+            'image_file'           => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:5120'],
+            'thumbnail'            => ['nullable', 'string', 'max:500'],
+            'short_description'    => ['nullable', 'string', 'max:500'],
+            'summary'              => ['nullable', 'string', 'max:500'],
+            'description'          => ['nullable', 'string'],
+            'content'              => ['nullable', 'string'],
             'consultation_process' => ['nullable', 'string'],
-            'order_position' => ['nullable', 'integer', 'min:0'],
+            'order_position'       => ['nullable', 'integer', 'min:0'],
         ]);
+
+        if ($request->hasFile('image_file')) {
+            if ($service->thumbnail && str_starts_with($service->thumbnail, 'storage/')) {
+                $oldRelPath = str_replace('storage/', '', $service->thumbnail);
+                if (Storage::disk('public')->exists($oldRelPath)) {
+                    Storage::disk('public')->delete($oldRelPath);
+                }
+            }
+
+            $path = $request->file('image_file')->store('services', 'public');
+            $service->thumbnail = 'storage/' . $path;
+        } elseif ($request->filled('thumbnail')) {
+            $service->thumbnail = $request->input('thumbnail');
+        }
 
         $title = $validated['title'] ?? $validated['name'] ?? $service->title;
         if ($service->title !== $title) {
@@ -109,6 +137,14 @@ class MedicalServiceController extends Controller
     {
         $service = MedicalService::findOrFail($id);
         $title = $service->title;
+
+        if ($service->thumbnail && str_starts_with($service->thumbnail, 'storage/')) {
+            $oldRelPath = str_replace('storage/', '', $service->thumbnail);
+            if (Storage::disk('public')->exists($oldRelPath)) {
+                Storage::disk('public')->delete($oldRelPath);
+            }
+        }
+
         $service->delete();
 
         return redirect()->route('admin.services.index')->with('success', 'Layanan medis ' . $title . ' berhasil dihapus.');

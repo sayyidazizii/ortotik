@@ -1,23 +1,30 @@
 @extends('layouts.app')
 
-@section('title', 'Layanan Ortotik & Prostetik Spesialis - PT. Orthocare Indonesia')
-@section('meta_description', 'Solusi komprehensif untuk pemulihan mobilitas Anda, didukung oleh teknologi mutakhir 3D scanning dan tim prostetis ortotis berpengalaman.')
+@section('title', 'Layanan Orthosis Prosthesis & Alat Bantu Ortopedi - pediOcare')
+@section('meta_description', 'Dengan kaidah Rehabilitasi Medis, Kami berusaha yang terbaik untuk memberikan solusi yang komprehensif untuk mencapai kualitas hidup Anda.')
 
 @section('content')
 
+@php
+    $heroServicesBg = $settings['hero_services_image'] ?? asset('images/client_update/image4.png');
+    if (!str_starts_with($heroServicesBg, 'http') && !str_starts_with($heroServicesBg, '/')) {
+        $heroServicesBg = asset($heroServicesBg);
+    }
+@endphp
+
 <!-- Hero Section -->
-<section class="relative text-center mx-auto space-y-6 py-20 md:py-28 px-6 md:px-12 text-white w-full overflow-hidden fade-in-up" 
-         style='background-image: linear-gradient(rgba(13, 28, 47, 0.75), rgba(13, 28, 47, 0.75)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuD8DxcjaMxpSaM5-0EYyzDMgWMw0biWQv7GHHGkOGe5_WhXA3N9xHYjgX8Mh9tLgQ-lWfAUCpRc97YGi2wzD0tCahPe1KOctBn1J9fMXAE1V3urJ6YhWGuKYKxLtJNqm7BfjKhOSvU5-gujkWl49CMT_fydGMAUd8aR5yeITUxuNxICOgYn5348w3NbJJ5TPAN5hquSn6LqtDyMIOpwYAjFBX3Jkmwhqo_Qk-rMbw8GbO7HcA3kBds"); background-size: cover; background-position: center;'>
-    <div class="max-w-container-max mx-auto relative z-10 space-y-4">
-        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-white/10 text-primary-fixed border border-surface-white/20 text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">
-            <span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
-            Pelayanan Klinis Terintegrasi
+<section class="relative text-center mx-auto py-10 md:py-14 px-margin-mobile md:px-margin-desktop text-white w-full overflow-hidden fade-in-up" 
+         style='background-image: linear-gradient(rgba(13, 28, 47, 0.82), rgba(13, 28, 47, 0.82)), url("{{ $heroServicesBg }}"); background-size: cover; background-position: center;'>
+    <div class="max-w-container-max mx-auto relative z-10 space-y-2.5 sm:space-y-3">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-white/15 text-primary-fixed border border-surface-white/25 text-[11px] font-bold uppercase tracking-wider backdrop-blur-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse"></span>
+            {{ $settings['hero_services_badge'] ?? 'Pelayanan profesional dengan semangat bermanfaat' }}
         </span>
-        <h1 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl font-bold tracking-tight text-white max-w-3xl mx-auto leading-tight">
-            Layanan Ortotik & Prostetik Spesialis
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white max-w-3xl mx-auto leading-tight">
+            {{ $settings['hero_services_title'] ?? 'Layanan Orthosis Prosthesis & Alat Bantu Ortopedi' }}
         </h1>
-        <p class="font-body-lg text-body-lg leading-relaxed text-slate-200 max-w-2xl mx-auto">
-            Solusi komprehensif untuk pemulihan mobilitas Anda, didukung oleh teknologi pemindaian 3D mutakhir dan tim medis tersertifikasi resmi Kemenkes RI.
+        <p class="font-body-md text-body-md leading-relaxed text-slate-200 max-w-2xl mx-auto text-xs sm:text-sm">
+            {{ $settings['hero_services_subtitle'] ?? 'Dengan kaidah Rehabilitasi Medis, Kami berusaha yang terbaik untuk memberikan solusi yang komprehensif untuk mencapai kualitas hidup Anda.' }}
         </p>
     </div>
 </section>
@@ -26,48 +33,85 @@
 <section class="py-16 md:py-24 bg-[#f8f9ff] relative overflow-hidden">
     <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop space-y-16">
         
-        <!-- Featured Service Spotlight (Prosthetics with Interactive Preview Card) -->
+        <!-- Featured Service Spotlight (Prosthetics with Interactive 9-Step Procedure) -->
         <div class="bg-surface-white rounded-3xl border border-outline-variant/30 p-8 md:p-12 shadow-1 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div class="lg:col-span-7 space-y-6">
-                <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
-                    <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">accessibility_new</span>
+                <div class="flex items-center gap-3">
+                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
+                        <!-- Wheelchair / Disability Icon -->
+                        <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">accessible_forward</span>
+                    </div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">Standar Kemenkes RI</span>
                 </div>
-                <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-semibold text-on-background tracking-tight">
-                    Prosthetics (Kaki & Tangan Palsu Presisi)
+                
+                <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-on-background tracking-tight">
+                    Prostesis (Kaki dan tangan Tiruan)
                 </h2>
                 <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                    Kami merancang solusi prostetik kustom yang memadukan kenyamanan soket anatomis dengan komponen bionik dan carbon fiber teringan untuk mengembalikan kemandirian penuh Anda.
+                    Kami melayani pembuatan kaki dan tangan palsu sesuai dengan standar pelayanan yang ditetapkan oleh Kementerian Kesehatan Republik Indonesia.
                 </p>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                    <div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
-                        <span class="font-bold text-primary text-sm block mb-1">01. Asesmen Klinis</span>
-                        <p class="text-xs text-on-surface-variant">Pemeriksaan kondisi stump & pola gerak.</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
-                        <span class="font-bold text-primary text-sm block mb-1">02. 3D Scanning</span>
-                        <p class="text-xs text-on-surface-variant">Pemindaian optik presisi milimeter.</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
-                        <span class="font-bold text-primary text-sm block mb-1">03. Gait Training</span>
-                        <p class="text-xs text-on-surface-variant">Latihan berjalan hingga mandiri.</p>
+
+                <!-- 9 Steps Clinical Workflow -->
+                <div class="space-y-3 pt-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-700 block">
+                        Alur Prosedur Pelayanan (9 Tahapan Standar Klinis):
+                    </span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+                        <div class="p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/20 flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-full bg-primary text-white text-[11px] font-bold flex items-center justify-center shrink-0">1</span>
+                            <div class="text-xs font-semibold text-slate-800">Pemeriksaan <span class="text-[10px] text-slate-500 font-normal italic block">(assessment)</span></div>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/20 flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-full bg-primary text-white text-[11px] font-bold flex items-center justify-center shrink-0">2</span>
+                            <div class="text-xs font-semibold text-slate-800">Diagnosis, preskripsi <span class="text-[10px] text-slate-500 font-normal italic block">(prescription)</span></div>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/20 flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-full bg-primary text-white text-[11px] font-bold flex items-center justify-center shrink-0">3</span>
+                            <div class="text-xs font-semibold text-slate-800">Pengukuran <span class="text-[10px] text-slate-500 font-normal italic block">(measurement)</span></div>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/20 flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-full bg-primary text-white text-[11px] font-bold flex items-center justify-center shrink-0">4</span>
+                            <div class="text-xs font-semibold text-slate-800">Pencetakan <span class="text-[10px] text-slate-500 font-normal italic block">(casting)</span></div>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/20 flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-full bg-primary text-white text-[11px] font-bold flex items-center justify-center shrink-0">5</span>
+                            <div class="text-xs font-semibold text-slate-800">Rektifikasi <span class="text-[10px] text-slate-500 font-normal italic block">(rectification)</span></div>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/20 flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-full bg-primary text-white text-[11px] font-bold flex items-center justify-center shrink-0">6</span>
+                            <div class="text-xs font-semibold text-slate-800">Fabrikasi <span class="text-[10px] text-slate-500 font-normal italic block">(fabrication)</span></div>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/20 flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-full bg-primary text-white text-[11px] font-bold flex items-center justify-center shrink-0">7</span>
+                            <div class="text-xs font-semibold text-slate-800">Pengepasan <span class="text-[10px] text-slate-500 font-normal italic block">(fitting)</span></div>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/20 flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-full bg-primary text-white text-[11px] font-bold flex items-center justify-center shrink-0">8</span>
+                            <div class="text-xs font-semibold text-slate-800">Penyerahan <span class="text-[10px] text-slate-500 font-normal italic block">(delivery & check out)</span></div>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/20 flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-full bg-primary text-white text-[11px] font-bold flex items-center justify-center shrink-0">9</span>
+                            <div class="text-xs font-semibold text-slate-800">Evaluasi & tindak lanjut <span class="text-[10px] text-slate-500 font-normal italic block">(follow up)</span></div>
+                        </div>
                     </div>
                 </div>
-                <div class="flex flex-wrap gap-4 pt-4">
-                    <a href="{{ route('consultation.create') }}" class="bg-primary text-on-primary px-8 py-3.5 rounded-xl font-label-md font-semibold hover:bg-secondary transition shadow-sm hover:shadow-md">
+
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="{{ route('consultation.create') }}" class="bg-primary text-on-primary px-8 py-3.5 rounded-xl font-label-md font-bold hover:bg-secondary transition shadow-sm hover:shadow-md">
                         Konsultasi Prostetik
                     </a>
-                    <a href="{{ route('services.show', 'prosthetics') }}" class="border border-outline-variant text-on-surface hover:text-primary hover:border-primary px-6 py-3.5 rounded-xl font-label-md font-semibold transition bg-surface-white">
+                    <a href="{{ route('services.show', 'prosthetics') }}" class="border border-outline-variant text-on-surface hover:text-primary hover:border-primary px-6 py-3.5 rounded-xl font-label-md font-bold transition bg-surface-white">
                         Detail Prosedur
                     </a>
                 </div>
             </div>
-            <div class="lg:col-span-5 relative rounded-2xl overflow-hidden shadow-lg h-[360px] md:h-[420px] bg-surface-container-low border border-outline-variant/20 group">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRX96KTlDSHiomGN3OyOvDA8gmpFo6nH9DuQJ13zV-uwYj0On4T643XIIvI7ZfTgEHlGNMCnzLWygdnoChDtXh3HKQ3iKaxsBs2SXt9HZXR5pM7Qtw8KzFBwh-xAkBI6kBHJNij2YKEAiHE2MhApvaIyUSmfo0V7MtHqYRgFzaU3IRMw5FPuoduXReXEcCNbLjLVDm5pEO5HM2XWxQXW-P6GZ1bJoBKdVpdMOPdViOhKinS3glyd4" 
-                     alt="Prosthetic Care Technology" 
-                     class="w-full h-full object-contain p-6 mix-blend-multiply group-hover:scale-105 transition-transform duration-500"/>
-                <div class="absolute top-4 right-4 bg-surface-white/90 backdrop-blur-sm border border-outline-variant/30 text-primary text-xs font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
+            <div class="lg:col-span-5 relative rounded-2xl overflow-hidden shadow-lg h-[360px] md:h-[450px] bg-surface-container-low border border-outline-variant/20 group">
+                <img src="{{ asset('images/client_update/image3.png') }}" 
+                     alt="Prostesis Kaki dan Tangan Tiruan pediOcare" 
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                <div class="absolute top-4 right-4 bg-surface-white/90 backdrop-blur-sm border border-outline-variant/30 text-primary text-xs font-bold px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
                     <span class="w-2 h-2 rounded-full bg-success-emerald animate-pulse"></span>
-                    Carbon Composite
+                    Standar Kemenkes RI
                 </div>
             </div>
         </div>

@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -46,13 +47,25 @@ class ArticleController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'category_id' => ['nullable', 'exists:categories,id'],
-            'featured_image_path' => ['nullable', 'string', 'max:255'],
-            'summary' => ['required', 'string', 'max:500'],
-            'content' => ['required', 'string'],
-            'read_time' => ['nullable'],
+            'title'               => ['required', 'string', 'max:255'],
+            'category_id'         => ['nullable', 'exists:categories,id'],
+            'image_file'          => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:5120'],
+            'thumbnail'           => ['nullable', 'string', 'max:500'],
+            'featured_image_path' => ['nullable', 'string', 'max:500'],
+            'summary'             => ['required', 'string', 'max:500'],
+            'content'             => ['required', 'string'],
+            'read_time'           => ['nullable'],
         ]);
+
+        // Handle Image Upload
+        if ($request->hasFile('image_file')) {
+            $path = $request->file('image_file')->store('articles', 'public');
+            $validated['thumbnail'] = 'storage/' . $path;
+        } elseif ($request->filled('thumbnail')) {
+            $validated['thumbnail'] = $request->input('thumbnail');
+        } elseif ($request->filled('featured_image_path')) {
+            $validated['thumbnail'] = $request->input('featured_image_path');
+        }
 
         $slug = Str::slug($validated['title']);
         $uniqueSlug = $slug;
@@ -85,13 +98,32 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
 
         $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'category_id' => ['nullable', 'exists:categories,id'],
-            'featured_image_path' => ['nullable', 'string', 'max:255'],
-            'summary' => ['required', 'string', 'max:500'],
-            'content' => ['required', 'string'],
-            'read_time' => ['nullable'],
+            'title'               => ['required', 'string', 'max:255'],
+            'category_id'         => ['nullable', 'exists:categories,id'],
+            'image_file'          => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:5120'],
+            'thumbnail'           => ['nullable', 'string', 'max:500'],
+            'featured_image_path' => ['nullable', 'string', 'max:500'],
+            'summary'             => ['required', 'string', 'max:500'],
+            'content'             => ['required', 'string'],
+            'read_time'           => ['nullable'],
         ]);
+
+        // Handle Image Upload
+        if ($request->hasFile('image_file')) {
+            if ($article->thumbnail && str_starts_with($article->thumbnail, 'storage/')) {
+                $oldRelPath = str_replace('storage/', '', $article->thumbnail);
+                if (Storage::disk('public')->exists($oldRelPath)) {
+                    Storage::disk('public')->delete($oldRelPath);
+                }
+            }
+
+            $path = $request->file('image_file')->store('articles', 'public');
+            $validated['thumbnail'] = 'storage/' . $path;
+        } elseif ($request->filled('thumbnail')) {
+            $validated['thumbnail'] = $request->input('thumbnail');
+        } elseif ($request->filled('featured_image_path')) {
+            $validated['thumbnail'] = $request->input('featured_image_path');
+        }
 
         if ($article->title !== $validated['title']) {
             $slug = Str::slug($validated['title']);
@@ -123,6 +155,14 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
         $title = $article->title;
+
+        if ($article->thumbnail && str_starts_with($article->thumbnail, 'storage/')) {
+            $oldRelPath = str_replace('storage/', '', $article->thumbnail);
+            if (Storage::disk('public')->exists($oldRelPath)) {
+                Storage::disk('public')->delete($oldRelPath);
+            }
+        }
+
         $article->delete();
 
         return redirect()->route('admin.articles.index')->with('success', 'Artikel ' . $title . ' berhasil dihapus.');

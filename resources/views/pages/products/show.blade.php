@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $product->name . ' - PT. Orthocare Indonesia')
+@section('title', $product->name . ' - pediOcare')
 @section('meta_description', strip_tags($product->excerpt ?? $product->description))
 
 @section('content')
@@ -84,7 +84,7 @@
 
             <!-- CTAs -->
             <div class="pt-6 border-t border-outline-variant/20 flex flex-col sm:flex-row gap-4">
-                <a href="https://wa.me/6281234567890?text=Halo%20PT.%20Orthocare%20Indonesia,%20saya%20tertarik%20dengan%20produk%20{{ urlencode($product->name) }}." target="_blank" rel="noopener noreferrer"
+                <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20tertarik%20dengan%20produk%20{{ urlencode($product->name) }}." target="_blank" rel="noopener noreferrer"
                    class="flex-1 inline-flex items-center justify-center bg-primary hover:bg-secondary text-surface-white text-sm font-semibold h-13 py-3.5 rounded-xl shadow-md transition gap-2">
                     <span class="material-symbols-outlined text-lg">chat</span> Pesan via WhatsApp
                 </a>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Alur Pasien & Produk Custom-Made - PT. Orthocare Indonesia')
+@section('title', 'Alur Pasien & Produk Custom-Made - pediOcare')
 @section('meta_description', 'Dirancang dan diproduksi secara individual mengikuti anatomi dan kebutuhan biomekanik setiap pasien dengan garansi fitting 100%.')
 
 @section('content')
@@ -205,7 +205,7 @@
                 <a href="{{ route('custom-products.show', $cp->slug) }}" class="flex items-center justify-center bg-surface-container-low hover:bg-surface-container-high text-on-surface text-xs font-semibold h-11 rounded-xl border border-outline-variant/30 transition">
                     Lihat Tahapan
                 </a>
-                <a href="https://wa.me/6281234567890?text=Halo%20PT.%20Orthocare%20Indonesia,%20saya%20ingin%20konsultasi%20pembuatan%20custom%20{{ urlencode($cp->name) }}." target="_blank"
+                <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20ingin%20konsultasi%20pembuatan%20custom%20{{ urlencode($cp->name) }}." target="_blank"
                     class="flex items-center justify-center bg-primary hover:bg-secondary text-surface-white text-xs font-semibold h-11 rounded-xl transition shadow-sm">
                     Konsultasi WA
                 </a>

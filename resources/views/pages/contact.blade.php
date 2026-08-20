@@ -1,23 +1,42 @@
 @extends('layouts.app')
 
-@section('title', 'Hubungi Kami - PT. Orthocare Indonesia')
-@section('meta_description', 'Kunjungi cabang praktek resmi PT. Orthocare Indonesia di Jakarta Selatan dan Surabaya atau jadwalkan janji temu konsultasi langsung.')
+@section('title', 'Hubungi Kami - pediOcare')
+@section('meta_description', 'Kunjungi klinik resmi pediOcare di Sleman, Yogyakarta atau hubungi WhatsApp 0856 9792 2194 untuk konsultasi langsung.')
 
 @section('content')
 
+@php
+    $heroContactBg = $settings['hero_contact_image'] ?? asset('images/client_update/image4.png');
+    if (!str_starts_with($heroContactBg, 'http') && !str_starts_with($heroContactBg, '/')) {
+        $heroContactBg = asset($heroContactBg);
+    }
+    $mapsEmbed = $settings['google_maps_embed'] ?? null;
+    $clinicAddr = $settings['clinic_address'] ?? ($settings['footer_address'] ?? 'Jl. Kaliurang KM 8.5, Sinduharjo, Ngaglik, Sleman, D.I. Yogyakarta 55581, Indonesia');
+    if (empty($mapsEmbed)) {
+        $mapsSrc = "https://maps.google.com/maps?q=" . urlencode($clinicAddr) . "&t=&z=15&ie=UTF8&iwloc=&output=embed";
+    } else {
+        if (preg_match('/src="([^"]+)"/', $mapsEmbed, $matches)) {
+            $mapsSrc = $matches[1];
+        } else {
+            $mapsSrc = $mapsEmbed;
+        }
+    }
+    $clinicCity = $settings['clinic_city'] ?? 'Sleman, D.I. Yogyakarta';
+@endphp
+
 <!-- Hero Section -->
-<section class="relative py-20 md:py-28 px-margin-mobile md:px-margin-desktop overflow-hidden bg-cover bg-center flex items-center justify-center fade-in-up" 
-         style="background-image: linear-gradient(rgba(13, 28, 47, 0.7), rgba(13, 28, 47, 0.7)), url('https://lh3.googleusercontent.com/aida/AP1WRLuOHytzpkIkMz3P-afHTM6P21GACTA8QAkYcW_g70K-2vIPNOiIg4rjb1gk6NDlvqwQCWkbdh70A40Z1TVlIeYMwlqJ5-Kc0l4QKmcH6TJMWoMeySloCMS75sTVFLx3ye_JuzL6E1t1aDWxhX_JgRnemqV7ljHsuIx8q-aNekJXISIKkNYH3K11-fq8EbOj4ptq7YVeK73l55kXcVJm41v__cgsCWjB9c5XBUnGge1yw44nQeDlewlfxA');">
-    <div class="max-w-container-max mx-auto text-center relative z-10 space-y-4">
-        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-white/10 text-primary-fixed border border-surface-white/20 text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">
-            <span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
-            Pelayanan & Lokasi Klinik
+<section class="relative py-10 md:py-14 px-margin-mobile md:px-margin-desktop overflow-hidden bg-cover bg-center flex items-center justify-center fade-in-up" 
+         style="background-image: linear-gradient(rgba(13, 28, 47, 0.75), rgba(13, 28, 47, 0.75)), url('{{ $heroContactBg }}');">
+    <div class="max-w-container-max mx-auto text-center relative z-10 space-y-2.5 sm:space-y-3">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-white/10 text-primary-fixed border border-surface-white/20 text-[11px] font-semibold uppercase tracking-wider backdrop-blur-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse"></span>
+            {{ $settings['hero_contact_badge'] ?? 'Pelayanan & Lokasi Klinik' }}
         </span>
-        <h1 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl font-bold text-surface-white tracking-tight">
-            Hubungi Kami
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-surface-white tracking-tight leading-tight">
+            {{ $settings['hero_contact_title'] ?? 'Hubungi Kami' }}
         </h1>
-        <p class="font-body-lg text-body-lg text-surface-white/90 max-w-2xl mx-auto leading-relaxed">
-            Kami siap melayani Anda dengan teknologi ortopedi mutakhir dan perawatan profesional yang mengutamakan kenyamanan pasien.
+        <p class="font-body-md text-body-md text-surface-white/90 max-w-2xl mx-auto leading-relaxed text-xs sm:text-sm">
+            {{ $settings['hero_contact_subtitle'] ?? 'Kami siap melayani Anda dengan teknologi ortopedi mutakhir dan perawatan profesional yang mengutamakan kenyamanan pasien. Care your milestone.' }}
         </p>
     </div>
 </section>
@@ -35,9 +54,9 @@
                         <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">location_on</span>
                     </div>
                     <div>
-                        <h3 class="font-headline-md text-base font-bold text-on-surface mb-1">Klinik Pusat Sleman</h3>
+                        <h3 class="font-headline-md text-base font-bold text-on-surface mb-1">Klinik {{ $settings['clinic_name'] ?? 'pediOcare' }} ({{ $clinicCity }})</h3>
                         <p class="font-body-md text-sm text-on-surface-variant leading-relaxed">
-                            Jl. Kaliurang KM 8.5, Sinduharjo, Ngaglik<br/>Kab. Sleman, D.I. Yogyakarta 55581, Indonesia
+                            {{ $clinicAddr }}
                         </p>
                     </div>
                 </div>
@@ -48,7 +67,7 @@
                     <div>
                         <h3 class="font-headline-md text-base font-bold text-on-surface mb-1">Kontak Hotline</h3>
                         <p class="font-body-md text-sm text-on-surface-variant leading-relaxed">
-                            (0274) 889912 / 0812-3456-7890<br/>info@orthocare.co.id
+                            {{ $settings['hotline_whatsapp'] ?? '0856 9792 2194' }}<br/>{{ $settings['contact_email'] ?? 'info@pediocare.id' }}
                         </p>
                     </div>
                 </div>
@@ -57,8 +76,8 @@
             <!-- Map Card -->
             <div class="bg-surface-white rounded-3xl shadow-1 border border-outline-variant/30 overflow-hidden h-64 sm:h-72 relative">
                 <iframe 
-                    title="Peta Lokasi PT. Orthocare Indonesia - Sleman Yogyakarta"
-                    src="https://maps.google.com/maps?q=Jl.+Kaliurang+KM+8.5,+Sinduharjo,+Ngaglik,+Sleman,+Yogyakarta&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                    title="Peta Lokasi {{ $settings['clinic_name'] ?? 'pediOcare' }} - {{ $clinicCity }}"
+                    src="{{ $mapsSrc }}" 
                     class="w-full h-full border-0" 
                     allowfullscreen="" 
                     loading="lazy" 

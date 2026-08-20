@@ -1,14 +1,28 @@
 @extends('layouts.app')
 
-@section('title', 'Beranda - PT. Orthocare Indonesia')
-@section('meta_description', 'Solusi berteknologi tinggi untuk mobilitas dan kenyamanan Anda. Kami menghadirkan perawatan ortopedi presisi dengan sentuhan hangat.')
+@section('title', 'pediOcare - Care your milestone')
+@section('meta_description', 'pediOcare berdedikasi melakukan pelayanan Ortotik Prostetik untuk membantu menunjang fungsi gerak, kenyamanan, serta kualitas hidup pengguna. Care your milestone.')
 
 @section('content')
+
+@php
+    $heroMedia = $settings['hero_home_media'] ?? 'https://lh3.googleusercontent.com/aida/AP1WRLu-cYuotNRMpQoNz8xiNuno33F9xSgeFfAKDWqxDogo2VSMvAuCS4QUt2jbop_cQ4e18T36Uqa6an8ezvVtDtXtwih7tYUxTzRHyWrqiqVAcV-b3G6wS_YbGIeB9Bl7tYBFGY4K81YU6TE_o1OvhLPzQstL7r4XrQEGsJ3mWxHjfxXavdzURFHoctGm1HxnTSA9wW180ytfdljOX3A9UWVLpKx5mwhgV3xHx-gbLfAcVFwk-s2AOYLy';
+    if (!str_starts_with($heroMedia, 'http') && !str_starts_with($heroMedia, '/') && !empty($heroMedia)) {
+        $heroMedia = asset($heroMedia);
+    }
+    $heroMediaType = $settings['hero_home_media_type'] ?? (preg_match('/\.(mp4|webm|ogg|mov)$/i', $heroMedia) ? 'video' : 'image');
+@endphp
 
 <!-- Hero Section -->
 <section class="relative bg-surface-container-low overflow-hidden min-h-[620px] md:min-h-[760px] flex items-center pb-24 md:pb-36">
     <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden leading-[0]">
-        <img alt="Hero Medical Background" class="w-full h-full object-cover opacity-50" src="https://lh3.googleusercontent.com/aida/AP1WRLu-cYuotNRMpQoNz8xiNuno33F9xSgeFfAKDWqxDogo2VSMvAuCS4QUt2jbop_cQ4e18T36Uqa6an8ezvVtDtXtwih7tYUxTzRHyWrqiqVAcV-b3G6wS_YbGIeB9Bl7tYBFGY4K81YU6TE_o1OvhLPzQstL7r4XrQEGsJ3mWxHjfxXavdzURFHoctGm1HxnTSA9wW180ytfdljOX3A9UWVLpKx5mwhgV3xHx-gbLfAcVFwk-s2AOYLy"/>
+        @if($heroMediaType === 'video')
+            <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-45">
+                <source src="{{ $heroMedia }}" type="video/mp4">
+            </video>
+        @else
+            <img alt="Hero Medical Background" class="w-full h-full object-cover opacity-50" src="{{ $heroMedia }}"/>
+        @endif
         <div class="absolute inset-0 z-0">
             <svg class="w-full h-full opacity-90 block" preserveAspectRatio="none" fill="none" viewBox="0 0 1440 800" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0H800C600 0 400 400 400 800H0V0Z" fill="white"></path>
@@ -21,16 +35,20 @@
         
         <!-- Left: Text Slide In from Left -->
         <div class="md:col-span-7 lg:col-span-7 flex flex-col gap-6 fade-in-left">
-            <h1 class="font-headline-xl-mobile text-headline-xl-mobile md:font-headline-xl md:text-headline-xl text-on-background leading-tight relative font-bold">
-                PT. Orthocare Indonesia: <span class="text-primary">Reborn Your Life</span> With Us
-            </h1>
-            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl leading-relaxed">
-                Solusi berteknologi tinggi untuk mobilitas dan kenyamanan Anda. Kami menghadirkan perawatan ortopedi presisi dengan teknologi 3D scanning, material carbon fiber ringan, dan sentuhan klinis praktisi tersertifikasi.
+            <div>
+                <h1 class="font-headline-xl-mobile text-headline-xl-mobile md:font-headline-xl md:text-headline-xl text-on-background leading-tight relative font-black">
+                    pedi<span class="text-secondary">O</span>care, <span class="text-primary">{{ $settings['clinic_tagline'] ?? 'Care your milestone' }}</span>
+                </h1>
+            </div>
+            
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl leading-relaxed text-sm sm:text-base">
+                {{ $settings['hero_home_description'] ?? 'Sebaik-baik manusia adalah yang bermanfaat untuk orang lain. Kami memandang manusia sebagai makhluk ciptaan yang sempurna. Sudah lebih dari satu dekade pediOcare melayani, membantu dan memberi solusi bagi masyarakat yang membutuhkan layanan alat bantu Ortosis Prostesis. Suatu kebahagiaan bagi Kami ketika dapat melihat klien/pasien yang mengalami amputasi kaki namun dapat kembali berjalan penuhi harapan, anak lahir yang ditakdirkan memiliki keistimewaan dapat tumbuh dan berkembang sesuai capaian (milestone).' }}
             </p>
+            
             <div class="flex flex-col sm:flex-row gap-4 mt-2">
-                <a href="https://wa.me/6281234567890?text=Halo%20PT.%20Orthocare%20Indonesia,%20saya%20ingin%20konsultasi%20layanan%20kesehatan%20ortopedi." target="_blank" rel="noopener noreferrer"
+                <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20ingin%20konsultasi%20layanan%20kesehatan%20ortopedi." target="_blank" rel="noopener noreferrer"
                    class="bg-primary text-on-primary px-7 py-3.5 rounded-xl font-label-md text-sm font-semibold hover:bg-secondary shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined">chat</span> WhatsApp Consultation
+                    <span class="material-symbols-outlined">chat</span> WhatsApp: 0856 9792 2194
                 </a>
                 <a href="{{ route('services.index') }}" 
                    class="border-2 border-primary/25 hover:border-primary text-on-surface hover:text-primary px-7 py-3.5 rounded-xl font-label-md text-sm font-semibold hover:bg-primary/5 transition-all duration-300 flex items-center justify-center bg-surface-white/80 backdrop-blur-sm">
@@ -50,75 +68,197 @@
                 </div>
                 <div>
                     <span class="font-bold text-base md:text-lg text-primary block">Kemenkes</span>
-                    <span class="text-[11px] text-on-surface-variant font-medium">Resmi Berlisensi</span>
+                    <span class="text-[10px] sm:text-[11px] text-on-surface-variant font-medium leading-tight block">memiliki Surat Tanda Registrasi dan Surat Izin Praktik</span>
                 </div>
             </div>
         </div>
 
-        <!-- Right: Doctor Cutout Visual Slide In from Right (Half Page) -->
+        <!-- Right: Doctor Cutout Visual Slide In from Right (Auto & Manual Slider) -->
         <div class="md:col-span-5 lg:col-span-5 relative flex items-center justify-center fade-in-right delay-200">
             <!-- Glowing Aura Circles -->
             <div class="absolute w-72 h-72 md:w-96 md:h-96 rounded-full bg-gradient-to-tr from-primary/20 to-secondary/20 blur-3xl -z-10 animate-pulse"></div>
             <div class="absolute w-60 h-60 md:w-80 md:h-80 rounded-full border-2 border-dashed border-primary/30 -z-10 animate-spin" style="animation-duration: 40s;"></div>
 
-            <!-- Doctor Cutout Card with Smooth Float -->
-            <div class="relative w-full max-w-sm md:max-w-md animate-float">
-                <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-surface-white bg-gradient-to-b from-primary/10 via-surface-white/40 to-transparent backdrop-blur-sm">
-                    @php
-                        $heroDoctorImg = $settings['hero_doctor_image'] ?? \App\Models\SiteSetting::get('hero_doctor_image', 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80');
-                        if (empty($heroDoctorImg)) {
-                            $heroDoctorImgUrl = 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80';
-                        } elseif (str_starts_with($heroDoctorImg, 'http://') || str_starts_with($heroDoctorImg, 'https://') || str_starts_with($heroDoctorImg, '//')) {
-                            $heroDoctorImgUrl = $heroDoctorImg;
-                        } elseif (str_starts_with($heroDoctorImg, 'storage/') || str_starts_with($heroDoctorImg, '/storage/')) {
-                            $heroDoctorImgUrl = asset(ltrim($heroDoctorImg, '/'));
-                        } else {
-                            $heroDoctorImgUrl = asset('storage/' . $heroDoctorImg);
-                        }
+            @php
+                $heroDoctorsRaw = $settings['hero_doctors'] ?? \App\Models\SiteSetting::get('hero_doctors');
+                $heroDoctorsList = [];
+                if (!empty($heroDoctorsRaw)) {
+                    $decoded = is_array($heroDoctorsRaw) ? $heroDoctorsRaw : json_decode($heroDoctorsRaw, true);
+                    if (is_array($decoded) && count($decoded) > 0) {
+                        $heroDoctorsList = $decoded;
+                    }
+                }
+                
+                if (empty($heroDoctorsList)) {
+                    $heroDoctorsList = [
+                        [
+                            'image' => asset('images/client_update/image5.png'),
+                            'name'  => 'Muhammad Antas Salam., S.Tr.Kes',
+                            'title' => 'Praktisi Ortotik & Prostetik Medis',
+                            'badge' => 'Tim Klinis Spesialis'
+                        ],
+                        [
+                            'image' => asset('images/client_update/image4.png'),
+                            'name'  => 'Muhammad Antas Salam., S.Tr.Kes',
+                            'title' => 'Spesialis Ortotik & Prostetik',
+                            'badge' => 'Tim Klinis Spesialis'
+                        ],
+                        [
+                            'image' => asset('images/client_update/image2.png'),
+                            'name'  => 'Tim Ortotik Prostetik pediOcare',
+                            'title' => 'Praktisi Berlisensi STR & SIP Kemenkes',
+                            'badge' => 'Tim Klinis Spesialis'
+                        ],
+                    ];
+                }
 
-                        $heroDoctorBadge = $settings['hero_doctor_badge'] ?? \App\Models\SiteSetting::get('hero_doctor_badge', 'Tim Klinis Spesialis');
-                        $heroDoctorName = $settings['hero_doctor_name'] ?? \App\Models\SiteSetting::get('hero_doctor_name', 'dr. Hendra Pratama, Sp.OT');
-                        $heroDoctorTitle = $settings['hero_doctor_title'] ?? \App\Models\SiteSetting::get('hero_doctor_title', 'Praktisi Ortotik & Prostetik Bionik');
-                        $heroDoctorAlt = $settings['hero_doctor_alt'] ?? \App\Models\SiteSetting::get('hero_doctor_alt', 'Dokter Spesialis Ortotik Prostetik PT. Orthocare Indonesia');
+                foreach ($heroDoctorsList as &$docItem) {
+                    $img = $docItem['image'] ?? '';
+                    if (empty($img)) {
+                        $docItem['image'] = asset('images/client_update/image5.png');
+                    } elseif (str_starts_with($img, 'http://') || str_starts_with($img, 'https://') || str_starts_with($img, '//')) {
+                        // full URL
+                    } elseif (str_starts_with($img, 'images/') || str_starts_with($img, '/images/')) {
+                        $docItem['image'] = asset(ltrim($img, '/'));
+                    } elseif (str_starts_with($img, 'storage/') || str_starts_with($img, '/storage/')) {
+                        $docItem['image'] = asset(ltrim($img, '/'));
+                    } else {
+                        $docItem['image'] = asset('storage/' . $img);
+                    }
+                }
+                unset($docItem);
+            @endphp
 
-                        $badge1Title = $settings['hero_badge_1_title'] ?? \App\Models\SiteSetting::get('hero_badge_1_title', 'Kemenkes RI');
-                        $badge1Subtitle = $settings['hero_badge_1_subtitle'] ?? \App\Models\SiteSetting::get('hero_badge_1_subtitle', 'Tersertifikasi Resmi');
-                        $badge2Title = $settings['hero_badge_2_title'] ?? \App\Models\SiteSetting::get('hero_badge_2_title', '3D CAD/CAM');
-                        $badge2Subtitle = $settings['hero_badge_2_subtitle'] ?? \App\Models\SiteSetting::get('hero_badge_2_subtitle', 'Akurasi Milimeter');
-                    @endphp
-                    <img src="{{ $heroDoctorImgUrl }}" 
-                         alt="{{ $heroDoctorAlt }}" 
-                         class="w-full h-[380px] sm:h-[440px] md:h-[480px] object-cover object-top filter contrast-105 brightness-105"/>
-                    <div class="absolute inset-0 bg-gradient-to-t from-on-background/75 via-transparent to-transparent flex items-end p-6">
-                        <div class="text-white">
-                            <span class="text-[11px] uppercase tracking-wider font-semibold text-primary-fixed bg-white/15 px-3 py-1 rounded-full backdrop-blur-md inline-block mb-1.5">
-                                {{ $heroDoctorBadge }}
-                            </span>
-                            <h3 class="text-lg font-bold">{{ $heroDoctorName }}</h3>
-                            <p class="text-xs text-slate-200">{{ $heroDoctorTitle }}</p>
+            <!-- Doctor Cutout Card with Smooth Float, Auto-Slide & Manual Controls -->
+            <div class="relative w-full max-w-sm md:max-w-md animate-float group/slider" 
+                 x-data="{ 
+                     currentHeroSlide: 0, 
+                     totalSlides: {{ count($heroDoctorsList) }},
+                     heroSlides: @js($heroDoctorsList),
+                     timer: null,
+                     isPaused: false,
+                     touchStartX: 0,
+                     touchEndX: 0,
+                     startAutoSlide() {
+                         this.stopAutoSlide();
+                         this.timer = setInterval(() => {
+                             if (!this.isPaused && this.totalSlides > 1) {
+                                 this.nextSlide(false);
+                             }
+                         }, 4500);
+                     },
+                     stopAutoSlide() {
+                         if (this.timer) clearInterval(this.timer);
+                     },
+                     nextSlide(manual = true) {
+                         this.currentHeroSlide = (this.currentHeroSlide + 1) % this.totalSlides;
+                         if (manual) this.startAutoSlide();
+                     },
+                     prevSlide(manual = true) {
+                         this.currentHeroSlide = (this.currentHeroSlide - 1 + this.totalSlides) % this.totalSlides;
+                         if (manual) this.startAutoSlide();
+                     },
+                     goToSlide(index) {
+                         this.currentHeroSlide = index;
+                         this.startAutoSlide();
+                     },
+                     handleTouchStart(e) {
+                         this.touchStartX = e.changedTouches[0].screenX;
+                     },
+                     handleTouchEnd(e) {
+                         this.touchEndX = e.changedTouches[0].screenX;
+                         if (this.touchStartX - this.touchEndX > 45) {
+                             this.nextSlide(true);
+                         } else if (this.touchEndX - this.touchStartX > 45) {
+                             this.prevSlide(true);
+                         }
+                     }
+                 }" 
+                 x-init="startAutoSlide()"
+                 @mouseenter="isPaused = true"
+                 @mouseleave="isPaused = false"
+                 @touchstart.passive="handleTouchStart($event)"
+                 @touchend.passive="handleTouchEnd($event)">
+                
+                <!-- Main Card Box -->
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-surface-white bg-gradient-to-b from-primary/10 via-surface-white/40 to-transparent backdrop-blur-sm min-h-[420px] sm:min-h-[480px]">
+                    
+                    <!-- Doctor Slides Loop -->
+                    <template x-for="(slide, sIdx) in heroSlides" :key="sIdx">
+                        <div x-show="currentHeroSlide === sIdx"
+                             x-transition:enter="transition ease-out duration-700"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100"
+                             x-transition:leave="transition ease-in duration-300"
+                             x-transition:leave-start="opacity-100 scale-100"
+                             x-transition:leave-end="opacity-0 scale-95"
+                             class="absolute inset-0">
+                            <img :src="slide.image" 
+                                 :alt="slide.name" 
+                                 class="w-full h-full object-cover object-top filter contrast-105 brightness-105 select-none"/>
+                            
+                            <!-- Dark Gradient & Doctor Info Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-on-background/90 via-on-background/25 to-transparent flex items-end p-6 sm:p-7">
+                                <div class="text-white w-full pr-12">
+                                    <span class="text-[10px] sm:text-[11px] uppercase tracking-wider font-bold text-primary-fixed bg-white/15 px-3 py-1 rounded-full backdrop-blur-md inline-block mb-1.5" x-text="slide.badge"></span>
+                                    <h3 class="text-base sm:text-lg font-black leading-snug drop-shadow-sm" x-text="slide.name"></h3>
+                                    <p class="text-xs text-slate-200 mt-0.5 leading-relaxed" x-text="slide.title"></p>
+                                </div>
+                            </div>
                         </div>
+                    </template>
+
+                    <!-- Top-Right Indicator Pill & Slide Counter -->
+                    <div class="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-black/45 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 shadow-md">
+                        <template x-for="(slide, sIdx) in heroSlides" :key="sIdx">
+                            <button type="button" 
+                                    @click.stop="goToSlide(sIdx)"
+                                    :class="currentHeroSlide === sIdx ? 'w-4 bg-primary-fixed' : 'w-1.5 bg-white/40 hover:bg-white/80'"
+                                    class="h-1.5 rounded-full transition-all duration-300 focus:outline-none"
+                                    :aria-label="'Pilih slide ' + (sIdx + 1)">
+                            </button>
+                        </template>
+                        <span class="text-[10px] text-white/90 font-mono font-bold ml-1" x-text="(currentHeroSlide + 1) + '/' + totalSlides"></span>
                     </div>
+
+                    <!-- Manual Prev Slide Button -->
+                    <button type="button" 
+                            @click.stop="prevSlide()"
+                            class="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/35 hover:bg-black/70 backdrop-blur-md text-white border border-white/25 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg group-hover/slider:opacity-100 opacity-70 focus:outline-none"
+                            title="Praktisi Sebelumnya"
+                            aria-label="Praktisi Sebelumnya">
+                        <span class="material-symbols-outlined text-lg sm:text-xl">chevron_left</span>
+                    </button>
+
+                    <!-- Manual Next Slide Button -->
+                    <button type="button" 
+                            @click.stop="nextSlide()"
+                            class="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/35 hover:bg-black/70 backdrop-blur-md text-white border border-white/25 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg group-hover/slider:opacity-100 opacity-70 focus:outline-none"
+                            title="Praktisi Selanjutnya"
+                            aria-label="Praktisi Selanjutnya">
+                        <span class="material-symbols-outlined text-lg sm:text-xl">chevron_right</span>
+                    </button>
                 </div>
 
                 <!-- Floating Badge 1: Kemenkes (Top Left) -->
-                <div class="absolute -top-3 -left-3 sm:-left-6 bg-surface-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-outline-variant/30 flex items-center gap-3 animate-float delay-100">
-                    <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+                <div class="absolute -top-3 -left-3 sm:-left-6 bg-surface-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-outline-variant/30 flex items-center gap-3 animate-float delay-100 max-w-[200px] z-30">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-xl">verified_user</span>
                     </div>
                     <div>
-                        <span class="text-xs font-bold text-on-background block">{{ $badge1Title }}</span>
-                        <span class="text-[10px] text-primary font-semibold">{{ $badge1Subtitle }}</span>
+                        <span class="text-xs font-bold text-on-background block">Kemenkes</span>
+                        <span class="text-[9px] text-primary font-semibold leading-tight block">memiliki STR & SIP Resmi</span>
                     </div>
                 </div>
 
-                <!-- Floating Badge 2: 3D Bionic (Bottom Right) -->
-                <div class="absolute -bottom-3 -right-3 sm:-right-6 bg-surface-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-outline-variant/30 flex items-center gap-3 animate-float delay-300">
-                    <div class="w-10 h-10 rounded-xl bg-[#E5A500]/15 text-[#E5A500] flex items-center justify-center">
+                <!-- Floating Badge 2: 100% Garansi Fitting (Bottom Right) -->
+                <div class="absolute -bottom-3 -right-3 sm:-right-6 bg-surface-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-outline-variant/30 flex items-center gap-3 animate-float delay-300 z-30">
+                    <div class="w-10 h-10 rounded-xl bg-[#E5A500]/15 text-[#E5A500] flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-xl">precision_manufacturing</span>
                     </div>
                     <div>
-                        <span class="text-xs font-bold text-on-background block">{{ $badge2Title }}</span>
-                        <span class="text-[10px] text-[#E5A500] font-semibold">{{ $badge2Subtitle }}</span>
+                        <span class="text-xs font-bold text-on-background block">100% Garansi Fitting</span>
+                        <span class="text-[10px] text-[#E5A500] font-semibold">Akurasi & Kenyamanan</span>
                     </div>
                 </div>
             </div>
@@ -145,19 +285,19 @@
                     Dedikasi & Integritas Medis
                 </span>
                 <h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background mb-6 font-semibold">
-                    Tentang PT. Orthocare Indonesia
+                    Tentang {{ $settings['clinic_name'] ?? 'pediOcare' }}
                 </h2>
                 <p class="font-body-md text-body-md text-on-surface-variant mb-6 leading-relaxed">
-                    Berdedikasi untuk memberikan solusi mobilitas terbaik, PT. Orthocare Indonesia memadukan keahlian klinis dengan teknologi tinggi. Tim prostetis dan ortotis bersertifikasi kami merancang alat bantu yang disesuaikan secara khusus untuk mengembalikan fungsi dan meningkatkan kualitas hidup pasien.
+                    {{ $settings['about_company_description'] ?? 'Pediocare Berdedikasi melakukan Pelayanan Ortotik Prostetik untuk membantu menunjang fungsi gerak, kenyamanan, serta kualitas hidup pengguna. Sejak 2012 Pediocare telah melayani dengan menghadirkan produk custom maupun readymade dengan mengutamakan kualitas bahan, kerapian pengerjaan, serta memperhatikan kebutuhan setiap pengguna. Dengan 14 tahun pengalaman di dunia alat bantu, Pediocare akan selalu berkomitmen memberi solusi yang terbaik dan dapat diandalkan.' }}
                 </p>
                 <ul class="flex flex-col gap-4 mb-8">
                     <li class="flex items-center gap-3">
                         <span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-full text-base">check</span>
-                        <span class="font-body-md text-on-surface font-medium">Teknologi 3D Scanning & Printing Terkini</span>
+                        <span class="font-body-md text-on-surface font-medium">Teknologi 3D Scanning & Custom Fitting Presisi</span>
                     </li>
                     <li class="flex items-center gap-3">
                         <span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-full text-base">check</span>
-                        <span class="font-body-md text-on-surface font-medium">Sertifikasi Kemenkes Resmi</span>
+                        <span class="font-body-md text-on-surface font-medium">Praktisi Berlisensi STR & SIP Kemenkes Resmi</span>
                     </li>
                     <li class="flex items-center gap-3">
                         <span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-full text-base">check</span>
@@ -169,17 +309,31 @@
                 </a>
             </div>
 
-            <!-- Right: Workshop Image Card Slide In from Right -->
-            <div class="relative rounded-3xl overflow-hidden shadow-2xl h-[420px] md:h-[500px] fade-in-right delay-200 hover:-translate-y-2 transition-transform duration-500 border border-outline-variant/30 group">
-                <img alt="Tentang Kami - Fasilitas & Workshop PT. Orthocare Indonesia" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AP1WRLsQeJ73W2vO0_8Vv2_uR_3cT7-T_u-f_Hq0_80K89kL0_QvT12_29Z_w3-F05W4-B97x6H5k_l7k2uL_t2K0fL0wVp3F2Q1M5s7C5A3Q0T8_m9-l2rZ3W50M1Z2qW9M3Q7x91c0"/>
+            <!-- Right: Photo Gallery Box (Auto-slide Activity Photos) -->
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl h-[420px] md:h-[500px] fade-in-right delay-200 hover:-translate-y-2 transition-transform duration-500 border border-outline-variant/30 group"
+                 x-data="{ currentAboutSlide: 0, aboutImages: [
+                     '{{ asset('images/client_update/image2.png') }}',
+                     '{{ asset('images/client_update/image5.png') }}',
+                     '{{ asset('images/client_update/image3.png') }}',
+                     '{{ asset('images/client_update/image7.png') }}'
+                 ] }" 
+                 x-init="setInterval(() => { currentAboutSlide = (currentAboutSlide + 1) % aboutImages.length }, 3500)">
+                <template x-for="(imgSrc, gIdx) in aboutImages" :key="gIdx">
+                    <img :src="imgSrc" alt="Kegiatan Pelayanan pediOcare" 
+                         x-show="currentAboutSlide === gIdx"
+                         x-transition:enter="transition ease-out duration-700"
+                         x-transition:enter-start="opacity-0 scale-95"
+                         x-transition:enter-end="opacity-100 scale-100"
+                         class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                </template>
                 <div class="absolute inset-0 bg-gradient-to-t from-on-background/70 via-transparent to-transparent flex items-end p-8">
                     <div class="bg-surface-white/95 backdrop-blur-md p-4 rounded-2xl border border-outline-variant/30 flex items-center gap-4 w-full shadow-lg">
                         <div class="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center shrink-0">
                             <span class="material-symbols-outlined text-2xl">biotech</span>
                         </div>
                         <div>
-                            <h4 class="font-bold text-sm text-on-background">Workshop Standar Internasional</h4>
-                            <p class="text-xs text-on-surface-variant">Fabrikasi soket bionik & carbon fiber presisi.</p>
+                            <h4 class="font-bold text-sm text-on-background">Kegiatan Pelayanan Klinis pediOcare</h4>
+                            <p class="text-xs text-on-surface-variant">Fabrikasi & Penanganan Ortotik Prostetik Berkualitas.</p>
                         </div>
                     </div>
                 </div>
@@ -406,7 +560,7 @@
                 </h3>
                 <div class="flex justify-between items-center mt-auto pt-2 border-t border-outline-variant/10 gap-1.5">
                     <span class="font-body-md text-xs sm:text-sm md:text-base text-primary font-bold">Rp 4.500.000</span>
-                    <a href="https://wa.me/6281234567890?text=Halo%20PT.%20Orthocare%20Indonesia,%20saya%20tertarik%20pesan%20Advanced%20Articulating%20Knee%20Orthosis." target="_blank" rel="noopener noreferrer"
+                    <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20tertarik%20pesan%20Advanced%20Articulating%20Knee%20Orthosis." target="_blank" rel="noopener noreferrer"
                        class="text-primary bg-primary/5 hover:bg-primary hover:text-surface-white p-2 sm:p-2.5 rounded-lg transition-all duration-300 flex items-center justify-center shrink-0" aria-label="Beli via WhatsApp">
                         <span class="material-symbols-outlined text-sm sm:text-base">shopping_cart</span>
                     </a>
@@ -423,7 +577,7 @@
                 </h3>
                 <div class="flex justify-between items-center mt-auto pt-2 border-t border-outline-variant/10 gap-1.5">
                     <span class="font-body-md text-xs sm:text-sm md:text-base text-primary font-bold">Rp 2.100.000</span>
-                    <a href="https://wa.me/6281234567890?text=Halo%20PT.%20Orthocare%20Indonesia,%20saya%20tertarik%20pesan%20Post-Op%20Knee%20Brace." target="_blank" rel="noopener noreferrer"
+                    <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20tertarik%20pesan%20Post-Op%20Knee%20Brace." target="_blank" rel="noopener noreferrer"
                        class="text-primary bg-primary/5 hover:bg-primary hover:text-surface-white p-2 sm:p-2.5 rounded-lg transition-all duration-300 flex items-center justify-center shrink-0" aria-label="Beli via WhatsApp">
                         <span class="material-symbols-outlined text-sm sm:text-base">shopping_cart</span>
                     </a>
@@ -440,7 +594,7 @@
                 </h3>
                 <div class="flex justify-between items-center mt-auto pt-2 border-t border-outline-variant/10 gap-1.5">
                     <span class="font-body-md text-xs sm:text-sm md:text-base text-primary font-bold">Rp 1.850.000</span>
-                    <a href="https://wa.me/6281234567890?text=Halo%20PT.%20Orthocare%20Indonesia,%20saya%20tertarik%20pesan%20Pneumatic%20Walker%20Boot." target="_blank" rel="noopener noreferrer"
+                    <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20tertarik%20pesan%20Pneumatic%20Walker%20Boot." target="_blank" rel="noopener noreferrer"
                        class="text-primary bg-primary/5 hover:bg-primary hover:text-surface-white p-2 sm:p-2.5 rounded-lg transition-all duration-300 flex items-center justify-center shrink-0" aria-label="Beli via WhatsApp">
                         <span class="material-symbols-outlined text-sm sm:text-base">shopping_cart</span>
                     </a>
@@ -457,7 +611,7 @@
                 </h3>
                 <div class="flex justify-between items-center mt-auto pt-2 border-t border-outline-variant/10 gap-1.5">
                     <span class="font-body-md text-xs sm:text-sm md:text-base text-primary font-bold">Rp 1.250.000</span>
-                    <a href="https://wa.me/6281234567890?text=Halo%20PT.%20Orthocare%20Indonesia,%20saya%20tertarik%20pesan%20Shoulder%20Abduction%20Sling." target="_blank" rel="noopener noreferrer"
+                    <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20tertarik%20pesan%20Shoulder%20Abduction%20Sling." target="_blank" rel="noopener noreferrer"
                        class="text-primary bg-primary/5 hover:bg-primary hover:text-surface-white p-2 sm:p-2.5 rounded-lg transition-all duration-300 flex items-center justify-center shrink-0" aria-label="Beli via WhatsApp">
                         <span class="material-symbols-outlined text-sm sm:text-base">shopping_cart</span>
                     </a>
@@ -481,9 +635,12 @@
 </section>
 
 <!-- Apa Kata Pasien Kami (Testimonials) -->
-<section class="relative py-20 md:py-28 bg-surface-white overflow-hidden fade-in-up">
+<section class="relative py-20 md:py-28 bg-surface-white overflow-hidden fade-in-up" id="testimoni">
     <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         <div class="text-center mb-16">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
+                Ulasan & Kepuasan Pasien
+            </span>
             <h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background mb-4 font-semibold">
                 Apa Kata Pasien Kami
             </h2>
@@ -493,14 +650,42 @@
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Testimonial 1 -->
+            @forelse($testimonials as $t)
+            <div class="bg-background-subtle p-8 rounded-2xl border border-outline-variant/20 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300">
+                <div class="space-y-4">
+                    <div class="flex gap-1 text-[#306D29]">
+                        @for($s = 1; $s <= 5; $s++)
+                            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' {{ $s <= $t->rating ? '1' : '0' }};">star</span>
+                        @endfor
+                    </div>
+                    <p class="font-body-md text-on-surface-variant italic leading-relaxed">
+                        "{{ $t->testimony }}"
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-outline-variant/15 flex items-center gap-4">
+                    @if($t->photo)
+                    <img src="{{ asset($t->photo) }}" alt="{{ $t->patient_name }}" class="w-12 h-12 rounded-full object-cover border border-outline-variant/30 shrink-0">
+                    @else
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg shrink-0">
+                        {{ strtoupper(substr($t->patient_name, 0, 1)) }}
+                    </div>
+                    @endif
+                    <div class="min-w-0">
+                        <h4 class="font-label-md text-on-background font-semibold truncate">{{ $t->patient_name }}</h4>
+                        <p class="font-label-sm text-primary font-medium truncate">{{ $t->service_used }}</p>
+                        @if($t->patient_info)
+                        <p class="text-[11px] text-on-surface-variant truncate">{{ $t->patient_info }}</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            @empty
+            <!-- Fallback Static Testimonials if DB empty -->
             <div class="bg-background-subtle p-8 rounded-2xl border border-outline-variant/20 flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300">
                 <div class="flex gap-1 text-[#306D29]">
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    @for($s = 1; $s <= 5; $s++)
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    @endfor
                 </div>
                 <p class="font-body-md text-on-surface-variant italic leading-relaxed">
                     "Pelayanan sangat profesional. Kaki palsu yang saya dapatkan sangat nyaman dan membantu saya kembali bekerja dengan percaya diri."
@@ -514,17 +699,14 @@
                 </div>
             </div>
 
-            <!-- Testimonial 2 -->
             <div class="bg-background-subtle p-8 rounded-2xl border border-outline-variant/20 flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300">
                 <div class="flex gap-1 text-[#306D29]">
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    @for($s = 1; $s <= 5; $s++)
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    @endfor
                 </div>
                 <p class="font-body-md text-on-surface-variant italic leading-relaxed">
-                    "Tim di Orthocare sangat sabar menjelaskan proses pembuatan brace untuk anak saya. Hasilnya sangat presisi dan berkualitas."
+                    "Tim di {{ $settings['clinic_name'] ?? 'pediOcare' }} sangat sabar menjelaskan proses pembuatan brace untuk anak saya. Hasilnya sangat presisi dan berkualitas."
                 </p>
                 <div class="mt-4 flex items-center gap-4">
                     <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">I</div>
@@ -535,14 +717,11 @@
                 </div>
             </div>
 
-            <!-- Testimonial 3 -->
             <div class="bg-background-subtle p-8 rounded-2xl border border-outline-variant/20 flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300">
                 <div class="flex gap-1 text-[#306D29]">
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
-                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    @for($s = 1; $s <= 5; $s++)
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    @endfor
                 </div>
                 <p class="font-body-md text-on-surface-variant italic leading-relaxed">
                     "Teknologi 3D scanning mereka luar biasa. Proses fitting jadi jauh lebih cepat dan akurat dibanding tempat lain yang pernah saya kunjungi."
@@ -555,6 +734,7 @@
                     </div>
                 </div>
             </div>
+            @endforelse
         </div>
     </div>
 </section>
@@ -572,9 +752,23 @@
                         Lokasi Kami
                     </h2>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6">
-                        Kunjungi klinik kami untuk konsultasi langsung dengan ahli ortopedi.
+                        Kunjungi klinik {{ $settings['clinic_name'] ?? 'pediOcare' }} untuk konsultasi langsung dengan ahli ortopedi kami.
                     </p>
                 </div>
+                @php
+                    $mapsEmbed = $settings['google_maps_embed'] ?? null;
+                    $clinicAddr = $settings['clinic_address'] ?? ($settings['footer_address'] ?? 'Jl. Kaliurang KM 8.5, Sinduharjo, Ngaglik, Sleman, D.I. Yogyakarta 55581');
+                    if (empty($mapsEmbed)) {
+                        $mapsSrc = "https://maps.google.com/maps?q=" . urlencode($clinicAddr) . "&t=&z=15&ie=UTF8&iwloc=&output=embed";
+                    } else {
+                        if (preg_match('/src="([^"]+)"/', $mapsEmbed, $matches)) {
+                            $mapsSrc = $matches[1];
+                        } else {
+                            $mapsSrc = $mapsEmbed;
+                        }
+                    }
+                    $clinicCity = $settings['clinic_city'] ?? 'Sleman, D.I. Yogyakarta';
+                @endphp
                 
                 <div class="bg-surface-white rounded-2xl p-8 shadow-1 border border-outline-variant/20 flex flex-col gap-8 hover:shadow-hover transition-shadow duration-300">
                     <div class="flex items-start gap-5">
@@ -582,9 +776,9 @@
                             <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">location_on</span>
                         </div>
                         <div>
-                            <h3 class="font-headline-md text-headline-md text-on-surface mb-2 font-semibold">Klinik Pusat Sleman</h3>
+                            <h3 class="font-headline-md text-headline-md text-on-surface mb-2 font-semibold">Klinik {{ $settings['clinic_name'] ?? 'pediOcare' }} ({{ $clinicCity }})</h3>
                             <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                                Jl. Kaliurang KM 8.5, Sinduharjo, Ngaglik<br/>Kab. Sleman, D.I. Yogyakarta 55581<br/>Indonesia
+                                {{ $clinicAddr }}
                             </p>
                         </div>
                     </div>
@@ -593,9 +787,9 @@
                             <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">call</span>
                         </div>
                         <div>
-                            <h3 class="font-headline-md text-headline-md text-on-surface mb-2 font-semibold">Kontak</h3>
+                            <h3 class="font-headline-md text-headline-md text-on-surface mb-2 font-semibold">Kontak & Konsultasi</h3>
                             <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                                (0274) 889912 / 0812-3456-7890<br/>info@orthocare.co.id
+                                {{ $settings['hotline_whatsapp'] ?? '0856 9792 2194' }}<br/>{{ $settings['contact_email'] ?? 'info@pediocare.id' }}
                             </p>
                         </div>
                     </div>
@@ -603,8 +797,8 @@
                 
                 <div class="bg-surface-white rounded-2xl shadow-1 border border-outline-variant/20 overflow-hidden h-72 relative">
                     <iframe 
-                        title="Peta Lokasi PT. Orthocare Indonesia - Sleman Yogyakarta"
-                        src="https://maps.google.com/maps?q=Jl.+Kaliurang+KM+8.5,+Sinduharjo,+Ngaglik,+Sleman,+Yogyakarta&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        title="Peta Lokasi {{ $settings['clinic_name'] ?? 'pediOcare' }} - {{ $clinicCity }}"
+                        src="{{ $mapsSrc }}" 
                         class="w-full h-full border-0" 
                         allowfullscreen="" 
                         loading="lazy" 

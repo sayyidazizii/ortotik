@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@yield('title', 'Beranda - PT. Orthocare Indonesia')</title>
-    <meta name="description" content="@yield('meta_description', 'Solusi berteknologi tinggi untuk mobilitas dan kenyamanan Anda. Kami menghadirkan perawatan ortopedi presisi dengan sentuhan hangat berstandar Kemenkes RI.')"/>
+    <title>@yield('title', ($settings['clinic_name'] ?? 'pediOcare') . ' - ' . ($settings['clinic_tagline'] ?? 'Care your milestone'))</title>
+    <meta name="description" content="@yield('meta_description', $settings['meta_description'] ?? 'Pusat pelayanan Ortotik Prostetik profesional tersertifikasi. Care your milestone.')"/>
     
     <!-- Google Fonts: Plus Jakarta Sans & Material Symbols Outlined -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -107,43 +107,45 @@
         .shadow-hover { box-shadow: 0px 12px 32px rgba(48, 109, 41, 0.12); }
         
         .fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
+            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .fade-in-left {
+            animation: fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .fade-in-right {
+            animation: fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
         @keyframes fadeInUp {
-            to {
+            0% {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            100% {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
-        .fade-in-left {
-            animation: fadeInLeft 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-            transform: translateX(-40px);
-        }
-
-        .fade-in-right {
-            animation: fadeInRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-            transform: translateX(40px);
-        }
-
-        .animate-float {
-            animation: floatSlow 4s ease-in-out infinite;
-        }
 
         @keyframes fadeInLeft {
-            to {
+            0% {
+                opacity: 0;
+                transform: translateX(-32px);
+            }
+            100% {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
 
         @keyframes fadeInRight {
-            to {
+            0% {
+                opacity: 0;
+                transform: translateX(32px);
+            }
+            100% {
                 opacity: 1;
                 transform: translateX(0);
             }
@@ -177,11 +179,29 @@
 </head>
 <body class="bg-background-subtle text-on-surface font-sans antialiased selection:bg-primary/20 selection:text-primary flex flex-col min-h-screen">
 
+    @php
+        $clinicName = $settings['clinic_name'] ?? 'pediOcare';
+        $clinicTagline = $settings['clinic_tagline'] ?? 'Care your milestone';
+        $hotlineWA = $settings['hotline_whatsapp'] ?? '0856 9792 2194';
+        $cleanWA = preg_replace('/[^0-9]/', '', $hotlineWA);
+        if (str_starts_with($cleanWA, '0')) {
+            $cleanWA = '62' . substr($cleanWA, 1);
+        }
+        $contactPhone = $settings['phone_number'] ?? $hotlineWA;
+        $contactEmail = $settings['contact_email'] ?? 'info@pediocare.id';
+        $footerAddr = $settings['footer_address'] ?? ($settings['clinic_address'] ?? 'Jl. Kaliurang KM 8.5, Sinduharjo, Ngaglik, Sleman, D.I. Yogyakarta 55581');
+    @endphp
+
     <!-- TopAppBar / Header -->
     <header class="bg-surface-white dark:bg-on-background sticky top-0 w-full z-50 border-b border-outline-variant/30 shadow-sm transition-all duration-300">
-        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
-            <a href="{{ route('home') }}" class="text-headline-md font-headline-xl text-primary dark:text-primary-fixed uppercase tracking-tighter hover:opacity-90 transition font-bold">
-                PT. Orthocare Indonesia
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-3.5 max-w-container-max mx-auto">
+            <a href="{{ route('home') }}" class="flex flex-col group">
+                <span class="text-2xl sm:text-[26px] font-headline-xl text-primary dark:text-primary-fixed tracking-tight hover:opacity-90 transition font-black">
+                    {{ $clinicName }}
+                </span>
+                <span class="text-[10px] sm:text-[11px] font-bold text-tertiary tracking-wider -mt-1 uppercase">
+                    {{ $clinicTagline }}
+                </span>
             </a>
             <nav class="hidden md:flex gap-gutter items-center">
                 <a class="{{ request()->routeIs('home') ? 'text-primary dark:text-primary-fixed border-b-2 border-primary font-bold pb-1' : 'dark:text-on-surface-variant/80 font-medium hover:text-primary text-on-surface-variant' }} font-label-md text-label-md transition-colors duration-200" href="{{ route('home') }}">Beranda</a>
@@ -189,16 +209,17 @@
                 <a class="{{ request()->routeIs('products.*') ? 'text-primary dark:text-primary-fixed border-b-2 border-primary font-bold pb-1' : 'dark:text-on-surface-variant/80 font-medium hover:text-primary text-on-surface-variant' }} font-label-md text-label-md transition-colors duration-200" href="{{ route('products.index') }}">Product</a>
                 <a class="{{ request()->routeIs('custom-products.*') ? 'text-primary dark:text-primary-fixed border-b-2 border-primary font-bold pb-1' : 'dark:text-on-surface-variant/80 font-medium hover:text-primary text-on-surface-variant' }} font-label-md text-label-md transition-colors duration-200" href="{{ route('custom-products.index') }}">Alur Pasien</a>
                 <a class="{{ request()->routeIs('about*') ? 'text-primary dark:text-primary-fixed border-b-2 border-primary font-bold pb-1' : 'dark:text-on-surface-variant/80 font-medium hover:text-primary text-on-surface-variant' }} font-label-md text-label-md transition-colors duration-200" href="{{ route('about') }}">Tentang Kami</a>
+                <a class="{{ request()->routeIs('articles.*') ? 'text-primary dark:text-primary-fixed border-b-2 border-primary font-bold pb-1' : 'dark:text-on-surface-variant/80 font-medium hover:text-primary text-on-surface-variant' }} font-label-md text-label-md transition-colors duration-200" href="{{ route('articles.index') }}">Artikel</a>
                 <a class="{{ request()->routeIs('contact') ? 'text-primary dark:text-primary-fixed border-b-2 border-primary font-bold pb-1' : 'dark:text-on-surface-variant/80 font-medium hover:text-primary text-on-surface-variant' }} font-label-md text-label-md transition-colors duration-200" href="{{ route('contact') }}">Kontak</a>
             </nav>
             <div class="hidden md:flex items-center gap-unit">
-                <a href="tel:+62215550123" aria-label="call" class="flex items-center justify-center p-2 text-on-surface-variant hover:text-primary transition-colors duration-200 rounded-full hover:bg-surface-variant">
+                <a href="tel:{{ preg_replace('/[^0-9]/', '', $contactPhone) }}" aria-label="call" class="flex items-center justify-center p-2 text-on-surface-variant hover:text-primary transition-colors duration-200 rounded-full hover:bg-surface-variant" title="Telepon">
                     <span class="material-symbols-outlined">call</span>
                 </a>
-                <a href="https://wa.me/6281234567890" target="_blank" aria-label="whatsapp" class="flex items-center justify-center p-2 text-on-surface-variant hover:text-primary transition-colors duration-200 rounded-full hover:bg-surface-variant">
+                <a href="https://wa.me/{{ $cleanWA }}" target="_blank" aria-label="whatsapp" class="flex items-center justify-center p-2 text-on-surface-variant hover:text-primary transition-colors duration-200 rounded-full hover:bg-surface-variant" title="WhatsApp {{ $hotlineWA }}">
                     <span class="material-symbols-outlined">chat</span>
                 </a>
-                <a href="{{ route('consultation.create') }}" class="bg-primary text-on-primary px-5 py-2.5 rounded-lg font-label-md text-label-md hover:bg-secondary hover:shadow-lg transition-all duration-300 ml-2 inline-flex items-center justify-center">Consultation</a>
+                <a href="{{ route('consultation.create') }}" class="bg-primary text-on-primary px-5 py-2.5 rounded-xl font-label-md text-label-md hover:bg-secondary hover:shadow-lg transition-all duration-300 ml-2 inline-flex items-center justify-center font-bold">Consultation</a>
             </div>
             <button class="md:hidden text-primary p-2 focus:outline-none" id="mobile-menu-btn" aria-label="Buka Menu">
                 <span class="material-symbols-outlined">menu</span>
@@ -206,49 +227,46 @@
         </div>
     </header>
 
-    <!-- SideNavBar (Mobile Drawer) -->
-    <div class="fixed inset-y-0 right-0 w-80 z-[60] bg-surface-container-lowest dark:bg-inverse-surface shadow-2xl flex flex-col h-full p-6 transform translate-x-full transition-transform duration-300 md:hidden" id="mobile-nav">
-        <div class="flex justify-between items-center mb-8">
+    <!-- SideNavBar (Mobile Drawer & Backdrop) -->
+    <div id="mobile-nav-backdrop" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-[55] opacity-0 pointer-events-none transition-opacity duration-300 md:hidden" aria-hidden="true"></div>
+    <div class="fixed inset-y-0 right-0 w-80 max-w-[85vw] z-[60] bg-surface-container-lowest dark:bg-inverse-surface shadow-2xl flex flex-col h-full p-5 sm:p-6 pb-8 sm:pb-6 transform translate-x-full transition-transform duration-300 md:hidden overflow-y-auto" id="mobile-nav">
+        <div class="flex justify-between items-center mb-4 shrink-0">
             <div>
-                <h2 class="font-headline-md text-primary dark:text-primary-fixed font-bold text-lg">PT. Orthocare Indonesia</h2>
-                <p class="font-body-sm text-body-sm text-on-surface-variant">High-Tech Orthopedic Care</p>
+                <h2 class="font-headline-md text-primary dark:text-primary-fixed font-black text-xl">{{ $clinicName }}</h2>
+                <p class="font-body-sm text-body-sm text-tertiary font-bold">{{ $clinicTagline }}</p>
             </div>
-            <button class="text-on-surface-variant p-1 hover:text-primary" id="close-mobile-nav" aria-label="Tutup Menu">
+            <button class="text-on-surface-variant p-2 hover:text-primary hover:bg-surface-container-high rounded-lg transition" id="close-mobile-nav" aria-label="Tutup Menu">
                 <span class="material-symbols-outlined">close</span>
             </button>
         </div>
-        <nav class="flex-1 flex flex-col gap-2">
-            <a class="flex items-center gap-4 p-3 {{ request()->routeIs('home') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-lg font-body-md text-body-md hover:pl-4 transition-all duration-300" href="{{ route('home') }}">
-                <span class="material-symbols-outlined">home</span> Beranda
+        <nav class="flex-1 flex flex-col gap-1.5 overflow-y-auto mb-3 pr-1">
+            <a class="flex items-center gap-3.5 p-2.5 {{ request()->routeIs('home') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-xl font-body-md text-body-md hover:pl-3.5 transition-all duration-200" href="{{ route('home') }}">
+                <span class="material-symbols-outlined text-xl">home</span> Beranda
             </a>
-            <a class="flex items-center gap-4 p-3 {{ request()->routeIs('services.*') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-lg font-body-md text-body-md hover:pl-4 transition-all duration-300" href="{{ route('services.index') }}">
-                <span class="material-symbols-outlined">medical_services</span> Layanan
+            <a class="flex items-center gap-3.5 p-2.5 {{ request()->routeIs('services.*') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-xl font-body-md text-body-md hover:pl-3.5 transition-all duration-200" href="{{ route('services.index') }}">
+                <span class="material-symbols-outlined text-xl">medical_services</span> Layanan
             </a>
-            <a class="flex items-center gap-4 p-3 {{ request()->routeIs('products.*') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-lg font-body-md text-body-md hover:pl-4 transition-all duration-300" href="{{ route('products.index') }}">
-                <span class="material-symbols-outlined">inventory_2</span> Product
+            <a class="flex items-center gap-3.5 p-2.5 {{ request()->routeIs('products.*') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-xl font-body-md text-body-md hover:pl-3.5 transition-all duration-200" href="{{ route('products.index') }}">
+                <span class="material-symbols-outlined text-xl">inventory_2</span> Product
             </a>
-            <a class="flex items-center gap-4 p-3 {{ request()->routeIs('custom-products.*') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-lg font-body-md text-body-md hover:pl-4 transition-all duration-300" href="{{ route('custom-products.index') }}">
-                <span class="material-symbols-outlined">mobile_share_stack</span> Alur Pasien
+            <a class="flex items-center gap-3.5 p-2.5 {{ request()->routeIs('custom-products.*') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-xl font-body-md text-body-md hover:pl-3.5 transition-all duration-200" href="{{ route('custom-products.index') }}">
+                <span class="material-symbols-outlined text-xl">mobile_share_stack</span> Alur Pasien
             </a>
-            <a class="flex items-center gap-4 p-3 {{ request()->routeIs('about*') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-lg font-body-md text-body-md hover:pl-4 transition-all duration-300" href="{{ route('about') }}">
-                <span class="material-symbols-outlined">info</span> Tentang Kami
+            <a class="flex items-center gap-3.5 p-2.5 {{ request()->routeIs('about*') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-xl font-body-md text-body-md hover:pl-3.5 transition-all duration-200" href="{{ route('about') }}">
+                <span class="material-symbols-outlined text-xl">info</span> Tentang Kami
             </a>
-            <a class="flex items-center gap-4 p-3 {{ request()->routeIs('contact') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-lg font-body-md text-body-md hover:pl-4 transition-all duration-300" href="{{ route('contact') }}">
-                <span class="material-symbols-outlined">mail</span> Kontak
+            <a class="flex items-center gap-3.5 p-2.5 {{ request()->routeIs('articles.*') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-xl font-body-md text-body-md hover:pl-3.5 transition-all duration-200" href="{{ route('articles.index') }}">
+                <span class="material-symbols-outlined text-xl">newspaper</span> Artikel & Edukasi
+            </a>
+            <a class="flex items-center gap-3.5 p-2.5 {{ request()->routeIs('contact') ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container-high' }} rounded-xl font-body-md text-body-md hover:pl-3.5 transition-all duration-200" href="{{ route('contact') }}">
+                <span class="material-symbols-outlined text-xl">contacts</span> Kontak
             </a>
         </nav>
-        <div class="mt-auto pt-6 border-t border-outline-variant/30 flex flex-col gap-4">
-            <a href="{{ route('consultation.create') }}" class="w-full text-center bg-primary text-on-primary py-3 rounded-lg font-label-md text-label-md hover:bg-secondary transition-colors duration-200 block font-semibold">Hubungi Kami</a>
-            <div class="flex justify-around text-on-surface-variant">
-                <a href="tel:+62215550123" class="flex flex-col items-center gap-1 hover:text-primary transition-colors">
-                    <span class="material-symbols-outlined">emergency_home</span>
-                    <span class="font-label-sm text-label-sm">Emergency</span>
-                </a>
-                <a href="https://wa.me/6281234567890" target="_blank" class="flex flex-col items-center gap-1 hover:text-primary transition-colors">
-                    <span class="material-symbols-outlined">chat</span>
-                    <span class="font-label-sm text-label-sm">WhatsApp</span>
-                </a>
-            </div>
+        <div class="pt-4 border-t border-outline-variant/30 flex flex-col shrink-0 mt-auto">
+            <a href="{{ route('consultation.create') }}" class="w-full bg-[#E5A500] hover:bg-[#CC9200] text-white py-3.5 rounded-xl font-label-md text-label-md text-center font-bold shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-lg">calendar_month</span>
+                <span>Jadwalkan Konsultasi</span>
+            </a>
         </div>
     </div>
 
@@ -259,10 +277,10 @@
 
     <!-- Floating Action WhatsApp Button -->
     <aside aria-label="WhatsApp Quick Contact">
-        <a href="https://wa.me/6281234567890?text=Halo%20PT.%20Orthocare%20Indonesia,%20saya%20ingin%20konsultasi%20mengenai%20alat%20medis%20dan%20jadwal%20klinik." 
+        <a href="https://wa.me/{{ $cleanWA }}?text=Halo%20{{ urlencode($clinicName) }},%20saya%20ingin%20konsultasi%20mengenai%20alat%20medis%20dan%20jadwal%20klinik." 
            target="_blank" rel="noopener noreferrer"
            class="fixed bottom-6 right-6 bg-[#25D366] hover:bg-[#20ba5a] text-white p-3.5 sm:p-4 rounded-full shadow-2 hover:shadow-hover hover:-translate-y-2 transition-all duration-300 z-50 flex items-center justify-center group ring-4 ring-[#25D366]/20 active:scale-95"
-           aria-label="Konsultasi WhatsApp">
+           aria-label="Konsultasi WhatsApp {{ $hotlineWA }}">
             <svg class="w-7 h-7 sm:w-8 sm:h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.04 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7.02 8.48 7.02 9.68C7.02 10.88 7.9 12.04 8.02 12.2C8.14 12.37 9.73 14.83 12.18 15.88C14.21 16.76 14.63 16.58 15.07 16.54C15.52 16.5 16.5 15.96 16.7 15.39C16.91 14.81 16.91 14.33 16.85 14.22C16.78 14.12 16.62 14.05 16.38 13.94C16.14 13.82 14.96 13.24 14.74 13.16C14.52 13.08 14.36 13.04 14.2 13.28C14.03 13.53 13.57 14.06 13.43 14.22C13.29 14.38 13.15 14.4 12.91 14.28C12.67 14.16 11.9 13.91 10.98 13.09C10.26 12.45 9.78 11.66 9.64 11.42C9.5 11.17 9.62 11.04 9.74 10.92C9.85 10.81 9.99 10.63 10.11 10.49C10.23 10.34 10.28 10.24 10.36 10.08C10.44 9.91 10.4 9.77 10.34 9.66C10.28 9.54 9.8 8.35 9.59 7.86C9.4 7.39 9.2 7.45 9.04 7.44C8.89 7.43 8.71 7.33 8.53 7.33Z"/>
             </svg>
@@ -273,10 +291,13 @@
     <footer class="relative bg-on-background text-on-primary-container w-full py-16 pt-16 md:pt-20 mb-0">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto font-body-sm text-body-sm text-surface-variant/70">
             <div class="col-span-1 md:col-span-2">
-                <div class="font-headline-md text-surface-white mb-6 text-2xl font-bold">PT. Orthocare Indonesia</div>
-                <p class="mb-6 max-w-sm leading-relaxed text-slate-300">Solusi mobilitas modern dengan teknologi ortotik dan prostetik terdepan untuk meningkatkan kualitas hidup Anda.</p>
+                <div class="font-headline-md text-surface-white mb-2 text-2xl font-black">
+                    {{ $clinicName }}
+                </div>
+                <div class="text-xs font-bold text-tertiary-fixed uppercase tracking-wider mb-4">{{ $clinicTagline }}</div>
+                <p class="mb-6 max-w-sm leading-relaxed text-slate-300">{{ $settings['footer_description'] ?? 'Pusat pelayanan Ortotik Prostetik profesional dengan semangat bermanfaat untuk menunjang fungsi gerak dan kualitas hidup Anda.' }}</p>
                 <div class="flex items-center gap-2 text-surface-white font-label-sm text-label-sm bg-surface-white/10 px-4 py-2 rounded-full w-fit border border-surface-white/20">
-                    <span class="material-symbols-outlined text-sm text-primary-fixed">verified</span> KEMENKES Certified
+                    <span class="material-symbols-outlined text-sm text-primary-fixed">verified</span> Certified
                 </div>
             </div>
             <div class="mt-8 md:mt-0">
@@ -286,60 +307,68 @@
                     <li><a class="hover:text-primary-fixed transition-colors" href="{{ route('products.index') }}">E-Katalog Produk</a></li>
                     <li><a class="hover:text-primary-fixed transition-colors" href="{{ route('custom-products.index') }}">Alur Pasien Custom</a></li>
                     <li><a class="hover:text-primary-fixed transition-colors" href="{{ route('about') }}">Tentang Kami</a></li>
+                    <li><a class="hover:text-primary-fixed transition-colors" href="{{ route('articles.index') }}">Artikel & Edukasi</a></li>
                     <li><a class="hover:text-primary-fixed transition-colors" href="{{ route('contact') }}">Cabang & Kontak</a></li>
                 </ul>
             </div>
             <div class="mt-8 md:mt-0">
-                <h4 class="text-surface-white font-label-md text-label-md mb-6 uppercase tracking-wider font-semibold">Kontak</h4>
+                <h4 class="text-surface-white font-label-md text-label-md mb-6 uppercase tracking-wider font-semibold">Kontak & Konsultasi</h4>
                 <ul class="flex flex-col gap-4 text-slate-300">
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-sm mt-1 text-primary-fixed">location_on</span> Jl. Kaliurang KM 8.5, Sinduharjo, Ngaglik, Sleman, D.I. Yogyakarta 55581</li>
-                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-sm text-primary-fixed">mail</span> info@orthocare.co.id</li>
-                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-sm text-primary-fixed">call</span> (0274) 889912 / 0812-3456-7890</li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-sm mt-1 text-primary-fixed">location_on</span> {{ $footerAddr }}</li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-sm text-primary-fixed">mail</span> {{ $contactEmail }}</li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-sm text-primary-fixed">call</span> {{ $contactPhone }}</li>
+                    <li class="flex items-center gap-3"><span class="material-symbols-outlined text-sm text-primary-fixed">chat</span> WhatsApp: {{ $hotlineWA }}</li>
                 </ul>
             </div>
         </div>
         <div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mt-16 pt-8 border-t border-surface-variant/10 text-center font-body-sm text-body-sm text-surface-variant/50 text-slate-400">
-            &copy; {{ date('Y') }} PT. Orthocare Indonesia. KEMENKES Certified. All rights reserved.
+            &copy; {{ date('Y') }} {{ $clinicName }}. Certified. {{ $clinicTagline }}. All rights reserved.
         </div>
     </footer>
 
-    <!-- Global Scripts: Mobile Menu & Fade In Animations -->
+    <!-- Global Scripts: Mobile Menu & Backdrop -->
     <script>
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const closeMobileNav = document.getElementById('close-mobile-nav');
-        const mobileNav = document.getElementById('mobile-nav');
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const closeMobileNav = document.getElementById('close-mobile-nav');
+            const mobileNav = document.getElementById('mobile-nav');
+            const mobileNavBackdrop = document.getElementById('mobile-nav-backdrop');
 
-        if (mobileMenuBtn && mobileNav) {
-            mobileMenuBtn.addEventListener('click', function() {
-                mobileNav.classList.remove('translate-x-full');
-            });
-        }
-        
-        if (closeMobileNav && mobileNav) {
-            closeMobileNav.addEventListener('click', function() {
-                mobileNav.classList.add('translate-x-full');
-            });
-        }
+            function openMenu() {
+                if (mobileNav) mobileNav.classList.remove('translate-x-full');
+                if (mobileNavBackdrop) {
+                    mobileNavBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+                    mobileNavBackdrop.classList.add('opacity-100', 'pointer-events-auto');
+                }
+                document.body.classList.add('overflow-hidden');
+            }
 
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+            function closeMenu() {
+                if (mobileNav) mobileNav.classList.add('translate-x-full');
+                if (mobileNavBackdrop) {
+                    mobileNavBackdrop.classList.remove('opacity-100', 'pointer-events-auto');
+                    mobileNavBackdrop.classList.add('opacity-0', 'pointer-events-none');
+                }
+                document.body.classList.remove('overflow-hidden');
+            }
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                    observer.unobserve(entry.target);
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', openMenu);
+            }
+            
+            if (closeMobileNav) {
+                closeMobileNav.addEventListener('click', closeMenu);
+            }
+
+            if (mobileNavBackdrop) {
+                mobileNavBackdrop.addEventListener('click', closeMenu);
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeMenu();
                 }
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in-up').forEach((el) => {
-            el.style.animationPlayState = 'paused';
-            observer.observe(el);
         });
     </script>
     @stack('scripts')

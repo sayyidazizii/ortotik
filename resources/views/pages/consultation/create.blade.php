@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Formulir Konsultasi Pasien - PT. Orthocare Indonesia')
-@section('meta_description', 'Jadwalkan konsultasi evaluasi awal keluhan kaki palsu, skoliosis, flatfoot, atau kelainan gerak tubuh bersama klinisi spesialis PT. Orthocare Indonesia.')
+@section('title', 'Formulir Konsultasi Pasien - pediOcare')
+@section('meta_description', 'Jadwalkan konsultasi evaluasi awal keluhan kaki palsu, skoliosis, flatfoot, atau kelainan gerak tubuh bersama praktisi spesialis pediOcare.')
 
 @section('content')
 

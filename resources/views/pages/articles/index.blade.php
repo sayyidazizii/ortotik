@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Artikel & Edukasi Medis - PT. Orthocare Indonesia')
+@section('title', 'Artikel & Edukasi Medis - pediOcare')
 @section('meta_description', 'Panduan klinis terpercaya seputar kesehatan tulang, sendi, perawatan prostesis bionik, dan tips terapi postur skoliosis.')
 
 @section('content')
@@ -88,10 +88,10 @@
             <div class="p-6 bg-surface-white rounded-3xl border border-outline-variant/30 space-y-3 shadow-1">
                 <h3 class="text-xs font-bold uppercase tracking-wider text-primary">Pencarian Topik</h3>
                 <form action="{{ route('articles.index') }}" method="GET">
-                    <div class="flex items-center bg-surface-container-low rounded-xl px-3.5 py-2.5 border border-outline-variant/30 focus-within:border-primary focus-within:bg-surface-white transition">
+                    <div class="flex items-center bg-surface-container-low rounded-xl px-3.5 py-2.5 border border-outline-variant/30 focus-within:border-primary focus-within:bg-surface-white focus-within:ring-2 focus-within:ring-primary/20 transition">
                         <span class="material-symbols-outlined text-outline-variant mr-2 text-lg">search</span>
                         <input type="text" name="search" value="{{ $currentSearch }}" placeholder="Ketik kata kunci..."
-                            class="bg-transparent text-xs text-on-surface placeholder:text-outline-variant focus:outline-none w-full">
+                            class="bg-transparent border-0 focus:ring-0 shadow-none p-0 text-xs text-on-surface placeholder:text-outline-variant focus:outline-none w-full">
                     </div>
                 </form>
             </div>

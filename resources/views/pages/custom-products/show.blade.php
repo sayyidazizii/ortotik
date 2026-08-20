@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $product->name . ' - PT. Orthocare Indonesia')
+@section('title', $product->name . ' - pediOcare')
 @section('meta_description', $product->summary)
 
 @section('content')
@@ -92,7 +92,7 @@
                         class="flex items-center justify-center w-full bg-[#E5A500] hover:bg-[#CC9200] text-surface-white text-xs font-semibold h-12 rounded-xl transition shadow-md">
                         <span>Isi Formulir Janji Temu</span>
                     </a>
-                    <a href="https://wa.me/6281234567890?text=Halo%20PT.%20Orthocare%20Indonesia,%20saya%20tertarik%20pembuatan%20{{ urlencode($product->name) }}" target="_blank" rel="noopener noreferrer"
+                    <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20tertarik%20pembuatan%20{{ urlencode($product->name) }}" target="_blank" rel="noopener noreferrer"
                         class="flex items-center justify-center w-full bg-surface-white/10 hover:bg-surface-white/20 text-white border border-surface-white/30 text-xs font-semibold h-12 rounded-xl transition">
                         <span>Tanya Estimasi via WA</span>
                     </a>

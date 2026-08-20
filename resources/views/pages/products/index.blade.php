@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'E-Katalog Produk Medis - PT. Orthocare Indonesia')
+@section('title', 'E-Katalog Produk Medis - pediOcare')
 @section('meta_description', 'Jelajahi e-katalog alat bantu ortopedi siap pakai, brace sendi, kolar leher, dan korset tulang belakang berstandar klinis Kemenkes RI.')
 
 @section('content')
@@ -63,17 +63,17 @@
                 <h2 class="font-headline-md text-lg font-semibold text-primary">Filter Anatomi</h2>
             </div>
             
-            <div class="space-y-2 relative z-10">
+            <div class="space-y-1.5 relative z-10">
                 <a href="{{ route('products.index', array_filter(['search' => request('search'), 'sort' => request('sort')])) }}"
-                   class="flex items-center justify-between p-2.5 rounded-xl transition-colors {{ !$selectedCategory ? 'bg-primary/10 text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' }}">
+                   class="flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-colors {{ !$selectedCategory ? 'bg-primary text-white font-bold shadow-xs' : 'text-on-surface-variant hover:bg-surface-container-low font-medium' }}">
                     <span class="text-sm">Semua Kategori</span>
-                    <span class="text-xs bg-surface-container-high px-2 py-0.5 rounded-full">{{ $products->total() }}</span>
+                    <span class="text-xs font-semibold px-2 py-0.5 rounded-full {{ !$selectedCategory ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500' }}">{{ $products->total() }}</span>
                 </a>
                 @foreach($categories as $cat)
                 <a href="{{ route('products.index', array_filter(['category' => $cat->slug, 'search' => request('search'), 'sort' => request('sort')])) }}"
-                   class="flex items-center justify-between p-2.5 rounded-xl transition-colors {{ $selectedCategory && $selectedCategory->id === $cat->id ? 'bg-primary/10 text-primary font-bold' : 'text-on-surface-variant hover:bg-surface-container-low' }}">
+                   class="flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-colors {{ $selectedCategory && $selectedCategory->id === $cat->id ? 'bg-primary text-white font-bold shadow-xs' : 'text-on-surface-variant hover:bg-surface-container-low font-medium' }}">
                     <span class="text-sm">{{ $cat->name }}</span>
-                    <span class="text-xs bg-surface-container-high px-2 py-0.5 rounded-full">{{ $cat->products_count }}</span>
+                    <span class="text-xs font-semibold px-2 py-0.5 rounded-full {{ $selectedCategory && $selectedCategory->id === $cat->id ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500' }}">{{ $cat->products_count }}</span>
                 </a>
                 @endforeach
             </div>
@@ -159,7 +159,7 @@
                             <a href="{{ route('products.show', $prod->slug) }}" class="w-6 h-6 sm:w-9 sm:h-9 rounded-full bg-surface-container-low hover:bg-primary hover:text-white border border-outline-variant/30 flex items-center justify-center text-on-surface-variant transition-colors" title="Lihat Detail">
                                 <span class="material-symbols-outlined text-[13px] sm:text-[18px]">visibility</span>
                             </a>
-                            <a href="https://wa.me/6281234567890?text=Halo%20PT.%20Orthocare%20Indonesia,%20saya%20tertarik%20pesan%20produk%20{{ urlencode($prod->name) }}." target="_blank" rel="noopener noreferrer"
+                            <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20tertarik%20pesan%20produk%20{{ urlencode($prod->name) }}." target="_blank" rel="noopener noreferrer"
                                class="w-6 h-6 sm:w-9 sm:h-9 rounded-full bg-primary flex items-center justify-center text-white hover:bg-secondary transition-all shadow-sm hover:scale-105" title="Order WhatsApp">
                                 <span class="material-symbols-outlined text-[13px] sm:text-[17px]">chat</span>
                             </a>

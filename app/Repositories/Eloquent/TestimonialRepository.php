@@ -26,13 +26,23 @@ class TestimonialRepository extends BaseRepository implements TestimonialReposit
         return $this->model->find($id);
     }
 
-    public function getFeatured(int $limit = 3): Collection
+    public function getFeatured(int $limit = 6): Collection
     {
-        return $this->model->newQuery()
+        $featured = $this->model->newQuery()
             ->where('is_active', true)
             ->where('is_featured', true)
             ->latest()
             ->limit($limit)
             ->get();
+
+        if ($featured->isEmpty()) {
+            $featured = $this->model->newQuery()
+                ->where('is_active', true)
+                ->latest()
+                ->limit($limit)
+                ->get();
+        }
+
+        return $featured;
     }
 }

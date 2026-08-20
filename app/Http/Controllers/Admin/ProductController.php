@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -24,7 +25,8 @@ class ProductController extends Controller
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
                   ->orWhere('sku', 'like', "%{$search}%")
-                  ->orWhere('short_description', 'like', "%{$search}%");
+                  ->orWhere('short_description', 'like', "%{$search}%")
+                  ->orWhere('excerpt', 'like', "%{$search}%");
             });
         }
 
@@ -51,26 +53,41 @@ class ProductController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'category_id' => ['required', 'exists:categories,id'],
-            'sku' => ['nullable', 'string', 'max:100', 'unique:products,sku'],
-            'price' => ['nullable', 'numeric', 'min:0'],
-            'stock_status' => ['required', 'in:in_stock,pre_order,out_of_stock,ready_stock,custom_only'],
-            'is_active' => ['boolean'],
-            'is_featured' => ['boolean'],
-            'is_custom_order' => ['boolean'],
-            'short_description' => ['nullable', 'string', 'max:500'],
-            'description' => ['required', 'string'],
-            'medical_indication' => ['nullable', 'string'],
-            'material_spec' => ['nullable', 'string'],
-            'warranty_period' => ['nullable', 'string', 'max:100'],
-            'main_image_path' => ['nullable', 'string', 'max:255'],
+            'name'                => ['required', 'string', 'max:255'],
+            'category_id'         => ['required', 'exists:categories,id'],
+            'sku'                 => ['nullable', 'string', 'max:100', 'unique:products,sku'],
+            'price'               => ['nullable', 'numeric', 'min:0'],
+            'discount_price'      => ['nullable', 'numeric', 'min:0'],
+            'stock_status'        => ['required', 'in:in_stock,pre_order,out_of_stock,ready_stock,custom_only'],
+            'is_active'           => ['boolean'],
+            'is_featured'         => ['boolean'],
+            'is_custom_order'     => ['boolean'],
+            'excerpt'             => ['nullable', 'string', 'max:500'],
+            'short_description'   => ['nullable', 'string', 'max:500'],
+            'description'         => ['required', 'string'],
+            'medical_indications' => ['nullable', 'string'],
+            'medical_indication'  => ['nullable', 'string'],
+            'material_spec'       => ['nullable', 'string'],
+            'warranty_period'     => ['nullable', 'string', 'max:100'],
+            'image_file'          => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:5120'],
+            'thumbnail'           => ['nullable', 'string', 'max:500'],
+            'main_image_path'     => ['nullable', 'string', 'max:500'],
         ]);
 
         if ($validated['stock_status'] === 'ready_stock') {
             $validated['stock_status'] = 'in_stock';
         } elseif ($validated['stock_status'] === 'custom_only') {
             $validated['stock_status'] = 'pre_order';
+        }
+
+        // Handle Image Upload
+        if ($request->hasFile('image_file')) {
+            $path = $request->file('image_file')->store('products', 'public');
+            $validated['thumbnail'] = 'storage/' . $path;
+        } elseif ($request->filled('thumbnail')) {
+            $validated['thumbnail'] = $request->input('thumbnail');
+        } elseif ($request->filled('main_image_path')) {
+            $validated['thumbnail'] = $request->input('main_image_path');
         }
 
         $slug = Str::slug($validated['name']);
@@ -80,9 +97,10 @@ class ProductController extends Controller
             $uniqueSlug = $slug . '-' . $counter++;
         }
         $validated['slug'] = $uniqueSlug;
-        $validated['is_active'] = $request->boolean('is_active');
-        $validated['is_featured'] = $request->boolean('is_featured');
-        $validated['is_custom_order'] = $request->boolean('is_custom_order');
+        $validated['excerpt'] = $validated['excerpt'] ?? $validated['short_description'] ?? '';
+        $validated['medical_indications'] = $validated['medical_indications'] ?? $validated['medical_indication'] ?? null;
+        $validated['is_active'] = $request->boolean('is_active', true);
+        $validated['is_featured'] = $request->boolean('is_featured', false);
 
         Product::create($validated);
 
@@ -101,23 +119,46 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'category_id' => ['required', 'exists:categories,id'],
-            'sku' => ['nullable', 'string', 'max:100', 'unique:products,sku,' . $product->id],
-            'price' => ['nullable', 'numeric', 'min:0'],
-            'stock_status' => ['required', 'in:in_stock,pre_order,out_of_stock,ready_stock,custom_only'],
-            'short_description' => ['nullable', 'string', 'max:500'],
-            'description' => ['required', 'string'],
-            'medical_indication' => ['nullable', 'string'],
-            'material_spec' => ['nullable', 'string'],
-            'warranty_period' => ['nullable', 'string', 'max:100'],
-            'main_image_path' => ['nullable', 'string', 'max:255'],
+            'name'                => ['required', 'string', 'max:255'],
+            'category_id'         => ['required', 'exists:categories,id'],
+            'sku'                 => ['nullable', 'string', 'max:100', 'unique:products,sku,' . $product->id],
+            'price'               => ['nullable', 'numeric', 'min:0'],
+            'discount_price'      => ['nullable', 'numeric', 'min:0'],
+            'stock_status'        => ['required', 'in:in_stock,pre_order,out_of_stock,ready_stock,custom_only'],
+            'excerpt'             => ['nullable', 'string', 'max:500'],
+            'short_description'   => ['nullable', 'string', 'max:500'],
+            'description'         => ['required', 'string'],
+            'medical_indications' => ['nullable', 'string'],
+            'medical_indication'  => ['nullable', 'string'],
+            'material_spec'       => ['nullable', 'string'],
+            'warranty_period'     => ['nullable', 'string', 'max:100'],
+            'image_file'          => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:5120'],
+            'thumbnail'           => ['nullable', 'string', 'max:500'],
+            'main_image_path'     => ['nullable', 'string', 'max:500'],
         ]);
 
         if ($validated['stock_status'] === 'ready_stock') {
             $validated['stock_status'] = 'in_stock';
         } elseif ($validated['stock_status'] === 'custom_only') {
             $validated['stock_status'] = 'pre_order';
+        }
+
+        // Handle Image Upload
+        if ($request->hasFile('image_file')) {
+            // Delete old file if stored locally
+            if ($product->thumbnail && str_starts_with($product->thumbnail, 'storage/')) {
+                $oldRelPath = str_replace('storage/', '', $product->thumbnail);
+                if (Storage::disk('public')->exists($oldRelPath)) {
+                    Storage::disk('public')->delete($oldRelPath);
+                }
+            }
+
+            $path = $request->file('image_file')->store('products', 'public');
+            $validated['thumbnail'] = 'storage/' . $path;
+        } elseif ($request->filled('thumbnail')) {
+            $validated['thumbnail'] = $request->input('thumbnail');
+        } elseif ($request->filled('main_image_path')) {
+            $validated['thumbnail'] = $request->input('main_image_path');
         }
 
         if ($product->name !== $validated['name']) {
@@ -130,9 +171,10 @@ class ProductController extends Controller
             $validated['slug'] = $uniqueSlug;
         }
 
+        $validated['excerpt'] = $validated['excerpt'] ?? $validated['short_description'] ?? $product->excerpt;
+        $validated['medical_indications'] = $validated['medical_indications'] ?? $validated['medical_indication'] ?? $product->medical_indications;
         $validated['is_active'] = $request->boolean('is_active');
         $validated['is_featured'] = $request->boolean('is_featured');
-        $validated['is_custom_order'] = $request->boolean('is_custom_order');
 
         $product->update($validated);
 
@@ -143,6 +185,14 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $name = $product->name;
+        
+        if ($product->thumbnail && str_starts_with($product->thumbnail, 'storage/')) {
+            $oldRelPath = str_replace('storage/', '', $product->thumbnail);
+            if (Storage::disk('public')->exists($oldRelPath)) {
+                Storage::disk('public')->delete($oldRelPath);
+            }
+        }
+
         $product->delete();
 
         return redirect()->route('admin.products.index')->with('success', 'Produk ' . $name . ' berhasil dihapus dari e-katalog.');

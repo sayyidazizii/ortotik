@@ -33,6 +33,23 @@
         </div>
     </div>
 
+    <!-- Banner Link ke Sinkronisasi Lengkap .ZIP (Database + Aset Media) -->
+    <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-teal-900 to-slate-900 text-white shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center shrink-0 border border-teal-500/30">
+                <i data-lucide="folder-sync" class="w-5 h-5"></i>
+            </div>
+            <div>
+                <h4 class="font-extrabold text-sm text-white">Butuh Sinkronisasi Lengkap Beserta Seluruh Foto & Aset?</h4>
+                <p class="text-xs text-slate-300">Gunakan fitur Paket .ZIP untuk memindahkan Database + Folder Upload Storage + Gambar Publik ke server online.</p>
+            </div>
+        </div>
+        <a href="{{ route('admin.settings.index', ['tab' => 'data_sync']) }}" class="px-4 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-600 text-white font-bold text-xs shadow transition shrink-0 flex items-center justify-center gap-2">
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            <span>Buka Sinkronisasi Data & Aset</span>
+        </a>
+    </div>
+
     <!-- Database Overview Metrics -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Database Name -->

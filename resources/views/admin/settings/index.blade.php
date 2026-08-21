@@ -89,47 +89,48 @@
     </div>
 
     <!-- Navigation Tabs / Sub-Menus -->
-    <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-200 no-scrollbar">
+    <div class="flex flex-wrap items-center gap-2 pb-3 border-b border-slate-200">
         <button type="button" @click="setTab('hero_home')"
                 :class="activeTab === 'hero_home' ? 'bg-medical-600 text-white shadow-sm font-bold' : 'bg-white text-slate-600 hover:bg-slate-100 font-semibold'"
-                class="px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shrink-0 transition">
+                class="px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition">
             <i data-lucide="sparkles" class="w-4 h-4"></i>
             <span>Visual & Teks Beranda</span>
         </button>
 
         <button type="button" @click="setTab('hero_pages')"
                 :class="activeTab === 'hero_pages' ? 'bg-medical-600 text-white shadow-sm font-bold' : 'bg-white text-slate-600 hover:bg-slate-100 font-semibold'"
-                class="px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shrink-0 transition">
+                class="px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition">
             <i data-lucide="image" class="w-4 h-4"></i>
             <span>Banner Halaman & Narasi Profil</span>
         </button>
 
         <button type="button" @click="setTab('location_maps')"
                 :class="activeTab === 'location_maps' ? 'bg-medical-600 text-white shadow-sm font-bold' : 'bg-white text-slate-600 hover:bg-slate-100 font-semibold'"
-                class="px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shrink-0 transition">
+                class="px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition">
             <i data-lucide="map" class="w-4 h-4"></i>
             <span>Alamat & Google Maps</span>
         </button>
 
         <button type="button" @click="setTab('footer_branding')"
                 :class="activeTab === 'footer_branding' ? 'bg-medical-600 text-white shadow-sm font-bold' : 'bg-white text-slate-600 hover:bg-slate-100 font-semibold'"
-                class="px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shrink-0 transition">
+                class="px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition">
             <i data-lucide="layout-template" class="w-4 h-4"></i>
             <span>Footer, Email & Kontak</span>
         </button>
 
         <button type="button" @click="setTab('seo_meta')"
                 :class="activeTab === 'seo_meta' ? 'bg-medical-600 text-white shadow-sm font-bold' : 'bg-white text-slate-600 hover:bg-slate-100 font-semibold'"
-                class="px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shrink-0 transition">
+                class="px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition">
             <i data-lucide="search" class="w-4 h-4"></i>
             <span>SEO & Metadata</span>
         </button>
 
         <button type="button" @click="setTab('data_sync')"
-                :class="activeTab === 'data_sync' ? 'bg-medical-600 text-white shadow-sm font-bold' : 'bg-white text-slate-600 hover:bg-slate-100 font-semibold'"
-                class="px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shrink-0 transition">
-            <i data-lucide="folder-sync" class="w-4 h-4"></i>
+                :class="activeTab === 'data_sync' ? 'bg-emerald-600 text-white shadow-md font-bold ring-2 ring-emerald-400/30' : 'bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 font-bold'"
+                class="px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition">
+            <i data-lucide="folder-sync" class="w-4 h-4" :class="activeTab === 'data_sync' ? 'text-white' : 'text-emerald-600'"></i>
             <span>Sinkronisasi Data & Aset (.ZIP)</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
         </button>
     </div>
 

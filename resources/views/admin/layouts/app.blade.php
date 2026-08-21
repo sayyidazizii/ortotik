@@ -236,6 +236,12 @@
                             <i data-lucide="search" class="w-3.5 h-3.5"></i>
                             <span>SEO & Metadata</span>
                         </a>
+
+                        <a href="{{ route('admin.settings.index', ['tab' => 'data_sync']) }}" 
+                           class="flex items-center gap-2 px-3 py-1.5 rounded-lg transition {{ request('tab') === 'data_sync' && request()->routeIs('admin.settings.*') ? 'text-teal-300 font-bold bg-slate-800' : 'text-emerald-400 hover:text-white hover:bg-slate-800/40' }}">
+                            <i data-lucide="folder-sync" class="w-3.5 h-3.5"></i>
+                            <span class="font-bold">Sinkronisasi Data (.ZIP)</span>
+                        </a>
                     </div>
                 </div>
 

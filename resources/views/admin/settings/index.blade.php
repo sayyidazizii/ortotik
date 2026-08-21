@@ -124,6 +124,13 @@
             <i data-lucide="search" class="w-4 h-4"></i>
             <span>SEO & Metadata</span>
         </button>
+
+        <button type="button" @click="setTab('data_sync')"
+                :class="activeTab === 'data_sync' ? 'bg-medical-600 text-white shadow-sm font-bold' : 'bg-white text-slate-600 hover:bg-slate-100 font-semibold'"
+                class="px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shrink-0 transition">
+            <i data-lucide="folder-sync" class="w-4 h-4"></i>
+            <span>Sinkronisasi Data & Aset (.ZIP)</span>
+        </button>
     </div>
 
     @if ($errors->any())
@@ -955,7 +962,7 @@
         </div>
 
         <!-- Sticky Submit Footer -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 shadow-sm flex items-center justify-between sticky bottom-4 z-30">
+        <div x-show="activeTab !== 'data_sync'" class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 shadow-sm flex items-center justify-between sticky bottom-4 z-30">
             <span class="text-xs text-slate-500 hidden sm:inline">Perubahan yang Anda simpan akan langsung aktif di seluruh website.</span>
             <button type="submit" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-medical-600 hover:bg-medical-700 text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
                 <i data-lucide="save" class="w-4 h-4"></i>
@@ -964,6 +971,180 @@
         </div>
 
     </form>
+
+    <!-- ====================================================================== -->
+    <!-- TAB 6: SINKRONISASI DATA & ASET (.ZIP) -->
+    <!-- ====================================================================== -->
+    <div x-show="activeTab === 'data_sync'" class="space-y-6" style="display: none;">
+        
+        <!-- Info Banner Card -->
+        <div class="bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl space-y-3 relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-8 w-48 h-48 bg-teal-500/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-teal-300 shrink-0 border border-white/10">
+                        <i data-lucide="folder-sync" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-black tracking-tight text-white">Sinkronisasi Data & Aset Lokal ↔ Server Online</h3>
+                        <p class="text-xs text-slate-300 mt-0.5">Paket <code>.ZIP</code> portabel berisi seluruh Database SQL, file upload <code>storage/</code>, dan gambar publik <code>images/</code>.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Status: Siap Digunakan
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2-Column Grid: Export & Import -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            <!-- Card 1: Export dari Server Ini (Localhost) -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-7 space-y-5 flex flex-col justify-between">
+                <div class="space-y-3.5">
+                    <div class="flex items-center gap-2.5 text-medical-600 border-b border-slate-100 pb-3">
+                        <i data-lucide="download-cloud" class="w-5 h-5"></i>
+                        <h4 class="font-extrabold text-slate-900 text-sm">1. Export Paket Data & Aset Lokal</h4>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Jalankan ini di <strong>komputer lokal (localhost)</strong> untuk men-download satu file <code>.ZIP</code> lengkap berisi data terkini dan file gambar yang siap diunggah ke server online.
+                    </p>
+                    
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-2">
+                        <span class="font-bold text-slate-900 block flex items-center gap-1.5">
+                            <i data-lucide="package-check" class="w-4 h-4 text-emerald-600"></i>
+                            <span>Isi Paket Export (.ZIP):</span>
+                        </span>
+                        <ul class="list-disc list-inside text-slate-600 text-[11px] space-y-1 pl-1">
+                            <li><strong>Database SQL Utuh:</strong> Produk, Layanan, Artikel, Testimoni, Cabang, Pengaturan Website, & Leads.</li>
+                            <li><strong>Folder File Uploads:</strong> Seluruh foto/banner di <code>storage/app/public/</code>.</li>
+                            <li><strong>Folder Gambar Publik:</strong> Seluruh aset di <code>public/images/</code>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="{{ route('admin.package.export') }}" class="w-full px-5 py-3.5 rounded-2xl bg-medical-600 hover:bg-medical-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>Download Paket (.ZIP) Sekarang</span>
+                </a>
+            </div>
+
+            <!-- Card 2: Import & Restore ke Server Ini (Online Server) -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-7 space-y-5 flex flex-col justify-between">
+                <div class="space-y-3.5">
+                    <div class="flex items-center gap-2.5 text-teal-600 border-b border-slate-100 pb-3">
+                        <i data-lucide="upload-cloud" class="w-5 h-5"></i>
+                        <h4 class="font-extrabold text-slate-900 text-sm">2. Import & Sinkronkan ke Server Ini</h4>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Gunakan form ini di <strong>server online / staging</strong> untuk mengunggah file <code>.ZIP</code> dari localhost. Database akan otomatis terestore dan file aset langsung disinkronkan.
+                    </p>
+
+                    <form id="importPackageForm" action="{{ route('admin.package.import') }}" method="POST" enctype="multipart/form-data" 
+                          onsubmit="return confirm('PERINGATAN: Mengimport paket ini akan memperbarui data database dan file aset di server ini. Pastikan Anda telah memiliki cadangan jika diperlukan. Lanjutkan proses import?');" 
+                          class="space-y-3">
+                        @csrf
+                        <div class="p-4 rounded-2xl bg-teal-50/60 border border-teal-200 space-y-2">
+                            <label class="block text-xs font-bold text-teal-900 uppercase">Pilih File Paket (.ZIP)</label>
+                            <input type="file" name="package_file" accept=".zip,application/zip" required
+                                   class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-teal-600 file:text-white hover:file:bg-teal-700 cursor-pointer border border-teal-200 rounded-xl bg-white p-1">
+                            <p class="text-[10px] text-slate-500">Maksimal ukuran file: 500 MB.</p>
+                        </div>
+                        <button type="submit" class="w-full px-5 py-3.5 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2">
+                            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                            <span>Upload & Sinkronkan Data Sekarang</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Card 3: Daftar Riwayat File Paket Tersimpan di Server -->
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-5">
+            <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-slate-900 font-extrabold text-sm">
+                    <i data-lucide="archive" class="w-4 h-4 text-medical-600"></i>
+                    <span>File Paket Tersimpan di Server (<code>storage/app/packages/</code>)</span>
+                </div>
+                <span class="text-xs text-slate-500">{{ count($packages ?? []) }} file tersedia</span>
+            </div>
+
+            @if(!empty($packages) && count($packages) > 0)
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-100 text-slate-400 font-bold uppercase tracking-wider text-[10px]">
+                            <th class="py-2.5 px-3">Nama File Paket</th>
+                            <th class="py-2.5 px-3">Ukuran</th>
+                            <th class="py-2.5 px-3">Dibuat Pada</th>
+                            <th class="py-2.5 px-3 text-right">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        @foreach($packages as $pkg)
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="py-3 px-3 font-semibold text-slate-800 flex items-center gap-2">
+                                <i data-lucide="file-archive" class="w-4 h-4 text-medical-600 shrink-0"></i>
+                                <span class="truncate max-w-xs sm:max-w-md font-mono">{{ $pkg['filename'] }}</span>
+                            </td>
+                            <td class="py-3 px-3 text-slate-600 font-medium">{{ $pkg['size'] }}</td>
+                            <td class="py-3 px-3 text-slate-500">{{ $pkg['created_at'] }}</td>
+                            <td class="py-3 px-3 text-right">
+                                <div class="flex items-center justify-end gap-1.5">
+                                    <a href="{{ route('admin.package.download', $pkg['filename']) }}" title="Download File ZIP" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+                                        <i data-lucide="download" class="w-4 h-4"></i>
+                                    </a>
+                                    <form action="{{ route('admin.package.restore', $pkg['filename']) }}" method="POST" class="inline" onsubmit="return confirm('Restore data dari paket {{ $pkg['filename'] }}? Seluruh database dan aset akan diperbarui.');">
+                                        @csrf
+                                        <button type="submit" title="Restore / Terapkan Paket Ini" class="p-2 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-700 transition">
+                                            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                                        </button>
+                                    </form>
+                                    <form action="{{ route('admin.package.destroy', $pkg['filename']) }}" method="POST" class="inline" onsubmit="return confirm('Hapus file backup {{ $pkg['filename'] }}?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" title="Hapus File" class="p-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 transition">
+                                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @else
+            <div class="text-center py-8 text-slate-400 space-y-2">
+                <i data-lucide="folder-open" class="w-8 h-8 mx-auto stroke-1 text-slate-300"></i>
+                <p class="text-xs">Belum ada file paket tersimpan di server. Klik <strong>Download Paket</strong> di atas untuk membuat paket baru.</p>
+            </div>
+            @endif
+        </div>
+
+        <!-- Card 4: Panduan Terminal / CLI -->
+        <div class="p-5 rounded-3xl bg-slate-100/80 border border-slate-200 text-xs text-slate-600 space-y-3">
+            <span class="font-bold text-slate-800 flex items-center gap-2">
+                <i data-lucide="terminal" class="w-4 h-4 text-slate-700"></i>
+                <span>Penggunaan via Terminal / CLI (Artisan Commands):</span>
+            </span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div class="p-3.5 rounded-2xl bg-slate-900 text-emerald-400 font-mono text-[11px] space-y-1">
+                    <p class="text-slate-400 text-[10px]"># 1. Buat paket export di Localhost:</p>
+                    <p class="text-white font-bold">php artisan app:export-package</p>
+                </div>
+                <div class="p-3.5 rounded-2xl bg-slate-900 text-emerald-400 font-mono text-[11px] space-y-1">
+                    <p class="text-slate-400 text-[10px]"># 2. Import / Restore di Server Online:</p>
+                    <p class="text-white font-bold">php artisan app:import-package [nama_file.zip]</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <!-- MODAL: EDIT / ADD DOCTOR DIALOG -->
     <div x-show="isModalOpen" 

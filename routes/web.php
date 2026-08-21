@@ -126,5 +126,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/sync-pull', [\App\Http\Controllers\Admin\BackupController::class, 'pullSync'])->name('sync-pull');
             Route::post('/sync-test', [\App\Http\Controllers\Admin\BackupController::class, 'testSyncConnection'])->name('sync-test');
         });
+
+        // Data & Asset Package Synchronization (Zip of SQL + Storage Uploads + Public Images)
+        Route::prefix('package')->name('package.')->group(function () {
+            Route::get('/export', [\App\Http\Controllers\Admin\DataPackageController::class, 'export'])->name('export');
+            Route::post('/import', [\App\Http\Controllers\Admin\DataPackageController::class, 'import'])->name('import');
+            Route::post('/restore/{filename}', [\App\Http\Controllers\Admin\DataPackageController::class, 'restore'])->name('restore');
+            Route::get('/download/{filename}', [\App\Http\Controllers\Admin\DataPackageController::class, 'download'])->name('download');
+            Route::delete('/destroy/{filename}', [\App\Http\Controllers\Admin\DataPackageController::class, 'destroy'])->name('destroy');
+        });
     });
 });

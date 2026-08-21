@@ -10,14 +10,17 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 
+use App\Services\DataPackageService;
+
 class SiteSettingController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request, DataPackageService $packageService): View
     {
         $settings = SiteSetting::all()->keyBy('key');
         $activeTab = $request->query('tab', 'hero_home');
         $mainBranch = Branch::where('is_main_branch', true)->first() ?? Branch::first();
-        return view('admin.settings.index', compact('settings', 'activeTab', 'mainBranch'));
+        $packages = $packageService->getExistingPackages();
+        return view('admin.settings.index', compact('settings', 'activeTab', 'mainBranch', 'packages'));
     }
 
     public function update(Request $request): RedirectResponse

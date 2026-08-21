@@ -315,6 +315,20 @@
             </div>
             @endif
 
+            @if($errors->any())
+            <div class="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-semibold shadow-sm space-y-2">
+                <div class="flex items-center gap-2 font-bold text-rose-900">
+                    <i data-lucide="alert-octagon" class="w-4 h-4 text-rose-600 shrink-0"></i>
+                    <span>Terdapat beberapa kesalahan validasi:</span>
+                </div>
+                <ul class="list-disc list-inside space-y-1 text-[11px] text-rose-700 font-normal pl-1">
+                    @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
             @yield('content')
         </main>
 

@@ -123,6 +123,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/restore/{filename}', [\App\Http\Controllers\Admin\BackupController::class, 'restore'])->name('restore');
             Route::delete('/destroy/{filename}', [\App\Http\Controllers\Admin\BackupController::class, 'destroy'])->name('destroy');
             Route::delete('/clean-all', [\App\Http\Controllers\Admin\BackupController::class, 'cleanAll'])->name('clean-all');
+            Route::post('/sync-pull', [\App\Http\Controllers\Admin\BackupController::class, 'pullSync'])->name('sync-pull');
+            Route::post('/sync-test', [\App\Http\Controllers\Admin\BackupController::class, 'testSyncConnection'])->name('sync-test');
         });
     });
 });

@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'sync' => [
+        'server_url' => env('SYNC_SERVER_URL', ''),
+        'secret_token' => env('SYNC_SECRET_TOKEN', ''),
+    ],
+
 ];

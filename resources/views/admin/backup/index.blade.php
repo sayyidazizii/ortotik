@@ -115,6 +115,16 @@
                 <i data-lucide="file-up" class="w-4 h-4 text-teal-600"></i>
                 <span>Import Excel (.xlsx / .csv)</span>
             </button>
+
+            <button type="button" @click="activeTab = 'server_sync'"
+                :class="activeTab === 'server_sync' ? 'border-b-2 border-indigo-600 text-indigo-700 bg-white shadow-sm' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100/60'"
+                class="px-5 py-3.5 transition flex items-center gap-2 whitespace-nowrap">
+                <i data-lucide="cloud-download" class="w-4 h-4 text-indigo-600"></i>
+                <span class="flex items-center gap-1.5">
+                    <span>Tarik Data Server</span>
+                    <span class="px-1.5 py-0.5 rounded text-[10px] bg-indigo-100 text-indigo-700 font-extrabold">Pull</span>
+                </span>
+            </button>
         </div>
 
         <!-- TAB CONTENT 1: EXPORT MYSQL (.SQL) -->
@@ -319,9 +329,9 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-extrabold transition shadow-md hover:shadow-lg">
-                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-                        <span>Mulai Restore Database MySQL</span>
+                    <button type="submit" :disabled="isRestoringSql" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-rose-600 hover:bg-rose-700 disabled:opacity-60 text-white text-xs font-extrabold transition shadow-md hover:shadow-lg">
+                        <i data-lucide="refresh-cw" class="w-4 h-4" :class="isRestoringSql ? 'animate-spin' : ''"></i>
+                        <span x-text="isRestoringSql ? 'Sedang Memproses Restore Database...' : 'Mulai Restore Database MySQL'"></span>
                     </button>
                 </div>
             </form>
@@ -382,6 +392,161 @@
                     <button type="submit" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-extrabold transition shadow-md hover:shadow-lg">
                         <i data-lucide="upload" class="w-4 h-4"></i>
                         <span>Mulai Import Data Excel</span>
+                    </button>
+                </div>
+        <!-- TAB CONTENT 5: SERVER SYNC (PULL FROM RAILWAY TO LOCAL) -->
+        <div x-show="activeTab === 'server_sync'" class="p-6 sm:p-8 space-y-6">
+            <div class="border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2 text-indigo-600">
+                    <i data-lucide="cloud-download" class="w-5 h-5"></i>
+                    <h3 class="text-base font-extrabold text-slate-900">
+                        Sinkronisasi Otomatis Server Online (Railway) ➔ Localhost
+                    </h3>
+                </div>
+                <p class="text-xs text-slate-500 mt-1">
+                    Tarik data database MySQL dan seluruh aset gambar/media (<code class="bg-slate-100 px-1 py-0.5 rounded text-[11px]">storage/app/public</code>) dari server produksi online ke komputer lokal Anda dengan 1-klik sebelum mulai development.
+                </p>
+            </div>
+
+            <!-- Notice & How it Works -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-4 rounded-xl bg-indigo-50/70 border border-indigo-100 space-y-1.5">
+                    <div class="flex items-center gap-2 font-bold text-xs text-indigo-900">
+                        <i data-lucide="database" class="w-4 h-4 text-indigo-600"></i>
+                        <span>1. Database MySQL Sinkron</span>
+                    </div>
+                    <p class="text-[11px] text-indigo-800 leading-relaxed">
+                        Data riil seperti leads konsultasi, produk, cabang, dan pengaturan terbaru di server akan disalin ke database local.
+                    </p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-purple-50/70 border border-purple-100 space-y-1.5">
+                    <div class="flex items-center gap-2 font-bold text-xs text-purple-900">
+                        <i data-lucide="images" class="w-4 h-4 text-purple-600"></i>
+                        <span>2. File Aset & Gambar Utuh</span>
+                    </div>
+                    <p class="text-[11px] text-purple-800 leading-relaxed">
+                        Foto produk, gambar artikel, dan banner yang diunggah di server online akan diunduh dan dipasang ke storage local.
+                    </p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-emerald-50/70 border border-emerald-100 space-y-1.5">
+                    <div class="flex items-center gap-2 font-bold text-xs text-emerald-900">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+                        <span>3. Bebas Push Git Kapan Saja</span>
+                    </div>
+                    <p class="text-[11px] text-emerald-800 leading-relaxed">
+                        Setelah local sinkron dengan server, Anda bisa leluasa coding dan melakukan <code class="bg-emerald-100 text-emerald-900 px-1 py-0.5 rounded text-[10px]">git push</code> tanpa khawatir merusak data online.
+                    </p>
+                </div>
+            </div>
+
+            <form action="{{ route('admin.backup.sync-pull') }}" method="POST" @submit="confirmServerSync($event)" class="space-y-6">
+                @csrf
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Server URL -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+                            URL Server Online Produksi / Railway
+                        </label>
+                        <input type="url" name="server_url" x-model="syncServerUrl" required
+                            placeholder="https://ortotik-production.up.railway.app"
+                            class="w-full text-xs rounded-xl border border-slate-300 p-2.5 focus:border-indigo-500 focus:ring-indigo-500 bg-white font-mono">
+                        <p class="text-[11px] text-slate-400">Masukkan domain web Railway Anda (contoh: <code class="bg-slate-100 px-1 py-0.5 rounded">https://ortotik-production.up.railway.app</code>).</p>
+                    </div>
+
+                    <!-- Secret Token -->
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+                                Secret Sync Token
+                            </label>
+                            <span class="text-[11px] text-slate-400 font-mono">SYNC_SECRET_TOKEN</span>
+                        </div>
+                        <div class="relative">
+                            <input :type="showSyncToken ? 'text' : 'password'" name="secret_token" x-model="syncSecretToken" required
+                                placeholder="Masukkan token rahasia sinkronisasi..."
+                                class="w-full text-xs rounded-xl border border-slate-300 p-2.5 pr-10 focus:border-indigo-500 focus:ring-indigo-500 bg-white font-mono">
+                            <button type="button" @click="showSyncToken = !showSyncToken" class="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600">
+                                <i data-lucide="eye" class="w-4 h-4" x-show="!showSyncToken"></i>
+                                <i data-lucide="eye-off" class="w-4 h-4" x-show="showSyncToken"></i>
+                            </button>
+                        </div>
+                        <p class="text-[11px] text-slate-400">Harus sama dengan nilai variabel <code class="text-indigo-600 font-bold">SYNC_SECRET_TOKEN</code> di file <code class="bg-slate-100 px-1 py-0.5 rounded">.env</code> server.</p>
+                    </div>
+                </div>
+
+                <!-- Test Connection Button & Result Box -->
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                        <button type="button" @click="testConnection()" :disabled="isTestingSync"
+                            class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">
+                            <i data-lucide="wifi" class="w-3.5 h-3.5" :class="isTestingSync ? 'animate-pulse text-indigo-600' : ''"></i>
+                            <span x-text="isTestingSync ? 'Menguji Koneksi...' : 'Uji Koneksi ke Server'"></span>
+                        </button>
+                    </div>
+
+                    <!-- Connection Test Result Box -->
+                    <template x-if="syncTestResult">
+                        <div :class="syncTestResult.success ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'"
+                             class="p-4 rounded-xl border text-xs space-y-2">
+                            <div class="flex items-center gap-2 font-bold">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600" x-show="syncTestResult.success"></i>
+                                <i data-lucide="alert-circle" class="w-4 h-4 text-rose-600" x-show="!syncTestResult.success"></i>
+                                <span x-text="syncTestResult.message"></span>
+                            </div>
+                            <template x-if="syncTestResult.server_info && syncTestResult.server_info.data">
+                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-emerald-200/60 text-[11px]">
+                                    <div><span class="text-emerald-700 font-semibold">Tabel Database:</span> <span class="font-bold font-mono" x-text="syncTestResult.server_info.data.database_tables"></span></div>
+                                    <div><span class="text-emerald-700 font-semibold">Total Baris:</span> <span class="font-bold font-mono" x-text="syncTestResult.server_info.data.database_rows"></span></div>
+                                    <div><span class="text-emerald-700 font-semibold">Ukuran DB:</span> <span class="font-bold font-mono" x-text="syncTestResult.server_info.data.database_size"></span></div>
+                                    <div><span class="text-emerald-700 font-semibold">Aset Storage:</span> <span class="font-bold font-mono" x-text="syncTestResult.server_info.data.assets_count + ' file (' + syncTestResult.server_info.data.assets_size + ')'"></span></div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Sync Scope Checkboxes -->
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+                    <span class="text-xs font-bold text-slate-800 uppercase tracking-wider block">Pilih Komponen yang Ingin Ditarik & Disinkronkan:</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <label class="flex items-start gap-2.5 p-3 rounded-lg bg-white border border-slate-200 cursor-pointer hover:border-indigo-400 transition">
+                            <input type="checkbox" name="sync_database" value="1" checked class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500">
+                            <div>
+                                <span class="font-bold text-slate-900 block">Database MySQL Lengkap (.sql)</span>
+                                <span class="text-[11px] text-slate-500">Menimpa database local dengan seluruh isi tabel riil dari server online.</span>
+                            </div>
+                        </label>
+
+                        <label class="flex items-start gap-2.5 p-3 rounded-lg bg-white border border-slate-200 cursor-pointer hover:border-indigo-400 transition">
+                            <input type="checkbox" name="sync_assets" value="1" checked class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500">
+                            <div>
+                                <span class="font-bold text-slate-900 block">Aset Media & Gambar (<code class="text-[10px]">storage/app/public</code>)</span>
+                                <span class="text-[11px] text-slate-500">Mengunduh seluruh foto produk, gambar artikel, banner hero, dan file upload dari server.</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Confirmation Checkbox -->
+                <div class="p-4 rounded-xl bg-amber-50 border border-amber-200">
+                    <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-amber-900">
+                        <input type="checkbox" required class="rounded text-indigo-600 focus:ring-indigo-500">
+                        <span>Saya mengonfirmasi untuk menimpa data dan aset media di local saya dengan versi terbaru dari server online.</span>
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <p class="text-[11px] text-slate-400">
+                        💡 <strong>Tips:</strong> Anda juga bisa menjalankan perintah terminal: <code class="bg-slate-100 px-1.5 py-0.5 rounded font-mono text-indigo-600 font-bold">php artisan server:pull</code>
+                    </p>
+                    <button type="submit" :disabled="isPullingSync"
+                        class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 text-white text-xs font-extrabold transition shadow-md hover:shadow-lg">
+                        <i data-lucide="cloud-download" class="w-4 h-4" :class="isPullingSync ? 'animate-bounce' : ''"></i>
+                        <span x-text="isPullingSync ? 'Sedang Mengunduh & Mensinkronkan...' : 'Tarik & Sinkronkan Data Server Sekarang'"></span>
                     </button>
                 </div>
             </form>
@@ -567,9 +732,19 @@
 <script>
     function backupManager() {
         return {
-            activeTab: 'export_sql',
+            activeTab: '{{ request('tab', session('active_tab', 'export_sql')) }}',
+            isRestoringSql: false,
             excelTargetTable: 'all',
             selectedSqlTables: @json(array_column($tables, 'name')),
+            
+            // Server Sync properties
+            syncServerUrl: '{{ config('services.sync.server_url') ?: env('SYNC_SERVER_URL', '') }}',
+            syncSecretToken: '{{ config('services.sync.secret_token') ?: env('SYNC_SECRET_TOKEN', '') }}',
+            showSyncToken: false,
+            isTestingSync: false,
+            isPullingSync: false,
+            syncTestResult: null,
+
             selectAllTablesSql(status) {
                 if (status) {
                     this.selectedSqlTables = @json(array_column($tables, 'name'));
@@ -577,10 +752,59 @@
                     this.selectedSqlTables = [];
                 }
             },
+
             confirmSqlRestore(event) {
                 if (!confirm('PERINGATAN TINGGI:\n\nRestore database akan menjalankan query dari file yang Anda upload dan dapat menimpa data yang ada.\n\nApakah Anda yakin ingin melanjutkan?')) {
                     event.preventDefault();
+                    return false;
                 }
+                this.isRestoringSql = true;
+            },
+
+            async testConnection() {
+                if (!this.syncServerUrl || !this.syncSecretToken) {
+                    alert('Harap isi URL Server dan Secret Token terlebih dahulu.');
+                    return;
+                }
+
+                this.isTestingSync = true;
+                this.syncTestResult = null;
+
+                try {
+                    const response = await fetch('{{ route('admin.backup.sync-test') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            server_url: this.syncServerUrl,
+                            secret_token: this.syncSecretToken
+                        })
+                    });
+
+                    const data = await response.json();
+                    this.syncTestResult = data;
+                } catch (err) {
+                    this.syncTestResult = {
+                        success: false,
+                        message: 'Gagal terhubung ke server atau terjadi error jaringan: ' + err.message
+                    };
+                } finally {
+                    this.isTestingSync = false;
+                    this.$nextTick(() => {
+                        if (window.lucide) window.lucide.createIcons();
+                    });
+                }
+            },
+
+            confirmServerSync(event) {
+                if (!confirm('PERINGATAN SINKRONISASI SERVER:\n\nProses ini akan mengunduh database dan aset dari server online dan MENIMPA database serta aset di local Anda.\n\nApakah Anda yakin ingin melanjutkan?')) {
+                    event.preventDefault();
+                    return false;
+                }
+                this.isPullingSync = true;
             }
         }
     }

@@ -151,16 +151,16 @@ class BackupController extends Controller
         $ext = strtolower($file->getClientOriginalExtension());
 
         if (!in_array($ext, ['sql', 'txt'])) {
-            return redirect()->route('admin.backup.index')
+            return redirect()->route('admin.backup.index', ['tab' => 'import_sql'])
                 ->with('error', 'Format file harus berupa file .sql');
         }
 
         try {
             $result = $this->backupService->importSqlFile($file->getRealPath());
-            return redirect()->route('admin.backup.index')
+            return redirect()->route('admin.backup.index', ['tab' => 'import_sql'])
                 ->with('success', $result['message']);
         } catch (Exception $e) {
-            return redirect()->route('admin.backup.index')
+            return redirect()->route('admin.backup.index', ['tab' => 'import_sql'])
                 ->with('error', 'Gagal restore database: ' . $e->getMessage());
         }
     }
@@ -182,10 +182,10 @@ class BackupController extends Controller
 
         try {
             $result = $this->backupService->importExcelFile($file->getRealPath(), $targetTable, $mode);
-            return redirect()->route('admin.backup.index')
+            return redirect()->route('admin.backup.index', ['tab' => 'import_excel'])
                 ->with('success', $result['message']);
         } catch (Exception $e) {
-            return redirect()->route('admin.backup.index')
+            return redirect()->route('admin.backup.index', ['tab' => 'import_excel'])
                 ->with('error', 'Gagal import Excel: ' . $e->getMessage());
         }
     }
@@ -283,5 +283,59 @@ class BackupController extends Controller
 
         return redirect()->route('admin.backup.index')
             ->with('success', "Semua riwayat backup ({$count} file) berhasil dibersihkan.");
+    }
+
+    /**
+     * Pull and Sync Database & Assets directly from Remote Server (Railway).
+     */
+    public function pullSync(Request $request, \App\Services\ServerSyncService $syncService)
+    {
+        $request->validate([
+            'server_url' => 'required|url',
+            'secret_token' => 'required|string',
+            'sync_database' => 'nullable|boolean',
+            'sync_assets' => 'nullable|boolean',
+        ]);
+
+        $serverUrl = $request->input('server_url');
+        $secretToken = $request->input('secret_token');
+        $syncDatabase = $request->boolean('sync_database', true);
+        $syncAssets = $request->boolean('sync_assets', true);
+
+        if (!$syncDatabase && !$syncAssets) {
+            return redirect()->route('admin.backup.index', ['tab' => 'server_sync'])
+                ->with('error', 'Pilih minimal satu opsi yang ingin disinkronkan (Database atau Aset Media).');
+        }
+
+        try {
+            set_time_limit(600);
+            ini_set('memory_limit', '512M');
+
+            $result = $syncService->pullFromServer($serverUrl, $secretToken, $syncDatabase, $syncAssets);
+
+            return redirect()->route('admin.backup.index', ['tab' => 'server_sync'])
+                ->with('success', $result['message']);
+        } catch (Exception $e) {
+            return redirect()->route('admin.backup.index', ['tab' => 'server_sync'])
+                ->with('error', 'Gagal sinkronisasi dari server: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Test connection to Remote Server for sync.
+     */
+    public function testSyncConnection(Request $request, \App\Services\ServerSyncService $syncService)
+    {
+        $request->validate([
+            'server_url' => 'required|url',
+            'secret_token' => 'required|string',
+        ]);
+
+        $serverUrl = $request->input('server_url');
+        $secretToken = $request->input('secret_token');
+
+        $result = $syncService->testConnection($serverUrl, $secretToken);
+
+        return response()->json($result);
     }
 }

@@ -635,6 +635,26 @@
                             $contactBannerImg = asset($contactBannerImg);
                         }
                     @endphp
+                    <div class="sm:col-span-2 p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+                         x-data="{ bannerContactPreview: '{{ $contactBannerImg }}' }">
+                        <!-- Active Preview Thumbnail -->
+                        <div class="w-28 h-18 sm:w-32 sm:h-20 rounded-xl overflow-hidden bg-slate-900 border border-slate-300 shrink-0 relative shadow-2xs">
+                            <img :src="bannerContactPreview" alt="Preview Banner Kontak" class="w-full h-full object-cover" x-on:error="$el.src = '{{ asset('images/client_update/image4.png') }}'">
+                            <span class="absolute bottom-1 right-1 bg-black/70 text-white text-[8px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Aktif</span>
+                        </div>
+                        <div class="space-y-1.5 flex-1 w-full">
+                            <label class="block text-xs font-bold text-slate-700 uppercase">Upload Foto Background Banner Kontak</label>
+                            <input type="file" name="hero_contact_image_file" accept="image/*" 
+                                   @change="if ($event.target.files[0]) bannerContactPreview = URL.createObjectURL($event.target.files[0])"
+                                   class="w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-medical-50 file:text-medical-700 hover:file:bg-medical-100 cursor-pointer border border-slate-200 rounded-xl bg-white p-1">
+                            <input type="text" name="hero_contact_image" value="{{ $settings['hero_contact_image']->value ?? '' }}" 
+                                   @input="bannerContactPreview = $event.target.value || '{{ asset('images/client_update/image4.png') }}'"
+                                   placeholder="Atau link URL gambar..." class="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 text-xs bg-white">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Hero Halaman E-Katalog Produk -->
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-5">
                 <div class="border-b border-slate-100 pb-3 flex items-center gap-2 text-medical-600">

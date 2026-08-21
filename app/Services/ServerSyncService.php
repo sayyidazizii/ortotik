@@ -149,13 +149,14 @@ class ServerSyncService
 
         try {
             // Stream/download zip directly to file with 10-minute timeout
-            $response = Http::withHeaders([
-                'X-Sync-Token' => $secretToken,
-                'Accept' => 'application/zip, application/json',
-            ])
-            ->timeout(600)
-            ->sink($tempZipPath)
-            ->get($downloadUrl);
+            $response = Http::withOptions($this->getHttpOptions())
+                ->withHeaders([
+                    'X-Sync-Token' => $secretToken,
+                    'Accept' => 'application/zip, application/json',
+                ])
+                ->timeout(600)
+                ->sink($tempZipPath)
+                ->get($downloadUrl);
 
             if ($response->status() === 403 || $response->status() === 401) {
                 throw new Exception("Autentikasi Gagal (HTTP {$response->status()}): Secret Sync Token salah atau belum diset di server.");
@@ -266,10 +267,11 @@ class ServerSyncService
         $checkUrl = "{$serverUrl}/api/sync/health";
 
         try {
-            $response = Http::withHeaders([
-                'X-Sync-Token' => $secretToken,
-                'Accept' => 'application/json',
-            ])->timeout(15)->get($checkUrl);
+            $response = Http::withOptions($this->getHttpOptions())
+                ->withHeaders([
+                    'X-Sync-Token' => $secretToken,
+                    'Accept' => 'application/json',
+                ])->timeout(15)->get($checkUrl);
 
             if ($response->status() === 403 || $response->status() === 401) {
                 return [
@@ -297,6 +299,38 @@ class ServerSyncService
                 'message' => "Gagal terhubung ke server: " . $e->getMessage(),
             ];
         }
+    }
+
+    /**
+     * Get HTTP client options with fallback SSL certificate handling.
+     */
+    protected function getHttpOptions(): array
+    {
+        $options = [];
+
+        // Determine valid SSL CA bundle path
+        $possibleCaPaths = [
+            'D:/laragon/etc/ssl/cacert.pem',
+            'C:/laragon/etc/ssl/cacert.pem',
+            ini_get('curl.cainfo'),
+            ini_get('openssl.cafile'),
+        ];
+
+        $validCaPath = null;
+        foreach ($possibleCaPaths as $path) {
+            if (!empty($path) && File::exists($path)) {
+                $validCaPath = $path;
+                break;
+            }
+        }
+
+        if ($validCaPath) {
+            $options['verify'] = $validCaPath;
+        } elseif (app()->environment('local')) {
+            $options['verify'] = false;
+        }
+
+        return $options;
     }
 
     /**

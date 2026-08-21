@@ -394,6 +394,9 @@
                         <span>Mulai Import Data Excel</span>
                     </button>
                 </div>
+            </form>
+        </div>
+
         <!-- TAB CONTENT 5: SERVER SYNC (PULL FROM RAILWAY TO LOCAL) -->
         <div x-show="activeTab === 'server_sync'" class="p-6 sm:p-8 space-y-6">
             <div class="border-b border-slate-100 pb-4">

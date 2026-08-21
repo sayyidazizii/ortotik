@@ -50,6 +50,7 @@
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
     <style>
+        [x-cloak] { display: none !important; }
         .ql-container {
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 14px;

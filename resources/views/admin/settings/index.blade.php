@@ -73,7 +73,7 @@
     $currentMediaType = $settings['hero_home_media_type']->value ?? (preg_match('/\.(mp4|webm|ogg|mov)$/i', $currentHeroMedia) ? 'video' : 'image');
 @endphp
 
-<div class="max-w-5xl space-y-6" x-data="settingsManager(@js($initialDoctors), '{{ $currentTab }}', '{{ $currentHeroMedia }}', '{{ $currentMediaType }}')">
+<div class="max-w-5xl space-y-6" x-data="settingsManager(@js($initialDoctors), @js($currentTab), @js($currentHeroMedia), @js($currentMediaType))">
 
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
@@ -155,7 +155,7 @@
         <!-- ====================================================================== -->
         <!-- TAB 1: VISUAL & TEKS HERO BERANDA -->
         <!-- ====================================================================== -->
-        <div x-show="activeTab === 'hero_home'" class="space-y-6">
+        <div x-show="activeTab === 'hero_home'" x-cloak class="space-y-6">
             
             <!-- Teks Narasi Utama Hero Beranda -->
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-4">
@@ -382,7 +382,7 @@
         <!-- ====================================================================== -->
         <!-- TAB 2: BANNER HERO HALAMAN & NARASI PROFIL -->
         <!-- ====================================================================== -->
-        <div x-show="activeTab === 'hero_pages'" class="space-y-6" style="display: none;">
+        <div x-show="activeTab === 'hero_pages'" x-cloak class="space-y-6">
             
             <!-- Hero Halaman Tentang Kami & Narasi Profil -->
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-5">
@@ -732,7 +732,7 @@
         <!-- ====================================================================== -->
         <!-- TAB 3: ALAMAT, KONTAK & GOOGLE MAPS -->
         <!-- ====================================================================== -->
-        <div x-show="activeTab === 'location_maps'" class="space-y-6" style="display: none;">
+        <div x-show="activeTab === 'location_maps'" x-cloak class="space-y-6">
             
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
                 <div class="border-b border-slate-100 pb-4">
@@ -840,7 +840,7 @@
         <!-- ====================================================================== -->
         <!-- TAB 4: IDENTITAS KLINIK & FOOTER -->
         <!-- ====================================================================== -->
-        <div x-show="activeTab === 'footer_branding'" class="space-y-6" style="display: none;">
+        <div x-show="activeTab === 'footer_branding'" x-cloak class="space-y-6">
             
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
                 <div class="border-b border-slate-100 pb-4">
@@ -931,7 +931,7 @@
         <!-- ====================================================================== -->
         <!-- TAB 5: SEO & METADATA -->
         <!-- ====================================================================== -->
-        <div x-show="activeTab === 'seo_meta'" class="space-y-6" style="display: none;">
+        <div x-show="activeTab === 'seo_meta'" x-cloak class="space-y-6">
             
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
                 <div class="border-b border-slate-100 pb-4">
@@ -976,7 +976,7 @@
     <!-- ====================================================================== -->
     <!-- TAB 6: SINKRONISASI DATA & ASET (.ZIP) -->
     <!-- ====================================================================== -->
-    <div x-show="activeTab === 'data_sync'" class="space-y-6" style="display: none;">
+    <div x-show="activeTab === 'data_sync'" x-cloak class="space-y-6">
         
         <!-- Info Banner Card -->
         <div class="bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl space-y-3 relative overflow-hidden">
@@ -1223,20 +1223,20 @@ function settingsManager(initialDoctors, initialTab, initialHeroMedia, initialHe
         activeTab: initialTab || 'hero_home',
         doctors: initialDoctors || [],
         currentSlide: 0,
-        badge1Title: '{{ $settings['hero_badge_1_title']->value ?? 'Kemenkes' }}',
-        badge1Subtitle: '{{ $settings['hero_badge_1_subtitle']->value ?? 'memiliki STR & SIP Resmi' }}',
-        badge2Title: '{{ $settings['hero_badge_2_title']->value ?? '100% Garansi Fitting' }}',
-        badge2Subtitle: '{{ $settings['hero_badge_2_subtitle']->value ?? 'Akurasi & Kenyamanan' }}',
+        badge1Title: @js($settings['hero_badge_1_title']->value ?? 'Kemenkes'),
+        badge1Subtitle: @js($settings['hero_badge_1_subtitle']->value ?? 'memiliki STR & SIP Resmi'),
+        badge2Title: @js($settings['hero_badge_2_title']->value ?? '100% Garansi Fitting'),
+        badge2Subtitle: @js($settings['hero_badge_2_subtitle']->value ?? 'Akurasi & Kenyamanan'),
 
         // Hero Background Media (Image or Video)
-        heroHomeMedia: initialHeroMedia || 'https://lh3.googleusercontent.com/aida/AP1WRLu-cYuotNRMpQoNz8xiNuno33F9xSgeFfAKDWqxDogo2VSMvAuCS4QUt2jbop_cQ4e18T36Uqa6an8ezvVtDtXtwih7tYUxTzRHyWrqiqVAcV-b3G6wS_YbGIeB9Bl7tYBFGY4K81YU6TE_o1OvhLPzQstL7r4XrQEGsJ3mWxHjfxXavdzURFHoctGm1HxnTSA9wW180ytfdljOX3A9UWVLpKx5mwhgV3xHx-gbLfAcVFwk-s2AOYLy',
-        heroPreviewMedia: initialHeroMedia || 'https://lh3.googleusercontent.com/aida/AP1WRLu-cYuotNRMpQoNz8xiNuno33F9xSgeFfAKDWqxDogo2VSMvAuCS4QUt2jbop_cQ4e18T36Uqa6an8ezvVtDtXtwih7tYUxTzRHyWrqiqVAcV-b3G6wS_YbGIeB9Bl7tYBFGY4K81YU6TE_o1OvhLPzQstL7r4XrQEGsJ3mWxHjfxXavdzURFHoctGm1HxnTSA9wW180ytfdljOX3A9UWVLpKx5mwhgV3xHx-gbLfAcVFwk-s2AOYLy',
+        heroHomeMedia: initialHeroMedia || @js(asset('images/client_update/image4.png')),
+        heroPreviewMedia: initialHeroMedia || @js(asset('images/client_update/image4.png')),
         heroHomeMediaType: initialHeroMediaType || 'image',
 
         // Maps & Address
-        clinicCity: '{{ $settings['clinic_city']->value ?? 'Sleman, D.I. Yogyakarta' }}',
-        clinicAddress: '{{ $settings['clinic_address']->value ?? ($settings['footer_address']->value ?? 'Jl. Kaliurang KM 8.5, Sinduharjo, Ngaglik, Sleman, D.I. Yogyakarta 55581') }}',
-        mapEmbed: '{{ $settings['google_maps_embed']->value ?? '' }}',
+        clinicCity: @js($settings['clinic_city']->value ?? 'Sleman, D.I. Yogyakarta'),
+        clinicAddress: @js($settings['clinic_address']->value ?? ($settings['footer_address']->value ?? 'Jl. Kaliurang KM 8.5, Sinduharjo, Ngaglik, Sleman, D.I. Yogyakarta 55581')),
+        mapEmbed: @js($settings['google_maps_embed']->value ?? ''),
         mapPreviewSrc: '',
 
         init() {

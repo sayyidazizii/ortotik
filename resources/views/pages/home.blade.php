@@ -250,24 +250,24 @@
                 </div>
 
                 <!-- Floating Badge 1: Kemenkes (Top Left) -->
-                <div class="absolute -top-3 -left-3 sm:-left-6 bg-surface-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-outline-variant/30 flex items-center gap-3 animate-float delay-100 max-w-[200px] z-30">
+                <div class="absolute -top-3 -left-3 sm:-left-6 bg-surface-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-outline-variant/30 flex items-center gap-3 animate-float delay-100 max-w-[220px] z-30">
                     <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-xl">verified_user</span>
                     </div>
                     <div>
-                        <span class="text-xs font-bold text-on-background block">Kemenkes</span>
-                        <span class="text-[9px] text-primary font-semibold leading-tight block">memiliki STR & SIP Resmi</span>
+                        <span class="text-xs font-bold text-on-background block">{{ $settings['hero_badge_1_title'] ?? 'Kemenkes' }}</span>
+                        <span class="text-[9px] text-primary font-semibold leading-tight block">{{ $settings['hero_badge_1_subtitle'] ?? 'memiliki STR & SIP Resmi' }}</span>
                     </div>
                 </div>
 
                 <!-- Floating Badge 2: 100% Garansi Fitting (Bottom Right) -->
-                <div class="absolute -bottom-3 -right-3 sm:-right-6 bg-surface-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-outline-variant/30 flex items-center gap-3 animate-float delay-300 z-30">
+                <div class="absolute -bottom-3 -right-3 sm:-right-6 bg-surface-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-outline-variant/30 flex items-center gap-3 animate-float delay-300 max-w-[220px] z-30">
                     <div class="w-10 h-10 rounded-xl bg-[#E5A500]/15 text-[#E5A500] flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-xl">precision_manufacturing</span>
                     </div>
                     <div>
-                        <span class="text-xs font-bold text-on-background block">100% Garansi Fitting</span>
-                        <span class="text-[10px] text-[#E5A500] font-semibold">Akurasi & Kenyamanan</span>
+                        <span class="text-xs font-bold text-on-background block">{{ $settings['hero_badge_2_title'] ?? '100% Garansi Fitting' }}</span>
+                        <span class="text-[10px] text-[#E5A500] font-semibold">{{ $settings['hero_badge_2_subtitle'] ?? 'Akurasi & Kenyamanan' }}</span>
                     </div>
                 </div>
             </div>
@@ -319,16 +319,33 @@
             </div>
 
             <!-- Right: Photo Gallery Box (Auto-slide Activity Photos) -->
+            @php
+                $aboutActivityImages = [];
+                $rawActivitySetting = $settings['about_activity_images'] ?? null;
+                if (!empty($rawActivitySetting)) {
+                    $decoded = is_array($rawActivitySetting) ? $rawActivitySetting : json_decode($rawActivitySetting, true);
+                    if (is_array($decoded)) {
+                        foreach ($decoded as $img) {
+                            if (!empty($img)) {
+                                $aboutActivityImages[] = (str_starts_with($img, 'http://') || str_starts_with($img, 'https://')) ? $img : ('/' . ltrim($img, '/'));
+                            }
+                        }
+                    }
+                }
+                if (empty($aboutActivityImages)) {
+                    $aboutActivityImages = [
+                        asset('images/client_update/image2.png'),
+                        asset('images/client_update/image5.png'),
+                        asset('images/client_update/image3.png'),
+                        asset('images/client_update/image7.png'),
+                    ];
+                }
+            @endphp
             <div class="relative rounded-3xl overflow-hidden shadow-2xl h-[420px] md:h-[500px] fade-in-right delay-200 hover:-translate-y-2 transition-transform duration-500 border border-outline-variant/30 group"
-                 x-data="{ currentAboutSlide: 0, aboutImages: [
-                     '{{ asset('images/client_update/image2.png') }}',
-                     '{{ asset('images/client_update/image5.png') }}',
-                     '{{ asset('images/client_update/image3.png') }}',
-                     '{{ asset('images/client_update/image7.png') }}'
-                 ] }" 
-                 x-init="setInterval(() => { currentAboutSlide = (currentAboutSlide + 1) % aboutImages.length }, 3500)">
+                 x-data="{ currentAboutSlide: 0, aboutImages: @js($aboutActivityImages) }" 
+                 x-init="if (aboutImages.length > 1) { setInterval(() => { currentAboutSlide = (currentAboutSlide + 1) % aboutImages.length }, 3500) }">
                 <template x-for="(imgSrc, gIdx) in aboutImages" :key="gIdx">
-                    <img :src="imgSrc" alt="Kegiatan Pelayanan pediOcare" 
+                    <img :src="imgSrc" alt="{{ $settings['about_activity_title'] ?? 'Kegiatan Pelayanan Klinis pediOcare' }}" 
                          x-show="currentAboutSlide === gIdx"
                          x-transition:enter="transition ease-out duration-700"
                          x-transition:enter-start="opacity-0 scale-95"
@@ -341,8 +358,8 @@
                             <span class="material-symbols-outlined text-2xl">biotech</span>
                         </div>
                         <div>
-                            <h4 class="font-bold text-sm text-on-background">Kegiatan Pelayanan Klinis pediOcare</h4>
-                            <p class="text-xs text-on-surface-variant">Fabrikasi & Penanganan Ortotik Prostetik Berkualitas.</p>
+                            <h4 class="font-bold text-sm text-on-background">{{ $settings['about_activity_title'] ?? 'Kegiatan Pelayanan Klinis pediOcare' }}</h4>
+                            <p class="text-xs text-on-surface-variant">{{ $settings['about_activity_subtitle'] ?? 'Fabrikasi & Penanganan Ortotik Prostetik Berkualitas.' }}</p>
                         </div>
                     </div>
                 </div>
@@ -544,93 +561,80 @@
 <!-- Produk Terlaris (Best Seller Products) -->
 <section class="relative py-20 md:py-28 pb-28 md:pb-40 bg-[#f0f9f8] overflow-hidden fade-in-up" id="produk">
     <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-        <div class="text-center md:text-left mb-12 flex flex-col md:flex-row justify-between items-end gap-4">
+        <div class="text-center md:text-left mb-10 md:mb-12 flex flex-col md:flex-row justify-between items-center md:items-end gap-4">
             <div class="fade-in-left">
-                <h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background mb-4 font-semibold">
+                <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
+                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    E-Katalog Ready Stock
+                </span>
+                <h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background font-semibold">
                     Produk Ready Stock Terlaris
                 </h2>
-                <p class="font-body-md text-body-md text-on-surface-variant">
-                    Solusi langsung untuk kebutuhan ortopedi Anda.
+                <p class="font-body-md text-body-md text-on-surface-variant max-w-xl mt-1">
+                    Pilihan alat bantu ortotik dan ortopedi siap pakai dengan standar mutu dan fitting presisi.
                 </p>
             </div>
-            <a href="{{ route('products.index') }}" class="hidden md:inline-flex items-center justify-center px-6 py-2.5 rounded-lg border border-outline text-on-surface font-label-md hover:bg-surface-variant transition-colors bg-surface-white font-semibold fade-in-right">
-                Lihat Semua Produk
+            <a href="{{ route('products.index') }}" class="hidden md:inline-flex items-center gap-1.5 px-6 py-3 rounded-xl border border-outline-variant/40 text-primary font-bold text-xs hover:bg-primary hover:text-white transition-all bg-surface-white shadow-2xs hover:shadow-md fade-in-right">
+                <span>Lihat Semua Katalog</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
         </div>
         
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 lg:gap-8">
-            <!-- Product 1 -->
-            <div class="bg-surface-white rounded-2xl shadow-1 hover:shadow-hover p-3.5 sm:p-5 border border-outline-variant/20 flex flex-col group transition-all duration-300 hover:-translate-y-1 fade-in-up delay-100">
-                <div class="aspect-square bg-background-subtle rounded-xl mb-3 sm:mb-5 relative overflow-hidden flex items-center justify-center p-3 sm:p-6">
-                    <img alt="Advanced Articulating Knee Orthosis" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRX96KTlDSHiomGN3OyOvDA8gmpFo6nH9DuQJ13zV-uwYj0On4T643XIIvI7ZfTgEHlGNMCnzLWygdnoChDtXh3HKQ3iKaxsBs2SXt9HZXR5pM7Qtw8KzFBwh-xAkBI6kBHJNij2YKEAiHE2MhApvaIyUSmfo0V7MtHqYRgFzaU3IRMw5FPuoduXReXEcCNbLjLVDm5pEO5HM2XWxQXW-P6GZ1bJoBKdVpdMOPdViOhKinS3glyd4"/>
-                </div>
-                <h3 class="font-label-md text-xs sm:text-sm md:text-base text-on-background mb-2 sm:mb-3 line-clamp-2 leading-snug font-semibold">
-                    Advanced Articulating Knee Orthosis
-                </h3>
-                <div class="flex justify-between items-center mt-auto pt-2 border-t border-outline-variant/10 gap-1.5">
-                    <span class="font-body-md text-xs sm:text-sm md:text-base text-primary font-bold">Rp 4.500.000</span>
-                    <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20tertarik%20pesan%20Advanced%20Articulating%20Knee%20Orthosis." target="_blank" rel="noopener noreferrer"
-                       class="text-primary bg-primary/5 hover:bg-primary hover:text-surface-white p-2 sm:p-2.5 rounded-lg transition-all duration-300 flex items-center justify-center shrink-0" aria-label="Beli via WhatsApp">
-                        <span class="material-symbols-outlined text-sm sm:text-base">shopping_cart</span>
-                    </a>
-                </div>
-            </div>
+        @if(isset($featuredProducts) && $featuredProducts->count() > 0)
+        <!-- Grid Real Database Products (Lapakgaming Compact Style) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 lg:gap-6">
+            @foreach($featuredProducts as $prod)
+            <a href="{{ route('products.show', $prod->slug) }}" 
+               class="bg-surface-white border border-outline-variant/30 hover:border-primary rounded-2xl sm:rounded-3xl p-3 sm:p-3.5 transition-all duration-300 group flex flex-col justify-between h-full shadow-1 hover:shadow-hover hover:-translate-y-1 relative">
+                
+                <!-- Inner Image Box -->
+                <div class="relative w-full aspect-square rounded-xl sm:rounded-2xl bg-surface-container-low/70 border border-outline-variant/20 overflow-hidden flex items-center justify-center p-3 sm:p-4 group-hover:bg-primary/5 transition-colors">
+                    <img src="{{ $prod->thumbnail_url }}" alt="{{ $prod->name }}" 
+                         class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300"/>
+                    
+                    <!-- Category Badge (Positioned at Bottom-Left of Image) -->
+                    <div class="absolute bottom-2 left-2 max-w-[calc(100%-16px)]">
+                        <span class="bg-primary/95 text-white font-bold text-[9px] sm:text-[10px] px-2 py-0.5 rounded-md shadow-2xs truncate block leading-tight">
+                            {{ $prod->category->name ?? 'Ortotik' }}
+                        </span>
+                    </div>
 
-            <!-- Product 2 -->
-            <div class="bg-surface-white rounded-2xl shadow-1 hover:shadow-hover p-3.5 sm:p-5 border border-outline-variant/20 flex flex-col group transition-all duration-300 hover:-translate-y-1 fade-in-up delay-200">
-                <div class="aspect-square bg-background-subtle rounded-xl mb-3 sm:mb-5 relative overflow-hidden flex items-center justify-center p-3 sm:p-6">
-                    <img alt="Post-Op Knee Brace" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLvP5_T_X177T_O2m4uL3n9fG_2bW8mG7z28Z6n1x9Y_X04K51Z36_V61E7tV9U6V_l5w9Q5D2k5B5q8X93zH7n6O_E0G5K35Q4v0R8G8V9P_7R7w8D2U1uL9P8S_2O6D5oK9Q9G_F3I4M7L2K0dF7pQ0qK6G_5dZ9F_X8I"/>
+                    @if($prod->stock_status === 'in_stock' || $prod->stock_status === 'ready_stock')
+                    <div class="absolute top-2 right-2">
+                        <span class="bg-white/90 backdrop-blur-sm text-emerald-700 font-bold text-[8px] sm:text-[9px] px-1.5 py-0.5 rounded-md border border-emerald-200/80 shadow-2xs">
+                            Ready Stock
+                        </span>
+                    </div>
+                    @endif
                 </div>
-                <h3 class="font-label-md text-xs sm:text-sm md:text-base text-on-background mb-2 sm:mb-3 line-clamp-2 leading-snug font-semibold">
-                    Post-Op Knee Brace
-                </h3>
-                <div class="flex justify-between items-center mt-auto pt-2 border-t border-outline-variant/10 gap-1.5">
-                    <span class="font-body-md text-xs sm:text-sm md:text-base text-primary font-bold">Rp 2.100.000</span>
-                    <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20tertarik%20pesan%20Post-Op%20Knee%20Brace." target="_blank" rel="noopener noreferrer"
-                       class="text-primary bg-primary/5 hover:bg-primary hover:text-surface-white p-2 sm:p-2.5 rounded-lg transition-all duration-300 flex items-center justify-center shrink-0" aria-label="Beli via WhatsApp">
-                        <span class="material-symbols-outlined text-sm sm:text-base">shopping_cart</span>
-                    </a>
+                
+                <!-- Compact Content Details -->
+                <div class="pt-3 pb-0.5 flex flex-col justify-between flex-grow space-y-2">
+                    <h3 class="text-xs sm:text-sm font-bold text-on-surface line-clamp-1 group-hover:text-primary transition-colors leading-snug">
+                        {{ $prod->name }}
+                    </h3>
+                    
+                    <div class="flex items-center justify-between pt-2 border-t border-outline-variant/15 mt-auto gap-1">
+                        <div>
+                            <span class="text-xs sm:text-sm md:text-base font-extrabold text-primary block leading-tight">{{ $prod->formatted_price }}</span>
+                            @if($prod->formatted_discount_price)
+                            <span class="text-[10px] text-slate-400 line-through block">{{ $prod->formatted_discount_price }}</span>
+                            @endif
+                        </div>
+                        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-surface-container-low group-hover:bg-primary group-hover:text-white text-on-surface-variant flex items-center justify-center transition-colors shrink-0 shadow-2xs">
+                            <span class="material-symbols-outlined text-sm sm:text-base">arrow_forward</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <!-- Product 3 -->
-            <div class="bg-surface-white rounded-2xl shadow-1 hover:shadow-hover p-3.5 sm:p-5 border border-outline-variant/20 flex flex-col group transition-all duration-300 hover:-translate-y-1 fade-in-up delay-300">
-                <div class="aspect-square bg-background-subtle rounded-xl mb-3 sm:mb-5 relative overflow-hidden flex items-center justify-center p-3 sm:p-6">
-                    <img alt="Pneumatic Walker Boot" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLt9R2Z_K8mN1_yJ6n3A_4cZ0Q_1H7B3T9tV_7V5t_G0oO9wM1W6c4V3rG2D_wO_H4tN2H2_rG0V6M4U4Y6wE4O8A9Y1qU_5lH6qC_D2O8L_t5E3zW0oU6sZ9I6xQ5nN_7K9oQ_tH0Q_T4_K1rO1qI9cO9uI_9eL"/>
-                </div>
-                <h3 class="font-label-md text-xs sm:text-sm md:text-base text-on-background mb-2 sm:mb-3 line-clamp-2 leading-snug font-semibold">
-                    Pneumatic Walker Boot
-                </h3>
-                <div class="flex justify-between items-center mt-auto pt-2 border-t border-outline-variant/10 gap-1.5">
-                    <span class="font-body-md text-xs sm:text-sm md:text-base text-primary font-bold">Rp 1.850.000</span>
-                    <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20tertarik%20pesan%20Pneumatic%20Walker%20Boot." target="_blank" rel="noopener noreferrer"
-                       class="text-primary bg-primary/5 hover:bg-primary hover:text-surface-white p-2 sm:p-2.5 rounded-lg transition-all duration-300 flex items-center justify-center shrink-0" aria-label="Beli via WhatsApp">
-                        <span class="material-symbols-outlined text-sm sm:text-base">shopping_cart</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="bg-surface-white rounded-2xl shadow-1 hover:shadow-hover p-3.5 sm:p-5 border border-outline-variant/20 flex flex-col group transition-all duration-300 hover:-translate-y-1 fade-in-up delay-400">
-                <div class="aspect-square bg-background-subtle rounded-xl mb-3 sm:mb-5 relative overflow-hidden flex items-center justify-center p-3 sm:p-6">
-                    <img alt="Shoulder Abduction Sling" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAomziuJgJ2pOhXZgdUea70UNAeDJWO2fp4tlHGaJSsRZzvuRuB2Kc2_T2okGTeJOAS_3ltSSAEzvli_BLT0dtUyfNpv15k7BgkIBMyvxqNj-Xi7vFkNO0qsQv4XOcHozbKjNAJ4gxdbqLkV_DzX5TZ_AFikagGERipBHIk8EDYY16XTxgkTLlp3BZ0z-fE9hJrv4zTlytToR1ap0wVxS0FT9t2cVYYuPOu67YgO1nGdYVm8x2gSS0"/>
-                </div>
-                <h3 class="font-label-md text-xs sm:text-sm md:text-base text-on-background mb-2 sm:mb-3 line-clamp-2 leading-snug font-semibold">
-                    Shoulder Abduction Sling
-                </h3>
-                <div class="flex justify-between items-center mt-auto pt-2 border-t border-outline-variant/10 gap-1.5">
-                    <span class="font-body-md text-xs sm:text-sm md:text-base text-primary font-bold">Rp 1.250.000</span>
-                    <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20tertarik%20pesan%20Shoulder%20Abduction%20Sling." target="_blank" rel="noopener noreferrer"
-                       class="text-primary bg-primary/5 hover:bg-primary hover:text-surface-white p-2 sm:p-2.5 rounded-lg transition-all duration-300 flex items-center justify-center shrink-0" aria-label="Beli via WhatsApp">
-                        <span class="material-symbols-outlined text-sm sm:text-base">shopping_cart</span>
-                    </a>
-                </div>
-            </div>
+            </a>
+            @endforeach
         </div>
+        @endif
         
         <div class="mt-8 text-center md:hidden">
-            <a href="{{ route('products.index') }}" class="inline-flex items-center justify-center px-6 py-2.5 rounded-lg border border-outline text-on-surface font-label-md hover:bg-surface-variant transition-colors w-full bg-surface-white font-semibold">
-                Lihat Semua Produk
+            <a href="{{ route('products.index') }}" class="inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-xl border border-outline-variant/40 text-primary font-bold text-xs hover:bg-primary hover:text-white transition-all w-full bg-surface-white shadow-sm">
+                <span>Lihat Semua Katalog Produk</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
         </div>
     </div>
@@ -672,8 +676,8 @@
                     </p>
                 </div>
                 <div class="mt-6 pt-4 border-t border-outline-variant/15 flex items-center gap-4">
-                    @if($t->photo)
-                    <img src="{{ asset($t->photo) }}" alt="{{ $t->patient_name }}" class="w-12 h-12 rounded-full object-cover border border-outline-variant/30 shrink-0">
+                    @if($t->photo_url)
+                    <img src="{{ $t->photo_url }}" alt="{{ $t->patient_name }}" class="w-12 h-12 rounded-full object-cover border border-outline-variant/30 shrink-0 shadow-2xs">
                     @else
                     <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg shrink-0">
                         {{ strtoupper(substr($t->patient_name, 0, 1)) }}

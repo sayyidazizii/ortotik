@@ -5,17 +5,25 @@
 
 @section('content')
 
+@php
+    $heroCustomBg = $settings['hero_about_image'] ?? asset('images/client_update/image4.png');
+    if (!str_starts_with($heroCustomBg, 'http') && !str_starts_with($heroCustomBg, '/')) {
+        $heroCustomBg = asset($heroCustomBg);
+    }
+@endphp
+
 <!-- Hero Section -->
-<section class="relative text-center mx-auto space-y-4 py-16 md:py-24 px-6 md:px-12 text-white w-full overflow-hidden bg-primary fade-in-up">
-    <div class="max-w-container-max mx-auto relative z-10 space-y-3">
-        <span class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-surface-white/10 text-primary-fixed border border-surface-white/20 text-xs font-semibold uppercase tracking-wider">
-            <span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
+<section class="relative text-center mx-auto py-10 md:py-14 px-margin-mobile md:px-margin-desktop text-white w-full overflow-hidden fade-in-up" 
+         style='background-image: linear-gradient(rgba(13, 28, 47, 0.82), rgba(13, 28, 47, 0.82)), url("{{ $heroCustomBg }}"); background-size: cover; background-position: center;'>
+    <div class="max-w-container-max mx-auto relative z-10 space-y-2.5 sm:space-y-3">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-white/15 text-primary-fixed border border-surface-white/25 text-[11px] font-bold uppercase tracking-wider backdrop-blur-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse"></span>
             Individual Custom Fabrication
         </span>
-        <h1 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl font-bold tracking-tight text-white max-w-3xl mx-auto leading-tight">
-            Alur Pasien & Produk Custom-Made
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white max-w-3xl mx-auto leading-tight">
+            Alur Pasien & Produk Custom
         </h1>
-        <p class="font-body-lg text-body-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
+        <p class="font-body-md text-body-md leading-relaxed text-slate-200 max-w-2xl mx-auto text-xs sm:text-sm">
             Dirancang dan diproduksi secara individual mengikuti anatomi dan kebutuhan biomekanik setiap pasien dengan garansi fitting 100%.
         </p>
     </div>

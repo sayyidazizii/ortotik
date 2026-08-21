@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@yield('title', ($settings['clinic_name'] ?? 'pediOcare') . ' - ' . ($settings['clinic_tagline'] ?? 'Care your milestone'))</title>
     <meta name="description" content="@yield('meta_description', $settings['meta_description'] ?? 'Pusat pelayanan Ortotik Prostetik profesional tersertifikasi. Care your milestone.')"/>
+    <meta name="keywords" content="@yield('meta_keywords', $settings['meta_keywords'] ?? 'kaki palsu jogja, ortotik prostetik jogja, klinik kaki palsu jogja, pembuatan kaki palsu yogyakarta, pediocare')"/>
     
     <!-- Google Fonts: Plus Jakarta Sans & Material Symbols Outlined -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -222,7 +223,7 @@
                 <a href="https://wa.me/{{ $cleanWA }}" target="_blank" aria-label="whatsapp" class="flex items-center justify-center p-2 text-on-surface-variant hover:text-primary transition-colors duration-200 rounded-full hover:bg-surface-variant" title="WhatsApp {{ $hotlineWA }}">
                     <span class="material-symbols-outlined">chat</span>
                 </a>
-                <a href="{{ route('consultation.create') }}" class="bg-primary text-on-primary px-5 py-2.5 rounded-xl font-label-md text-label-md hover:bg-secondary hover:shadow-lg transition-all duration-300 ml-2 inline-flex items-center justify-center font-bold">Consultation</a>
+                <a href="{{ route('contact') }}" class="bg-primary text-on-primary px-5 py-2.5 rounded-xl font-label-md text-label-md hover:bg-secondary hover:shadow-lg transition-all duration-300 ml-2 inline-flex items-center justify-center font-bold">Konsultasi</a>
             </div>
             <button class="md:hidden text-primary p-2 focus:outline-none" id="mobile-menu-btn" aria-label="Buka Menu">
                 <span class="material-symbols-outlined">menu</span>
@@ -266,9 +267,9 @@
             </a>
         </nav>
         <div class="pt-4 border-t border-outline-variant/30 flex flex-col shrink-0 mt-auto">
-            <a href="{{ route('consultation.create') }}" class="w-full bg-[#E5A500] hover:bg-[#CC9200] text-white py-3.5 rounded-xl font-label-md text-label-md text-center font-bold shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
-                <span class="material-symbols-outlined text-lg">calendar_month</span>
-                <span>Jadwalkan Konsultasi</span>
+            <a href="{{ route('contact') }}" class="w-full bg-[#E5A500] hover:bg-[#CC9200] text-white py-3.5 rounded-xl font-label-md text-label-md text-center font-bold shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-lg">contacts</span>
+                <span>Hubungi / Kontak Kami</span>
             </a>
         </div>
     </div>

@@ -25,12 +25,12 @@ class SiteSettingController extends Controller
         $request->validate([
             // Home Hero Background Media (Image or Video)
             'hero_home_media_file'       => 'nullable|file|mimes:jpeg,png,jpg,webp,svg,gif,mp4,webm,ogg,mov,avi|max:51200',
-            'hero_home_media'            => 'nullable|string|max:1000',
+            'hero_home_media'            => 'nullable|string',
             'hero_home_media_type'       => 'nullable|string|in:image,video',
 
             // Hero Doctors & Badges
             'hero_doctor_image_file'     => 'nullable|image|mimes:jpeg,png,jpg,webp,svg,gif|max:5120',
-            'hero_doctor_image'          => 'nullable|string|max:500',
+            'hero_doctor_image'          => 'nullable|string',
             'hero_doctor_badge'          => 'nullable|string|max:100',
             'hero_doctor_name'           => 'nullable|string|max:150',
             'hero_doctor_title'          => 'nullable|string|max:200',
@@ -102,22 +102,24 @@ class SiteSettingController extends Controller
             );
         } elseif ($request->filled('hero_home_media')) {
             $url = $request->input('hero_home_media');
-            $isVideo = (bool) preg_match('/\.(mp4|webm|ogg|mov)$/i', $url);
-            if ($request->filled('hero_home_media_type')) {
-                $mediaType = $request->input('hero_home_media_type');
-            } else {
-                $mediaType = $isVideo ? 'video' : 'image';
+            if (!str_starts_with($url, 'data:')) {
+                $isVideo = (bool) preg_match('/\.(mp4|webm|ogg|mov)$/i', $url);
+                if ($request->filled('hero_home_media_type')) {
+                    $mediaType = $request->input('hero_home_media_type');
+                } else {
+                    $mediaType = $isVideo ? 'video' : 'image';
+                }
+
+                SiteSetting::updateOrCreate(
+                    ['key' => 'hero_home_media'],
+                    ['value' => $url, 'group' => 'hero']
+                );
+
+                SiteSetting::updateOrCreate(
+                    ['key' => 'hero_home_media_type'],
+                    ['value' => $mediaType, 'group' => 'hero']
+                );
             }
-
-            SiteSetting::updateOrCreate(
-                ['key' => 'hero_home_media'],
-                ['value' => $url, 'group' => 'hero']
-            );
-
-            SiteSetting::updateOrCreate(
-                ['key' => 'hero_home_media_type'],
-                ['value' => $mediaType, 'group' => 'hero']
-            );
         }
 
         // 2. Handle Multiple Hero Doctors JSON & Files
@@ -185,11 +187,12 @@ class SiteSettingController extends Controller
 
         // 3. Handle Page Hero Banner Image Uploads
         $pageImageKeys = [
-            'hero_services_image' => 'hero_services_image_file',
-            'hero_about_image'    => 'hero_about_image_file',
-            'hero_contact_image'  => 'hero_contact_image_file',
-            'hero_products_image' => 'hero_products_image_file',
-            'hero_articles_image' => 'hero_articles_image_file',
+            'hero_services_image'      => 'hero_services_image_file',
+            'services_spotlight_image' => 'services_spotlight_image_file',
+            'hero_about_image'         => 'hero_about_image_file',
+            'hero_contact_image'       => 'hero_contact_image_file',
+            'hero_products_image'      => 'hero_products_image_file',
+            'hero_articles_image'      => 'hero_articles_image_file',
         ];
 
         foreach ($pageImageKeys as $settingKey => $fileInputName) {
@@ -208,9 +211,31 @@ class SiteSettingController extends Controller
             }
         }
 
-        // 4. Handle Remaining Text Fields
+        // 4. Handle About Section Activity Slider Images
+        if ($request->has('retained_about_activity_images') || $request->hasFile('about_activity_files')) {
+            $activityImages = $request->input('retained_about_activity_images', []);
+            if (!is_array($activityImages)) {
+                $activityImages = [];
+            }
+            if ($request->hasFile('about_activity_files')) {
+                foreach ($request->file('about_activity_files') as $file) {
+                    if ($file->isValid()) {
+                        $path = $file->store('settings/activity', 'public');
+                        $activityImages[] = 'storage/' . $path;
+                    }
+                }
+            }
+            if (!empty($activityImages)) {
+                SiteSetting::updateOrCreate(
+                    ['key' => 'about_activity_images'],
+                    ['value' => json_encode(array_values($activityImages), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE), 'group' => 'hero_pages']
+                );
+            }
+        }
+
+        // 5. Handle Remaining Text Fields
         $fields = $request->except(array_merge(
-            ['_token', '_method', 'hero_doctor_files', 'hero_doctors_json', 'hero_home_media_file', 'hero_home_media', 'hero_home_media_type'],
+            ['_token', '_method', 'hero_doctor_files', 'hero_doctors_json', 'hero_home_media_file', 'hero_home_media', 'hero_home_media_type', 'about_activity_files', 'retained_about_activity_images'],
             array_values($pageImageKeys),
             array_keys($pageImageKeys)
         ));

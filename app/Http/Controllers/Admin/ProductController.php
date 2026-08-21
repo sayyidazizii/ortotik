@@ -68,8 +68,12 @@ class ProductController extends Controller
             'medical_indications' => ['nullable', 'string'],
             'medical_indication'  => ['nullable', 'string'],
             'material_spec'       => ['nullable', 'string'],
+            'specifications'      => ['nullable'],
+            'size_chart'          => ['nullable', 'string'],
             'warranty_period'     => ['nullable', 'string', 'max:100'],
             'image_file'          => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:5120'],
+            'gallery_files.*'     => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:5120'],
+            'gallery_urls.*'      => ['nullable', 'string', 'max:500'],
             'thumbnail'           => ['nullable', 'string', 'max:500'],
             'main_image_path'     => ['nullable', 'string', 'max:500'],
         ]);
@@ -80,7 +84,7 @@ class ProductController extends Controller
             $validated['stock_status'] = 'pre_order';
         }
 
-        // Handle Image Upload
+        // Handle Thumbnail Upload
         if ($request->hasFile('image_file')) {
             $path = $request->file('image_file')->store('products', 'public');
             $validated['thumbnail'] = 'storage/' . $path;
@@ -89,6 +93,23 @@ class ProductController extends Controller
         } elseif ($request->filled('main_image_path')) {
             $validated['thumbnail'] = $request->input('main_image_path');
         }
+
+        // Handle Multiple Gallery Images
+        $galleryImages = [];
+        if ($request->hasFile('gallery_files')) {
+            foreach ($request->file('gallery_files') as $gFile) {
+                $gPath = $gFile->store('products/gallery', 'public');
+                $galleryImages[] = 'storage/' . $gPath;
+            }
+        }
+        if ($request->filled('gallery_urls') && is_array($request->input('gallery_urls'))) {
+            foreach ($request->input('gallery_urls') as $gUrl) {
+                if (!empty($gUrl)) {
+                    $galleryImages[] = $gUrl;
+                }
+            }
+        }
+        $validated['images'] = array_values(array_unique($galleryImages));
 
         $slug = Str::slug($validated['name']);
         $uniqueSlug = $slug;
@@ -99,6 +120,7 @@ class ProductController extends Controller
         $validated['slug'] = $uniqueSlug;
         $validated['excerpt'] = $validated['excerpt'] ?? $validated['short_description'] ?? '';
         $validated['medical_indications'] = $validated['medical_indications'] ?? $validated['medical_indication'] ?? null;
+        $validated['specifications'] = $request->input('specifications') ?? $request->input('material_spec') ?? null;
         $validated['is_active'] = $request->boolean('is_active', true);
         $validated['is_featured'] = $request->boolean('is_featured', false);
 
@@ -119,22 +141,27 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         $validated = $request->validate([
-            'name'                => ['required', 'string', 'max:255'],
-            'category_id'         => ['required', 'exists:categories,id'],
-            'sku'                 => ['nullable', 'string', 'max:100', 'unique:products,sku,' . $product->id],
-            'price'               => ['nullable', 'numeric', 'min:0'],
-            'discount_price'      => ['nullable', 'numeric', 'min:0'],
-            'stock_status'        => ['required', 'in:in_stock,pre_order,out_of_stock,ready_stock,custom_only'],
-            'excerpt'             => ['nullable', 'string', 'max:500'],
-            'short_description'   => ['nullable', 'string', 'max:500'],
-            'description'         => ['required', 'string'],
-            'medical_indications' => ['nullable', 'string'],
-            'medical_indication'  => ['nullable', 'string'],
-            'material_spec'       => ['nullable', 'string'],
-            'warranty_period'     => ['nullable', 'string', 'max:100'],
-            'image_file'          => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:5120'],
-            'thumbnail'           => ['nullable', 'string', 'max:500'],
-            'main_image_path'     => ['nullable', 'string', 'max:500'],
+            'name'                     => ['required', 'string', 'max:255'],
+            'category_id'              => ['required', 'exists:categories,id'],
+            'sku'                      => ['nullable', 'string', 'max:100', 'unique:products,sku,' . $product->id],
+            'price'                    => ['nullable', 'numeric', 'min:0'],
+            'discount_price'           => ['nullable', 'numeric', 'min:0'],
+            'stock_status'             => ['required', 'in:in_stock,pre_order,out_of_stock,ready_stock,custom_only'],
+            'excerpt'                  => ['nullable', 'string', 'max:500'],
+            'short_description'        => ['nullable', 'string', 'max:500'],
+            'description'              => ['required', 'string'],
+            'medical_indications'      => ['nullable', 'string'],
+            'medical_indication'       => ['nullable', 'string'],
+            'material_spec'            => ['nullable', 'string'],
+            'specifications'           => ['nullable'],
+            'size_chart'               => ['nullable', 'string'],
+            'warranty_period'          => ['nullable', 'string', 'max:100'],
+            'image_file'               => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:5120'],
+            'gallery_files.*'          => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:5120'],
+            'gallery_urls.*'           => ['nullable', 'string', 'max:500'],
+            'retained_gallery_images.*' => ['nullable', 'string', 'max:500'],
+            'thumbnail'                => ['nullable', 'string', 'max:500'],
+            'main_image_path'          => ['nullable', 'string', 'max:500'],
         ]);
 
         if ($validated['stock_status'] === 'ready_stock') {
@@ -161,6 +188,41 @@ class ProductController extends Controller
             $validated['thumbnail'] = $request->input('main_image_path');
         }
 
+        // Handle Gallery Multi-Images
+        $galleryImages = [];
+        if ($request->has('retained_gallery_images') && is_array($request->input('retained_gallery_images'))) {
+            $galleryImages = $request->input('retained_gallery_images');
+        }
+
+        // Clean up un-retained images from storage
+        $oldImages = is_array($product->images) ? $product->images : [];
+        foreach ($oldImages as $oldImg) {
+            if (!in_array($oldImg, $galleryImages) && str_starts_with($oldImg, 'storage/')) {
+                $oldRel = str_replace('storage/', '', $oldImg);
+                if (Storage::disk('public')->exists($oldRel)) {
+                    Storage::disk('public')->delete($oldRel);
+                }
+            }
+        }
+
+        // Add newly uploaded gallery files
+        if ($request->hasFile('gallery_files')) {
+            foreach ($request->file('gallery_files') as $gFile) {
+                $gPath = $gFile->store('products/gallery', 'public');
+                $galleryImages[] = 'storage/' . $gPath;
+            }
+        }
+
+        // Add gallery URLs / presets
+        if ($request->filled('gallery_urls') && is_array($request->input('gallery_urls'))) {
+            foreach ($request->input('gallery_urls') as $gUrl) {
+                if (!empty($gUrl)) {
+                    $galleryImages[] = $gUrl;
+                }
+            }
+        }
+        $validated['images'] = array_values(array_unique($galleryImages));
+
         if ($product->name !== $validated['name']) {
             $slug = Str::slug($validated['name']);
             $uniqueSlug = $slug;
@@ -173,6 +235,7 @@ class ProductController extends Controller
 
         $validated['excerpt'] = $validated['excerpt'] ?? $validated['short_description'] ?? $product->excerpt;
         $validated['medical_indications'] = $validated['medical_indications'] ?? $validated['medical_indication'] ?? $product->medical_indications;
+        $validated['specifications'] = $request->input('specifications') ?? $request->input('material_spec') ?? $product->specifications;
         $validated['is_active'] = $request->boolean('is_active');
         $validated['is_featured'] = $request->boolean('is_featured');
 

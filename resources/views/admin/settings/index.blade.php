@@ -60,7 +60,16 @@
     unset($docItem);
 
     $currentTab = request('tab', 'hero_home');
-    $currentHeroMedia = $settings['hero_home_media']->value ?? 'https://lh3.googleusercontent.com/aida/AP1WRLu-cYuotNRMpQoNz8xiNuno33F9xSgeFfAKDWqxDogo2VSMvAuCS4QUt2jbop_cQ4e18T36Uqa6an8ezvVtDtXtwih7tYUxTzRHyWrqiqVAcV-b3G6wS_YbGIeB9Bl7tYBFGY4K81YU6TE_o1OvhLPzQstL7r4XrQEGsJ3mWxHjfxXavdzURFHoctGm1HxnTSA9wW180ytfdljOX3A9UWVLpKx5mwhgV3xHx-gbLfAcVFwk-s2AOYLy';
+    $rawHeroMedia = $settings['hero_home_media']->value ?? '';
+    if (empty($rawHeroMedia)) {
+        $currentHeroMedia = asset('images/client_update/image4.png');
+    } else {
+        if (!str_starts_with($rawHeroMedia, 'http') && !str_starts_with($rawHeroMedia, '/')) {
+            $currentHeroMedia = '/' . $rawHeroMedia;
+        } else {
+            $currentHeroMedia = $rawHeroMedia;
+        }
+    }
     $currentMediaType = $settings['hero_home_media_type']->value ?? (preg_match('/\.(mp4|webm|ogg|mov)$/i', $currentHeroMedia) ? 'video' : 'image');
 @endphp
 
@@ -150,61 +159,6 @@
                     <label class="block text-xs font-bold text-slate-700 uppercase">Teks Deskripsi / Narasi Utama di Bawah Judul Hero</label>
                     <textarea name="hero_home_description" rows="4" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-medical-500 leading-relaxed">{{ $settings['hero_home_description']->value ?? 'Sebaik-baik manusia adalah yang bermanfaat untuk orang lain. Kami memandang manusia sebagai makhluk ciptaan yang sempurna. Sudah lebih dari satu dekade pediOcare melayani, membantu dan memberi solusi bagi masyarakat yang membutuhkan layanan alat bantu Ortosis Prostesis. Suatu kebahagiaan bagi Kami ketika dapat melihat klien/pasien yang mengalami amputasi kaki namun dapat kembali berjalan penuhi harapan, anak lahir yang ditakdirkan memiliki keistimewaan dapat tumbuh dan berkembang sesuai capaian (milestone).' }}</textarea>
                     <p class="text-[11px] text-slate-400">Teks ini tampil di samping slider dokter pada bagian utama beranda website.</p>
-                </div>
-            </div>
-
-            <!-- Hero Medical Background (Image / Video) -->
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-5">
-                <div class="border-b border-slate-100 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                    <div class="flex items-center gap-2 text-medical-600">
-                        <i data-lucide="clapperboard" class="w-5 h-5"></i>
-                        <h3 class="text-base font-extrabold text-slate-900">Background Hero Beranda (Gambar / Video)</h3>
-                    </div>
-                    <span class="text-xs text-slate-500 font-medium">Bisa upload gambar statis atau video animasi/loop (MP4/WebM)</span>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                    <div class="lg:col-span-7 space-y-4">
-                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
-                            <label class="block text-xs font-bold text-slate-700 uppercase">Pilih File Foto atau Video MP4 Baru (Upload)</label>
-                            <input type="file" name="hero_home_media_file" accept="image/*,video/mp4,video/webm,video/ogg"
-                                   @change="handleHeroMediaUpload($event)"
-                                   class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-medical-50 file:text-medical-700 hover:file:bg-medical-100 cursor-pointer border border-slate-200 rounded-xl bg-white p-1">
-                            <p class="text-[11px] text-slate-400 mt-1">Format gambar (JPG, PNG, WEBP) atau video (MP4, WebM, MOV) maksimal 50MB.</p>
-                        </div>
-
-                        <div class="space-y-1.5">
-                            <label class="block text-xs font-bold text-slate-700 uppercase">Atau URL Link Gambar / Video</label>
-                            <input type="text" name="hero_home_media" x-model="heroHomeMedia" @input="detectMediaType()"
-                                   placeholder="https://... atau /images/..." 
-                                   class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-medical-500">
-                        </div>
-
-                        <div class="space-y-1.5">
-                            <label class="block text-xs font-bold text-slate-700 uppercase">Tipe Format Media</label>
-                            <select name="hero_home_media_type" x-model="heroHomeMediaType" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-medical-500 font-semibold">
-                                <option value="image">Gambar Statis (Image)</option>
-                                <option value="video">Video Loop Animasi (Video MP4/WebM)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Live Preview Box -->
-                    <div class="lg:col-span-5 space-y-2">
-                        <span class="text-xs font-bold text-slate-700 block">Preview Background Hero:</span>
-                        <div class="w-full h-48 rounded-2xl overflow-hidden bg-slate-900 border-2 border-slate-200 shadow-sm relative flex items-center justify-center">
-                            <template x-if="heroHomeMediaType === 'video'">
-                                <video :src="heroHomeMedia" autoplay muted loop playsinline class="w-full h-full object-cover opacity-70"></video>
-                            </template>
-                            <template x-if="heroHomeMediaType !== 'video'">
-                                <img :src="heroHomeMedia" alt="Preview Background" class="w-full h-full object-cover opacity-70" x-on:error="$el.src = '{{ asset('images/client_update/image4.png') }}'">
-                            </template>
-                            <div class="absolute bottom-2 left-2 px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-xs text-white text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                <span x-text="heroHomeMediaType === 'video' ? 'Video Player' : 'Image Background'"></span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -360,6 +314,61 @@
 
                 </div>
             </div>
+
+            <!-- Hero Medical Background (Image / Video) -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-5">
+                <div class="border-b border-slate-100 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                    <div class="flex items-center gap-2 text-medical-600">
+                        <i data-lucide="clapperboard" class="w-5 h-5"></i>
+                        <h3 class="text-base font-extrabold text-slate-900">Background Hero Beranda (Gambar / Video)</h3>
+                    </div>
+                    <span class="text-xs text-slate-500 font-medium">Bisa upload gambar statis atau video animasi/loop (MP4/WebM)</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 uppercase">Pilih File Foto atau Video MP4 Baru (Upload)</label>
+                            <input type="file" name="hero_home_media_file" accept="image/*,video/mp4,video/webm,video/ogg"
+                                   @change="handleHeroMediaUpload($event)"
+                                   class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-medical-50 file:text-medical-700 hover:file:bg-medical-100 cursor-pointer border border-slate-200 rounded-xl bg-white p-1">
+                            <p class="text-[11px] text-slate-400 mt-1">Format gambar (JPG, PNG, WEBP) atau video (MP4, WebM, MOV) maksimal 50MB.</p>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold text-slate-700 uppercase">Atau URL Link Gambar / Video</label>
+                            <input type="text" name="hero_home_media" x-model="heroHomeMedia" @input="detectMediaType()"
+                                   placeholder="https://... atau /images/..." 
+                                   class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-medical-500">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold text-slate-700 uppercase">Tipe Format Media</label>
+                            <select name="hero_home_media_type" x-model="heroHomeMediaType" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-medical-500 font-semibold">
+                                <option value="image">Gambar Statis (Image)</option>
+                                <option value="video">Video Loop Animasi (Video MP4/WebM)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Live Preview Box -->
+                    <div class="lg:col-span-5 space-y-2">
+                        <span class="text-xs font-bold text-slate-700 block">Preview Background Hero:</span>
+                        <div class="w-full h-48 rounded-2xl overflow-hidden bg-slate-900 border-2 border-slate-200 shadow-sm relative flex items-center justify-center">
+                            <template x-if="heroHomeMediaType === 'video'">
+                                <video :src="heroPreviewMedia" autoplay muted loop playsinline class="w-full h-full object-cover opacity-70"></video>
+                            </template>
+                            <template x-if="heroHomeMediaType !== 'video'">
+                                <img :src="heroPreviewMedia" alt="Preview Background" class="w-full h-full object-cover opacity-70" x-on:error="$el.src = '{{ asset('images/client_update/image4.png') }}'">
+                            </template>
+                            <div class="absolute bottom-2 left-2 px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-xs text-white text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <span x-text="heroHomeMediaType === 'video' ? 'Video Player' : 'Image Background'"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- ====================================================================== -->
@@ -394,10 +403,107 @@
                         <p class="text-[11px] text-slate-400">Teks ini tampil pada bagian Tentang Kami di Beranda dan Halaman Profil Tentang Kami.</p>
                     </div>
 
-                    <div class="sm:col-span-2 p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
-                        <label class="block text-xs font-bold text-slate-700 uppercase">Upload Foto Background Banner Tentang Kami</label>
-                        <input type="file" name="hero_about_image_file" accept="image/*" class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-medical-50 file:text-medical-700 hover:file:bg-medical-100 cursor-pointer border border-slate-200 rounded-xl bg-white p-1">
-                        <input type="text" name="hero_about_image" value="{{ $settings['hero_about_image']->value ?? '' }}" placeholder="Atau link URL gambar..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-white mt-1">
+                    <!-- Foto Slider Kegiatan Pelayanan Klinis (Beranda) -->
+                    @php
+                        $actSetting = $settings['about_activity_images']->value ?? null;
+                        $existingActivityImages = [];
+                        if (!empty($actSetting)) {
+                            $decoded = is_array($actSetting) ? $actSetting : json_decode($actSetting, true);
+                            if (is_array($decoded)) {
+                                $existingActivityImages = array_values(array_filter($decoded));
+                            }
+                        }
+                        if (empty($existingActivityImages)) {
+                            $existingActivityImages = [
+                                'images/client_update/image2.png',
+                                'images/client_update/image5.png',
+                                'images/client_update/image3.png',
+                                'images/client_update/image7.png',
+                            ];
+                        }
+                    @endphp
+
+                    <div class="sm:col-span-2 p-5 rounded-2xl bg-indigo-50/50 border border-indigo-100 space-y-4"
+                         x-data="{
+                             activityImages: @js($existingActivityImages),
+                             removeImage(idx) {
+                                 this.activityImages.splice(idx, 1);
+                             }
+                         }">
+                        <div class="flex items-center justify-between border-b border-indigo-100/80 pb-3">
+                            <div>
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                                    <i data-lucide="images" class="w-4 h-4 text-indigo-600"></i>
+                                    <span>Foto Slider Kegiatan Pelayanan Klinis (Beranda)</span>
+                                </h4>
+                                <p class="text-[11px] text-slate-500 mt-0.5">Foto-foto ini berganti otomatis (auto-slide) pada kotak galeri kegiatan pelayanan di Beranda.</p>
+                            </div>
+                        </div>
+
+                        <!-- Existing Images Grid -->
+                        <div class="space-y-2">
+                            <label class="block text-[11px] font-bold text-slate-600 uppercase">Daftar Foto Slider Kegiatan Aktif:</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <template x-for="(img, idx) in activityImages" :key="idx">
+                                    <div class="relative group rounded-xl overflow-hidden border border-slate-200 bg-white aspect-4/3 shadow-xs">
+                                        <img :src="img.startsWith('http') || img.startsWith('/') ? img : '/' + img" 
+                                             class="w-full h-full object-cover">
+                                        
+                                        <input type="hidden" name="retained_about_activity_images[]" :value="img">
+                                        
+                                        <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-2">
+                                            <button type="button" @click="removeImage(idx)" 
+                                                    class="p-1.5 rounded-lg bg-rose-600 text-white text-xs font-bold hover:bg-rose-700 transition flex items-center gap-1 shadow-sm cursor-pointer">
+                                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                                <span>Hapus</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Upload New Activity Images -->
+                        <div class="space-y-1.5 pt-3 border-t border-indigo-100/60">
+                            <label class="block text-xs font-bold text-slate-700 uppercase">Upload Tambah Foto Kegiatan Baru (Bisa Pilih Banyak Sekaligus):</label>
+                            <input type="file" name="about_activity_files[]" multiple accept="image/*" 
+                                   class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200 cursor-pointer border border-slate-200 rounded-xl bg-white p-1">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                            <div class="space-y-1">
+                                <label class="block text-[11px] font-bold text-slate-700 uppercase">Judul Kartu Box</label>
+                                <input type="text" name="about_activity_title" value="{{ $settings['about_activity_title']->value ?? 'Kegiatan Pelayanan Klinis pediOcare' }}" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-medical-500">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="block text-[11px] font-bold text-slate-700 uppercase">Subtitle / Keterangan Box</label>
+                                <input type="text" name="about_activity_subtitle" value="{{ $settings['about_activity_subtitle']->value ?? 'Fabrikasi & Penanganan Ortotik Prostetik Berkualitas.' }}" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:ring-2 focus:ring-medical-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    @php
+                        $aboutBannerImg = $settings['hero_about_image']->value ?? 'images/client_update/image4.png';
+                        if (!str_starts_with($aboutBannerImg, 'http') && !str_starts_with($aboutBannerImg, '/')) {
+                            $aboutBannerImg = asset($aboutBannerImg);
+                        }
+                    @endphp
+                    <div class="sm:col-span-2 p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+                         x-data="{ bannerAboutPreview: '{{ $aboutBannerImg }}' }">
+                        <!-- Active Preview Thumbnail -->
+                        <div class="w-28 h-18 sm:w-32 sm:h-20 rounded-xl overflow-hidden bg-slate-900 border border-slate-300 shrink-0 relative shadow-2xs">
+                            <img :src="bannerAboutPreview" alt="Preview Banner Tentang Kami" class="w-full h-full object-cover" x-on:error="$el.src = '{{ asset('images/client_update/image4.png') }}'">
+                            <span class="absolute bottom-1 right-1 bg-black/70 text-white text-[8px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Aktif</span>
+                        </div>
+                        <div class="space-y-1.5 flex-1 w-full">
+                            <label class="block text-xs font-bold text-slate-700 uppercase">Upload Foto Background Banner (Tentang Kami)</label>
+                            <input type="file" name="hero_about_image_file" accept="image/*" 
+                                   @change="if ($event.target.files[0]) bannerAboutPreview = URL.createObjectURL($event.target.files[0])"
+                                   class="w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-medical-50 file:text-medical-700 hover:file:bg-medical-100 cursor-pointer border border-slate-200 rounded-xl bg-white p-1">
+                            <input type="text" name="hero_about_image" value="{{ $settings['hero_about_image']->value ?? '' }}" 
+                                   @input="bannerAboutPreview = $event.target.value || '{{ asset('images/client_update/image4.png') }}'"
+                                   placeholder="Atau link URL gambar..." class="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 text-xs bg-white">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -421,10 +527,76 @@
                         <label class="block text-xs font-bold text-slate-700 uppercase">Deskripsi / Subtitle</label>
                         <textarea name="hero_services_subtitle" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-medical-500">{{ $settings['hero_services_subtitle']->value ?? 'Perawatan komprehensif dari evaluasi klinis, perancangan presisi, hingga rehabilitasi gait training berstandar medis.' }}</textarea>
                     </div>
-                    <div class="sm:col-span-2 p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
-                        <label class="block text-xs font-bold text-slate-700 uppercase">Upload Foto Background Banner Layanan</label>
-                        <input type="file" name="hero_services_image_file" accept="image/*" class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-medical-50 file:text-medical-700 hover:file:bg-medical-100 cursor-pointer border border-slate-200 rounded-xl bg-white p-1">
-                        <input type="text" name="hero_services_image" value="{{ $settings['hero_services_image']->value ?? '' }}" placeholder="Atau link URL gambar..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-white mt-1">
+
+                    @php
+                        $servicesBannerImg = $settings['hero_services_image']->value ?? 'images/client_update/image4.png';
+                        if (!str_starts_with($servicesBannerImg, 'http') && !str_starts_with($servicesBannerImg, '/')) {
+                            $servicesBannerImg = asset($servicesBannerImg);
+                        }
+                    @endphp
+                    <div class="sm:col-span-2 p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+                         x-data="{ bannerServicesPreview: '{{ $servicesBannerImg }}' }">
+                        <!-- Active Preview Thumbnail -->
+                        <div class="w-28 h-18 sm:w-32 sm:h-20 rounded-xl overflow-hidden bg-slate-900 border border-slate-300 shrink-0 relative shadow-2xs">
+                            <img :src="bannerServicesPreview" alt="Preview Banner Layanan" class="w-full h-full object-cover" x-on:error="$el.src = '{{ asset('images/client_update/image4.png') }}'">
+                            <span class="absolute bottom-1 right-1 bg-black/70 text-white text-[8px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Aktif</span>
+                        </div>
+                        <div class="space-y-1.5 flex-1 w-full">
+                            <label class="block text-xs font-bold text-slate-700 uppercase">Upload Foto Background Banner Header Layanan</label>
+                            <input type="file" name="hero_services_image_file" accept="image/*" 
+                                   @change="if ($event.target.files[0]) bannerServicesPreview = URL.createObjectURL($event.target.files[0])"
+                                   class="w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-medical-50 file:text-medical-700 hover:file:bg-medical-100 cursor-pointer border border-slate-200 rounded-xl bg-white p-1">
+                            <input type="text" name="hero_services_image" value="{{ $settings['hero_services_image']->value ?? '' }}" 
+                                   @input="bannerServicesPreview = $event.target.value || '{{ asset('images/client_update/image4.png') }}'"
+                                   placeholder="Atau link URL gambar..." class="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 text-xs bg-white">
+                        </div>
+                    </div>
+
+                    <!-- Spotlight Card Foto Prosedur 9 Tahapan Layanan -->
+                    @php
+                        $currentSpotlightImg = $settings['services_spotlight_image']->value ?? 'images/client_update/image3.png';
+                        if (!str_starts_with($currentSpotlightImg, 'http') && !str_starts_with($currentSpotlightImg, '/')) {
+                            $currentSpotlightImg = asset($currentSpotlightImg);
+                        }
+                    @endphp
+                    <div class="sm:col-span-2 p-5 rounded-2xl bg-teal-50/60 border border-teal-100 space-y-4"
+                         x-data="{ spotlightPreview: '{{ $currentSpotlightImg }}' }">
+                        <div class="flex items-center gap-2 text-teal-800 font-bold text-xs">
+                            <i data-lucide="image" class="w-4 h-4 text-teal-600"></i>
+                            <span>Foto Kartu Spotlight (Prosedur 9 Tahapan Layanan di Halaman /services)</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                            <!-- Live Active Thumbnail Preview -->
+                            <div class="sm:col-span-4 flex flex-col items-center justify-center">
+                                <div class="w-full h-32 sm:h-36 rounded-xl overflow-hidden bg-slate-900 border-2 border-teal-200 shadow-md relative group">
+                                    <img :src="spotlightPreview" alt="Preview Spotlight" class="w-full h-full object-cover" x-on:error="$el.src = '{{ asset('images/client_update/image3.png') }}'">
+                                    <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-xs text-white text-[9px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                        <span>Gambar Aktif</span>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] text-slate-500 mt-1">Preview Kartu di /services</span>
+                            </div>
+
+                            <div class="sm:col-span-8 space-y-3">
+                                <div class="space-y-1.5">
+                                    <label class="block text-xs font-bold text-slate-700 uppercase">Teks Badge Sudut Foto</label>
+                                    <input type="text" name="services_spotlight_badge" value="{{ $settings['services_spotlight_badge']->value ?? 'Standar Kemenkes RI' }}" placeholder="Standar Kemenkes RI" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-white">
+                                </div>
+                                <div class="space-y-1.5">
+                                    <label class="block text-xs font-bold text-slate-700 uppercase">Upload Foto Baru (Ganti Gambar Aktif)</label>
+                                    <input type="file" name="services_spotlight_image_file" accept="image/*" 
+                                           @change="if ($event.target.files[0]) spotlightPreview = URL.createObjectURL($event.target.files[0])"
+                                           class="w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-teal-600 file:text-white hover:file:bg-teal-700 cursor-pointer border border-slate-200 rounded-xl bg-white p-1">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="block text-[11px] font-bold text-slate-500 uppercase">Atau Link / Path URL Foto</label>
+                                    <input type="text" name="services_spotlight_image" value="{{ $settings['services_spotlight_image']->value ?? '' }}" 
+                                           @input="spotlightPreview = $event.target.value || '{{ asset('images/client_update/image3.png') }}'"
+                                           placeholder="images/client_update/image3.png atau /storage/..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-white">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -448,10 +620,101 @@
                         <label class="block text-xs font-bold text-slate-700 uppercase">Deskripsi / Subtitle</label>
                         <textarea name="hero_contact_subtitle" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-medical-500">{{ $settings['hero_contact_subtitle']->value ?? 'Kami siap melayani Anda dengan teknologi ortopedi mutakhir dan perawatan profesional yang mengutamakan kenyamanan pasien. Care your milestone.' }}</textarea>
                     </div>
-                    <div class="sm:col-span-2 p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
-                        <label class="block text-xs font-bold text-slate-700 uppercase">Upload Foto Background Banner Kontak</label>
-                        <input type="file" name="hero_contact_image_file" accept="image/*" class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-medical-50 file:text-medical-700 hover:file:bg-medical-100 cursor-pointer border border-slate-200 rounded-xl bg-white p-1">
-                        <input type="text" name="hero_contact_image" value="{{ $settings['hero_contact_image']->value ?? '' }}" placeholder="Atau link URL gambar..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-white mt-1">
+
+                    @php
+                        $contactBannerImg = $settings['hero_contact_image']->value ?? 'images/client_update/image4.png';
+                        if (!str_starts_with($contactBannerImg, 'http') && !str_starts_with($contactBannerImg, '/')) {
+                            $contactBannerImg = asset($contactBannerImg);
+                        }
+                    @endphp
+            <!-- Hero Halaman E-Katalog Produk -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-5">
+                <div class="border-b border-slate-100 pb-3 flex items-center gap-2 text-medical-600">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <h3 class="text-base font-extrabold text-slate-900">Hero Banner Halaman E-Katalog Produk</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-slate-700 uppercase">Badge Header</label>
+                        <input type="text" name="hero_products_badge" value="{{ $settings['hero_products_badge']->value ?? 'E-Katalog Resmi pediOcare' }}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-medical-500">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-slate-700 uppercase">Judul Utama Halaman</label>
+                        <input type="text" name="hero_products_title" value="{{ $settings['hero_products_title']->value ?? 'E-Katalog Produk Medis & Alat Bantu' }}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-medical-500">
+                    </div>
+                    <div class="sm:col-span-2 space-y-1.5">
+                        <label class="block text-xs font-bold text-slate-700 uppercase">Deskripsi / Subtitle</label>
+                        <textarea name="hero_products_subtitle" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-medical-500">{{ $settings['hero_products_subtitle']->value ?? 'Pilihan alat bantu ortotik dan ortopedi siap pakai dengan standar mutu dan fitting presisi bergaransi.' }}</textarea>
+                    </div>
+
+                    @php
+                        $productsBannerImg = $settings['hero_products_image']->value ?? 'images/client_update/image4.png';
+                        if (!str_starts_with($productsBannerImg, 'http') && !str_starts_with($productsBannerImg, '/')) {
+                            $productsBannerImg = asset($productsBannerImg);
+                        }
+                    @endphp
+                    <div class="sm:col-span-2 p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+                         x-data="{ bannerProductsPreview: '{{ $productsBannerImg }}' }">
+                        <!-- Active Preview Thumbnail -->
+                        <div class="w-28 h-18 sm:w-32 sm:h-20 rounded-xl overflow-hidden bg-slate-900 border border-slate-300 shrink-0 relative shadow-2xs">
+                            <img :src="bannerProductsPreview" alt="Preview Banner E-Katalog" class="w-full h-full object-cover" x-on:error="$el.src = '{{ asset('images/client_update/image4.png') }}'">
+                            <span class="absolute bottom-1 right-1 bg-black/70 text-white text-[8px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Aktif</span>
+                        </div>
+                        <div class="space-y-1.5 flex-1 w-full">
+                            <label class="block text-xs font-bold text-slate-700 uppercase">Upload Foto Background Banner E-Katalog</label>
+                            <input type="file" name="hero_products_image_file" accept="image/*" 
+                                   @change="if ($event.target.files[0]) bannerProductsPreview = URL.createObjectURL($event.target.files[0])"
+                                   class="w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-medical-50 file:text-medical-700 hover:file:bg-medical-100 cursor-pointer border border-slate-200 rounded-xl bg-white p-1">
+                            <input type="text" name="hero_products_image" value="{{ $settings['hero_products_image']->value ?? '' }}" 
+                                   @input="bannerProductsPreview = $event.target.value || '{{ asset('images/client_update/image4.png') }}'"
+                                   placeholder="Atau link URL gambar..." class="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 text-xs bg-white">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Halaman Artikel & Edukasi -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-5">
+                <div class="border-b border-slate-100 pb-3 flex items-center gap-2 text-medical-600">
+                    <i data-lucide="book-open" class="w-5 h-5"></i>
+                    <h3 class="text-base font-extrabold text-slate-900">Hero Banner Halaman Artikel & Edukasi</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-slate-700 uppercase">Badge Header</label>
+                        <input type="text" name="hero_articles_badge" value="{{ $settings['hero_articles_badge']->value ?? 'Pusat Pengetahuan & Edukasi Medis' }}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-medical-500">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-slate-700 uppercase">Judul Utama Halaman</label>
+                        <input type="text" name="hero_articles_title" value="{{ $settings['hero_articles_title']->value ?? 'Artikel & Edukasi Medis' }}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-medical-500">
+                    </div>
+                    <div class="sm:col-span-2 space-y-1.5">
+                        <label class="block text-xs font-bold text-slate-700 uppercase">Deskripsi / Subtitle</label>
+                        <textarea name="hero_articles_subtitle" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-medical-500">{{ $settings['hero_articles_subtitle']->value ?? 'Informasi medis terpercaya seputar kesehatan muskuloskeletal, penanganan skoliosis, dan perawatan kaki palsu.' }}</textarea>
+                    </div>
+
+                    @php
+                        $articlesBannerImg = $settings['hero_articles_image']->value ?? 'images/client_update/image4.png';
+                        if (!str_starts_with($articlesBannerImg, 'http') && !str_starts_with($articlesBannerImg, '/')) {
+                            $articlesBannerImg = asset($articlesBannerImg);
+                        }
+                    @endphp
+                    <div class="sm:col-span-2 p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+                         x-data="{ bannerArticlesPreview: '{{ $articlesBannerImg }}' }">
+                        <!-- Active Preview Thumbnail -->
+                        <div class="w-28 h-18 sm:w-32 sm:h-20 rounded-xl overflow-hidden bg-slate-900 border border-slate-300 shrink-0 relative shadow-2xs">
+                            <img :src="bannerArticlesPreview" alt="Preview Banner Artikel" class="w-full h-full object-cover" x-on:error="$el.src = '{{ asset('images/client_update/image4.png') }}'">
+                            <span class="absolute bottom-1 right-1 bg-black/70 text-white text-[8px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Aktif</span>
+                        </div>
+                        <div class="space-y-1.5 flex-1 w-full">
+                            <label class="block text-xs font-bold text-slate-700 uppercase">Upload Foto Background Banner Artikel</label>
+                            <input type="file" name="hero_articles_image_file" accept="image/*" 
+                                   @change="if ($event.target.files[0]) bannerArticlesPreview = URL.createObjectURL($event.target.files[0])"
+                                   class="w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-medical-50 file:text-medical-700 hover:file:bg-medical-100 cursor-pointer border border-slate-200 rounded-xl bg-white p-1">
+                            <input type="text" name="hero_articles_image" value="{{ $settings['hero_articles_image']->value ?? '' }}" 
+                                   @input="bannerArticlesPreview = $event.target.value || '{{ asset('images/client_update/image4.png') }}'"
+                                   placeholder="Atau link URL gambar..." class="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 text-xs bg-white">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -785,6 +1048,7 @@ function settingsManager(initialDoctors, initialTab, initialHeroMedia, initialHe
 
         // Hero Background Media (Image or Video)
         heroHomeMedia: initialHeroMedia || 'https://lh3.googleusercontent.com/aida/AP1WRLu-cYuotNRMpQoNz8xiNuno33F9xSgeFfAKDWqxDogo2VSMvAuCS4QUt2jbop_cQ4e18T36Uqa6an8ezvVtDtXtwih7tYUxTzRHyWrqiqVAcV-b3G6wS_YbGIeB9Bl7tYBFGY4K81YU6TE_o1OvhLPzQstL7r4XrQEGsJ3mWxHjfxXavdzURFHoctGm1HxnTSA9wW180ytfdljOX3A9UWVLpKx5mwhgV3xHx-gbLfAcVFwk-s2AOYLy',
+        heroPreviewMedia: initialHeroMedia || 'https://lh3.googleusercontent.com/aida/AP1WRLu-cYuotNRMpQoNz8xiNuno33F9xSgeFfAKDWqxDogo2VSMvAuCS4QUt2jbop_cQ4e18T36Uqa6an8ezvVtDtXtwih7tYUxTzRHyWrqiqVAcV-b3G6wS_YbGIeB9Bl7tYBFGY4K81YU6TE_o1OvhLPzQstL7r4XrQEGsJ3mWxHjfxXavdzURFHoctGm1HxnTSA9wW180ytfdljOX3A9UWVLpKx5mwhgV3xHx-gbLfAcVFwk-s2AOYLy',
         heroHomeMediaType: initialHeroMediaType || 'image',
 
         // Maps & Address
@@ -807,15 +1071,18 @@ function settingsManager(initialDoctors, initialTab, initialHeroMedia, initialHe
             if (file) {
                 const isVid = file.type.startsWith('video/') || file.name.match(/\.(mp4|webm|ogg|mov)$/i);
                 this.heroHomeMediaType = isVid ? 'video' : 'image';
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    this.heroHomeMedia = e.target.result;
-                };
-                reader.readAsDataURL(file);
+                this.heroPreviewMedia = URL.createObjectURL(file);
+                // Reset text input to avoid submitting massive Base64
+                this.heroHomeMedia = '';
             }
         },
 
         detectMediaType() {
+            let media = this.heroHomeMedia;
+            if (media && !media.startsWith('http') && !media.startsWith('/') && !media.startsWith('data:')) {
+                media = '/' + media;
+            }
+            this.heroPreviewMedia = media || '{{ asset('images/client_update/image4.png') }}';
             if (this.heroHomeMedia && this.heroHomeMedia.match(/\.(mp4|webm|ogg|mov)$/i)) {
                 this.heroHomeMediaType = 'video';
             }

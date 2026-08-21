@@ -106,11 +106,11 @@
             <p class="text-sm text-white/80 max-w-xl">Kunjungi klinik kami di Sleman, D.I. Yogyakarta atau jadwalkan janji temu konsultasi WhatsApp di 0856 9792 2194.</p>
         </div>
         <div class="flex flex-wrap gap-3">
-            <a href="{{ route('consultation.create') }}" class="bg-[#E5A500] hover:bg-[#CC9200] text-surface-white font-bold text-xs px-7 py-3.5 rounded-xl transition shadow-md">
-                Jadwalkan Konsultasi
+            <a href="{{ route('contact') }}" class="bg-[#E5A500] hover:bg-[#CC9200] text-surface-white font-bold text-xs px-7 py-3.5 rounded-xl transition shadow-md">
+                Kontak & Janji Temu
             </a>
-            <a href="{{ route('contact') }}" class="bg-surface-white/10 hover:bg-surface-white/20 text-white font-bold text-xs px-6 py-3.5 rounded-xl border border-surface-white/30 transition">
-                Hubungi Kami
+            <a href="https://wa.me/6285697922194" target="_blank" rel="noopener noreferrer" class="bg-surface-white/10 hover:bg-surface-white/20 text-white font-bold text-xs px-6 py-3.5 rounded-xl border border-surface-white/30 transition">
+                Chat WhatsApp
             </a>
         </div>
     </div>

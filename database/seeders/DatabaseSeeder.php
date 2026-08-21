@@ -145,6 +145,8 @@ class DatabaseSeeder extends Seeder
                 <li><strong>Material Ultralight Carbon Fiber:</strong> Ringan, kokoh, dan tahan lama untuk aktivitas harian hingga olahraga.</li>
                 <li><strong>Garansi Kenyamanan & Fitting:</strong> Monitoring berkala penyesuaian volume stump pasien hingga berjalan normal tanpa pincang.</li>
             </ul>',
+            'thumbnail' => 'images/client_update/image3.png',
+            'gallery_images' => ['images/client_update/image1.png', 'images/client_update/image5.png'],
             'icon_name' => 'Activity',
             'indications' => [
                 'Pasca amputasi bawah lutut (Transtibial)',
@@ -166,6 +168,8 @@ class DatabaseSeeder extends Seeder
             'summary' => 'Penyangga ortopedi medis untuk koreksi sudut kelainan anatomi sendi, stabilisasi pasca cedera ligamen, dan penanganan drop foot.',
             'content' => '<h3>Penyangga Sendi & Tulang Medis Berstandar Global</h3>
             <p>Kami merancang dan memproduksi custom brace seperti KAFO (Knee Ankle Foot Orthosis), AFO (Ankle Foot Orthosis), serta custom orthotic insole untuk membantu anak-anak dengan kelainan tumbuh kembang maupun orang dewasa pasca stroke/trauma.</p>',
+            'thumbnail' => 'images/client_update/image7.png',
+            'gallery_images' => ['images/client_update/image4.png', 'images/client_update/image2.png'],
             'icon_name' => 'Shield',
             'indications' => [
                 'Koreksi Kaki O (Genu Varum) & Kaki X (Genu Valgum)',
@@ -187,6 +191,8 @@ class DatabaseSeeder extends Seeder
             'summary' => 'Pusat penanganan skoliosis non-operatif terpadu menggunakan korset korektif 3D Cheneau Style TLSO dengan presisi pemindaian 3D scan.',
             'content' => '<h3>Koreksi Kurva Skoliosis Remaja & Dewasa Tanpa Operasi</h3>
             <p>Melalui evaluasi biomekanik menyeluruh dan analisa rotasi tulang belakang berbasis radiologi, kami membuat brace skoliosis 3D custom yang aktif mendorong de-rotasi kurva saat anak bertumbuh.</p>',
+            'thumbnail' => 'images/client_update/image6.png',
+            'gallery_images' => ['images/client_update/image2.png', 'images/client_update/image4.png'],
             'icon_name' => 'Layers',
             'indications' => [
                 'Skoliosis Idiopatik Remaja (AIS) Sudut Cobb 20° - 45°',
@@ -207,6 +213,8 @@ class DatabaseSeeder extends Seeder
             'summary' => 'Layanan fisioterapi muskuloskeletal, latihan pola jalan fungsional (Gait Training), dan adaptasi penggunaan alat bantu ortosis/prostesis.',
             'content' => '<h3>Pemulihan Gerak & Pola Jalan Mandiri</h3>
             <p>Fisioterapis klinis kami mendampingi pasien dalam latihan penguatan otot stump, keseimbangan tubuh, dan teknik melangkah alami saat menggunakan kaki palsu atau brace ortopedi.</p>',
+            'thumbnail' => 'images/client_update/image5.png',
+            'gallery_images' => ['images/client_update/image1.png', 'images/client_update/image7.png'],
             'icon_name' => 'HeartPulse',
             'indications' => [
                 'Latihan adaptasi kaki palsu baru',
@@ -226,6 +234,8 @@ class DatabaseSeeder extends Seeder
             'summary' => 'Terapi pemulihan neuro-motorik canggih berbasis robotik eksoskeleton dan sensor biofeedback untuk pasien stroke & cedera saraf medula spinalis.',
             'content' => '<h3>Teknologi Rehabilitasi Robotik Modern</h3>
             <p>Kombinasi robotik eksoskeleton terkomputerisasi membantu menstimulasi jalur saraf motorik otak pasien secara repetitif, presisi, dan terukur.</p>',
+            'thumbnail' => 'images/client_update/image4.png',
+            'gallery_images' => ['images/client_update/image3.png', 'images/client_update/image6.png'],
             'icon_name' => 'Cpu',
             'indications' => [
                 'Hemiparesis pasca Stroke',

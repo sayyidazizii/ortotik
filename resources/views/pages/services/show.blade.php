@@ -40,48 +40,59 @@
             <div class="bg-surface-white rounded-3xl border border-outline-variant/30 p-6 sm:p-10 space-y-8 shadow-1">
                 
                 @php
-                    $serviceImages = [];
-                    if (str_contains(strtolower($service->slug), 'prosthet')) {
-                        $serviceImages = [
-                            asset('images/client_update/image3.png'),
-                            asset('images/client_update/image1.png'),
-                            asset('images/client_update/image5.png')
-                        ];
-                    } elseif (str_contains(strtolower($service->slug), 'bracing')) {
-                        $serviceImages = [
-                            asset('images/client_update/image7.png'),
-                            asset('images/client_update/image4.png')
-                        ];
-                    } elseif (str_contains(strtolower($service->slug), 'scoliosis')) {
-                        $serviceImages = [
-                            asset('images/client_update/image6.png'),
-                            asset('images/client_update/image2.png')
-                        ];
-                    } else {
-                        $serviceImages = [
-                            asset('images/client_update/image4.png'),
-                            asset('images/client_update/image5.png')
-                        ];
-                    }
+                    $serviceImages = $service->slider_images;
                 @endphp
 
                 <!-- Gallery Auto-Slide and Summary Intro Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                    <!-- Photo Slideshow (5 cols) -->
-                    <div class="md:col-span-6 relative rounded-2xl overflow-hidden shadow-md h-64 sm:h-72 border border-outline-variant/30 group"
-                         x-data="{ currentImg: 0, imgs: @json($serviceImages) }"
-                         x-init="if (imgs.length > 1) setInterval(() => { currentImg = (currentImg + 1) % imgs.length }, 3500)">
-                        <template x-for="(imgSrc, iIdx) in imgs" :key="iIdx">
-                            <img :src="imgSrc" :alt="'{{ $service->title }} - Slide ' + (iIdx + 1)"
-                                 x-show="currentImg === iIdx"
-                                 x-transition:enter="transition ease-out duration-700"
-                                 x-transition:enter-start="opacity-0 scale-95"
-                                 x-transition:enter-end="opacity-100 scale-100"
-                                 class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
-                        </template>
-                        <div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-0.5 rounded-full font-mono">
-                            <span x-text="(currentImg + 1) + '/' + imgs.length"></span>
+                    <!-- Photo Slideshow (6 cols) -->
+                    <div class="md:col-span-6 space-y-3"
+                         x-data="serviceGallerySlider(@js($serviceImages))"
+                         @mouseenter="stopAutoplay()"
+                         @mouseleave="startAutoplay()">
+                        
+                        <!-- Main Slider Image Box -->
+                        <div class="relative rounded-2xl overflow-hidden shadow-md h-72 sm:h-80 border border-outline-variant/30 group bg-slate-900">
+                            <template x-for="(imgSrc, iIdx) in imgs" :key="iIdx">
+                                <img :src="imgSrc" :alt="'{{ $service->title }} - Slide ' + (iIdx + 1)"
+                                     x-show="currentImg === iIdx"
+                                     x-transition:enter="transition ease-out duration-700"
+                                     x-transition:enter-start="opacity-0 scale-95"
+                                     x-transition:enter-end="opacity-100 scale-100"
+                                     class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+                            </template>
+
+                            <!-- Navigation Arrows (Shown if multiple images) -->
+                            <template x-if="hasMultipleImages">
+                                <div class="absolute inset-x-2 top-1/2 -translate-y-1/2 flex items-center justify-between pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <button type="button" @click="prev()" class="pointer-events-auto w-8 h-8 rounded-full bg-black/60 hover:bg-primary text-white flex items-center justify-center backdrop-blur-sm transition shadow-md">
+                                        <span class="material-symbols-outlined text-sm">chevron_left</span>
+                                    </button>
+                                    <button type="button" @click="next()" class="pointer-events-auto w-8 h-8 rounded-full bg-black/60 hover:bg-primary text-white flex items-center justify-center backdrop-blur-sm transition shadow-md">
+                                        <span class="material-symbols-outlined text-sm">chevron_right</span>
+                                    </button>
+                                </div>
+                            </template>
+
+                            <!-- Slider Counter Badge -->
+                            <div class="absolute bottom-2.5 right-3 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2.5 py-1 rounded-full font-mono flex items-center gap-1.5 shadow-sm">
+                                <span class="material-symbols-outlined text-xs">photo_camera</span>
+                                <span x-text="(currentImg + 1) + ' / ' + imgs.length"></span>
+                            </div>
                         </div>
+
+                        <!-- Thumbnail Strip (if multiple images) -->
+                        <template x-if="hasMultipleImages">
+                            <div class="flex items-center gap-2 overflow-x-auto pb-1">
+                                <template x-for="(thumb, tIdx) in imgs" :key="tIdx">
+                                    <button type="button" @click="currentImg = tIdx"
+                                            :class="currentImg === tIdx ? 'ring-2 ring-primary scale-105 opacity-100' : 'opacity-60 hover:opacity-100'"
+                                            class="w-14 h-11 rounded-lg overflow-hidden shrink-0 border border-outline-variant/30 transition-all duration-200">
+                                        <img :src="thumb" class="w-full h-full object-cover">
+                                    </button>
+                                </template>
+                            </div>
+                        </template>
                     </div>
 
                     <!-- Intro Highlights (6 cols) -->
@@ -117,9 +128,9 @@
                            class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition shadow-sm">
                             <span class="material-symbols-outlined text-sm">chat</span> WhatsApp
                         </a>
-                        <a href="{{ route('consultation.create') }}?service_id={{ $service->id }}"
+                        <a href="{{ route('contact') }}?service_id={{ $service->id }}"
                            class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-primary hover:bg-secondary text-white text-xs font-bold transition shadow-sm">
-                            <span class="material-symbols-outlined text-sm">calendar_month</span> Buat Janji
+                            <span class="material-symbols-outlined text-sm">contacts</span> Kontak / Janji Temu
                         </a>
                     </div>
                 </div>
@@ -149,8 +160,8 @@
                     <h3 class="font-headline-md text-xl font-bold text-white">Butuh Penanganan Khusus untuk Kondisi Anda?</h3>
                     <p class="text-xs text-white/85 max-w-md">Konsultasikan keluhan Anda bersama tim ortotis dan prostetis berpengalaman kami hari ini.</p>
                 </div>
-                <a href="{{ route('consultation.create') }}?service_id={{ $service->id }}" class="shrink-0 bg-white hover:bg-slate-100 text-primary text-xs font-bold px-7 py-3.5 rounded-xl transition-all shadow-md hover:shadow-lg flex items-center gap-1.5">
-                    <span class="material-symbols-outlined text-sm text-primary">calendar_month</span> Buat Janji Temu
+                <a href="{{ route('contact') }}?service_id={{ $service->id }}" class="shrink-0 bg-white hover:bg-slate-100 text-primary text-xs font-bold px-7 py-3.5 rounded-xl transition-all shadow-md hover:shadow-lg flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-sm text-primary">contacts</span> Hubungi Kami
                 </a>
             </div>
         </div>
@@ -168,9 +179,9 @@
                 </div>
 
                 <div class="space-y-3 pt-2">
-                    <a href="{{ route('consultation.create') }}?service_id={{ $service->id }}" 
+                    <a href="{{ route('contact') }}?service_id={{ $service->id }}" 
                        class="w-full flex items-center justify-center bg-primary hover:bg-secondary text-surface-white text-sm font-bold h-12 rounded-xl transition shadow-sm">
-                        Buat Janji Temu
+                        Hubungi / Jadwalkan Konsultasi
                     </a>
                     <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20ingin%20konsultasi%20layanan%20{{ urlencode($service->title) }}." target="_blank"
                        class="w-full flex items-center justify-center bg-surface-container-low hover:bg-surface-container-high text-primary text-sm font-bold h-12 rounded-xl border border-outline-variant/30 transition">
@@ -204,4 +215,43 @@
     </div>
 </div>
 
+<script>
+    function serviceGallerySlider(images) {
+        return {
+            currentImg: 0,
+            imgs: Array.isArray(images) && images.length > 0 ? images : [],
+            autoplayTimer: null,
+            get hasMultipleImages() {
+                return this.imgs && this.imgs.length > 1;
+            },
+            next() {
+                if (this.imgs.length > 0) {
+                    this.currentImg = (this.currentImg + 1) % this.imgs.length;
+                }
+            },
+            prev() {
+                if (this.imgs.length > 0) {
+                    this.currentImg = (this.currentImg - 1 + this.imgs.length) % this.imgs.length;
+                }
+            },
+            startAutoplay() {
+                if (this.hasMultipleImages) {
+                    this.stopAutoplay();
+                    this.autoplayTimer = setInterval(() => {
+                        this.next();
+                    }, 4000);
+                }
+            },
+            stopAutoplay() {
+                if (this.autoplayTimer) {
+                    clearInterval(this.autoplayTimer);
+                    this.autoplayTimer = null;
+                }
+            },
+            init() {
+                this.startAutoplay();
+            }
+        };
+    }
+</script>
 @endsection

@@ -5,27 +5,31 @@
 
 @section('content')
 
-<!-- Header Banner -->
-<div class="bg-surface-white border-b border-outline-variant/30 py-10 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-container-max mx-auto flex flex-wrap justify-between items-center gap-4">
-        <div>
-            <div class="flex items-center gap-2 text-xs text-on-surface-variant font-medium mb-1">
-                <a href="{{ route('home') }}" class="hover:text-primary transition-colors">Beranda</a>
-                <span class="text-outline-variant">/</span>
-                <span class="text-on-surface font-medium">E-Katalog</span>
-                @if($selectedCategory)
-                <span class="text-outline-variant">/</span>
-                <span class="text-primary font-semibold">{{ $selectedCategory->name }}</span>
-                @endif
-            </div>
-            <h1 class="text-2xl sm:text-3xl lg:text-[34px] font-headline-xl font-bold text-on-background tracking-tight">
-                E-Katalog Produk Medis Ready Stock ({{ $products->total() }})
-            </h1>
-        </div>
-    </div>
-</div>
+@php
+    $heroProductsBg = $settings['hero_products_image'] ?? ($settings['hero_about_image'] ?? asset('images/client_update/image4.png'));
+    if (!str_starts_with($heroProductsBg, 'http') && !str_starts_with($heroProductsBg, '/')) {
+        $heroProductsBg = asset($heroProductsBg);
+    }
+@endphp
 
-<main class="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-10 md:py-16 flex flex-col md:flex-row gap-8 relative z-10">
+<!-- Hero Section -->
+<section class="relative text-center mx-auto py-10 md:py-14 px-margin-mobile md:px-margin-desktop text-white w-full overflow-hidden fade-in-up" 
+         style='background-image: linear-gradient(rgba(13, 28, 47, 0.82), rgba(13, 28, 47, 0.82)), url("{{ $heroProductsBg }}"); background-size: cover; background-position: center;'>
+    <div class="max-w-container-max mx-auto relative z-10 space-y-2.5 sm:space-y-3">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-white/15 text-primary-fixed border border-surface-white/25 text-[11px] font-bold uppercase tracking-wider backdrop-blur-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse"></span>
+            E-Katalog Ready Stock ({{ $products->total() }} Produk)
+        </span>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white max-w-3xl mx-auto leading-tight">
+            {{ $settings['hero_products_title'] ?? 'E-Katalog Produk Medis & Alat Bantu' }}
+        </h1>
+        <p class="font-body-md text-body-md leading-relaxed text-slate-200 max-w-2xl mx-auto text-xs sm:text-sm">
+            {{ $settings['hero_products_subtitle'] ?? 'Pilihan alat bantu ortotik dan ortopedi siap pakai dengan standar mutu dan fitting presisi bergaransi.' }}
+        </p>
+    </div>
+</section>
+
+<main class="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-8 md:py-12 flex flex-col md:flex-row gap-8 relative z-10">
     
 <!-- Mobile Anatomy Filter Dropdown (Visible only on mobile/tablet) -->
     <div class="md:hidden w-full bg-surface-white p-4 rounded-2xl border border-outline-variant/30 shadow-1 space-y-2">
@@ -122,51 +126,52 @@
         </div>
 
         @if($products->count() > 0)
-        <!-- Grid Cards: 3 Columns on Mobile, 2 on Tablet, 3 on Desktop -->
-        <div class="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-6 relative z-10">
+        <!-- Grid Cards: 2 Columns on Mobile, 3 on Tablet/Desktop, 4 on XL -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-4 relative z-10">
             @foreach($products as $prod)
-            <div class="bg-surface-white border border-outline-variant/30 rounded-2xl sm:rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 group flex flex-col h-full shadow-1 hover:shadow-hover hover:-translate-y-1">
-                <!-- Thumbnail -->
-                <div class="aspect-square bg-surface-container-low relative overflow-hidden p-2 sm:p-6 flex items-center justify-center border-b border-outline-variant/15">
-                    @if($prod->thumbnail)
-                    <img src="{{ $prod->thumbnail }}" alt="{{ $prod->name }}" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"/>
-                    @else
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRX96KTlDSHiomGN3OyOvDA8gmpFo6nH9DuQJ13zV-uwYj0On4T643XIIvI7ZfTgEHlGNMCnzLWygdnoChDtXh3HKQ3iKaxsBs2SXt9HZXR5pM7Qtw8KzFBwh-xAkBI6kBHJNij2YKEAiHE2MhApvaIyUSmfo0V7MtHqYRgFzaU3IRMw5FPuoduXReXEcCNbLjLVDm5pEO5HM2XWxQXW-P6GZ1bJoBKdVpdMOPdViOhKinS3glyd4" 
-                         alt="{{ $prod->name }}" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"/>
-                    @endif
-                    <div class="hidden sm:block absolute top-3.5 left-3.5 bg-primary text-white font-label-sm text-[11px] uppercase tracking-wider px-3 py-1 rounded-full shadow-2xs">
-                        {{ $prod->category->name ?? 'Ortotik' }}
+            <a href="{{ route('products.show', $prod->slug) }}" 
+               class="bg-surface-white border border-outline-variant/30 hover:border-primary rounded-2xl sm:rounded-3xl p-2.5 sm:p-3 transition-all duration-300 group flex flex-col justify-between h-full shadow-2xs hover:shadow-md hover:-translate-y-1 relative">
+                
+                <!-- Inner Image Box (Lapakgaming style with border-radius & padding) -->
+                <div class="relative w-full aspect-square rounded-xl sm:rounded-2xl bg-surface-container-low/70 border border-outline-variant/20 overflow-hidden flex items-center justify-center p-3 group-hover:bg-primary/5 transition-colors">
+                    <img src="{{ $prod->thumbnail_url }}" alt="{{ $prod->name }}" 
+                         class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300"/>
+                    
+                    <!-- Category Badge (Positioned at Bottom of Image) -->
+                    <div class="absolute bottom-2 left-2 max-w-[calc(100%-16px)]">
+                        <span class="bg-primary/95 text-white font-bold text-[9px] sm:text-[10px] px-2 py-0.5 rounded-md shadow-2xs truncate block leading-tight">
+                            {{ $prod->category->name ?? 'Ortotik' }}
+                        </span>
                     </div>
+
+                    @if($prod->stock_status === 'in_stock' || $prod->stock_status === 'ready_stock')
+                    <div class="absolute top-2 right-2">
+                        <span class="bg-white/90 backdrop-blur-sm text-emerald-700 font-bold text-[8px] sm:text-[9px] px-1.5 py-0.5 rounded-md border border-emerald-200/80 shadow-2xs">
+                            Ready
+                        </span>
+                    </div>
+                    @endif
                 </div>
                 
-                <!-- Content -->
-                <div class="p-2 sm:p-6 flex flex-col flex-grow relative z-10">
-                    <h3 class="font-headline-md text-[11px] sm:text-base leading-tight font-bold text-on-surface mb-1 sm:mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                        <a href="{{ route('products.show', $prod->slug) }}">{{ $prod->name }}</a>
+                <!-- Compact Content Details -->
+                <div class="pt-2.5 pb-0.5 flex flex-col justify-between flex-grow space-y-2">
+                    <h3 class="text-xs sm:text-sm font-bold text-on-surface line-clamp-1 group-hover:text-primary transition-colors leading-snug">
+                        {{ $prod->name }}
                     </h3>
-                    <p class="hidden sm:block text-xs text-on-surface-variant line-clamp-2 leading-relaxed mb-4">
-                        {{ $prod->short_description ?? 'Alat bantu ortopedi standar klinis presisi tinggi untuk pemulihan optimal.' }}
-                    </p>
                     
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-auto pt-2 sm:pt-4 border-t border-outline-variant/15 gap-1.5 sm:gap-2">
+                    <div class="flex items-center justify-between pt-1.5 border-t border-outline-variant/15 mt-auto gap-1">
                         <div>
-                            <span class="font-headline-md text-[11px] sm:text-base font-bold text-primary block leading-tight">{{ $prod->formatted_price }}</span>
+                            <span class="text-xs sm:text-sm font-extrabold text-primary block leading-tight">{{ $prod->formatted_price }}</span>
                             @if($prod->formatted_discount_price)
-                            <span class="text-[9px] sm:text-[11px] text-outline line-through">{{ $prod->formatted_discount_price }}</span>
+                            <span class="text-[9px] sm:text-[10px] text-outline line-through block leading-tight">{{ $prod->formatted_discount_price }}</span>
                             @endif
                         </div>
-                        <div class="flex gap-1 sm:gap-2 justify-end">
-                            <a href="{{ route('products.show', $prod->slug) }}" class="w-6 h-6 sm:w-9 sm:h-9 rounded-full bg-surface-container-low hover:bg-primary hover:text-white border border-outline-variant/30 flex items-center justify-center text-on-surface-variant transition-colors" title="Lihat Detail">
-                                <span class="material-symbols-outlined text-[13px] sm:text-[18px]">visibility</span>
-                            </a>
-                            <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20tertarik%20pesan%20produk%20{{ urlencode($prod->name) }}." target="_blank" rel="noopener noreferrer"
-                               class="w-6 h-6 sm:w-9 sm:h-9 rounded-full bg-primary flex items-center justify-center text-white hover:bg-secondary transition-all shadow-sm hover:scale-105" title="Order WhatsApp">
-                                <span class="material-symbols-outlined text-[13px] sm:text-[17px]">chat</span>
-                            </a>
+                        <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-surface-container-low group-hover:bg-primary group-hover:text-white text-on-surface-variant flex items-center justify-center transition-colors shrink-0">
+                            <span class="material-symbols-outlined text-[13px] sm:text-sm">arrow_forward</span>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
             @endforeach
         </div>
 

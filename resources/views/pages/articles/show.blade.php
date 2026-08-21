@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('title', $article->title . ' - pediOcare')
-@section('meta_description', $article->summary)
+@section('title', ($article->meta_title ?: $article->title) . ' - pediOcare')
+@section('meta_description', $article->meta_description ?: $article->summary)
+@section('meta_keywords', 'kaki palsu jogja, pembuatan kaki palsu jogja, klinik ortotik prostetik jogja, kaki palsu bawah lutut jogja, harga kaki palsu jogja, pediocare yogyakarta')
 
 @section('content')
 
@@ -58,8 +59,8 @@
                 <h3 class="text-lg font-bold text-on-background">Butuh Konsultasi Mengenai Kondisi Anda?</h3>
                 <p class="text-xs text-on-surface-variant">Konsultasikan keluhan gerak tubuh Anda langsung bersama tim klinisi kami.</p>
             </div>
-            <a href="{{ route('consultation.create') }}" class="inline-flex items-center justify-center bg-[#E5A500] hover:bg-[#CC9200] text-surface-white text-xs font-semibold px-7 py-3.5 rounded-xl transition shrink-0 shadow-md">
-                <span>Jadwalkan Konsultasi</span>
+            <a href="{{ route('contact') }}" class="inline-flex items-center justify-center bg-[#E5A500] hover:bg-[#CC9200] text-surface-white text-xs font-semibold px-7 py-3.5 rounded-xl transition shrink-0 shadow-md">
+                <span>Hubungi / Kontak Kami</span>
             </a>
         </div>
 

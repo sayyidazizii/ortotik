@@ -53,7 +53,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         return $query->paginate($perPage);
     }
 
-    public function getFeatured(int $limit = 6): Collection
+    public function getFeatured(int $limit = 8): Collection
     {
         return $this->model->newQuery()
             ->with(['category'])

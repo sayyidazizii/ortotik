@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index(): View
     {
         $services = $this->medicalService->getAllServices();
-        $featuredProducts = $this->productService->getFeaturedProducts(6);
+        $featuredProducts = $this->productService->getFeaturedProducts(8);
         $customProducts = $this->medicalService->getCustomProducts();
         $testimonials = $this->testimonialRepository->getFeatured(3);
         $branches = $this->branchRepository->getActiveBranches();

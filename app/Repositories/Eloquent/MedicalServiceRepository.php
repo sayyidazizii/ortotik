@@ -29,10 +29,24 @@ class MedicalServiceRepository extends BaseRepository implements MedicalServiceR
 
     public function findBySlug(string $slug): ?MedicalService
     {
-        return $this->model->newQuery()
+        $query = $this->model->newQuery()
             ->with(['category', 'products'])
-            ->where('slug', $slug)
-            ->where('is_active', true)
-            ->first();
+            ->where('is_active', true);
+
+        if ($slug === 'bracing-supports') {
+            $query->where(function ($q) {
+                $q->where('slug', 'bracing-supports')
+                  ->orWhere('slug', 'bracing-orthopaedic-supports-orthosis');
+            });
+        } elseif ($slug === 'neuro-robotic') {
+            $query->where(function ($q) {
+                $q->where('slug', 'neuro-robotic')
+                  ->orWhere('slug', 'neuro-robotic-rehabilitation');
+            });
+        } else {
+            $query->where('slug', $slug);
+        }
+
+        return $query->first();
     }
 }

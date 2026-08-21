@@ -88,9 +88,9 @@
                 <h3 class="text-xl font-bold text-white">Jadwal Pengukuran & 3D Scanning</h3>
                 <p class="text-xs text-white/80 leading-relaxed">Pemeriksaan fisik dan scanning 3D awal dapat dilakukan di klinik kami di Sleman, D.I. Yogyakarta.</p>
                 <div class="pt-2 space-y-2.5">
-                    <a href="{{ route('consultation.create') }}"
+                    <a href="{{ route('contact') }}"
                         class="flex items-center justify-center w-full bg-[#E5A500] hover:bg-[#CC9200] text-surface-white text-xs font-semibold h-12 rounded-xl transition shadow-md">
-                        <span>Isi Formulir Janji Temu</span>
+                        <span>Hubungi & Jadwal Pengukuran</span>
                     </a>
                     <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20tertarik%20pembuatan%20{{ urlencode($product->name) }}" target="_blank" rel="noopener noreferrer"
                         class="flex items-center justify-center w-full bg-surface-white/10 hover:bg-surface-white/20 text-white border border-surface-white/30 text-xs font-semibold h-12 rounded-xl transition">

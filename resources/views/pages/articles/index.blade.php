@@ -5,23 +5,31 @@
 
 @section('content')
 
-<!-- Header Banner -->
-<div class="bg-surface-container-low border-b border-outline-variant/30 py-16 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-container-max mx-auto text-center space-y-3">
-        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider">
-            <span class="w-2 h-2 rounded-full bg-primary"></span>
-            Pusat Pengetahuan & Edukasi
+@php
+    $heroArticlesBg = $settings['hero_articles_image'] ?? ($settings['hero_about_image'] ?? asset('images/client_update/image4.png'));
+    if (!str_starts_with($heroArticlesBg, 'http') && !str_starts_with($heroArticlesBg, '/')) {
+        $heroArticlesBg = asset($heroArticlesBg);
+    }
+@endphp
+
+<!-- Hero Section -->
+<section class="relative text-center mx-auto py-10 md:py-14 px-margin-mobile md:px-margin-desktop text-white w-full overflow-hidden fade-in-up" 
+         style='background-image: linear-gradient(rgba(13, 28, 47, 0.82), rgba(13, 28, 47, 0.82)), url("{{ $heroArticlesBg }}"); background-size: cover; background-position: center;'>
+    <div class="max-w-container-max mx-auto relative z-10 space-y-2.5 sm:space-y-3">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-white/15 text-primary-fixed border border-surface-white/25 text-[11px] font-bold uppercase tracking-wider backdrop-blur-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse"></span>
+            Pusat Pengetahuan & Edukasi Medis
         </span>
-        <h1 class="text-3xl sm:text-4xl font-headline-xl font-bold tracking-tight text-on-background leading-tight">
-            Artikel & Edukasi Medis
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white max-w-3xl mx-auto leading-tight">
+            {{ $settings['hero_articles_title'] ?? 'Artikel & Edukasi Medis' }}
         </h1>
-        <p class="text-on-surface-variant text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-            Informasi medis terpercaya seputar kesehatan muskuloskeletal, penanganan skoliosis, dan perawatan kaki palsu.
+        <p class="font-body-md text-body-md leading-relaxed text-slate-200 max-w-2xl mx-auto text-xs sm:text-sm">
+            {{ $settings['hero_articles_subtitle'] ?? 'Informasi medis terpercaya seputar kesehatan muskuloskeletal, penanganan skoliosis, dan perawatan kaki palsu.' }}
         </p>
     </div>
-</div>
+</section>
 
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-16">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-12">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
         
         <!-- Main Article List -->

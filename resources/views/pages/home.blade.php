@@ -11,6 +11,12 @@
         $heroMedia = asset($heroMedia);
     }
     $heroMediaType = $settings['hero_home_media_type'] ?? (preg_match('/\.(mp4|webm|ogg|mov)$/i', $heroMedia) ? 'video' : 'image');
+    $clinicName = $settings['clinic_name'] ?? 'pediOcare';
+    $hotlineWA = $settings['hotline_whatsapp'] ?? '0856 9792 2194';
+    $cleanWA = preg_replace('/[^0-9]/', '', $hotlineWA);
+    if (str_starts_with($cleanWA, '0')) {
+        $cleanWA = '62' . substr($cleanWA, 1);
+    }
 @endphp
 
 <!-- Hero Section -->
@@ -46,12 +52,17 @@
             </p>
             
             <div class="flex flex-col sm:flex-row gap-4 mt-2">
-                <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20ingin%20konsultasi%20layanan%20kesehatan%20ortopedi." target="_blank" rel="noopener noreferrer"
-                   class="bg-primary text-on-primary px-7 py-3.5 rounded-xl font-label-md text-sm font-semibold hover:bg-secondary shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined">chat</span> WhatsApp: 0856 9792 2194
+                <a href="https://wa.me/{{ $cleanWA }}?text=Halo%20{{ urlencode($clinicName) }},%20saya%20ingin%20konsultasi%20layanan%20kesehatan%20ortopedi." 
+                   target="_blank" rel="noopener noreferrer"
+                   class="btn-shimmer group relative bg-gradient-to-r from-primary via-[#36802e] to-primary hover:from-secondary hover:to-secondary text-on-primary px-7 py-3.5 rounded-xl font-label-md text-sm font-semibold shadow-lg shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5">
+                    <!-- WhatsApp SVG Icon -->
+                    <svg class="w-5 h-5 fill-current shrink-0 group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.04 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7.02 8.48 7.02 9.68C7.02 10.88 7.9 12.04 8.02 12.2C8.14 12.37 9.73 14.83 12.18 15.88C14.21 16.76 14.63 16.58 15.07 16.54C15.52 16.5 16.5 15.96 16.7 15.39C16.91 14.81 16.91 14.33 16.85 14.22C16.78 14.12 16.62 14.05 16.38 13.94C16.14 13.82 14.96 13.24 14.74 13.16C14.52 13.08 14.36 13.04 14.2 13.28C14.03 13.53 13.57 14.06 13.43 14.22C13.29 14.38 13.15 14.4 12.91 14.28C12.67 14.16 11.9 13.91 10.98 13.09C10.26 12.45 9.78 11.66 9.64 11.42C9.5 11.17 9.62 11.04 9.74 10.92C9.85 10.81 9.99 10.63 10.11 10.49C10.23 10.34 10.28 10.24 10.36 10.08C10.44 9.91 10.4 9.77 10.34 9.66C10.28 9.54 9.8 8.35 9.59 7.86C9.4 7.39 9.2 7.45 9.04 7.44C8.89 7.43 8.71 7.33 8.53 7.33Z"/>
+                    </svg>
+                    <span>WhatsApp: {{ $hotlineWA }}</span>
                 </a>
                 <a href="{{ route('services.index') }}" 
-                   class="border-2 border-primary/25 hover:border-primary text-on-surface hover:text-primary px-7 py-3.5 rounded-xl font-label-md text-sm font-semibold hover:bg-primary/5 transition-all duration-300 flex items-center justify-center bg-surface-white/80 backdrop-blur-sm">
+                   class="border-2 border-primary/25 hover:border-primary text-on-surface hover:text-primary px-7 py-3.5 rounded-xl font-label-md text-sm font-semibold hover:bg-primary/5 transition-all duration-300 flex items-center justify-center bg-surface-white/80 backdrop-blur-sm shadow-xs hover:shadow-md">
                     Lihat Layanan
                 </a>
             </div>

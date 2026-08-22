@@ -178,6 +178,44 @@
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        @keyframes shimmerSweep {
+            0% {
+                transform: translateX(-150%) skewX(-25deg);
+            }
+            45%, 100% {
+                transform: translateX(250%) skewX(-25deg);
+            }
+        }
+
+        .btn-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-shimmer::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.08) 25%,
+                rgba(255, 255, 255, 0.5) 50%,
+                rgba(255, 255, 255, 0.08) 75%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: translateX(-150%) skewX(-25deg);
+            animation: shimmerSweep 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            pointer-events: none;
+        }
+
+        .btn-shimmer:hover::after {
+            animation-duration: 1.8s;
+        }
     </style>
     @stack('styles')
 </head>

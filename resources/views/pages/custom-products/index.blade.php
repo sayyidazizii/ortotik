@@ -17,7 +17,6 @@
          style='background-image: linear-gradient(rgba(13, 28, 47, 0.82), rgba(13, 28, 47, 0.82)), url("{{ $heroCustomBg }}"); background-size: cover; background-position: center;'>
     <div class="max-w-container-max mx-auto relative z-10 space-y-2.5 sm:space-y-3">
         <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-white/15 text-primary-fixed border border-surface-white/25 text-[11px] font-bold uppercase tracking-wider backdrop-blur-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse"></span>
             Individual Custom Fabrication
         </span>
         <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white max-w-3xl mx-auto leading-tight">

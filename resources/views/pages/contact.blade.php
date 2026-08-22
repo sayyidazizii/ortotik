@@ -112,7 +112,6 @@
          style="background-image: linear-gradient(rgba(13, 28, 47, 0.8), rgba(13, 28, 47, 0.8)), url('{{ $heroContactBg }}');">
     <div class="max-w-container-max mx-auto text-center relative z-10 space-y-2">
         <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-surface-white/10 text-primary-fixed border border-surface-white/20 text-[11px] font-semibold uppercase tracking-wider backdrop-blur-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse"></span>
             {{ $settings['hero_contact_badge'] ?? 'Pelayanan & Lokasi Cabang' }}
         </span>
         <h1 class="text-2xl sm:text-3xl font-bold text-surface-white tracking-tight leading-tight">

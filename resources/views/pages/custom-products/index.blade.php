@@ -29,141 +29,282 @@
 </section>
 
 <!-- Zig-Zag Workflow Stepper Section -->
-<section class="py-16 md:py-24 bg-surface-container-low border-b border-outline-variant/30 relative overflow-hidden">
+<section class="py-12 md:py-16 bg-surface-container-low border-b border-outline-variant/30 relative overflow-hidden">
     <!-- Background subtle ambient circles -->
     <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none"></div>
     <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none"></div>
 
     <div class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
-        <div class="text-center max-w-2xl mx-auto mb-14 space-y-2">
+        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10 space-y-2">
             <span class="text-xs font-bold text-primary uppercase tracking-wider inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10">
-                <span class="material-symbols-outlined text-sm">route</span> Standard Operating Procedure
+                <span class="material-symbols-outlined text-sm">route</span> Standar Pelayanan Kemenkes RI
             </span>
             <h2 class="font-headline-lg text-2xl sm:text-3xl md:text-4xl font-bold text-on-background tracking-tight">
-                4 Tahapan Alur Pasien
+                9 Tahapan Alur Pasien
             </h2>
             <p class="text-on-surface-variant text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-                Setiap tahapan dirancang sistematis untuk menjamin akurasi biomekanik, kenyamanan soket, dan mobilitas mandiri.
+                Alur prosedur pelayanan klinis terstandar dari asesmen awal hingga tindak lanjut berkala untuk menjamin akurasi biomekanik, kenyamanan, dan mobilitas mandiri.
             </p>
         </div>
 
         <!-- Zig-Zag Flow Container (Mobile & Desktop) -->
-        <div class="relative space-y-2 sm:space-y-0">
+        <div class="relative space-y-1 sm:space-y-0">
             
             <!-- Step 1 (Left) -->
             <div class="flex justify-start w-full">
-                <div class="w-[88%] sm:w-[78%] md:w-[48%] bg-surface-white p-4 sm:p-6 rounded-2xl border border-outline-variant/30 shadow-1 hover:shadow-hover hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1.5 h-full bg-primary"></div>
-                    <div class="flex items-start gap-3 sm:gap-4">
-                        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-primary/10 text-primary font-bold text-sm sm:text-base flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-2xs">
+                <div class="w-[92%] sm:w-[84%] md:w-[48%] bg-surface-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-outline-variant/30 shadow-1 hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300 relative group overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+                    <div class="flex items-start gap-2.5 sm:gap-3.5">
+                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-primary/10 text-primary font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-2xs">
                             01
                         </div>
-                        <div class="space-y-1 sm:space-y-1.5">
-                            <div class="flex items-center gap-1.5 sm:gap-2">
-                                <span class="material-symbols-outlined text-primary text-base sm:text-lg">clinical_notes</span>
-                                <h3 class="text-xs sm:text-base font-bold text-on-background leading-tight">Konsultasi & Gait Analysis</h3>
+                        <div class="space-y-0.5 sm:space-y-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-primary text-sm sm:text-base">clinical_notes</span>
+                                <h3 class="text-xs sm:text-sm font-bold text-on-background leading-tight">Pemeriksaan <span class="text-[10px] sm:text-xs text-primary font-normal italic">(assessment)</span></h3>
                             </div>
-                            <p class="text-[11px] sm:text-xs text-on-surface-variant leading-relaxed">
-                                Pemeriksaan fisik komprehensif oleh tim Ortotis-Prostetis tersertifikasi dan evaluasi biomekanik pola gerak tubuh pasien.
+                            <p class="text-[11px] sm:text-xs text-on-surface-variant leading-snug sm:leading-relaxed">
+                                Pemeriksaan fisik komprehensif oleh tim Ortotis-Prostetis tersertifikasi, anamnesis riwayat medis, serta evaluasi kondisi ekstremitas/stump dan kebutuhan fungsional pasien.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Connector 1: Left to Right Curved Dashed Spiral Arrow (Mobile & Desktop) -->
-            <div class="flex justify-center items-center -my-2 sm:-my-4 relative z-0 pointer-events-none py-1">
-                <svg class="w-48 sm:w-60 h-14 sm:h-16 text-primary/60" viewBox="0 0 220 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Spiral Curved Dashed Flow Path -->
-                    <path d="M 40 10 C 140 5, 80 65, 175 62" stroke="currentColor" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round"/>
-                    <!-- Arrow Head -->
-                    <polygon points="175,55 192,62 175,69" fill="currentColor"/>
-                    <!-- Decorative Spiral Loop Dot -->
-                    <circle cx="40" cy="10" r="4" fill="currentColor"/>
+            <!-- Connector 1: Left to Right Curved Dashed Spiral Arrow -->
+            <div class="flex justify-center items-center -my-2.5 sm:-my-3.5 relative z-0 pointer-events-none">
+                <svg class="w-36 sm:w-48 h-6 sm:h-7 text-primary/50" viewBox="0 0 200 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 35 4 C 115 4, 85 26, 165 26" stroke="currentColor" stroke-width="1.8" stroke-dasharray="4 4" stroke-linecap="round"/>
+                    <polygon points="165,22 175,26 165,30" fill="currentColor"/>
+                    <circle cx="35" cy="4" r="2.5" fill="currentColor"/>
                 </svg>
             </div>
 
             <!-- Step 2 (Right) -->
             <div class="flex justify-end w-full">
-                <div class="w-[88%] sm:w-[78%] md:w-[48%] bg-surface-white p-4 sm:p-6 rounded-2xl border border-outline-variant/30 shadow-1 hover:shadow-hover hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden">
-                    <div class="absolute top-0 right-0 w-1.5 h-full bg-primary"></div>
-                    <div class="flex items-start gap-3 sm:gap-4">
-                        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-primary/10 text-primary font-bold text-sm sm:text-base flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-2xs">
+                <div class="w-[92%] sm:w-[84%] md:w-[48%] bg-surface-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-outline-variant/30 shadow-1 hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300 relative group overflow-hidden">
+                    <div class="absolute top-0 right-0 w-1 h-full bg-primary"></div>
+                    <div class="flex items-start gap-2.5 sm:gap-3.5">
+                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-primary/10 text-primary font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-2xs">
                             02
                         </div>
-                        <div class="space-y-1 sm:space-y-1.5">
-                            <div class="flex items-center gap-1.5 sm:gap-2">
-                                <span class="material-symbols-outlined text-primary text-base sm:text-lg">document_scanner</span>
-                                <h3 class="text-xs sm:text-base font-bold text-on-background leading-tight">3D Scanning & Modifikasi</h3>
+                        <div class="space-y-0.5 sm:space-y-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-primary text-sm sm:text-base">prescriptions</span>
+                                <h3 class="text-xs sm:text-sm font-bold text-on-background leading-tight">Diagnosis, preskripsi <span class="text-[10px] sm:text-xs text-primary font-normal italic">(prescription)</span></h3>
                             </div>
-                            <p class="text-[11px] sm:text-xs text-on-surface-variant leading-relaxed">
-                                Pengambilan data kontur anatomi akurasi sub-milimeter menggunakan optical 3D scanner dan perancangan digital CAD/CAM.
+                            <p class="text-[11px] sm:text-xs text-on-surface-variant leading-snug sm:leading-relaxed">
+                                Penetapan diagnosis klinis ortotik-prostetik dan penentuan rekomendasi spesifikasi desain alat bantu, jenis soket, serta pemilihan komponen yang tepat.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Connector 2: Right to Left Curved Dashed Spiral Arrow (Mobile & Desktop) -->
-            <div class="flex justify-center items-center -my-2 sm:-my-4 relative z-0 pointer-events-none py-1">
-                <svg class="w-48 sm:w-60 h-14 sm:h-16 text-primary/60" viewBox="0 0 220 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Spiral Curved Dashed Flow Path -->
-                    <path d="M 180 10 C 80 5, 140 65, 45 62" stroke="currentColor" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round"/>
-                    <!-- Arrow Head -->
-                    <polygon points="45,55 28,62 45,69" fill="currentColor"/>
-                    <!-- Decorative Spiral Loop Dot -->
-                    <circle cx="180" cy="10" r="4" fill="currentColor"/>
+            <!-- Connector 2: Right to Left Curved Dashed Spiral Arrow -->
+            <div class="flex justify-center items-center -my-2.5 sm:-my-3.5 relative z-0 pointer-events-none">
+                <svg class="w-36 sm:w-48 h-6 sm:h-7 text-primary/50" viewBox="0 0 200 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 165 4 C 85 4, 115 26, 35 26" stroke="currentColor" stroke-width="1.8" stroke-dasharray="4 4" stroke-linecap="round"/>
+                    <polygon points="35,22 25,26 35,30" fill="currentColor"/>
+                    <circle cx="165" cy="4" r="2.5" fill="currentColor"/>
                 </svg>
             </div>
 
             <!-- Step 3 (Left) -->
             <div class="flex justify-start w-full">
-                <div class="w-[88%] sm:w-[78%] md:w-[48%] bg-surface-white p-4 sm:p-6 rounded-2xl border border-outline-variant/30 shadow-1 hover:shadow-hover hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1.5 h-full bg-primary"></div>
-                    <div class="flex items-start gap-3 sm:gap-4">
-                        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-primary/10 text-primary font-bold text-sm sm:text-base flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-2xs">
+                <div class="w-[92%] sm:w-[84%] md:w-[48%] bg-surface-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-outline-variant/30 shadow-1 hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300 relative group overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+                    <div class="flex items-start gap-2.5 sm:gap-3.5">
+                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-primary/10 text-primary font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-2xs">
                             03
                         </div>
-                        <div class="space-y-1 sm:space-y-1.5">
-                            <div class="flex items-center gap-1.5 sm:gap-2">
-                                <span class="material-symbols-outlined text-primary text-base sm:text-lg">precision_manufacturing</span>
-                                <h3 class="text-xs sm:text-base font-bold text-on-background leading-tight">Fabrikasi Carbon Composite</h3>
+                        <div class="space-y-0.5 sm:space-y-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-primary text-sm sm:text-base">straighten</span>
+                                <h3 class="text-xs sm:text-sm font-bold text-on-background leading-tight">Pengukuran <span class="text-[10px] sm:text-xs text-primary font-normal italic">(measurement)</span></h3>
                             </div>
-                            <p class="text-[11px] sm:text-xs text-on-surface-variant leading-relaxed">
-                                Pengerjaan mandiri di workshop tersertifikasi menggunakan rajutan serat karbon ringan berkekuatan tinggi berstandar medis.
+                            <p class="text-[11px] sm:text-xs text-on-surface-variant leading-snug sm:leading-relaxed">
+                                Pengambilan ukuran dan parameter anatomis secara mendalam, presisi, dan teliti guna menjamin kesesuaian dimensi alat bantu dengan proporsi tubuh pasien.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Connector 3: Left to Right Curved Dashed Spiral Arrow (Mobile & Desktop) -->
-            <div class="flex justify-center items-center -my-2 sm:-my-4 relative z-0 pointer-events-none py-1">
-                <svg class="w-48 sm:w-60 h-14 sm:h-16 text-primary/60" viewBox="0 0 220 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Spiral Curved Dashed Flow Path -->
-                    <path d="M 40 10 C 140 5, 80 65, 175 62" stroke="currentColor" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round"/>
-                    <!-- Arrow Head -->
-                    <polygon points="175,55 192,62 175,69" fill="currentColor"/>
-                    <!-- Decorative Spiral Loop Dot -->
-                    <circle cx="40" cy="10" r="4" fill="currentColor"/>
+            <!-- Connector 3: Left to Right Curved Dashed Spiral Arrow -->
+            <div class="flex justify-center items-center -my-2.5 sm:-my-3.5 relative z-0 pointer-events-none">
+                <svg class="w-36 sm:w-48 h-6 sm:h-7 text-primary/50" viewBox="0 0 200 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 35 4 C 115 4, 85 26, 165 26" stroke="currentColor" stroke-width="1.8" stroke-dasharray="4 4" stroke-linecap="round"/>
+                    <polygon points="165,22 175,26 165,30" fill="currentColor"/>
+                    <circle cx="35" cy="4" r="2.5" fill="currentColor"/>
                 </svg>
             </div>
 
             <!-- Step 4 (Right) -->
             <div class="flex justify-end w-full">
-                <div class="w-[88%] sm:w-[78%] md:w-[48%] bg-surface-white p-4 sm:p-6 rounded-2xl border border-outline-variant/30 shadow-1 hover:shadow-hover hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden">
-                    <div class="absolute top-0 right-0 w-1.5 h-full bg-[#E5A500]"></div>
-                    <div class="flex items-start gap-3 sm:gap-4">
-                        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#E5A500]/15 text-[#B38000] font-bold text-sm sm:text-base flex items-center justify-center shrink-0 group-hover:bg-[#E5A500] group-hover:text-white transition-colors duration-300 shadow-2xs">
+                <div class="w-[92%] sm:w-[84%] md:w-[48%] bg-surface-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-outline-variant/30 shadow-1 hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300 relative group overflow-hidden">
+                    <div class="absolute top-0 right-0 w-1 h-full bg-primary"></div>
+                    <div class="flex items-start gap-2.5 sm:gap-3.5">
+                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-primary/10 text-primary font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-2xs">
                             04
                         </div>
-                        <div class="space-y-1 sm:space-y-1.5">
-                            <div class="flex items-center gap-1.5 sm:gap-2">
-                                <span class="material-symbols-outlined text-[#B38000] text-base sm:text-lg">directions_walk</span>
-                                <h3 class="text-xs sm:text-base font-bold text-on-background leading-tight">Fitting & Gait Training</h3>
+                        <div class="space-y-0.5 sm:space-y-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-primary text-sm sm:text-base">view_in_ar</span>
+                                <h3 class="text-xs sm:text-sm font-bold text-on-background leading-tight">Pencetakan <span class="text-[10px] sm:text-xs text-primary font-normal italic">(casting)</span></h3>
                             </div>
-                            <p class="text-[11px] sm:text-xs text-on-surface-variant leading-relaxed">
-                                Penyetelan dinamis soket, evaluasi beban tumpuan, serta bimbingan rehabilitasi berjalan hingga pasien nyaman dan mandiri.
+                            <p class="text-[11px] sm:text-xs text-on-surface-variant leading-snug sm:leading-relaxed">
+                                Pengambilan cetakan negatif anatomi tubuh pasien menggunakan gips medis (Plaster of Paris) atau pemindaian optik 3D scanner berakurasi sub-milimeter.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connector 4: Right to Left Curved Dashed Spiral Arrow -->
+            <div class="flex justify-center items-center -my-2.5 sm:-my-3.5 relative z-0 pointer-events-none">
+                <svg class="w-36 sm:w-48 h-6 sm:h-7 text-primary/50" viewBox="0 0 200 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 165 4 C 85 4, 115 26, 35 26" stroke="currentColor" stroke-width="1.8" stroke-dasharray="4 4" stroke-linecap="round"/>
+                    <polygon points="35,22 25,26 35,30" fill="currentColor"/>
+                    <circle cx="165" cy="4" r="2.5" fill="currentColor"/>
+                </svg>
+            </div>
+
+            <!-- Step 5 (Left) -->
+            <div class="flex justify-start w-full">
+                <div class="w-[92%] sm:w-[84%] md:w-[48%] bg-surface-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-outline-variant/30 shadow-1 hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300 relative group overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+                    <div class="flex items-start gap-2.5 sm:gap-3.5">
+                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-primary/10 text-primary font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-2xs">
+                            05
+                        </div>
+                        <div class="space-y-0.5 sm:space-y-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-primary text-sm sm:text-base">tune</span>
+                                <h3 class="text-xs sm:text-sm font-bold text-on-background leading-tight">Rektifikasi <span class="text-[10px] sm:text-xs text-primary font-normal italic">(rectification)</span></h3>
+                            </div>
+                            <p class="text-[11px] sm:text-xs text-on-surface-variant leading-snug sm:leading-relaxed">
+                                Modifikasi dan penyesuaian model cetakan positif (gips positif atau digital CAD 3D) untuk distribusi tumpuan beban (weight-bearing) dan koreksi biomekanik.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connector 5: Left to Right Curved Dashed Spiral Arrow -->
+            <div class="flex justify-center items-center -my-2.5 sm:-my-3.5 relative z-0 pointer-events-none">
+                <svg class="w-36 sm:w-48 h-6 sm:h-7 text-primary/50" viewBox="0 0 200 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 35 4 C 115 4, 85 26, 165 26" stroke="currentColor" stroke-width="1.8" stroke-dasharray="4 4" stroke-linecap="round"/>
+                    <polygon points="165,22 175,26 165,30" fill="currentColor"/>
+                    <circle cx="35" cy="4" r="2.5" fill="currentColor"/>
+                </svg>
+            </div>
+
+            <!-- Step 6 (Right) -->
+            <div class="flex justify-end w-full">
+                <div class="w-[92%] sm:w-[84%] md:w-[48%] bg-surface-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-outline-variant/30 shadow-1 hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300 relative group overflow-hidden">
+                    <div class="absolute top-0 right-0 w-1 h-full bg-primary"></div>
+                    <div class="flex items-start gap-2.5 sm:gap-3.5">
+                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-primary/10 text-primary font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-2xs">
+                            06
+                        </div>
+                        <div class="space-y-0.5 sm:space-y-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-primary text-sm sm:text-base">precision_manufacturing</span>
+                                <h3 class="text-xs sm:text-sm font-bold text-on-background leading-tight">Fabrikasi <span class="text-[10px] sm:text-xs text-primary font-normal italic">(fabrication)</span></h3>
+                            </div>
+                            <p class="text-[11px] sm:text-xs text-on-surface-variant leading-snug sm:leading-relaxed">
+                                Proses pengerjaan, pembentukan soket, dan perakitan komponen alat bantu di workshop khusus menggunakan material berkualitas medis standar internasional.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connector 6: Right to Left Curved Dashed Spiral Arrow -->
+            <div class="flex justify-center items-center -my-2.5 sm:-my-3.5 relative z-0 pointer-events-none">
+                <svg class="w-36 sm:w-48 h-6 sm:h-7 text-primary/50" viewBox="0 0 200 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 165 4 C 85 4, 115 26, 35 26" stroke="currentColor" stroke-width="1.8" stroke-dasharray="4 4" stroke-linecap="round"/>
+                    <polygon points="35,22 25,26 35,30" fill="currentColor"/>
+                    <circle cx="165" cy="4" r="2.5" fill="currentColor"/>
+                </svg>
+            </div>
+
+            <!-- Step 7 (Left) -->
+            <div class="flex justify-start w-full">
+                <div class="w-[92%] sm:w-[84%] md:w-[48%] bg-surface-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-outline-variant/30 shadow-1 hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300 relative group overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+                    <div class="flex items-start gap-2.5 sm:gap-3.5">
+                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-primary/10 text-primary font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-2xs">
+                            07
+                        </div>
+                        <div class="space-y-0.5 sm:space-y-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-primary text-sm sm:text-base">accessibility_new</span>
+                                <h3 class="text-xs sm:text-sm font-bold text-on-background leading-tight">Pengepasan <span class="text-[10px] sm:text-xs text-primary font-normal italic">(fitting)</span></h3>
+                            </div>
+                            <p class="text-[11px] sm:text-xs text-on-surface-variant leading-snug sm:leading-relaxed">
+                                Uji coba langsung pada pasien, evaluasi kenyamanan soket, penyesuaian kelurusan statis & dinamis (alignment), serta evaluasi fungsi gerak tubuh.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connector 7: Left to Right Curved Dashed Spiral Arrow -->
+            <div class="flex justify-center items-center -my-2.5 sm:-my-3.5 relative z-0 pointer-events-none">
+                <svg class="w-36 sm:w-48 h-6 sm:h-7 text-primary/50" viewBox="0 0 200 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 35 4 C 115 4, 85 26, 165 26" stroke="currentColor" stroke-width="1.8" stroke-dasharray="4 4" stroke-linecap="round"/>
+                    <polygon points="165,22 175,26 165,30" fill="currentColor"/>
+                    <circle cx="35" cy="4" r="2.5" fill="currentColor"/>
+                </svg>
+            </div>
+
+            <!-- Step 8 (Right) -->
+            <div class="flex justify-end w-full">
+                <div class="w-[92%] sm:w-[84%] md:w-[48%] bg-surface-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-outline-variant/30 shadow-1 hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300 relative group overflow-hidden">
+                    <div class="absolute top-0 right-0 w-1 h-full bg-primary"></div>
+                    <div class="flex items-start gap-2.5 sm:gap-3.5">
+                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-primary/10 text-primary font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-2xs">
+                            08
+                        </div>
+                        <div class="space-y-0.5 sm:space-y-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-primary text-sm sm:text-base">inventory_2</span>
+                                <h3 class="text-xs sm:text-sm font-bold text-on-background leading-tight">Penyerahan <span class="text-[10px] sm:text-xs text-primary font-normal italic">(delivery & check out)</span></h3>
+                            </div>
+                            <p class="text-[11px] sm:text-xs text-on-surface-variant leading-snug sm:leading-relaxed">
+                                Pemeriksaan akhir mutu alat bantu, penyerahan resmi kepada pasien, serta edukasi intensif tata cara pemakaian dan pemeliharaan mandiri.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connector 8: Right to Left Curved Dashed Spiral Arrow -->
+            <div class="flex justify-center items-center -my-2.5 sm:-my-3.5 relative z-0 pointer-events-none">
+                <svg class="w-36 sm:w-48 h-6 sm:h-7 text-primary/50" viewBox="0 0 200 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 165 4 C 85 4, 115 26, 35 26" stroke="currentColor" stroke-width="1.8" stroke-dasharray="4 4" stroke-linecap="round"/>
+                    <polygon points="35,22 25,26 35,30" fill="currentColor"/>
+                    <circle cx="165" cy="4" r="2.5" fill="currentColor"/>
+                </svg>
+            </div>
+
+            <!-- Step 9 (Left - Finish Milestone) -->
+            <div class="flex justify-start w-full">
+                <div class="w-[92%] sm:w-[84%] md:w-[48%] bg-surface-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-outline-variant/30 shadow-1 hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300 relative group overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-[#E5A500]"></div>
+                    <div class="flex items-start gap-2.5 sm:gap-3.5">
+                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-[#E5A500]/15 text-[#B38000] font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 group-hover:bg-[#E5A500] group-hover:text-white transition-colors duration-300 shadow-2xs">
+                            09
+                        </div>
+                        <div class="space-y-0.5 sm:space-y-1">
+                            <div class="flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[#B38000] text-sm sm:text-base">published_with_changes</span>
+                                <h3 class="text-xs sm:text-sm font-bold text-on-background leading-tight">Evaluasi & tindak lanjut <span class="text-[10px] sm:text-xs text-[#B38000] font-normal italic">(follow up)</span></h3>
+                            </div>
+                            <p class="text-[11px] sm:text-xs text-on-surface-variant leading-snug sm:leading-relaxed">
+                                Pemantauan rutin dan evaluasi berkala untuk memastikan kenyamanan jangka panjang, adaptasi fungsi, serta jaminan garansi fitting 100% dari pediOcare.
                             </p>
                         </div>
                     </div>

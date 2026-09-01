@@ -43,7 +43,8 @@
         <div class="md:col-span-7 lg:col-span-7 flex flex-col gap-6 fade-in-left">
             <div>
                 <h1 class="font-headline-xl-mobile text-headline-xl-mobile md:font-headline-xl md:text-headline-xl text-on-background leading-tight relative font-black">
-                    pedi<span class="text-secondary">O</span>care, <span class="text-primary">{{ $settings['clinic_tagline'] ?? 'Care your milestone' }}</span>
+                    pedi<span class="text-secondary">O</span>care
+                    <span class="text-primary text-xl sm:text-2xl md:text-3xl font-extrabold block mt-1 tracking-tight">{{ $settings['clinic_tagline'] ?? 'Care your milestone' }}</span>
                 </h1>
             </div>
             
@@ -54,7 +55,7 @@
             <div class="flex flex-col sm:flex-row gap-4 mt-2">
                 <a href="https://wa.me/{{ $cleanWA }}?text=Halo%20{{ urlencode($clinicName) }},%20saya%20ingin%20konsultasi%20layanan%20kesehatan%20ortopedi." 
                    target="_blank" rel="noopener noreferrer"
-                   class="btn-shimmer group relative bg-gradient-to-r from-primary via-[#36802e] to-primary hover:from-secondary hover:to-secondary text-on-primary px-7 py-3.5 rounded-xl font-label-md text-sm font-semibold shadow-lg shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5">
+                   class="btn-shimmer group relative bg-gradient-to-r from-primary via-primary-light to-primary hover:from-secondary hover:to-secondary-light text-on-primary px-7 py-3.5 rounded-xl font-label-md text-sm font-semibold shadow-lg shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5">
                     <!-- WhatsApp SVG Icon -->
                     <svg class="w-5 h-5 fill-current shrink-0 group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.04 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7.02 8.48 7.02 9.68C7.02 10.88 7.9 12.04 8.02 12.2C8.14 12.37 9.73 14.83 12.18 15.88C14.21 16.76 14.63 16.58 15.07 16.54C15.52 16.5 16.5 15.96 16.7 15.39C16.91 14.81 16.91 14.33 16.85 14.22C16.78 14.12 16.62 14.05 16.38 13.94C16.14 13.82 14.96 13.24 14.74 13.16C14.52 13.08 14.36 13.04 14.2 13.28C14.03 13.53 13.57 14.06 13.43 14.22C13.29 14.38 13.15 14.4 12.91 14.28C12.67 14.16 11.9 13.91 10.98 13.09C10.26 12.45 9.78 11.66 9.64 11.42C9.5 11.17 9.62 11.04 9.74 10.92C9.85 10.81 9.99 10.63 10.11 10.49C10.23 10.34 10.28 10.24 10.36 10.08C10.44 9.91 10.4 9.77 10.34 9.66C10.28 9.54 9.8 8.35 9.59 7.86C9.4 7.39 9.2 7.45 9.04 7.44C8.89 7.43 8.71 7.33 8.53 7.33Z"/>
@@ -198,53 +199,31 @@
                  @touchstart.passive="handleTouchStart($event)"
                  @touchend.passive="handleTouchEnd($event)">
                 
-                <!-- Main Card Box -->
-                <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-surface-white bg-gradient-to-b from-primary/10 via-surface-white/40 to-transparent backdrop-blur-sm min-h-[420px] sm:min-h-[480px]">
-                    
-                    <!-- Doctor Slides Loop (Direct Blade Rendering with Alpine Reactivity) -->
-                    @foreach($heroDoctorsList as $sIdx => $slide)
-                    <div x-show="currentHeroSlide === {{ $sIdx }}"
-                         @if($sIdx !== 0) style="display: none;" @endif
-                         x-transition:enter="transition ease-out duration-700"
-                         x-transition:enter-start="opacity-0 scale-95"
-                         x-transition:enter-end="opacity-100 scale-100"
-                         x-transition:leave="transition ease-in duration-300"
-                         x-transition:leave-start="opacity-100 scale-100"
-                         x-transition:leave-end="opacity-0 scale-95"
-                         class="absolute inset-0">
-                        <img src="{{ $slide['image'] }}" 
-                             alt="{{ $slide['name'] }}" 
-                             class="w-full h-full object-cover object-top filter contrast-105 brightness-105 select-none"
-                             onerror="this.onerror=null; this.src='{{ asset('images/client_update/image5.png') }}';"/>
-                        
-                        <!-- Dark Gradient & Doctor Info Overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-on-background/90 via-on-background/25 to-transparent flex items-end p-6 sm:p-7">
-                            <div class="text-white w-full pr-12">
-                                <span class="text-[10px] sm:text-[11px] uppercase tracking-wider font-bold text-primary-fixed bg-white/15 px-3 py-1 rounded-full backdrop-blur-md inline-block mb-1.5">{{ $slide['badge'] }}</span>
-                                <h3 class="text-base sm:text-lg font-black leading-snug drop-shadow-sm">{{ $slide['name'] }}</h3>
-                                <p class="text-xs text-slate-200 mt-0.5 leading-relaxed">{{ $slide['title'] }}</p>
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-b from-surface-white via-surface-container-low to-surface-container-high border-2 border-primary/20 p-2 sm:p-3">
+                    <template x-for="(doc, dIdx) in heroSlides" :key="dIdx">
+                        <div x-show="currentHeroSlide === dIdx"
+                             x-transition:enter="transition ease-out duration-700"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100"
+                             class="relative flex flex-col items-center">
+                            <div class="relative w-full h-[320px] sm:h-[380px] md:h-[420px] rounded-2xl overflow-hidden bg-gradient-to-t from-primary/10 via-transparent to-transparent flex items-end justify-center">
+                                <img :src="doc.image" 
+                                     :alt="doc.name" 
+                                     class="w-full h-full object-cover object-top filter contrast-105 drop-shadow-md"/>
+                                
+                                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-primary/90 via-primary/50 to-transparent p-4 text-center text-white">
+                                    <span class="inline-block bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase mb-1" x-text="doc.badge || 'Tim Klinis Spesialis'"></span>
+                                    <h3 class="font-bold text-sm sm:text-base leading-snug drop-shadow-sm" x-text="doc.name"></h3>
+                                    <p class="text-[11px] text-white/85 font-medium leading-tight mt-0.5" x-text="doc.title"></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    @endforeach
-
-                    <!-- Top-Right Indicator Pill & Slide Counter -->
-                    <div class="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-black/45 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 shadow-md">
-                        @foreach($heroDoctorsList as $sIdx => $slide)
-                        <button type="button" 
-                                @click.stop="goToSlide({{ $sIdx }})"
-                                :class="currentHeroSlide === {{ $sIdx }} ? 'w-4 bg-primary-fixed' : 'w-1.5 bg-white/40 hover:bg-white/80'"
-                                class="h-1.5 rounded-full transition-all duration-300 focus:outline-none {{ $sIdx === 0 ? 'w-4 bg-primary-fixed' : 'w-1.5 bg-white/40' }}"
-                                aria-label="Pilih slide {{ $sIdx + 1 }}">
-                        </button>
-                        @endforeach
-                        <span class="text-[10px] text-white/90 font-mono font-bold ml-1" x-text="(currentHeroSlide + 1) + '/' + totalSlides">1/{{ count($heroDoctorsList) }}</span>
-                    </div>
+                    </template>
 
                     <!-- Manual Prev Slide Button -->
                     <button type="button" 
                             @click.stop="prevSlide()"
-                            class="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/35 hover:bg-black/70 backdrop-blur-md text-white border border-white/25 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg group-hover/slider:opacity-100 opacity-70 focus:outline-none"
+                            class="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/35 hover:bg-primary backdrop-blur-md text-white border border-white/25 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg group-hover/slider:opacity-100 opacity-70 focus:outline-none"
                             title="Praktisi Sebelumnya"
                             aria-label="Praktisi Sebelumnya">
                         <span class="material-symbols-outlined text-lg sm:text-xl">chevron_left</span>
@@ -253,7 +232,7 @@
                     <!-- Manual Next Slide Button -->
                     <button type="button" 
                             @click.stop="nextSlide()"
-                            class="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/35 hover:bg-black/70 backdrop-blur-md text-white border border-white/25 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg group-hover/slider:opacity-100 opacity-70 focus:outline-none"
+                            class="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/35 hover:bg-primary backdrop-blur-md text-white border border-white/25 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg group-hover/slider:opacity-100 opacity-70 focus:outline-none"
                             title="Praktisi Selanjutnya"
                             aria-label="Praktisi Selanjutnya">
                         <span class="material-symbols-outlined text-lg sm:text-xl">chevron_right</span>
@@ -273,12 +252,12 @@
 
                 <!-- Floating Badge 2: 100% Garansi Fitting (Bottom Right) -->
                 <div class="absolute -bottom-3 -right-3 sm:-right-6 bg-surface-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-outline-variant/30 flex items-center gap-3 animate-float delay-300 max-w-[220px] z-30">
-                    <div class="w-10 h-10 rounded-xl bg-[#E5A500]/15 text-[#E5A500] flex items-center justify-center shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-secondary/15 text-secondary flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-xl">precision_manufacturing</span>
                     </div>
                     <div>
                         <span class="text-xs font-bold text-on-background block">{{ $settings['hero_badge_2_title'] ?? '100% Garansi Fitting' }}</span>
-                        <span class="text-[10px] text-[#E5A500] font-semibold">{{ $settings['hero_badge_2_subtitle'] ?? 'Akurasi & Kenyamanan' }}</span>
+                        <span class="text-[10px] text-secondary font-semibold">{{ $settings['hero_badge_2_subtitle'] ?? 'Akurasi & Kenyamanan' }}</span>
                     </div>
                 </div>
             </div>
@@ -289,13 +268,13 @@
     <!-- Wave Transition: Edge-to-Edge -->
     <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-[0] z-20 pointer-events-none -mb-[1px]">
         <svg class="relative block w-full w-[calc(100%+1.3px)] -ml-[0.5px] h-[60px] sm:h-[90px] md:h-[130px]" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
-            <path class="fill-[#306D29]" d="M0,0 C150,100 350,0 500,80 C650,160 850,40 1200,100 L1200,120 L0,120 Z"></path>
+            <path class="fill-[#0F2C59]" d="M0,0 C150,100 350,0 500,80 C650,160 850,40 1200,100 L1200,120 L0,120 Z"></path>
         </svg>
     </div>
 </section>
 
 <!-- Tentang Kami (About Us) -->
-<section class="relative py-20 md:py-28 pb-28 md:pb-40 bg-[#f0fdfa] overflow-hidden fade-in-up" id="tentang">
+<section class="relative py-20 md:py-28 pb-28 md:pb-40 bg-[#F0F7FF] overflow-hidden fade-in-up" id="tentang">
     <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             
@@ -312,16 +291,16 @@
                 </p>
                 <ul class="flex flex-col gap-4 mb-8">
                     <li class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-full text-base">check</span>
-                        <span class="font-body-md text-on-surface font-medium">Teknologi 3D Scanning & Custom Fitting Presisi</span>
+                        <span class="material-symbols-outlined text-white bg-primary p-1.5 rounded-full text-base">check</span>
+                        <span class="font-body-md text-on-surface font-medium">Teknologi terkini dengan standar pelayanan & alat customize yang presisi.</span>
                     </li>
                     <li class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-full text-base">check</span>
-                        <span class="font-body-md text-on-surface font-medium">Praktisi Berlisensi STR & SIP Kemenkes Resmi</span>
+                        <span class="material-symbols-outlined text-white bg-primary p-1.5 rounded-full text-base">check</span>
+                        <span class="font-body-md text-on-surface font-medium">Praktisi Ortotis Prostetis legal memiliki STR & Surat Ijin Praktik Dinas Kesehatan.</span>
                     </li>
                     <li class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-full text-base">check</span>
-                        <span class="font-body-md text-on-surface font-medium">Pelayanan Komprehensif (Konsultasi hingga Rehabilitasi)</span>
+                        <span class="material-symbols-outlined text-white bg-primary p-1.5 rounded-full text-base">check</span>
+                        <span class="font-body-md text-on-surface font-medium">Pelayanan komprehensif dan paripurna (konsultasi gratis).</span>
                     </li>
                 </ul>
                 <a class="inline-flex items-center font-label-md text-label-md text-primary hover:text-secondary group transition-colors font-semibold" href="{{ route('about') }}">
@@ -382,26 +361,26 @@
     <!-- Wave Transition: Edge-to-Edge -->
     <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-[0] z-20 pointer-events-none -mb-[1px]">
         <svg class="relative block w-full w-[calc(100%+1.3px)] -ml-[0.5px] h-[70px] sm:h-[110px] md:h-[160px]" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
-            <path class="fill-[#306D29] opacity-40" d="M0,40 C200,120 400,20 600,100 C800,180 1000,60 1200,120 L1200,120 L0,120 Z"></path>
-            <path class="fill-[#306D29]" d="M0,0 C150,100 350,0 500,80 C650,160 850,40 1200,100 L1200,120 L0,120 Z"></path>
+            <path class="fill-[#0F2C59] opacity-40" d="M0,40 C200,120 400,20 600,100 C800,180 1000,60 1200,120 L1200,120 L0,120 Z"></path>
+            <path class="fill-[#0F2C59]" d="M0,0 C150,100 350,0 500,80 C650,160 850,40 1200,100 L1200,120 L0,120 Z"></path>
         </svg>
     </div>
 </section>
 
 <!-- Layanan Unggulan (Our Services) - Circular Horizontal Animated Slider -->
-<section class="relative py-20 md:py-28 pb-28 md:pb-40 bg-[#f6fdfc] overflow-hidden fade-in-up" id="layanan">
-    <div class="absolute -left-20 top-1/4 w-64 h-64 bg-[#306D29] opacity-5 rounded-full blur-3xl z-0 pointer-events-none"></div>
+<section class="relative py-20 md:py-28 pb-28 md:pb-40 bg-[#F8FAFC] overflow-hidden fade-in-up" id="layanan">
+    <div class="absolute -left-20 top-1/4 w-64 h-64 bg-secondary opacity-5 rounded-full blur-3xl z-0 pointer-events-none"></div>
     <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         
         <!-- Header & Slider Navigation -->
         <div class="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 mb-10 md:mb-14">
             <div class="text-center md:text-left">
                 <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
-                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
                     Solusi Klinis Terintegrasi
                 </span>
-                <h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background font-semibold">
-                    Layanan Unggulan Kami
+                <h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background font-black leading-tight">
+                    Layanan Orthosis Prosthesis<br class="hidden sm:inline"> Dan Alat Bantu Ortopedi
                 </h2>
                 <p class="font-body-md text-body-md text-on-surface-variant max-w-xl mt-1">
                     Solusi komprehensif untuk berbagai kebutuhan ortopedi, prostetik bionik, dan pemulihan gerak.
@@ -563,19 +542,19 @@
     <!-- Wave Transition: Edge-to-Edge -->
     <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-[0] z-20 pointer-events-none -mb-[1px]">
         <svg class="relative block w-full w-[calc(100%+1.3px)] -ml-[0.5px] h-[70px] sm:h-[110px] md:h-[160px]" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
-            <path class="fill-[#306D29] opacity-30" d="M0,20 C300,90 600,20 900,100 C1050,140 1150,80 1200,60 L1200,120 L0,120 Z"></path>
-            <path class="fill-[#306D29]" d="M0,60 C200,120 500,40 800,100 C1000,140 1100,80 1200,100 L1200,120 L0,120 Z"></path>
+            <path class="fill-[#0F2C59] opacity-30" d="M0,20 C300,90 600,20 900,100 C1050,140 1150,80 1200,60 L1200,120 L0,120 Z"></path>
+            <path class="fill-[#0F2C59]" d="M0,60 C200,120 500,40 800,100 C1000,140 1100,80 1200,100 L1200,120 L0,120 Z"></path>
         </svg>
     </div>
 </section>
 
 <!-- Produk Terlaris (Best Seller Products) -->
-<section class="relative py-20 md:py-28 pb-28 md:pb-40 bg-[#f0f9f8] overflow-hidden fade-in-up" id="produk">
+<section class="relative py-20 md:py-28 pb-28 md:pb-40 bg-[#F0F7FF] overflow-hidden fade-in-up" id="produk">
     <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         <div class="text-center md:text-left mb-10 md:mb-12 flex flex-col md:flex-row justify-between items-center md:items-end gap-4">
             <div class="fade-in-left">
                 <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
-                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
                     E-Katalog Ready Stock
                 </span>
                 <h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background font-semibold">
@@ -612,7 +591,7 @@
 
                     @if($prod->stock_status === 'in_stock' || $prod->stock_status === 'ready_stock')
                     <div class="absolute top-2 right-2">
-                        <span class="bg-white/90 backdrop-blur-sm text-emerald-700 font-bold text-[8px] sm:text-[9px] px-1.5 py-0.5 rounded-md border border-emerald-200/80 shadow-2xs">
+                        <span class="bg-white/90 backdrop-blur-sm text-secondary font-bold text-[8px] sm:text-[9px] px-1.5 py-0.5 rounded-md border border-secondary/30 shadow-2xs">
                             Ready Stock
                         </span>
                     </div>
@@ -677,7 +656,7 @@
             @forelse($testimonials as $t)
             <div class="bg-background-subtle p-8 rounded-2xl border border-outline-variant/20 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300">
                 <div class="space-y-4">
-                    <div class="flex gap-1 text-[#306D29]">
+                    <div class="flex gap-1 text-primary">
                         @for($s = 1; $s <= 5; $s++)
                             <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' {{ $s <= $t->rating ? '1' : '0' }};">star</span>
                         @endfor
@@ -706,7 +685,7 @@
             @empty
             <!-- Fallback Static Testimonials if DB empty -->
             <div class="bg-background-subtle p-8 rounded-2xl border border-outline-variant/20 flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300">
-                <div class="flex gap-1 text-[#306D29]">
+                <div class="flex gap-1 text-primary">
                     @for($s = 1; $s <= 5; $s++)
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
                     @endfor
@@ -724,7 +703,7 @@
             </div>
 
             <div class="bg-background-subtle p-8 rounded-2xl border border-outline-variant/20 flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300">
-                <div class="flex gap-1 text-[#306D29]">
+                <div class="flex gap-1 text-primary">
                     @for($s = 1; $s <= 5; $s++)
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
                     @endfor
@@ -742,7 +721,7 @@
             </div>
 
             <div class="bg-background-subtle p-8 rounded-2xl border border-outline-variant/20 flex flex-col gap-4 hover:shadow-lg transition-shadow duration-300">
-                <div class="flex gap-1 text-[#306D29]">
+                <div class="flex gap-1 text-primary">
                     @for($s = 1; $s <= 5; $s++)
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
                     @endfor
@@ -764,8 +743,8 @@
 </section>
 
 <!-- Lokasi Kami & Form Janji Temu -->
-<section class="relative py-20 md:py-28 pb-28 md:pb-40 bg-[#e6f4f2] overflow-hidden fade-in-up" id="lokasi">
-    <div class="absolute -right-32 bottom-1/4 w-96 h-96 bg-[#306D29] opacity-[0.03] rounded-full blur-3xl z-0 pointer-events-none"></div>
+<section class="relative py-20 md:py-28 pb-28 md:pb-40 bg-[#F0F7FF] overflow-hidden fade-in-up" id="lokasi">
+    <div class="absolute -right-32 bottom-1/4 w-96 h-96 bg-secondary opacity-5 rounded-full blur-3xl z-0 pointer-events-none"></div>
     <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
             

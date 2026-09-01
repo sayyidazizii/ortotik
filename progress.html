@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PT. Orthocare Indonesia - Executive Project Dashboard (Stitch Clinical Excellence System)</title>
+    <title>pediOcare &bull; Executive Project Dashboard (Revisi 2 Clinical Excellence System)</title>
     
     <!-- Google Fonts: Plus Jakarta Sans & Material Symbols Outlined -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,24 +19,24 @@
 
     <style>
         :root {
-            /* PT. Orthocare Indonesia - Stitch Design Tokens */
-            --primary: #306D29;
-            --primary-dark: #25581f;
-            --primary-light: #418e38;
-            --secondary: #006a63;
-            --secondary-light: #99efe5;
+            /* pediOcare - Revisi 2 Design Tokens */
+            --primary: #0F2C59;
+            --primary-dark: #0A1E3F;
+            --primary-light: #1A3E75;
+            --secondary: #0284C7;
+            --secondary-light: #38BDF8;
+            --secondary-ice: #E0F2FE;
             --accent: #E5A500;
             --accent-hover: #CC9200;
-            --success: #147901;
-            --dark: #0d1c2f;
+            --success: #059669;
+            --dark: #0A1E3F;
             --surface: #FFFFFF;
-            --surface-low: #eff4ff;
-            --surface-mint: #f0fdfa;
+            --surface-low: #F0F7FF;
             --surface-subtle: #F8FAFC;
-            --border: #bcc9c6;
-            --border-light: rgba(188, 201, 198, 0.3);
-            --text-main: #0d1c2f;
-            --text-muted: #3d4947;
+            --border: #CBD5E1;
+            --border-light: rgba(203, 213, 225, 0.5);
+            --text-main: #0F172A;
+            --text-muted: #475569;
             
             --radius-sm: 6px;
             --radius-md: 12px;
@@ -46,9 +46,9 @@
             --radius-full: 9999px;
             
             --transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
-            --shadow-1: 0px 4px 16px rgba(0, 0, 0, 0.04);
-            --shadow-2: 0px 8px 24px rgba(48, 109, 41, 0.08);
-            --shadow-hover: 0px 12px 32px rgba(48, 109, 41, 0.12);
+            --shadow-1: 0px 4px 16px rgba(15, 44, 89, 0.05);
+            --shadow-2: 0px 8px 24px rgba(15, 44, 89, 0.08);
+            --shadow-hover: 0px 12px 32px rgba(15, 44, 89, 0.14);
         }
 
         * {
@@ -99,15 +99,15 @@
         .pm-brand-badge {
             width: 42px;
             height: 42px;
-            background: var(--primary);
+            background: linear-gradient(135deg, #0284C7, #0F2C59);
             color: #FFFFFF;
             border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 16px;
-            box-shadow: 0 2px 8px rgba(48, 109, 41, 0.3);
+            font-size: 15px;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
         }
 
         .header-title-box h1 {
@@ -122,7 +122,7 @@
 
         .header-title-box p {
             font-size: 11px;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.75);
             font-weight: 400;
         }
 
@@ -133,8 +133,8 @@
         }
 
         .health-indicator {
-            background: rgba(48, 109, 41, 0.2);
-            border: 1px solid var(--primary);
+            background: rgba(2, 132, 199, 0.2);
+            border: 1px solid var(--secondary-light);
             color: #FFFFFF;
             padding: 5px 14px;
             border-radius: var(--radius-full);
@@ -148,9 +148,9 @@
         .health-dot {
             width: 8px;
             height: 8px;
-            background: #22c55e;
+            background: #38BDF8;
             border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
+            box-shadow: 0 0 8px #38BDF8;
         }
 
         .last-updated-box {
@@ -188,7 +188,7 @@
 
         /* Sub-Header Navigation Bar */
         .pm-sub-nav {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             color: var(--text-main);
@@ -219,8 +219,8 @@
         }
 
         .nav-tab-item.active, .nav-tab-item:hover {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
             font-weight: 700;
         }
 
@@ -290,8 +290,8 @@
         .kpi-icon {
             width: 38px;
             height: 38px;
-            background: rgba(48, 109, 41, 0.1);
-            color: var(--primary);
+            background: var(--surface-low);
+            color: var(--secondary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -336,7 +336,8 @@
         }
 
         .badge-amber { background: var(--accent); color: #FFFFFF; }
-        .badge-green { background: rgba(48, 109, 41, 0.15); color: var(--primary); }
+        .badge-blue { background: var(--surface-low); color: var(--secondary); border: 1px solid var(--secondary-light); }
+        .badge-navy { background: var(--primary); color: #FFFFFF; }
 
         /* Row of Charts */
         .charts-row {
@@ -390,7 +391,7 @@
             justify-content: center;
         }
 
-        /* SECTION: STITCH DESIGN SPECIFICATION */
+        /* SECTION: REVISI 2 DESIGN SPECIFICATION */
         .design-system-card {
             background: #FFFFFF;
             border: 1px solid var(--border-light);
@@ -515,7 +516,7 @@
         }
 
         .flow-card.completed {
-            border-left: 4px solid var(--primary);
+            border-left: 4px solid var(--secondary);
         }
 
         .flow-card-head {
@@ -533,7 +534,7 @@
             text-transform: uppercase;
         }
 
-        .step-index-badge.done { background: rgba(48, 109, 41, 0.15); color: var(--primary); }
+        .step-index-badge.done { background: var(--surface-low); color: var(--secondary); border: 1px solid var(--secondary-light); }
 
         .flow-date {
             font-size: 11px;
@@ -571,7 +572,7 @@
         .flow-part-item i {
             margin-top: 2px;
             flex-shrink: 0;
-            color: var(--primary);
+            color: var(--secondary);
         }
 
         /* SECTION: INTERACTIVE TASK INVENTORY TABLE */
@@ -627,14 +628,7 @@
             text-transform: uppercase;
         }
 
-        .status-pill-table.done { background: rgba(48, 109, 41, 0.15); color: var(--primary); }
-
-        .task-checkbox-custom {
-            accent-color: var(--primary);
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
+        .status-pill-table.done { background: var(--surface-low); color: var(--secondary); border: 1px solid var(--secondary-light); }
 
         /* SECTION: ACTIVITY LOG / REVISION HISTORY */
         .activity-log-card {
@@ -677,12 +671,12 @@
             width: 22px;
             height: 22px;
             border-radius: 50%;
-            background: var(--primary);
+            background: var(--secondary);
             color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 0 4px rgba(48, 109, 41, 0.15);
+            box-shadow: 0 0 0 4px var(--surface-low);
         }
 
         .timeline-dot i {
@@ -732,8 +726,8 @@
             font-weight: 700;
             padding: 2px 7px;
             border-radius: var(--radius-full);
-            background: rgba(48, 109, 41, 0.1);
-            color: var(--primary);
+            background: var(--surface-low);
+            color: var(--secondary);
             text-transform: uppercase;
         }
 
@@ -773,22 +767,22 @@
         <!-- Top Executive Header Bar -->
         <header class="pm-top-header">
             <div class="header-left">
-                <div class="pm-brand-badge">OC</div>
+                <div class="pm-brand-badge">pOc</div>
                 <div class="header-title-box">
-                    <h1>PT. Orthocare Indonesia &bull; Executive System Dashboard</h1>
-                    <p>Stitch Clinical Excellence & Precision Compassion Design System</p>
+                    <h1>pediOcare &bull; Executive System Dashboard</h1>
+                    <p>Care your milestone &bull; Revisi 2 Clinical Excellence System</p>
                 </div>
             </div>
 
             <div class="header-right">
                 <div class="health-indicator">
                     <span class="health-dot"></span>
-                    <span>Portal Theme: <strong>ORTHOCARE STITCH 100%</strong></span>
+                    <span>Portal Theme: <strong>pediOcare REVISI 2 (100%)</strong></span>
                 </div>
 
                 <div class="last-updated-box">
                     <i data-lucide="clock" style="width: 13px; height: 13px;"></i>
-                    <span>Update: <strong>17 Agustus 2026, 12:00 WIB</strong></span>
+                    <span>Update: <strong>1 September 2026, 21:30 WIB</strong></span>
                 </div>
 
                 <button class="btn-export-pdf" onclick="window.print()">
@@ -802,16 +796,16 @@
         <div class="pm-sub-nav">
             <div class="nav-tab-list">
                 <div class="nav-tab-item active"><i data-lucide="layout-dashboard" style="width: 14px; height: 14px;"></i> Dashboard Overview</div>
-                <div class="nav-tab-item" onclick="scrollToSection('design-system-section')"><i data-lucide="layers" style="width: 14px; height: 14px;"></i> Stitch Design Specs</div>
+                <div class="nav-tab-item" onclick="scrollToSection('design-system-section')"><i data-lucide="layers" style="width: 14px; height: 14px;"></i> Revisi 2 Design Tokens</div>
                 <div class="nav-tab-item" onclick="scrollToSection('workflow-section')"><i data-lucide="git-commit" style="width: 14px; height: 14px;"></i> Milestone Workflow</div>
                 <div class="nav-tab-item" onclick="scrollToSection('tasks-section')"><i data-lucide="check-square" style="width: 14px; height: 14px;"></i> Task Inventory</div>
-                <div class="nav-tab-item" onclick="scrollToSection('activity-log-section')"><i data-lucide="history" style="width: 14px; height: 14px;"></i> Log Aktivitas</div>
+                <div class="nav-tab-item" onclick="scrollToSection('activity-log-section')"><i data-lucide="history" style="width: 14px; height: 14px;"></i> Log Revisi 2</div>
                 <a href="/" target="_blank" class="nav-tab-item"><i data-lucide="globe" style="width: 14px; height: 14px;"></i> Live Website</a>
             </div>
 
             <div class="project-meta-pills">
-                <span class="meta-pill">Palette: #306D29 / #006a63 / #E5A500</span>
-                <span class="meta-pill">Status: 23/23 Tests Passed</span>
+                <span class="meta-pill">Palette: #0F2C59 (Navy) / #0284C7 (Sky) / #E5A500 (Amber)</span>
+                <span class="meta-pill">Brand: pediOcare &bull; Care your milestone</span>
             </div>
         </div>
     </div>
@@ -823,7 +817,7 @@
             <!-- KPI 1 -->
             <div class="kpi-card">
                 <div class="kpi-header">
-                    <span class="kpi-title">Overall Progress</span>
+                    <span class="kpi-title">Revisi 2 Progress</span>
                     <div class="kpi-icon"><i data-lucide="check-check" style="width: 18px; height: 18px;"></i></div>
                 </div>
                 <div class="kpi-body">
@@ -831,56 +825,56 @@
                     <span class="kpi-sub">Target: 100%</span>
                 </div>
                 <div class="kpi-footer">
-                    <span>26 / 26 Modul Selesai</span>
-                    <span class="kpi-badge badge-green">Production Ready</span>
+                    <span>11 / 11 Poin Revisi 2 Tuntas</span>
+                    <span class="kpi-badge badge-blue">Production Ready</span>
                 </div>
             </div>
 
             <!-- KPI 2 -->
             <div class="kpi-card">
                 <div class="kpi-header">
-                    <span class="kpi-title">Automated Tests</span>
-                    <div class="kpi-icon"><i data-lucide="shield-check" style="width: 18px; height: 18px;"></i></div>
+                    <span class="kpi-title">Sinkronisasi Server</span>
+                    <div class="kpi-icon"><i data-lucide="refresh-cw" style="width: 18px; height: 18px;"></i></div>
                 </div>
                 <div class="kpi-body">
-                    <span class="kpi-value">23/23</span>
-                    <span class="kpi-sub">Assertions: 71</span>
+                    <span class="kpi-value">Anti-Timeout</span>
+                    <span class="kpi-sub">Chunked Pull</span>
                 </div>
                 <div class="kpi-footer">
-                    <span>100% Pass Rate</span>
-                    <span class="kpi-badge badge-green">Verified</span>
+                    <span>Database SQL + Aset Media</span>
+                    <span class="kpi-badge badge-blue">Realtime Progress</span>
                 </div>
             </div>
 
             <!-- KPI 3 -->
             <div class="kpi-card">
                 <div class="kpi-header">
-                    <span class="kpi-title">Stitch View Templates</span>
-                    <div class="kpi-icon"><i data-lucide="layout" style="width: 18px; height: 18px;"></i></div>
+                    <span class="kpi-title">Alur Pasien Klinis</span>
+                    <div class="kpi-icon"><i data-lucide="route" style="width: 18px; height: 18px;"></i></div>
                 </div>
                 <div class="kpi-body">
-                    <span class="kpi-value">10</span>
-                    <span class="kpi-sub">Blade Views</span>
+                    <span class="kpi-value">9 Tahapan</span>
+                    <span class="kpi-sub">Standar Kemenkes RI</span>
                 </div>
                 <div class="kpi-footer">
-                    <span>Beranda, Layanan, Katalog, Kontak, dll</span>
-                    <span class="kpi-badge badge-green">100% Matched</span>
+                    <span>Zig-zag Stepper & Connectors</span>
+                    <span class="kpi-badge badge-navy">Dynamic CMS</span>
                 </div>
             </div>
 
             <!-- KPI 4 -->
             <div class="kpi-card">
                 <div class="kpi-header">
-                    <span class="kpi-title">CRM & CMS Backend</span>
-                    <div class="kpi-icon"><i data-lucide="database" style="width: 18px; height: 18px;"></i></div>
+                    <span class="kpi-title">Backend CMS Dedicated</span>
+                    <div class="kpi-icon"><i data-lucide="layout-grid" style="width: 18px; height: 18px;"></i></div>
                 </div>
                 <div class="kpi-body">
-                    <span class="kpi-value">8</span>
-                    <span class="kpi-sub">Admin Controllers</span>
+                    <span class="kpi-value">2 Modul</span>
+                    <span class="kpi-sub">Baru di Sidebar</span>
                 </div>
                 <div class="kpi-footer">
-                    <span>Leads, Products, Services, Settings</span>
-                    <span class="kpi-badge badge-amber">Active</span>
+                    <span>Alur Pasien & Tentang Kami</span>
+                    <span class="kpi-badge badge-amber">Fully Editable</span>
                 </div>
             </div>
         </section>
@@ -890,8 +884,8 @@
             <!-- Chart 1: Module Completion -->
             <div class="chart-card">
                 <div class="card-header-clean">
-                    <h3><i data-lucide="pie-chart" style="width: 15px; height: 15px;"></i> Status Modul Sistem</h3>
-                    <span>26 Total</span>
+                    <h3><i data-lucide="pie-chart" style="width: 15px; height: 15px;"></i> Status Modul Revisi 2</h3>
+                    <span>11 Target Revisi</span>
                 </div>
                 <div class="chart-canvas-wrap">
                     <canvas id="moduleCompletionChart"></canvas>
@@ -913,7 +907,7 @@
             <div class="chart-card">
                 <div class="card-header-clean">
                     <h3><i data-lucide="activity" style="width: 15px; height: 15px;"></i> Kualitas & Reliability</h3>
-                    <span>71 Assertions</span>
+                    <span>Blade Render Clean</span>
                 </div>
                 <div class="chart-canvas-wrap">
                     <canvas id="qualityRadarChart"></canvas>
@@ -921,50 +915,51 @@
             </div>
         </section>
 
-        <!-- SECTION: STITCH DESIGN SPECIFICATION -->
+        <!-- SECTION: REVISI 2 DESIGN SPECIFICATION -->
         <section class="design-system-card" id="design-system-section">
             <div class="design-system-header">
                 <div>
-                    <h2>PT. Orthocare Indonesia &bull; Stitch Design Specification</h2>
-                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Standardisasi estetika klinis modern, higienis, dan berteknologi tinggi.</p>
+                    <h2>pediOcare &bull; Revisi 2 Design & Brand Specification</h2>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Standardisasi identitas visual medis modern, presisi, dan terintegrasi Kemenkes RI.</p>
                 </div>
                 <div style="display: flex; gap: 8px;">
-                    <span class="kpi-badge badge-green">Solid Green #306D29</span>
-                    <span class="kpi-badge badge-amber">Warm Amber #E5A500</span>
+                    <span class="kpi-badge badge-navy">Dark Navy #0F2C59</span>
+                    <span class="kpi-badge badge-blue">Sky Blue #0284C7</span>
+                    <span class="kpi-badge badge-amber">Amber #E5A500</span>
                 </div>
             </div>
 
             <div class="design-specs-grid">
                 <div class="spec-tile">
                     <div>
-                        <span class="spec-tile-title">Primary Brand</span>
-                        <div class="spec-tile-value" style="color: var(--primary);">#306D29 Solid Green</div>
+                        <span class="spec-tile-title">Brand Identity</span>
+                        <div class="spec-tile-value" style="color: var(--primary);">pediOcare</div>
                     </div>
-                    <p class="spec-tile-desc">Warna hijau medis alami yang melambangkan pemulihan, kesehatan, dan kredibilitas klinis berstandar Kemenkes RI.</p>
+                    <p class="spec-tile-desc">Penulisan nama brand menggunakan huruf 'O' kapital: <strong>pediOcare</strong>. Tagline: <em>Care your milestone</em> (ditulis tepat di bawah nama tanpa tanda koma).</p>
                 </div>
 
                 <div class="spec-tile">
                     <div>
-                        <span class="spec-tile-title">Secondary & Accent</span>
-                        <div class="spec-tile-value" style="color: var(--secondary);">#006a63 Teal & #E5A500 Amber</div>
+                        <span class="spec-tile-title">Primary & Secondary</span>
+                        <div class="spec-tile-value" style="color: var(--secondary);">Biru Tua & Biru Muda</div>
                     </div>
-                    <p class="spec-tile-desc">Teal untuk status klinis dan Warm Amber untuk tombol Call-to-Action berkonversi tinggi (*Jadwalkan Konsultasi*).</p>
+                    <p class="spec-tile-desc">Seluruh warna hijau lama digantikan dengan <strong>Biru Tua (Navy #0F2C59)</strong> dan <strong>Biru Muda (Sky #0284C7 / #38BDF8)</strong> untuk kesan medis berteknologi mutakhir.</p>
                 </div>
 
                 <div class="spec-tile">
                     <div>
-                        <span class="spec-tile-title">Typography Scale</span>
-                        <div class="spec-tile-value">Plus Jakarta Sans</div>
+                        <span class="spec-tile-title">Services & Icon</span>
+                        <div class="spec-tile-value">Orthosis Prosthesis & Kursi Roda</div>
                     </div>
-                    <p class="spec-tile-desc">Font modern humanistik sans-serif yang presisi dan mudah dibaca pada seluruh resolusi layar desktop maupun mobile.</p>
+                    <p class="spec-tile-desc">Judul section layanan: <em>Layanan Orthosis Prosthesis Dan Alat Bantu Ortopedi</em> dengan ikon kursi roda / disabilitas (<code>accessible_forward</code>).</p>
                 </div>
 
                 <div class="spec-tile">
                     <div>
-                        <span class="spec-tile-title">Transitions & Elevation</span>
-                        <div class="spec-tile-value">Wave SVG & Ambient Shadows</div>
+                        <span class="spec-tile-title">Modern Fabrication</span>
+                        <div class="spec-tile-value">Inovasi Fabrikasi Modern</div>
                     </div>
-                    <p class="spec-tile-desc">Pemisah antar section menggunakan kurva gelombang organik hijau (`#306D29`) dengan bayangan kartu bertingkat.</p>
+                    <p class="spec-tile-desc">Pengantar: <em>"pediOcare akan terus berkembang menuju inovasi fabrikasi modern"</em> didukung foto workshop fabrikasi presisi baru dan kartu 3 core values.</p>
                 </div>
             </div>
         </section>
@@ -973,28 +968,28 @@
         <section class="flow-section-card" id="workflow-section">
             <div class="flow-section-header">
                 <div>
-                    <h2><i data-lucide="git-commit" style="width: 20px; height: 20px;"></i> Milestone Alur Pengembangan Proyek</h2>
-                    <p>Track record eksekusi berurutan dari arsitektur backend, PRD, database, hingga implementasi template Stitch.</p>
+                    <h2><i data-lucide="git-commit" style="width: 20px; height: 20px;"></i> Milestone Alur Pengembangan Revisi 2</h2>
+                    <p>Track record eksekusi menyeluruh dari database seeder, refactoring warna, sinkronisasi server, hingga pemisahan menu CMS backend.</p>
                 </div>
-                <span class="kpi-badge badge-green">100% Complete</span>
+                <span class="kpi-badge badge-blue">100% Complete</span>
             </div>
 
             <div class="milestone-flow-grid">
-                <!-- Row 1: Foundation & Core -->
+                <!-- Row 1: Brand & Theme -->
                 <div class="flow-row">
                     <!-- Milestone 1 -->
                     <div class="flow-card completed">
                         <div>
                             <div class="flow-card-head">
-                                <span class="step-index-badge done">M1 &bull; Database & PRD</span>
+                                <span class="step-index-badge done">M1 &bull; Brand & Color</span>
                                 <span class="flow-date">Tuntas</span>
                             </div>
-                            <h3 class="flow-card-title">Arsitektur Data & Model Relasi</h3>
-                            <p style="font-size: 11px; color: var(--text-muted);">Database migration, seeder realistis medis, and clean schema definition.</p>
+                            <h3 class="flow-card-title">Brand pediOcare & Palet Biru</h3>
+                            <p style="font-size: 11px; color: var(--text-muted);">Transformasi nama brand, tagline <em>Care your milestone</em>, dan palet warna global Dark Navy & Sky Blue.</p>
                         </div>
                         <ul class="flow-part-list">
-                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> 7 Tabel Medis (Products, Services, Leads, Branches)</li>
-                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Repository Pattern & Contracts</li>
+                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Brand Name 'pediOcare' & Tagline 'Care your milestone'</li>
+                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Penggantian warna hijau ke Biru Tua & Biru Muda di seluruh Blade</li>
                         </ul>
                     </div>
 
@@ -1002,15 +997,15 @@
                     <div class="flow-card completed">
                         <div>
                             <div class="flow-card-head">
-                                <span class="step-index-badge done">M2 &bull; Admin & CRM</span>
+                                <span class="step-index-badge done">M2 &bull; Services & Products</span>
                                 <span class="flow-date">Tuntas</span>
                             </div>
-                            <h3 class="flow-card-title">Portal Manajemen & Leads CRM</h3>
-                            <p style="font-size: 11px; color: var(--text-muted);">Admin authentication, leads tracking pipeline, and full CMS CRUD.</p>
+                            <h3 class="flow-card-title">Layanan & E-Katalog Produk</h3>
+                            <p style="font-size: 11px; color: var(--text-muted);">Pembaruan Prostesis Kaki & Tangan Tiruan, Bracing slider, Scoliosis Center, dan katalog produk baru.</p>
                         </div>
                         <ul class="flow-part-list">
-                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Status Leads Management (New, Followed Up, Completed)</li>
-                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> CMS Products, Services, Branches, Settings</li>
+                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Skoliosis Brace, Kaki Palsu Custom, Skoliosis 3D Correction</li>
+                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Slider foto multi-image pada detail layanan medis</li>
                         </ul>
                     </div>
 
@@ -1018,34 +1013,34 @@
                     <div class="flow-card completed">
                         <div>
                             <div class="flow-card-head">
-                                <span class="step-index-badge done">M3 &bull; Public Features</span>
+                                <span class="step-index-badge done">M3 &bull; Patient Flow</span>
                                 <span class="flow-date">Tuntas</span>
                             </div>
-                            <h3 class="flow-card-title">Fitur Publik & Booking WhatsApp</h3>
-                            <p style="font-size: 11px; color: var(--text-muted);">Formulir konsultasi cerdas dengan redirect otomatis ke WhatsApp.</p>
+                            <h3 class="flow-card-title">9 Tahapan Alur Pasien SOP</h3>
+                            <p style="font-size: 11px; color: var(--text-muted);">Standardisasi 9 tahapan alur prosedur klinis sesuai Kemenkes RI dengan tata letak zig-zag dinamis.</p>
                         </div>
                         <ul class="flow-part-list">
-                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Smart Lead WhatsApp Dispatcher</li>
-                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> E-Katalog Search, Filter & Sort</li>
+                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> 01. Pemeriksaan s/d 09. Evaluasi & tindak lanjut</li>
+                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Konektor spiral dashed arrows responsif di desktop & mobile</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Row 2: Stitch Portal UI Match -->
+                <!-- Row 2: Sync & CMS Dedicated -->
                 <div class="flow-row">
                     <!-- Milestone 4 -->
                     <div class="flow-card completed">
                         <div>
                             <div class="flow-card-head">
-                                <span class="step-index-badge done">M4 &bull; Stitch Beranda</span>
+                                <span class="step-index-badge done">M4 &bull; Anti-Timeout Sync</span>
                                 <span class="flow-date">Tuntas</span>
                             </div>
-                            <h3 class="flow-card-title">Halaman Beranda 1-to-1 Match</h3>
-                            <p style="font-size: 11px; color: var(--text-muted);">Hero section, Wave SVG transitions, 5 Layanan, Produk Terlaris, Testimonial, & Form Janji Temu.</p>
+                            <h3 class="flow-card-title">Sinkronisasi Server Bertahap</h3>
+                            <p style="font-size: 11px; color: var(--text-muted);">Engine unduh bertahap (Database & Aset) anti timeout dengan indikator progress persen real-time.</p>
                         </div>
                         <ul class="flow-part-list">
-                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Material Symbols Outlined & Plus Jakarta Sans</li>
-                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Responsive Navigation Header & Mobile Drawer</li>
+                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> 3 Tahap Eksekusi: Healthcheck, Database SQL, Asset ZIP</li>
+                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Penanganan token CSRF mismatch & permission ZIP extraction</li>
                         </ul>
                     </div>
 
@@ -1053,15 +1048,15 @@
                     <div class="flow-card completed">
                         <div>
                             <div class="flow-card-head">
-                                <span class="step-index-badge done">M5 &bull; Stitch Sub-Pages</span>
+                                <span class="step-index-badge done">M5 &bull; Standalone CMS Alur Pasien</span>
                                 <span class="flow-date">Tuntas</span>
                             </div>
-                            <h3 class="flow-card-title">Layanan, Katalog, Kontak & Custom</h3>
-                            <p style="font-size: 11px; color: var(--text-muted);">Implementasi desain Stitch pada seluruh halaman publik ortotik & prostetik.</p>
+                            <h3 class="flow-card-title">Menu CMS Alur Pasien Backend</h3>
+                            <p style="font-size: 11px; color: var(--text-muted);">Halaman admin mandiri untuk mengelola urutan, teks, istilah medis, dan ikon 9 tahapan alur pasien.</p>
                         </div>
                         <ul class="flow-part-list">
-                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Anatomy Filter E-Katalog Produk Medis</li>
-                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> 4-Step SOP Workflow Stepper Alur Pasien</li>
+                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> PatientFlowController & route <code>/admin/patient-flow</code></li>
+                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Live reordering up/down, add/remove, reset default Kemenkes</li>
                         </ul>
                     </div>
 
@@ -1069,15 +1064,15 @@
                     <div class="flow-card completed">
                         <div>
                             <div class="flow-card-head">
-                                <span class="step-index-badge done">M6 &bull; QA & Testing</span>
+                                <span class="step-index-badge done">M6 &bull; Standalone CMS Tentang Kami</span>
                                 <span class="flow-date">Tuntas</span>
                             </div>
-                            <h3 class="flow-card-title">Automated Verification Suite</h3>
-                            <p style="font-size: 11px; color: var(--text-muted);">Verifikasi komprehensif PHPUnit test suite pada seluruh rute dan aksi.</p>
+                            <h3 class="flow-card-title">Menu CMS Tentang Kami Backend</h3>
+                            <p style="font-size: 11px; color: var(--text-muted);">Halaman admin mandiri untuk mengelola seluruh foto dan elemen narasi Tentang Kami.</p>
                         </div>
                         <ul class="flow-part-list">
-                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> 23/23 Feature & Unit Tests Passed (100%)</li>
-                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Clean Views & Routes Cache</li>
+                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> AboutUsController & route <code>/admin/about</code></li>
+                            <li class="flow-part-item"><i data-lucide="check" style="width: 12px; height: 12px;"></i> Upload Banner Hero, Fabrikasi Modern, & Galeri Foto Aktivitas</li>
                         </ul>
                     </div>
                 </div>
@@ -1088,10 +1083,10 @@
         <section class="task-inventory-card" id="tasks-section">
             <div class="flow-section-header">
                 <div>
-                    <h2><i data-lucide="check-square" style="width: 20px; height: 20px;"></i> Task Inventory & Rincian Fitur</h2>
-                    <p>Daftar lengkap 26 modul teknis yang telah diimplementasikan dan diverifikasi.</p>
+                    <h2><i data-lucide="check-square" style="width: 20px; height: 20px;"></i> Task Inventory & Rincian Fitur Revisi 2</h2>
+                    <p>Daftar lengkap implementasi modul teknis dan penyesuaian dokumen Revisi 2.</p>
                 </div>
-                <span class="kpi-badge badge-green">26 / 26 Tuntas</span>
+                <span class="kpi-badge badge-blue">11 / 11 Poin Revisi Tuntas</span>
             </div>
 
             <div class="table-responsive">
@@ -1099,95 +1094,88 @@
                     <thead>
                         <tr>
                             <th style="width: 40px;">#</th>
-                            <th>Modul / Fitur</th>
+                            <th>Item Revisi</th>
                             <th>Kategori</th>
-                            <th>Spesifikasi Teknis</th>
+                            <th>Implementasi Teknis</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td><strong>Design System & Navigasi</strong></td>
-                            <td>Frontend UI/UX</td>
-                            <td>Tailwind custom tokens (`#306D29`, `#006a63`, `#E5A500`, `#F8FAFC`), Plus Jakarta Sans, Menu: Beranda, Layanan, Product, Alur Pasien, Tentang Kami, Kontak</td>
+                            <td><strong>Nama Brand 'pediOcare'</strong></td>
+                            <td>Branding</td>
+                            <td>Penyeragaman nama brand dengan huruf O kapital ('pediOcare') di seluruh layout, header, footer, SEO meta, dan seeder.</td>
                             <td><span class="status-pill-table done"><i data-lucide="check" style="width: 10px; height: 10px;"></i> Selesai</span></td>
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td><strong>Halaman Beranda</strong></td>
-                            <td>Public View</td>
-                            <td>Hero Left/Right Animated Transitions, Dokter Spesialis Dummy Visual & Floating Badges, Layanan Unggulan Circular Slider, Produk Ready Stock, Testimonial, Form Janji Temu</td>
+                            <td><strong>Tagline 'Care your milestone'</strong></td>
+                            <td>Branding</td>
+                            <td>Tagline diletakkan tepat di bawah nama brand tanpa tanda koma pada seluruh header, profil, dan footer.</td>
                             <td><span class="status-pill-table done"><i data-lucide="check" style="width: 10px; height: 10px;"></i> Selesai</span></td>
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td><strong>5 Pilar Layanan Medis</strong></td>
-                            <td>Public View</td>
-                            <td>Prosthetics, Bracing & Supports, Scoliosis Center, Physiotherapy, Neuro Robotic</td>
+                            <td><strong>Palet Warna Biru Tua & Biru Muda</strong></td>
+                            <td>UI/UX Design</td>
+                            <td>Penggantian seluruh aksen hijau ke Biru Tua (#0F2C59) dan Biru Muda (#0284C7 / #38BDF8 / #F0F7FF) pada Tailwind & Blade views.</td>
                             <td><span class="status-pill-table done"><i data-lucide="check" style="width: 10px; height: 10px;"></i> Selesai</span></td>
                         </tr>
                         <tr>
                             <td>4</td>
-                            <td><strong>E-Katalog Produk Medis</strong></td>
+                            <td><strong>3 Poin Keunggulan Utama (V-Checklist)</strong></td>
                             <td>Public View</td>
-                            <td>3-Kolom Mobile & Desktop Grid, Anatomy Filter Dropdown Mobile & Sidebar Desktop, search, sort, and detail page</td>
+                            <td>Teknologi & presisi, Praktisi legal STR & SIP Dinkes, Pelayanan komprehensif (konsultasi gratis) di Beranda & Profil.</td>
                             <td><span class="status-pill-table done"><i data-lucide="check" style="width: 10px; height: 10px;"></i> Selesai</span></td>
                         </tr>
                         <tr>
                             <td>5</td>
-                            <td><strong>Alur Pasien Custom-Made</strong></td>
+                            <td><strong>Judul Layanan & Ikon Kursi Roda</strong></td>
                             <td>Public View</td>
-                            <td>Zig-Zag Stepper Layout dengan Spiral Cut Arrow Connectors, Compact Cards 4 Tahapan SOP, showcase custom prosthetics & scoliosis brace</td>
+                            <td>Judul: <em>Layanan Orthosis Prosthesis Dan Alat Bantu Ortopedi</em> dengan ikon disabilitas kursi roda (<code>accessible_forward</code>).</td>
                             <td><span class="status-pill-table done"><i data-lucide="check" style="width: 10px; height: 10px;"></i> Selesai</span></td>
                         </tr>
                         <tr>
                             <td>6</td>
-                            <td><strong>Kontak & Cabang Klinik</strong></td>
+                            <td><strong>Section Fabrikasi Modern</strong></td>
                             <td>Public View</td>
-                            <td>Klinik Pusat Sleman D.I. Yogyakarta, Google Maps Real Embed (Zoomable & Interactive), direct hotline</td>
+                            <td>Pengantar inovasi modern, foto workshop baru (<code>image12.png</code>), dan 3 kartu Core Values.</td>
                             <td><span class="status-pill-table done"><i data-lucide="check" style="width: 10px; height: 10px;"></i> Selesai</span></td>
                         </tr>
                         <tr>
                             <td>7</td>
-                            <td><strong>Tentang Kami</strong></td>
-                            <td>Public View</td>
-                            <td>Profil klinis, komitmen mutu Kemenkes RI, garansi fitting 100%, 3 core values</td>
+                            <td><strong>Layanan Prostesis Standar Kemenkes</strong></td>
+                            <td>Layanan Medis</td>
+                            <td>Judul: <em>Prostesis (Kaki dan tangan Tiruan)</em>, deskripsi standar Kemenkes RI, sub-deskripsi restorasi fungsi gerak tubuh.</td>
                             <td><span class="status-pill-table done"><i data-lucide="check" style="width: 10px; height: 10px;"></i> Selesai</span></td>
                         </tr>
                         <tr>
                             <td>8</td>
-                            <td><strong>Formulir Konsultasi Pasien</strong></td>
-                            <td>Public Action</td>
-                            <td>StoreConsultationRequest validation, CRM lead generator, WhatsApp redirection</td>
+                            <td><strong>Bracing & Scoliosis Center Slider</strong></td>
+                            <td>Layanan Medis</td>
+                            <td>Slider galeri foto otomatis pada detail layanan dan konsultasi box bertema Navy/Sky Blue.</td>
                             <td><span class="status-pill-table done"><i data-lucide="check" style="width: 10px; height: 10px;"></i> Selesai</span></td>
                         </tr>
                         <tr>
                             <td>9</td>
-                            <td><strong>Artikel & Edukasi Medis</strong></td>
-                            <td>Public View</td>
-                            <td>Edukasi kesehatan muskuloskeletal, tips perawatan prostesis, filter kategori, estimasi baca</td>
+                            <td><strong>Katalog Produk Revisi 2</strong></td>
+                            <td>E-Katalog</td>
+                            <td>Skoliosis Brace, Kaki Palsu Custom Made, Skoliosis Brace with 3D Correction terpasang di database dengan status in_stock.</td>
                             <td><span class="status-pill-table done"><i data-lucide="check" style="width: 10px; height: 10px;"></i> Selesai</span></td>
                         </tr>
                         <tr>
                             <td>10</td>
-                            <td><strong>Admin CRM Leads Pipeline</strong></td>
-                            <td>Backend CRM</td>
-                            <td>Leads management index, filter by status, detail modal, status updater, admin notes</td>
+                            <td><strong>Alur Pasien 9 Tahapan Kemenkes</strong></td>
+                            <td>Public View</td>
+                            <td>01. Pemeriksaan s/d 09. Evaluasi & tindak lanjut dengan layout zig-zag dinamis dan panah spiral.</td>
                             <td><span class="status-pill-table done"><i data-lucide="check" style="width: 10px; height: 10px;"></i> Selesai</span></td>
                         </tr>
                         <tr>
                             <td>11</td>
-                            <td><strong>Admin CMS Products & Services</strong></td>
-                            <td>Backend CMS</td>
-                            <td>Full CRUD resource controllers, price formatting, category associations, active toggles</td>
-                            <td><span class="status-pill-table done"><i data-lucide="check" style="width: 10px; height: 10px;"></i> Selesai</span></td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td><strong>Automated Test Suite</strong></td>
-                            <td>Quality Assurance</td>
-                            <td>23 Feature & Unit tests, 71 assertions covering public pages, admin auth, and leads flow</td>
+                            <td><strong>Menu CMS Dedicated Backend</strong></td>
+                            <td>Admin Backend</td>
+                            <td>Pemisahan menu <strong>Alur Pasien</strong> (<code>/admin/patient-flow</code>) dan <strong>Tentang Kami</strong> (<code>/admin/about</code>) dengan kontrol foto & teks penuh.</td>
                             <td><span class="status-pill-table done"><i data-lucide="check" style="width: 10px; height: 10px;"></i> Selesai</span></td>
                         </tr>
                     </tbody>
@@ -1199,112 +1187,95 @@
         <section class="activity-log-card" id="activity-log-section">
             <div class="flow-section-header">
                 <div>
-                    <h2><i data-lucide="history" style="width: 20px; height: 20px;"></i> Catatan Log Progress & Riwayat Aktivitas</h2>
-                    <p>Dokumentasi lengkap iterasi pengembangan dan penyempurnaan sistem terkini.</p>
+                    <h2><i data-lucide="history" style="width: 20px; height: 20px;"></i> Catatan Log Progress & Riwayat Revisi 2</h2>
+                    <p>Dokumentasi lengkap iterasi pengembangan dan penyempurnaan sistem pada tahap Revisi 2.</p>
                 </div>
-                <span class="kpi-badge badge-green">17 Agustus 2026</span>
+                <span class="kpi-badge badge-blue">1 September 2026</span>
             </div>
 
             <div class="timeline-container">
-                <!-- Log 1: Alur Pasien Zig-Zag -->
+                <!-- Log 1: Standalone Tentang Kami -->
                 <div class="timeline-item">
-                    <div class="timeline-dot"><i data-lucide="git-merge"></i></div>
+                    <div class="timeline-dot"><i data-lucide="info"></i></div>
                     <div class="timeline-header">
-                        <span class="timeline-title">Redesain Zig-Zag Stepper & Spiral Cut Arrow Connectors pada Custom-Products</span>
-                        <span class="timeline-time">12:48 WIB</span>
+                        <span class="timeline-title">Pemisahan Menu Dedicated "Tentang Kami (Profil & Galeri)" di Sidebar Backend</span>
+                        <span class="timeline-time">21:20 WIB</span>
                     </div>
                     <p class="timeline-desc">
-                        Mengubah 4 tahapan SOP Alur Pasien menjadi kartu yang lebih ramping dan kompak dengan tata letak bergantian / zig-zag (Kiri - Kanan - Kiri - Kanan) baik pada tampilan Desktop maupun Mobile. Menambahkan konektor visual garis spiral bergaris putus-putus (*SVG Spiral Curved Dashed Arrow*) yang presisi dan responsif di semua ukuran layar.
+                        Membuat controller mandiri <code>AboutUsController</code> dan view <code>admin/about/index.blade.php</code> di bawah menu Alur Pasien. Seluruh elemen Tentang Kami dapat di-update langsung dari backend: Foto Banner Hero, Visi & Sejarah 14 Tahun, 3 Poin Keunggulan (V-Checklist), 2 Badge Garansi & Legalitas, Galeri Foto Aktivitas Multi-Upload dengan tombol hapus langsung, Section Inovasi Fabrikasi Modern (foto workshop baru + fitur), 3 Nilai Inti Medis (Core Values), serta Banner Ajakan Konsultasi CTA.
                     </p>
                     <div class="timeline-tags">
-                        <span class="timeline-tag">custom-products</span>
-                        <span class="timeline-tag">zig-zag stepper</span>
-                        <span class="timeline-tag">svg spiral arrows</span>
+                        <span class="timeline-tag">about-us cms</span>
+                        <span class="timeline-tag">multi-image upload</span>
+                        <span class="timeline-tag">fabrication modern</span>
                     </div>
                 </div>
 
-                <!-- Log 2: Animasi Kanan-Kiri & Dokter Dummy Visual -->
+                <!-- Log 2: Standalone Alur Pasien -->
                 <div class="timeline-item">
-                    <div class="timeline-dot"><i data-lucide="sparkles"></i></div>
+                    <div class="timeline-dot"><i data-lucide="route"></i></div>
                     <div class="timeline-header">
-                        <span class="timeline-title">Animasi Left/Right Transitions & Visual Dokter Dummy Berlatar Transparan</span>
-                        <span class="timeline-time">12:42 WIB</span>
+                        <span class="timeline-title">Pemisahan Menu Dedicated "Alur Pasien (9 Tahapan)" di Backend CMS</span>
+                        <span class="timeline-time">21:15 WIB</span>
                     </div>
                     <p class="timeline-desc">
-                        Memperbarui animasi Beranda dengan efek slide masuk dari arah kanan dan kiri (<code>fade-in-left</code> & <code>fade-in-right</code>). Menambahkan elemen visual dokter spesialis ortotik dengan efek latar lingkaran aura transparan, animasi melayang halus (<code>animate-float</code>), dan lencana akreditasi Kemenkes RI & 3D CAD/CAM.
+                        Membuat controller mandiri <code>PatientFlowController</code> dan view <code>admin/patient_flow/index.blade.php</code> dengan rute <code>/admin/patient-flow</code>. Admin dapat mengubah nomor tahap, judul, istilah medis, nama ikon Material Symbol, deskripsi prosedur, memindahkan urutan naik/turun, menambah tahapan baru, atau mereset ke 9 Tahapan Baku Standar Kemenkes RI.
                     </p>
                     <div class="timeline-tags">
-                        <span class="timeline-tag">home.blade.php</span>
-                        <span class="timeline-tag">doctor cutout</span>
-                        <span class="timeline-tag">entrance animations</span>
+                        <span class="timeline-tag">patient-flow cms</span>
+                        <span class="timeline-tag">9 steps kemenkes</span>
+                        <span class="timeline-tag">interactive reorder</span>
                     </div>
                 </div>
 
-                <!-- Log 3: Google Maps Real Embed -->
+                <!-- Log 3: Anti-Timeout Sync -->
                 <div class="timeline-item">
-                    <div class="timeline-dot"><i data-lucide="map-pin"></i></div>
+                    <div class="timeline-dot"><i data-lucide="refresh-cw"></i></div>
                     <div class="timeline-header">
-                        <span class="timeline-title">Implementasi Google Maps Real Embed (Interactive & Zoomable)</span>
-                        <span class="timeline-time">12:39 WIB</span>
+                        <span class="timeline-title">Penyempurnaan Engine Sinkronisasi Server Bertahap (Anti-Timeout & Real-time Progress Bar)</span>
+                        <span class="timeline-time">20:10 WIB</span>
                     </div>
                     <p class="timeline-desc">
-                        Mengganti visual gambar peta statis pada Beranda dan halaman Kontak dengan iframe resmi Google Maps interaktif yang mendukung fungsi zoom in/out, panning, drag, dan mode satelit yang presisi di lokasi Sleman Yogyakarta.
+                        Memperbarui <code>ServerSyncService</code>, <code>BackupController</code>, dan <code>SyncController</code> dengan arsitektur 3 tahap anti-timeout: (1) Healthcheck & verifikasi koneksi, (2) Unduh & eksekusi database MySQL per tabel/per chunk, (3) Unduh arsip aset media dengan progress persen real-time, auto-refresh token CSRF, dan sanitasi permission ekstraksi file ZIP.
                     </p>
                     <div class="timeline-tags">
-                        <span class="timeline-tag">google maps</span>
-                        <span class="timeline-tag">interactive iframe</span>
-                        <span class="timeline-tag">sleman yogyakarta</span>
+                        <span class="timeline-tag">server-sync</span>
+                        <span class="timeline-tag">anti-timeout</span>
+                        <span class="timeline-tag">chunked download</span>
                     </div>
                 </div>
 
-                <!-- Log 4: E-Katalog 3-Kolom & Dropdown Filter -->
+                <!-- Log 4: Palet Biru & Brand pediOcare -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"><i data-lucide="palette"></i></div>
+                    <div class="timeline-header">
+                        <span class="timeline-title">Implementasi Penuh Palet Warna Biru Tua & Biru Muda serta Brand pediOcare</span>
+                        <span class="timeline-time">19:40 WIB</span>
+                    </div>
+                    <p class="timeline-desc">
+                        Menyeragamkan identitas brand menjadi <strong>pediOcare</strong> dan tagline <strong>Care your milestone</strong>. Mengganti seluruh token warna hijau (Emerald `#306D29`) ke <strong>Biru Tua (#0F2C59)</strong> dan <strong>Biru Muda (#0284C7 / #38BDF8 / #F0F7FF)</strong> pada layout publik, navigation bar, wave SVG kurva, tombol CTA, kartu layanan, dan footer.
+                    </p>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">pediocare</span>
+                        <span class="timeline-tag">navy & sky blue</span>
+                        <span class="timeline-tag">revisi-2 theme</span>
+                    </div>
+                </div>
+
+                <!-- Log 5: Layanan & E-Katalog Database Update -->
                 <div class="timeline-item">
                     <div class="timeline-dot"><i data-lucide="shopping-bag"></i></div>
                     <div class="timeline-header">
-                        <span class="timeline-title">E-Katalog Produk: 3-Kolom Mobile & Dropdown Filter Anatomi Ringkas</span>
-                        <span class="timeline-time">12:34 WIB</span>
+                        <span class="timeline-title">Pembaruan Layanan Medis, E-Katalog Produk, & Slider Foto Galeri</span>
+                        <span class="timeline-time">19:15 WIB</span>
                     </div>
                     <p class="timeline-desc">
-                        Mengoptimalkan tampilan mobile E-Katalog Produk Medis menjadi 3 kolom yang proporsional dan mengubah daftar panjang filter anatomi menjadi 1 dropdown select interaktif pada layar kecil agar tidak memakan ruang scroll ke bawah.
+                        Memperbarui data layanan medis: Prostesis (Kaki dan tangan Tiruan), Bracing & Orthopaedic Supports dengan slider 3 foto, Scoliosis Center dengan metode Cheneau 3D Correction. Menambahkan produk Skoliosis Brace, Kaki Palsu Custom Made, dan Skoliosis Brace with 3D Correction ke database MySQL.
                     </p>
                     <div class="timeline-tags">
-                        <span class="timeline-tag">products.index</span>
-                        <span class="timeline-tag">3-col mobile</span>
-                        <span class="timeline-tag">anatomy dropdown</span>
-                    </div>
-                </div>
-
-                <!-- Log 5: Database Single Branch & Test Isolation -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"><i data-lucide="database"></i></div>
-                    <div class="timeline-header">
-                        <span class="timeline-title">Penyatuan Data Cabang Tunggal Sleman & Isolasi Test Suite</span>
-                        <span class="timeline-time">12:29 WIB</span>
-                    </div>
-                    <p class="timeline-desc">
-                        Menyesuaikan basis data cabang klinik hanya menjadi 1 cabang unggulan (Sleman, D.I. Yogyakarta) dan memodifikasi test suite agar tidak melakukan insert data cabang dummy saat pengujian berlangsung.
-                    </p>
-                    <div class="timeline-tags">
-                        <span class="timeline-tag">database seeder</span>
-                        <span class="timeline-tag">single branch</span>
-                        <span class="timeline-tag">test suite clean</span>
-                    </div>
-                </div>
-
-                <!-- Log 6: Layanan Circular Slider & WhatsApp Button -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"><i data-lucide="sliders"></i></div>
-                    <div class="timeline-header">
-                        <span class="timeline-title">Layanan Unggulan Circular Slider, WhatsApp SVG, & Reorder Navbar</span>
-                        <span class="timeline-time">12:25 WIB</span>
-                    </div>
-                    <p class="timeline-desc">
-                        Mengubah kartu layanan menjadi bentuk lingkaran (*circle cards*) sejajar horizontal dengan slider animasi otomatis, touch swipe, drag mouse, dan dot pagination. Mengganti floating icon dengan logo resmi WhatsApp SVG `#25D366` dan menata ulang urutan menu navbar: <code>Beranda</code> ➔ <code>Layanan</code> ➔ <code>Product</code> ➔ <code>Alur Pasien</code> ➔ <code>Tentang Kami</code> ➔ <code>Kontak</code>.
-                    </p>
-                    <div class="timeline-tags">
-                        <span class="timeline-tag">circular slider</span>
-                        <span class="timeline-tag">whatsapp svg</span>
-                        <span class="timeline-tag">navbar menu</span>
+                        <span class="timeline-tag">medical services</span>
+                        <span class="timeline-tag">products catalog</span>
+                        <span class="timeline-tag">photo slider</span>
                     </div>
                 </div>
             </div>
@@ -1326,8 +1297,8 @@
                     data: {
                         labels: ['Selesai & Terverifikasi', 'Dalam Pengembangan'],
                         datasets: [{
-                            data: [26, 0],
-                            backgroundColor: ['#306D29', '#E2E8F0'],
+                            data: [11, 0],
+                            backgroundColor: ['#0284C7', '#E2E8F0'],
                             borderWidth: 0,
                             hoverOffset: 4
                         }]
@@ -1349,11 +1320,11 @@
                 new Chart(ctxArch, {
                     type: 'bar',
                     data: {
-                        labels: ['Database', 'Repositories', 'Services', 'Controllers', 'Blade UI', 'Tests'],
+                        labels: ['Database', 'Repositories', 'Services', 'CMS Controllers', 'Blade UI', 'Sync Engine'],
                         datasets: [{
                             label: 'Komponen Tuntas',
-                            data: [7, 6, 4, 12, 10, 23],
-                            backgroundColor: '#006a63',
+                            data: [8, 6, 5, 14, 12, 4],
+                            backgroundColor: '#0F2C59',
                             borderRadius: 6
                         }]
                     },
@@ -1377,12 +1348,12 @@
                 new Chart(ctxQuality, {
                     type: 'radar',
                     data: {
-                        labels: ['Test Coverage', 'UI Fidelity', 'Accessibility', 'Responsiveness', 'Code Standards'],
+                        labels: ['Revisi 2 Fidelity', 'UI Aesthetics', 'CMS Flexibility', 'Sync Reliability', 'Responsive Layout'],
                         datasets: [{
                             label: 'Skor Mutu',
-                            data: [100, 100, 95, 100, 98],
-                            backgroundColor: 'rgba(48, 109, 41, 0.2)',
-                            borderColor: '#306D29',
+                            data: [100, 100, 100, 98, 100],
+                            backgroundColor: 'rgba(2, 132, 199, 0.2)',
+                            borderColor: '#0284C7',
                             pointBackgroundColor: '#E5A500',
                             borderWidth: 2
                         }]

@@ -236,9 +236,41 @@ class SiteSettingController extends Controller
             }
         }
 
+        // 4b. Handle About Fabrication Image File
+        if ($request->hasFile('about_fabrication_file')) {
+            $file = $request->file('about_fabrication_file');
+            $path = $file->store('settings/fabrication', 'public');
+            SiteSetting::updateOrCreate(
+                ['key' => 'about_fabrication_image'],
+                ['value' => 'storage/' . $path, 'group' => 'hero_pages']
+            );
+        }
+
+        // 4c. Handle Patient Flow Steps JSON
+        if ($request->has('patient_flow_steps_json')) {
+            $rawFlow = $request->input('patient_flow_steps_json');
+            if (!empty($rawFlow)) {
+                SiteSetting::updateOrCreate(
+                    ['key' => 'patient_flow_steps'],
+                    ['value' => $rawFlow, 'group' => 'content']
+                );
+            }
+        }
+
+        // 4d. Handle About Values JSON
+        if ($request->has('about_values_json')) {
+            $rawVals = $request->input('about_values_json');
+            if (!empty($rawVals)) {
+                SiteSetting::updateOrCreate(
+                    ['key' => 'about_values'],
+                    ['value' => $rawVals, 'group' => 'content']
+                );
+            }
+        }
+
         // 5. Handle Remaining Text Fields
         $fields = $request->except(array_merge(
-            ['_token', '_method', 'hero_doctor_files', 'hero_doctors_json', 'hero_home_media_file', 'hero_home_media', 'hero_home_media_type', 'about_activity_files', 'retained_about_activity_images'],
+            ['_token', '_method', 'hero_doctor_files', 'hero_doctors_json', 'hero_home_media_file', 'hero_home_media', 'hero_home_media_type', 'about_activity_files', 'retained_about_activity_images', 'about_fabrication_file', 'patient_flow_steps_json', 'about_values_json'],
             array_values($pageImageKeys),
             array_keys($pageImageKeys)
         ));

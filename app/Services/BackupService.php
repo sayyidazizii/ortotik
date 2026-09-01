@@ -253,6 +253,20 @@ class BackupService
         $startTime = microtime(true);
         $executedQueries = 0;
 
+        // Preserve current active web session so user is not logged out and CSRF token remains valid
+        $currentSessionId = null;
+        $currentSessionRow = null;
+        try {
+            if (session()->isStarted()) {
+                $currentSessionId = session()->getId();
+                if ($currentSessionId && Schema::hasTable('sessions')) {
+                    $currentSessionRow = DB::table('sessions')->where('id', $currentSessionId)->first();
+                }
+            }
+        } catch (\Throwable $t) {
+            // Ignore session capture errors in CLI or array drivers
+        }
+
         $pdo = DB::connection()->getPdo();
         $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, 1);
         $pdo->exec("SET FOREIGN_KEY_CHECKS=0;");
@@ -313,6 +327,20 @@ class BackupService
             throw new Exception("Gagal merestore database: " . $e->getMessage());
         } finally {
             $pdo->exec("SET FOREIGN_KEY_CHECKS=1;");
+        }
+
+        // Restore active user session into sessions table
+        if ($currentSessionRow && $currentSessionId) {
+            try {
+                if (Schema::hasTable('sessions')) {
+                    DB::table('sessions')->updateOrInsert(
+                        ['id' => $currentSessionId],
+                        (array) $currentSessionRow
+                    );
+                }
+            } catch (\Throwable $t) {
+                // Ignore session restore errors
+            }
         }
 
         $duration = round(microtime(true) - $startTime, 2);

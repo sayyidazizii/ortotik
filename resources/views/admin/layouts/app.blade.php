@@ -174,6 +174,18 @@
                     <span>Layanan Medis</span>
                 </a>
 
+                <a href="{{ route('admin.patient-flow.index') }}"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition {{ request()->routeIs('admin.patient-flow.*') ? 'bg-medical-600 text-white shadow-md' : 'text-slate-400 hover:text-white hover:bg-slate-800/60' }}">
+                    <i data-lucide="route" class="w-4 h-4"></i>
+                    <span>Alur Pasien (9 Tahapan)</span>
+                </a>
+
+                <a href="{{ route('admin.about.index') }}"
+                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition {{ request()->routeIs('admin.about.*') ? 'bg-medical-600 text-white shadow-md' : 'text-slate-400 hover:text-white hover:bg-slate-800/60' }}">
+                    <i data-lucide="info" class="w-4 h-4"></i>
+                    <span>Tentang Kami (Profil & Galeri)</span>
+                </a>
+
                 <a href="{{ route('admin.articles.index') }}"
                     class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition {{ request()->routeIs('admin.articles.*') ? 'bg-medical-600 text-white shadow-md' : 'text-slate-400 hover:text-white hover:bg-slate-800/60' }}">
                     <i data-lucide="newspaper" class="w-4 h-4"></i>

@@ -16,5 +16,7 @@ use App\Http\Controllers\Api\SyncController;
 
 Route::prefix('sync')->group(function () {
     Route::get('/health', [SyncController::class, 'health'])->name('api.sync.health');
+    Route::get('/database', [SyncController::class, 'downloadDatabase'])->name('api.sync.database');
+    Route::get('/assets', [SyncController::class, 'downloadAssets'])->name('api.sync.assets');
     Route::get('/package', [SyncController::class, 'downloadPackage'])->name('api.sync.package');
 });

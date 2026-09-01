@@ -47,7 +47,10 @@
                     Prostesis (Kaki dan tangan Tiruan)
                 </h2>
                 <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                    Kami melayani pembuatan kaki dan tangan palsu sesuai dengan standar pelayanan yang ditetapkan oleh Kementerian Kesehatan Republik Indonesia.
+                    Pembuatan kaki dan tangan palsu sesuai dengan standar pelayanan yang ditetapkan oleh Kementrian Kesehatan Republik Indonesia.
+                </p>
+                <p class="text-xs sm:text-sm text-on-surface-variant/90 leading-relaxed italic bg-surface-container-low p-3.5 rounded-xl border border-outline-variant/30">
+                    Solusi mengembalikan fungsi anggota gerak tubuh yang hilang karena amputasi/bawaan sejak lahir <strong>(restoration of Function)</strong>.
                 </p>
 
                 <!-- 9 Steps Clinical Workflow -->
@@ -197,25 +200,30 @@
         <!-- Technology Spotlight -->
         <div class="bg-surface-container-low rounded-3xl p-8 md:p-12 relative overflow-hidden border border-outline-variant/30 flex flex-col md:flex-row items-center gap-8 shadow-1">
             <div class="md:w-1/2 space-y-5">
-                <span class="text-xs font-semibold uppercase tracking-wider text-primary">Inovasi Fabrikasi Modern</span>
-                <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-semibold text-on-background tracking-tight">
-                    Teknologi Digital 3D Scanning & Modifikasi CAD/CAM
-                </h2>
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-secondary block mb-1">
+                        pediOcare akan terus berkembang menuju inovasi fabrikasi modern
+                    </span>
+                    <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-on-background tracking-tight">
+                        Inovasi Fabrikasi Modern
+                    </h2>
+                </div>
                 <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                    Tinggalkan metode cetak gips tradisional yang memakan waktu. Kami menggunakan pemindai 3D optik presisi tinggi yang dikombinasikan dengan pemodelan software biomedis untuk menciptakan soket dan brace yang akurat serta pas sempurna dengan anatomi tubuh Anda.
+                    Tinggalkan metode konvensional lama. Kami mengintegrasikan pemindai 3D optik presisi tinggi dan pemodelan software biomedis untuk menciptakan soket dan brace yang akurat serta pas sempurna dengan anatomi tubuh setiap pengguna.
                 </p>
                 <div class="flex flex-wrap gap-4 pt-2">
                     <div class="flex items-center gap-2 text-sm font-medium text-on-surface bg-surface-white px-3.5 py-2 rounded-xl border border-outline-variant/20 shadow-2xs">
-                        <span class="material-symbols-outlined text-primary text-base">verified</span> Akurasi Hingga Milimeter
+                        <span class="material-symbols-outlined text-primary text-base">verified</span> Akurasi Presisi Custom
                     </div>
                     <div class="flex items-center gap-2 text-sm font-medium text-on-surface bg-surface-white px-3.5 py-2 rounded-xl border border-outline-variant/20 shadow-2xs">
-                        <span class="material-symbols-outlined text-primary text-base">speed</span> Proses Cepat Tanpa Sakit
+                        <span class="material-symbols-outlined text-primary text-base">speed</span> Pengerjaan Cepat & Rapi
                     </div>
                 </div>
             </div>
-            <div class="md:w-1/2 relative h-[280px] md:h-[340px] w-full rounded-2xl overflow-hidden border-4 border-surface-white shadow-md">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnzbcnd-h_d84ohAqDZlDMQuyQIpJDRMS_zB5cowSkt4V9Ee9Hs-FJdjPsFSK4od-hNCyFMN9WkUXGC9hS-nQZbdmGvFjmbgojvSvhWTAaDSek5ov7M2dqhrlxfT38AkZ7VyQfR54DnAwofDzJ6A3I7Gt_W5AkKOA-JiBEs3aLnE7s0njfxBPfCUlMtKUEmM8aERJVk1Cwtl9FONOv4StQ0zq8JeQW9jo43AFf0l1_zjnkb9bQZio"
-                     alt="3D Scanning Technology" class="w-full h-full object-cover"/>
+            <div class="md:w-1/2 relative h-[280px] md:h-[340px] w-full rounded-2xl overflow-hidden border-4 border-surface-white shadow-md bg-slate-900">
+                <img src="{{ asset('images/client_update_rev2/image12.png') }}"
+                     alt="Inovasi Fabrikasi Modern pediOcare" 
+                     class="w-full h-full object-cover"/>
             </div>
         </div>
 

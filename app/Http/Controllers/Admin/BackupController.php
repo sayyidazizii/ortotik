@@ -308,16 +308,97 @@ class BackupController extends Controller
         }
 
         try {
-            set_time_limit(600);
-            ini_set('memory_limit', '512M');
+            set_time_limit(1800);
+            ini_set('memory_limit', '1024M');
 
-            $result = $syncService->pullFromServer($serverUrl, $secretToken, $syncDatabase, $syncAssets);
+            $result = $syncService->pullFromServer($serverUrl, $secretToken, $syncDatabase, $syncAssets, null, 1800);
 
             return redirect()->route('admin.backup.index', ['tab' => 'server_sync'])
                 ->with('success', $result['message']);
         } catch (Exception $e) {
+            $errorInfo = \App\Services\ServerSyncService::parseSyncError($e, [
+                'server_url' => $serverUrl,
+                'timeout' => 1800,
+            ]);
+
+            $errorMsg = "Gagal Sinkronisasi: {$errorInfo['title']}. {$errorInfo['detail']}";
+            if (!empty($errorInfo['suggestions'])) {
+                $errorMsg .= " Rekomendasi: " . implode(' | ', $errorInfo['suggestions']);
+            }
+
             return redirect()->route('admin.backup.index', ['tab' => 'server_sync'])
-                ->with('error', 'Gagal sinkronisasi dari server: ' . $e->getMessage());
+                ->with('error', $errorMsg);
+        }
+    }
+
+    /**
+     * Step 2 (AJAX): Pull & Restore Database SQL from Remote Server.
+     */
+    public function syncStepDatabase(Request $request, \App\Services\ServerSyncService $syncService)
+    {
+        $request->validate([
+            'server_url' => 'required|url',
+            'secret_token' => 'required|string',
+        ]);
+
+        $serverUrl = $request->input('server_url');
+        $secretToken = $request->input('secret_token');
+
+        try {
+            set_time_limit(600);
+            ini_set('memory_limit', '512M');
+
+            $result = $syncService->pullDatabase($serverUrl, $secretToken, null, 600);
+            $result['csrf_token'] = csrf_token();
+
+            return response()->json($result);
+        } catch (Exception $e) {
+            $errorInfo = \App\Services\ServerSyncService::parseSyncError($e, [
+                'server_url' => $serverUrl,
+                'timeout' => 600,
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+                'error_info' => $errorInfo,
+                'csrf_token' => csrf_token(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Step 3 (AJAX): Pull & Extract Storage Assets from Remote Server.
+     */
+    public function syncStepAssets(Request $request, \App\Services\ServerSyncService $syncService)
+    {
+        $request->validate([
+            'server_url' => 'required|url',
+            'secret_token' => 'required|string',
+        ]);
+
+        $serverUrl = $request->input('server_url');
+        $secretToken = $request->input('secret_token');
+
+        try {
+            set_time_limit(1200);
+            ini_set('memory_limit', '1024M');
+
+            $result = $syncService->pullAssets($serverUrl, $secretToken, null, 1200);
+            $result['csrf_token'] = csrf_token();
+
+            return response()->json($result);
+        } catch (Exception $e) {
+            $errorInfo = \App\Services\ServerSyncService::parseSyncError($e, [
+                'server_url' => $serverUrl,
+                'timeout' => 1200,
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+                'error_info' => $errorInfo,
+            ], 500);
         }
     }
 

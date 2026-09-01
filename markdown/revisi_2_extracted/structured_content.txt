@@ -1,0 +1,45 @@
+ [GAMBAR: image10.png]
+Nama : pediOcare 
+Tag line : Care your milestone (Ditulis dibawahnya tanpa koma)
+Tema warna bukan hijau, tetapi Biru tua (yang hijau-hijau dirubah semua warna nya)
+ [GAMBAR: image2.png]
+V - Teknologi 3D Scanning & Custom fitting presisi → diganti “Teknologi terkini dengan standar pelayanan & alat customize yang presisi.
+V- Praktisi Ortotis Prostetis legal memiliki STR & Surat Ijin Praktik Dinas Kesehatan
+V- Pelayanan komprehensif dan paripurna (konsultasi gratis)
+Tema warna biru tua bagian dalam biru muda (gradasi)
+ [GAMBAR: image7.png]
+Susunan Tulisannya  “Layanan Orthosis Prosthesis 
+                                      Dan Alat Bantu Ortopedi”
+Tema warana :  Biru Tua 
+Gambar Orang kecil → diganti logo disabilitas (kursi roda)
+ [GAMBAR: image11.png]
+Sebelum tulisan : “Inovasi Fabrikasi Modern”  →  “ pediOcare akan terus berkembang menuju inovasi fabrikasi modern”
+Fotonya diganti ini “  [GAMBAR: image12.png]
+ [GAMBAR: image4.png]
+Kasih foto disamping deksripsi yang otomatis sliide
+Kemudian “Konsultaasi medis Dibawahnya”
+Prosthetics … → diganti “ Prostesis (Kaki dan tangan Tiruan)
+Pembuatan kaki … → diganti “ Pembuatan kaki dan tangan palsu sesuai dengan standar pelayanan yang ditetapkan oleh Kementrian Kesehatan Republik Indonesia”
+Solusi mobilitas.. → Solusi mengembalikan fungsi anggota gerak tubuh yang hilang karena amputasi/bawaan sejak lahir (restoration of Function) 
+Keunggulan layanan prostesis Kami : 
+Untuk bagian Bracing & Orthopaedic Supports
+ [GAMBAR: image9.png]
+Kasih foto di samping deksripsi yang automatis terslide
+Kemudian box konsultasi medis dibawahnya
+ [GAMBAR: image1.png]
+Tambahkan foto auto slide di samping deksripsi
+Pusat penanganan…dst , diganti dengan, Penanganan skoliosis dengan metode non operatif dengan mencetak langsung dengan POP,Kemudiian di design cheneau dengan fokus 3 point penekanan di sepanjang tulang belakang
+Melalui evaluasi biomekanik ..dst  Diganti dengan Melalui rektifikasi menyeluruh dan analisa rotasi tulang belakang berbasis radiologi, kami membuat brace skoliosis custom yang berkerja 3 point presure yang bekerja di lengkungan tulang belakang
+ [GAMBAR: image5.png]
+Korset skoliosis dst….  →di ganti “ Skoliosis Brace”
+ Tulisan bawahnya → diganti    “Brace yang mengoreksi skoliosis dengan sistem tiga dimensi secara efektif mengoreksi dan   menghambat bertambahnya kurva derajat skoliosis.
+Tema warna sama semua “ biru tua kombinasi biru muda”
+ [GAMBAR: image8.png]
+Kaki palsu bawah lutut …dst
+Diganti “ Kaki Palsu Custome Made”
+Prostesis atas lutut & bawah lutut dengan mengutamakan kenyamanan pengguna dengan material berkualitas dan sesuai standar.
+Korset skoliosis 3D…dst 
+Diganti “ Skoliosis Brace with 3D Correction
+ [GAMBAR: image3.png]
+Isi foto slide masih “ Orthocare” bisa diganti yang pediOcare semua
+ di menu ini belum ada yang untuk edit “Alur PAsien” dan “Tentang Kami” [GAMBAR: image6.png]

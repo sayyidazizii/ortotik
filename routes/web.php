@@ -96,6 +96,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // CMS Services (Layanan Medis)
         Route::resource('services', \App\Http\Controllers\Admin\MedicalServiceController::class)->except(['show']);
 
+        // CMS Alur Pasien (9 Tahapan Pelayanan)
+        Route::get('/patient-flow', [\App\Http\Controllers\Admin\PatientFlowController::class, 'index'])->name('patient-flow.index');
+        Route::put('/patient-flow', [\App\Http\Controllers\Admin\PatientFlowController::class, 'update'])->name('patient-flow.update');
+
+        // CMS Tentang Kami (Profil, Keunggulan & Galeri)
+        Route::get('/about', [\App\Http\Controllers\Admin\AboutUsController::class, 'index'])->name('about.index');
+        Route::put('/about', [\App\Http\Controllers\Admin\AboutUsController::class, 'update'])->name('about.update');
+
         // CMS Articles (Edukasi & Blog)
         Route::resource('articles', \App\Http\Controllers\Admin\ArticleController::class)->except(['show']);
 
@@ -125,6 +133,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/clean-all', [\App\Http\Controllers\Admin\BackupController::class, 'cleanAll'])->name('clean-all');
             Route::post('/sync-pull', [\App\Http\Controllers\Admin\BackupController::class, 'pullSync'])->name('sync-pull');
             Route::post('/sync-test', [\App\Http\Controllers\Admin\BackupController::class, 'testSyncConnection'])->name('sync-test');
+            Route::post('/sync-step-db', [\App\Http\Controllers\Admin\BackupController::class, 'syncStepDatabase'])->name('sync-step-db');
+            Route::post('/sync-step-assets', [\App\Http\Controllers\Admin\BackupController::class, 'syncStepAssets'])->name('sync-step-assets');
         });
 
         // Data & Asset Package Synchronization (Zip of SQL + Storage Uploads + Public Images)

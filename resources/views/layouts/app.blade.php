@@ -24,43 +24,46 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#306D29",
-                        "secondary": "#006a63",
-                        "tertiary": "#825100",
-                        "deep-forest": "#1C4F40",
-                        "success-emerald": "#147901",
+                        "primary": "#0F2C59",
+                        "primary-dark": "#0A1D3B",
+                        "primary-light": "#1E3A8A",
+                        "secondary": "#0284C7",
+                        "secondary-light": "#38BDF8",
+                        "tertiary": "#0369A1",
+                        "deep-forest": "#0B1E38",
+                        "success-emerald": "#0284C7",
                         "background-subtle": "#F8FAFC",
                         "surface-white": "#FFFFFF",
-                        "surface-container-low": "#eff4ff",
-                        "surface-container-lowest": "#ffffff",
-                        "surface-container": "#e6eeff",
-                        "surface-container-high": "#dde9ff",
-                        "surface-container-highest": "#d5e3fd",
-                        "on-surface": "#0d1c2f",
-                        "on-surface-variant": "#3d4947",
-                        "on-background": "#0d1c2f",
-                        "on-primary": "#ffffff",
-                        "on-primary-container": "#f4fffc",
-                        "on-secondary": "#ffffff",
-                        "on-secondary-container": "#006f67",
-                        "on-tertiary": "#ffffff",
-                        "on-tertiary-container": "#fffbff",
-                        "outline": "#6d7a77",
-                        "outline-variant": "#bcc9c6",
-                        "secondary-container": "#99efe5",
-                        "primary-fixed": "#89f5e7",
-                        "secondary-fixed": "#9cf2e8",
-                        "tertiary-fixed": "#ffddb8",
-                        "error": "#ba1a1a",
-                        "surface": "#f8f9ff",
-                        "surface-dim": "#ccdbf4",
-                        "surface-bright": "#f8f9ff",
-                        "surface-variant": "#d5e3fd",
-                        "surface-tint": "#006a61",
-                        "inverse-surface": "#233144",
-                        "inverse-on-surface": "#ebf1ff",
-                        "inverse-primary": "#6bd8cb",
-                        "background": "#f8f9ff"
+                        "surface-container-low": "#F0F7FF",
+                        "surface-container-lowest": "#FFFFFF",
+                        "surface-container": "#E0F2FE",
+                        "surface-container-high": "#BAE6FD",
+                        "surface-container-highest": "#7DD3FC",
+                        "on-surface": "#0F172A",
+                        "on-surface-variant": "#334155",
+                        "on-background": "#0F172A",
+                        "on-primary": "#FFFFFF",
+                        "on-primary-container": "#F0F7FF",
+                        "on-secondary": "#FFFFFF",
+                        "on-secondary-container": "#0369A1",
+                        "on-tertiary": "#FFFFFF",
+                        "on-tertiary-container": "#F8FAFC",
+                        "outline": "#64748B",
+                        "outline-variant": "#CBD5E1",
+                        "secondary-container": "#BAE6FD",
+                        "primary-fixed": "#BAE6FD",
+                        "secondary-fixed": "#E0F2FE",
+                        "tertiary-fixed": "#F0F7FF",
+                        "error": "#BA1A1A",
+                        "surface": "#F8FAFC",
+                        "surface-dim": "#CBD5E1",
+                        "surface-bright": "#F8FAFC",
+                        "surface-variant": "#E2E8F0",
+                        "surface-tint": "#0F2C59",
+                        "inverse-surface": "#0F172A",
+                        "inverse-on-surface": "#F8FAFC",
+                        "inverse-primary": "#38BDF8",
+                        "background": "#F8FAFC"
                     },
                     borderRadius: {
                         "DEFAULT": "0.25rem",
@@ -106,9 +109,9 @@
     </script>
     
     <style>
-        .shadow-1 { box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04); }
-        .shadow-2 { box-shadow: 0px 8px 24px rgba(48, 109, 41, 0.08); }
-        .shadow-hover { box-shadow: 0px 12px 32px rgba(48, 109, 41, 0.12); }
+        .shadow-1 { box-shadow: 0px 4px 16px rgba(15, 44, 89, 0.06); }
+        .shadow-2 { box-shadow: 0px 8px 24px rgba(15, 44, 89, 0.10); }
+        .shadow-hover { box-shadow: 0px 12px 32px rgba(15, 44, 89, 0.15); }
         
         .fade-in-up {
             animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;

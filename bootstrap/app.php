@@ -14,6 +14,12 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->trustProxies(at: '*');
 
+        $middleware->validateCsrfTokens(except: [
+            'admin/backup/sync-step-db',
+            'admin/backup/sync-step-assets',
+            'admin/backup/sync-test',
+        ]);
+
         $middleware->redirectGuestsTo(fn () => route('admin.login'));
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,

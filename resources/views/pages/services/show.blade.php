@@ -117,19 +117,19 @@
                 </div>
 
                 <!-- Box Konsultasi Medis Di Bawah Deskripsi -->
-                <div class="p-6 rounded-2xl bg-gradient-to-r from-teal-50 to-emerald-50 border border-teal-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="p-6 rounded-2xl bg-gradient-to-r from-blue-50 via-sky-50 to-indigo-50 border border-sky-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="space-y-1 text-center sm:text-left">
-                        <span class="text-xs font-extrabold text-teal-800 uppercase tracking-wider block">Konsultasi Medis Klinis</span>
+                        <span class="text-xs font-extrabold text-primary uppercase tracking-wider block">Konsultasi Medis Klinis</span>
                         <h4 class="text-sm sm:text-base font-bold text-slate-900">Ingin berkonsultasi mengenai {{ $service->title }}?</h4>
                         <p class="text-xs text-slate-600">Jadwalkan pemeriksaan klinis langsung dengan praktisi Ortotis Prostetis ber-STR & ber-SIP.</p>
                     </div>
                     <div class="flex flex-wrap items-center gap-2.5 shrink-0">
                         <a href="https://wa.me/6285697922194?text=Halo%20pediOcare,%20saya%20ingin%20konsultasi%20layanan%20{{ urlencode($service->title) }}." target="_blank"
-                           class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition shadow-sm">
+                           class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs font-bold transition shadow-sm">
                             <span class="material-symbols-outlined text-sm">chat</span> WhatsApp
                         </a>
                         <a href="{{ route('contact') }}?service_id={{ $service->id }}"
-                           class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-primary hover:bg-secondary text-white text-xs font-bold transition shadow-sm">
+                           class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-light text-white text-xs font-bold transition shadow-sm">
                             <span class="material-symbols-outlined text-sm">contacts</span> Kontak / Janji Temu
                         </a>
                     </div>

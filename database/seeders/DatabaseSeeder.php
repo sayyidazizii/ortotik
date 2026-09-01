@@ -405,12 +405,12 @@ class DatabaseSeeder extends Seeder
 
         // 6. Branches (Single Clinic: Sleman, Yogyakarta)
         Branch::create([
-            'name' => 'PT. Orthocare Indonesia - Klinik Sleman Yogyakarta',
+            'name' => 'pediOcare - Klinik Sleman Yogyakarta',
             'city' => 'Sleman',
             'address' => 'Jl. Kaliurang KM 8.5, Sinduharjo, Kec. Ngaglik, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55581',
             'phone_number' => '(0274) 889912',
-            'whatsapp_number' => '6281234567890',
-            'email' => 'sleman@orthocare.co.id',
+            'whatsapp_number' => '6285697922194',
+            'email' => 'sleman@pediocare.co.id',
             'google_maps_url' => 'https://maps.google.com/?q=Sleman+Yogyakarta',
             'opening_hours' => 'Senin - Sabtu: 08:30 - 17:00 WIB',
             'image' => '/images/branches/sleman-yogyakarta.jpg',
@@ -486,15 +486,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // 9. Site Settings
-        SiteSetting::set('site_name', 'PT. Orthocare Indonesia', 'general');
-        SiteSetting::set('site_tagline', 'High-Tech Orthopedic Care & Precision Prosthetics', 'general');
+        SiteSetting::set('site_name', 'pediOcare', 'general');
+        SiteSetting::set('site_tagline', 'Care your milestone', 'general');
         SiteSetting::set('company_phone', '(0274) 889912', 'contact');
-        SiteSetting::set('company_email', 'info@orthocare.co.id', 'contact');
-        SiteSetting::set('whatsapp_global', '6281234567890', 'contact');
+        SiteSetting::set('company_email', 'info@pediocare.co.id', 'contact');
+        SiteSetting::set('whatsapp_global', '6285697922194', 'contact');
         SiteSetting::set('company_address', 'Jl. Kaliurang KM 8.5, Sinduharjo, Kec. Ngaglik, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55581', 'contact');
         SiteSetting::set('working_hours', 'Senin - Sabtu: 08:30 - 17:00 WIB', 'general');
-        SiteSetting::set('facebook_url', 'https://facebook.com/ortotikindonesia', 'social');
-        SiteSetting::set('instagram_url', 'https://instagram.com/ortotikindonesia', 'social');
-        SiteSetting::set('youtube_url', 'https://youtube.com/@ortotikindonesia', 'social');
+        SiteSetting::set('facebook_url', 'https://facebook.com/pediocare', 'social');
+        SiteSetting::set('instagram_url', 'https://instagram.com/pediocare', 'social');
+        SiteSetting::set('youtube_url', 'https://youtube.com/@pediocare', 'social');
     }
 }

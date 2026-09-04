@@ -16,6 +16,9 @@
     <!-- Tailwind CSS CDN with Plugins -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="{{ asset('logo/logo.jpg') }}"/>
+
     <!-- Alpine.js CDN -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script id="tailwind-config">
@@ -240,13 +243,8 @@
     <!-- TopAppBar / Header -->
     <header class="bg-surface-white dark:bg-on-background sticky top-0 w-full z-50 border-b border-outline-variant/30 shadow-sm transition-all duration-300">
         <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-3.5 max-w-container-max mx-auto">
-            <a href="{{ route('home') }}" class="flex flex-col group">
-                <span class="text-2xl sm:text-[26px] font-headline-xl text-primary dark:text-primary-fixed tracking-tight hover:opacity-90 transition font-black">
-                    {{ $clinicName }}
-                </span>
-                <span class="text-[10px] sm:text-[11px] font-bold text-tertiary tracking-wider -mt-1 uppercase">
-                    {{ $clinicTagline }}
-                </span>
+            <a href="{{ route('home') }}" class="flex items-center group py-0.5">
+                <img src="{{ asset('logo/logo.jpg') }}" alt="{{ $clinicName }}" class="h-10 sm:h-12 w-auto object-contain hover:opacity-90 transition">
             </a>
             <nav class="hidden md:flex gap-gutter items-center">
                 <a class="{{ request()->routeIs('home') ? 'text-primary dark:text-primary-fixed border-b-2 border-primary font-bold pb-1' : 'dark:text-on-surface-variant/80 font-medium hover:text-primary text-on-surface-variant' }} font-label-md text-label-md transition-colors duration-200" href="{{ route('home') }}">Beranda</a>
@@ -276,10 +274,9 @@
     <div id="mobile-nav-backdrop" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-[55] opacity-0 pointer-events-none transition-opacity duration-300 md:hidden" aria-hidden="true"></div>
     <div class="fixed inset-y-0 right-0 w-80 max-w-[85vw] z-[60] bg-surface-container-lowest dark:bg-inverse-surface shadow-2xl flex flex-col h-full p-5 sm:p-6 pb-8 sm:pb-6 transform translate-x-full transition-transform duration-300 md:hidden overflow-y-auto" id="mobile-nav">
         <div class="flex justify-between items-center mb-4 shrink-0">
-            <div>
-                <h2 class="font-headline-md text-primary dark:text-primary-fixed font-black text-xl">{{ $clinicName }}</h2>
-                <p class="font-body-sm text-body-sm text-tertiary font-bold">{{ $clinicTagline }}</p>
-            </div>
+            <a href="{{ route('home') }}" class="block">
+                <img src="{{ asset('logo/logo.jpg') }}" alt="{{ $clinicName }}" class="h-9 sm:h-10 w-auto object-contain">
+            </a>
             <button class="text-on-surface-variant p-2 hover:text-primary hover:bg-surface-container-high rounded-lg transition" id="close-mobile-nav" aria-label="Tutup Menu">
                 <span class="material-symbols-outlined">close</span>
             </button>
@@ -336,8 +333,10 @@
     <footer class="relative bg-on-background text-on-primary-container w-full py-16 pt-16 md:pt-20 mb-0">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto font-body-sm text-body-sm text-surface-variant/70">
             <div class="col-span-1 md:col-span-2">
-                <div class="font-headline-md text-surface-white mb-2 text-2xl font-black">
-                    {{ $clinicName }}
+                <div class="mb-4">
+                    <a href="{{ route('home') }}" class="inline-block bg-white p-2.5 rounded-2xl shadow-md hover:opacity-95 transition">
+                        <img src="{{ asset('logo/logo.jpg') }}" alt="{{ $clinicName }}" class="h-10 sm:h-12 w-auto object-contain">
+                    </a>
                 </div>
                 <div class="text-xs font-bold text-tertiary-fixed uppercase tracking-wider mb-4">{{ $clinicTagline }}</div>
                 <p class="mb-6 max-w-sm leading-relaxed text-slate-300">{{ $settings['footer_description'] ?? 'Pusat pelayanan Ortotik Prostetik profesional dengan semangat bermanfaat untuk menunjang fungsi gerak dan kualitas hidup Anda.' }}</p>

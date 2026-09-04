@@ -364,7 +364,7 @@ class DatabaseSeeder extends Seeder
             'slug' => 'kaki-palsu-bawah-lutut-carbon-custom',
             'category_type' => 'prosthetic_leg',
             'thumbnail' => '/images/custom/transtibial-carbon.jpg',
-            'summary' => 'Prostesis bawah lutut dengan soket cetak presisi 3D, silikon suspension lock, dan telapak kaki carbon dinamis.',
+            'summary' => 'Casting gips secara presisi. Dengan pilihan suspensi standar, silicone lock & berbagai jenis telapak kaki sesuai kebutuhan.',
             'description' => '<p>Didesain khusus mengikuti anatomi tungkai sisa pasien dengan bobot super ringan namun mampu menahan beban aktifitas lari dan melompat.</p>',
             'indications' => ['Amputasi bawah lutut', 'Revisi soket kaki palsu lama'],
             'features' => [
@@ -374,7 +374,7 @@ class DatabaseSeeder extends Seeder
                 'Kosmetik Busa Waterproof Mirip Kulit Asli'
             ],
             'workflow_steps' => [
-                ['step' => 1, 'title' => 'Konsultasi & 3D Scanning', 'desc' => 'Pemeriksaan kondisi stump dan pemindaian 3D non-invasif.'],
+                ['step' => 1, 'title' => 'Konsultasi & Casting Gips Presisi', 'desc' => 'Pemeriksaan kondisi stump dan proses casting gips secara presisi.'],
                 ['step' => 2, 'title' => 'Fabrikasi Soket Presisi', 'desc' => 'Pencetakan soket carbon fiber berkualitas tinggi di workshop medik.'],
                 ['step' => 3, 'title' => 'Pemasangan & Dynamic Alignment', 'desc' => 'Penyetelan sudut keseimbangan dan uji coba berjalan.'],
                 ['step' => 4, 'title' => 'Gait Training & Garansi', 'desc' => 'Latihan pola jalan mandiri dan garansi penyesuaian fitting gratis.']

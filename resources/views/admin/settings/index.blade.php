@@ -529,7 +529,7 @@
                     </div>
                     <div class="space-y-1.5">
                         <label class="block text-xs font-bold text-slate-700 uppercase">Judul Utama Halaman</label>
-                        <input type="text" name="hero_services_title" value="{{ $settings['hero_services_title']->value ?? 'Layanan Orthosis Prosthesis & Alat Bantu Ortopedi' }}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-medical-500">
+                        <input type="text" name="hero_services_title" value="{{ $settings['hero_services_title']->value ?? 'Layanan Orthosis Prosthesis' }}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-medical-500">
                     </div>
                     <div class="sm:col-span-2 space-y-1.5">
                         <label class="block text-xs font-bold text-slate-700 uppercase">Deskripsi / Subtitle</label>

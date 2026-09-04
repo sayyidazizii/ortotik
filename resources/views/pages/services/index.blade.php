@@ -20,9 +20,12 @@
             {{ $settings['hero_services_badge'] ?? 'Pelayanan profesional dengan semangat bermanfaat' }}
         </span>
         <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white max-w-3xl mx-auto leading-tight">
-            {{ $settings['hero_services_title'] ?? 'Layanan Orthosis Prosthesis & Alat Bantu Ortopedi' }}
+            {{ trim(str_ireplace(['& Alat Bantu Ortopedi', 'Dan Alat Bantu Ortopedi', '& alat bantu ortopedi'], '', $settings['hero_services_title'] ?? 'Layanan Orthosis Prosthesis')) ?: 'Layanan Orthosis Prosthesis' }}
         </h1>
-        <p class="font-body-md text-body-md leading-relaxed text-slate-200 max-w-2xl mx-auto text-xs sm:text-sm">
+        <p class="text-xs sm:text-sm font-semibold text-primary-fixed uppercase tracking-wider -mt-1">
+            & Alat Bantu Ortopedi
+        </p>
+        <p class="font-body-md text-body-md leading-relaxed text-slate-200 max-w-2xl mx-auto text-xs sm:text-sm pt-0.5">
             {{ $settings['hero_services_subtitle'] ?? 'Dengan kaidah Rehabilitasi Medis, Kami berusaha yang terbaik untuk memberikan solusi yang komprehensif untuk mencapai kualitas hidup Anda.' }}
         </p>
     </div>

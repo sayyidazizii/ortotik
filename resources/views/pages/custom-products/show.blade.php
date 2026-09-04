@@ -85,8 +85,8 @@
         <div class="lg:col-span-4 space-y-6">
             <div class="bg-primary text-surface-white p-8 rounded-3xl space-y-4 text-center shadow-2">
                 <span class="text-xs text-primary-fixed font-semibold uppercase tracking-wider block">Layanan Kustom</span>
-                <h3 class="text-xl font-bold text-white">Jadwal Pengukuran & 3D Scanning</h3>
-                <p class="text-xs text-white/80 leading-relaxed">Pemeriksaan fisik dan scanning 3D awal dapat dilakukan di klinik kami di Sleman, D.I. Yogyakarta.</p>
+                <h3 class="text-xl font-bold text-white">Jadwal Pengukuran & Casting Gips</h3>
+                <p class="text-xs text-white/80 leading-relaxed">Pemeriksaan fisik dan casting gips presisi awal dapat dilakukan di klinik kami di Sleman, D.I. Yogyakarta.</p>
                 <div class="pt-2 space-y-2.5">
                     <a href="{{ route('contact') }}"
                         class="flex items-center justify-center w-full bg-[#E5A500] hover:bg-[#CC9200] text-surface-white text-xs font-semibold h-12 rounded-xl transition shadow-md">

@@ -727,7 +727,7 @@
                     @endfor
                 </div>
                 <p class="font-body-md text-on-surface-variant italic leading-relaxed">
-                    "Teknologi 3D scanning mereka luar biasa. Proses fitting jadi jauh lebih cepat dan akurat dibanding tempat lain yang pernah saya kunjungi."
+                    "Proses casting gips presisi dan pelayanannya luar biasa. Hasil fitting jadi jauh lebih nyaman dan pas dibanding tempat lain yang pernah saya kunjungi."
                 </p>
                 <div class="mt-4 flex items-center gap-4">
                     <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">A</div>

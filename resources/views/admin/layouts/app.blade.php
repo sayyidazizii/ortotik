@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Dashboard') - {{ \App\Models\SiteSetting::get('clinic_name', 'pediOcare') }}</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="{{ asset('logo/logo.jpg') }}"/>
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -97,11 +100,11 @@
             <!-- Sidebar Brand Header -->
             <div class="h-16 px-5 sm:px-6 flex items-center justify-between border-b border-slate-800 bg-slate-950/50">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-medical-500 to-tealmed-500 flex items-center justify-center font-extrabold text-base shadow text-white">
-                        {{ strtoupper(substr(\App\Models\SiteSetting::get('clinic_name', 'pediOcare'), 0, 2)) }}
+                    <div class="bg-white p-1 rounded-xl flex items-center justify-center shadow shrink-0">
+                        <img src="{{ asset('logo/logo.jpg') }}" alt="{{ \App\Models\SiteSetting::get('clinic_name', 'pediOcare') }}" class="h-7 w-auto object-contain">
                     </div>
                     <div>
-                        <h2 class="font-extrabold text-sm tracking-tight text-white leading-tight uppercase">{{ \App\Models\SiteSetting::get('clinic_name', 'pediOcare') }}</h2>
+                        <h2 class="font-extrabold text-xs tracking-tight text-white leading-tight uppercase">{{ \App\Models\SiteSetting::get('clinic_name', 'pediOcare') }}</h2>
                         <span class="text-[10px] text-teal-400 font-semibold tracking-wider uppercase">Medical Panel</span>
                     </div>
                 </div>

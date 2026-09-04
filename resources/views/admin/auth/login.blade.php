@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Administrator - Klinik Ortotik & Prostetik</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="{{ asset('logo/logo.jpg') }}"/>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,12 +54,12 @@
     <div class="w-full max-w-md relative z-10">
         <!-- Logo & Header -->
         <div class="text-center mb-8">
-            <a href="{{ route('home') }}" class="inline-flex items-center gap-3 group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-medical-500 to-tealmed-500 flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-medical-500/30 group-hover:scale-105 transition duration-300">
-                    OP
+            <a href="{{ route('home') }}" class="inline-flex flex-col items-center gap-3 group">
+                <div class="bg-white p-3 rounded-2xl shadow-xl shadow-black/30 group-hover:scale-105 transition duration-300">
+                    <img src="{{ asset('logo/logo.jpg') }}" alt="{{ \App\Models\SiteSetting::get('clinic_name', 'pediOcare') }}" class="h-12 sm:h-14 w-auto object-contain">
                 </div>
-                <div class="text-left">
-                    <h1 class="text-xl font-extrabold text-white tracking-tight">KLINIK ORTOTIK</h1>
+                <div class="text-center mt-1">
+                    <h1 class="text-xl font-extrabold text-white tracking-tight uppercase">{{ \App\Models\SiteSetting::get('clinic_name', 'pediOcare') }}</h1>
                     <p class="text-xs font-semibold text-teal-400">Panel Manajemen Medis</p>
                 </div>
             </a>

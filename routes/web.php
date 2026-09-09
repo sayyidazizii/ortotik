@@ -74,6 +74,64 @@ Route::get('/sitemap.xml', function () {
         ->header('Content-Type', 'text/xml');
 })->name('sitemap');
 
+// Fallback Routes for Web Manifest and Logo Assets (Guarantees 200 on all server configs)
+Route::get('/site.webmanifest', function () {
+    $path = public_path('site.webmanifest');
+    if (file_exists($path)) {
+        return response()->file($path, ['Content-Type' => 'application/manifest+json']);
+    }
+    return response()->json([
+        'name' => 'pediOcare - Kaki Palsu Jogja & Ortotik Prostetik',
+        'short_name' => 'pediOcare',
+        'start_url' => '/',
+        'display' => 'standalone',
+        'background_color' => '#ffffff',
+        'theme_color' => '#0F2C59',
+        'icons' => [
+            ['src' => '/logo/icon.jpg', 'sizes' => '192x192', 'type' => 'image/jpeg'],
+            ['src' => '/logo/icon.jpg', 'sizes' => '512x512', 'type' => 'image/jpeg']
+        ]
+    ], 200, ['Content-Type' => 'application/manifest+json']);
+});
+
+Route::get('/manifest.json', function () {
+    $path = public_path('site.webmanifest');
+    if (file_exists($path)) {
+        return response()->file($path, ['Content-Type' => 'application/manifest+json']);
+    }
+    return response()->json(['name' => 'pediOcare'], 200, ['Content-Type' => 'application/manifest+json']);
+});
+
+Route::get('/logo/{filename}', function ($filename) {
+    $searchPaths = [
+        public_path('logo/' . $filename),
+        public_path('images/logo/' . $filename),
+        public_path($filename),
+    ];
+    foreach ($searchPaths as $path) {
+        if (file_exists($path)) {
+            $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+            $mime = match ($ext) {
+                'ico' => 'image/x-icon',
+                'jpg', 'jpeg' => 'image/jpeg',
+                'png' => 'image/png',
+                'svg' => 'image/svg+xml',
+                default => mime_content_type($path) ?: 'application/octet-stream',
+            };
+            return response()->file($path, ['Content-Type' => $mime]);
+        }
+    }
+    abort(404);
+})->where('filename', '.*');
+
+Route::get('/images/{path}', function ($path) {
+    $filePath = public_path('images/' . $path);
+    if (file_exists($filePath)) {
+        return response()->file($filePath);
+    }
+    abort(404);
+})->where('path', '.*');
+
 /*
 |--------------------------------------------------------------------------
 | Admin Authentication Routes

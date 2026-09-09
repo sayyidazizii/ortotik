@@ -1,0 +1,21 @@
+{
+    "name": "pediOcare - Kaki Palsu Jogja & Ortotik Prostetik",
+    "short_name": "pediOcare",
+    "description": "Pusat Pembuatan Kaki Palsu Jogja & Pelayanan Ortotik Prostetik Terpercaya di Yogyakarta",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#0F2C59",
+    "icons": [
+        {
+            "src": "/logo/icon.jpg",
+            "sizes": "192x192",
+            "type": "image/jpeg"
+        },
+        {
+            "src": "/logo/icon.jpg",
+            "sizes": "512x512",
+            "type": "image/jpeg"
+        }
+    ]
+}

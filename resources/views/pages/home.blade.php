@@ -774,12 +774,13 @@
                 <a href="{{ route('articles.show', $art->slug) }}" 
                    class="bg-surface-white rounded-2xl sm:rounded-3xl border border-outline-variant/30 overflow-hidden flex flex-col justify-between shadow-1 hover:shadow-hover hover:-translate-y-1.5 transition-all duration-300 group">
                     <div>
-                        <div class="relative bg-surface-container-low aspect-[16/10] overflow-hidden border-b border-outline-variant/15">
-                            @if($art->thumbnail)
-                            <img src="{{ asset($art->thumbnail) }}" alt="{{ $art->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            @else
-                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" alt="{{ $art->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            @endif
+                            @php
+                                $thumbRaw = $art->thumbnail ? ltrim($art->thumbnail, '/') : null;
+                                $thumbSrc = ($thumbRaw && file_exists(public_path($thumbRaw)))
+                                    ? asset($thumbRaw)
+                                    : 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80';
+                            @endphp
+                            <img src="{{ $thumbSrc }}" alt="{{ $art->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             <span class="absolute top-3 left-3 bg-surface-white/95 text-primary text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-outline-variant/20 shadow-2xs">
                                 {{ $art->category->name ?? 'Edukasi' }}
                             </span>

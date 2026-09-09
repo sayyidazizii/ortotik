@@ -1,0 +1,11 @@
+Uncaught ReferenceError: tailwind is not defined
+    at (index):129:9
+site.webmanifest:1  Failed to load resource: the server responded with a status of 404 ()
+(index):1 Manifest fetch from https://pediocare.com/site.webmanifest failed, code 404
+init_embed.js:304 Search endpoint requested!
+site.webmanifest:1  Failed to load resource: the server responded with a status of 404 ()
+(index):1 Manifest fetch from https://pediocare.com/site.webmanifest failed, code 404
+perawatan-prostesis.jpg:1  Failed to load resource: the server responded with a status of 404 ()
+site.webmanifest:1  Failed to load resource: the server responded with a status of 404 ()
+icon.ico:1  GET https://pediocare.com/logo/icon.ico 404 (Not Found)
+icon.jpg:1  GET https://pediocare.com/logo/icon.jpg 404 (Not Found)

@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Tentang Kami - pediOcare')
-@section('meta_description', 'Pediocare Berdedikasi melakukan Pelayanan Ortotik Prostetik untuk membantu menunjang fungsi gerak, kenyamanan, serta kualitas hidup pengguna. Care your milestone.')
+@section('title', 'Tentang Kami - Pusat Kaki Palsu Jogja & Ortotik Prostetik | pediOcare')
+@section('meta_description', 'Mengenal pediOcare Yogyakarta: pusat pembuatan kaki palsu Jogja bergaransi 100%, tangan palsu, korset skoliosis, dan pelayanan ortotik prostetik profesional berlisensi Kemenkes RI.')
+@section('meta_keywords', 'tentang pediocare, kaki palsu jogja, klinik kaki palsu jogja, ortotis prostetis jogja, ortotik prostetik yogyakarta, pediocare')
 
 @section('content')
 

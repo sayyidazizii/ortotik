@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'pediOcare - Care your milestone')
-@section('meta_description', 'pediOcare berdedikasi melakukan pelayanan Ortotik Prostetik untuk membantu menunjang fungsi gerak, kenyamanan, serta kualitas hidup pengguna. Care your milestone.')
+@section('title', 'pediOcare - Pusat Pembuatan Kaki Palsu Jogja & Ortotik Prostetik')
+@section('meta_description', 'pediOcare adalah klinik pusat pembuatan kaki palsu Jogja, tangan palsu bionik, korset skoliosis, dan alat bantu ortotik prostetik profesional di Sleman, Yogyakarta.')
+@section('meta_keywords', 'pediocare, kaki palsu jogja, pembuatan kaki palsu jogja, klinik kaki palsu jogja, ortotik prostetik jogja, kaki palsu yogyakarta, tempat bikin kaki palsu di jogja, harga kaki palsu jogja, pediocare jogja')
 
 @section('content')
 
@@ -42,14 +43,18 @@
         <!-- Left: Text Slide In from Left -->
         <div class="md:col-span-7 lg:col-span-7 flex flex-col gap-6 fade-in-left">
             <div>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-3">
+                    <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                    Pusat Pembuatan Kaki Palsu Jogja &amp; Ortotik Medis
+                </span>
                 <h1 class="font-headline-xl-mobile text-headline-xl-mobile md:font-headline-xl md:text-headline-xl text-on-background leading-tight relative font-black">
                     pedi<span class="text-secondary">O</span>care
-                    <span class="text-primary text-xl sm:text-2xl md:text-3xl font-extrabold block mt-1 tracking-tight">{{ $settings['clinic_tagline'] ?? 'Care your milestone' }}</span>
+                    <span class="text-primary text-xl sm:text-2xl md:text-3xl font-extrabold block mt-1 tracking-tight">{{ $settings['clinic_tagline'] ?? 'Pusat Pembuatan Kaki Palsu Jogja & Ortotik Prostetik' }}</span>
                 </h1>
             </div>
             
             <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl leading-relaxed text-sm sm:text-base">
-                {{ $settings['hero_home_description'] ?? 'Sebaik-baik manusia adalah yang bermanfaat untuk orang lain. Kami memandang manusia sebagai makhluk ciptaan yang sempurna. Sudah lebih dari satu dekade pediOcare melayani, membantu dan memberi solusi bagi masyarakat yang membutuhkan layanan alat bantu Ortosis Prostesis. Suatu kebahagiaan bagi Kami ketika dapat melihat klien/pasien yang mengalami amputasi kaki namun dapat kembali berjalan penuhi harapan, anak lahir yang ditakdirkan memiliki keistimewaan dapat tumbuh dan berkembang sesuai capaian (milestone).' }}
+                {{ $settings['hero_home_description'] ?? 'Sebaik-baik manusia adalah yang bermanfaat untuk orang lain. Sudah lebih dari satu dekade pediOcare melayani, membantu dan memberi solusi pembuatan kaki palsu di Jogja serta layanan alat bantu Ortosis Prostesis berkualitas medis. Suatu kebahagiaan bagi kami ketika pasien yang mengalami amputasi dapat kembali berjalan mandiri dan meraih kualitas hidup terbaiknya (Care your milestone).' }}
             </p>
             
             <div class="flex flex-col sm:flex-row gap-4 mt-2">
@@ -413,10 +418,10 @@
                         <span class="material-symbols-outlined text-2xl md:text-3xl">accessible_forward</span>
                     </div>
                     <h3 class="font-headline-md text-sm md:text-base font-bold text-on-background group-hover:text-primary transition-colors leading-tight mb-1">
-                        Prosthetics
+                        Kaki Palsu &amp; Prostetik
                     </h3>
                     <p class="text-[11px] md:text-xs text-on-surface-variant line-clamp-2 px-2 leading-relaxed">
-                        Kaki & Tangan Palsu Presisi
+                        Kaki Palsu Jogja Bawah/Atas Lutut &amp; Bionik
                     </p>
                     <span class="text-[11px] text-primary font-semibold flex items-center gap-0.5 mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         Lihat <span class="material-symbols-outlined text-xs">arrow_forward</span>
@@ -742,6 +747,75 @@
     </div>
 </section>
 
+<!-- Artikel & Edukasi Medis (Kaki Palsu Jogja & Pediocare) -->
+<section class="relative py-20 md:py-24 bg-surface-container-low/50 overflow-hidden fade-in-up" id="artikel">
+    <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        <div class="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 mb-12">
+            <div class="text-center md:text-left">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-2">
+                    Edukasi &amp; Panduan Pasien
+                </span>
+                <h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background font-bold">
+                    Artikel &amp; Edukasi Kaki Palsu Jogja
+                </h2>
+                <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-1">
+                    Informasi terpercaya seputar pembuatan kaki palsu di Jogja, perawatan ortotik prostetik, dan panduan kemandirian gerak bersama pediOcare.
+                </p>
+            </div>
+            <a href="{{ route('articles.index') }}" class="hidden md:inline-flex items-center gap-1.5 px-6 py-3 rounded-xl border border-outline-variant/40 text-primary font-bold text-xs hover:bg-primary hover:text-white transition-all bg-surface-white shadow-2xs hover:shadow-md">
+                <span>Lihat Semua Artikel</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            @if(isset($latestArticles) && $latestArticles->count() > 0)
+                @foreach($latestArticles as $art)
+                <a href="{{ route('articles.show', $art->slug) }}" 
+                   class="bg-surface-white rounded-2xl sm:rounded-3xl border border-outline-variant/30 overflow-hidden flex flex-col justify-between shadow-1 hover:shadow-hover hover:-translate-y-1.5 transition-all duration-300 group">
+                    <div>
+                        <div class="relative bg-surface-container-low aspect-[16/10] overflow-hidden border-b border-outline-variant/15">
+                            @if($art->thumbnail)
+                            <img src="{{ asset($art->thumbnail) }}" alt="{{ $art->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            @else
+                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" alt="{{ $art->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            @endif
+                            <span class="absolute top-3 left-3 bg-surface-white/95 text-primary text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-outline-variant/20 shadow-2xs">
+                                {{ $art->category->name ?? 'Edukasi' }}
+                            </span>
+                        </div>
+                        <div class="p-6 space-y-2">
+                            <span class="text-[11px] text-on-surface-variant flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-sm">schedule</span>
+                                {{ $art->read_time ?? 5 }} menit baca &bull; {{ $art->published_at ? $art->published_at->format('d M Y') : 'Terbaru' }}
+                            </span>
+                            <h3 class="text-base font-bold text-on-background group-hover:text-primary transition-colors leading-snug line-clamp-2">
+                                {{ $art->title }}
+                            </h3>
+                            <p class="text-xs text-on-surface-variant line-clamp-2 leading-relaxed">
+                                {{ $art->summary }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-2">
+                        <span class="text-xs font-semibold text-primary inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            Baca Selengkapnya <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                        </span>
+                    </div>
+                </a>
+                @endforeach
+            @endif
+        </div>
+
+        <div class="mt-8 text-center md:hidden">
+            <a href="{{ route('articles.index') }}" class="inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-xl border border-outline-variant/40 text-primary font-bold text-xs hover:bg-primary hover:text-white transition-all w-full bg-surface-white shadow-sm">
+                <span>Lihat Semua Artikel &amp; Edukasi</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+        </div>
+    </div>
+</section>
+
 <!-- Lokasi Kami & Form Janji Temu -->
 <section class="relative py-20 md:py-28 pb-28 md:pb-40 bg-[#F0F7FF] overflow-hidden fade-in-up" id="lokasi">
     <div class="absolute -right-32 bottom-1/4 w-96 h-96 bg-secondary opacity-5 rounded-full blur-3xl z-0 pointer-events-none"></div>
@@ -820,7 +894,7 @@
                         Jadwalkan konsultasi dengan tim ahli kami.
                     </p>
 
-                    @if ($errors->any())
+                    @if (isset($errors) && $errors->any())
                     <div class="p-4 mb-6 bg-red-50 border-l-4 border-error text-sm text-red-700 rounded-lg">
                         <p class="font-semibold mb-1">Mohon perbaiki formulir:</p>
                         <ul class="list-disc list-inside text-xs">

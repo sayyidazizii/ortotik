@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Alur Pasien & Produk Custom-Made - pediOcare')
-@section('meta_description', 'Dirancang dan diproduksi secara individual mengikuti anatomi dan kebutuhan biomekanik setiap pasien dengan garansi fitting 100%.')
+@section('title', 'Alur Pelayanan Kaki Palsu Jogja & Custom Orthosis - pediOcare')
+@section('meta_description', '9 Tahapan pembuatan kaki palsu Jogja dan produk custom-made di pediOcare. Didesain secara individual dengan akurasi 3D scan dan garansi fitting 100%.')
+@section('meta_keywords', 'alur pembuatan kaki palsu jogja, pembuatan kaki palsu custom yogyakarta, proses kaki palsu, pediocare')
 
 @section('content')
 

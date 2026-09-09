@@ -63,6 +63,17 @@ Route::get('/tentang-kami', function () {
     return view('pages.about');
 });
 
+// Dynamic XML Sitemap for SEO Crawlers
+Route::get('/sitemap.xml', function () {
+    $services = \App\Models\MedicalService::where('is_active', true)->get();
+    $products = \App\Models\Product::where('is_active', true)->get();
+    $articles = \App\Models\Article::where('is_published', true)->get();
+    $customProducts = \App\Models\CustomProduct::where('is_active', true)->get();
+
+    return response()->view('sitemap', compact('services', 'products', 'articles', 'customProducts'))
+        ->header('Content-Type', 'text/xml');
+})->name('sitemap');
+
 /*
 |--------------------------------------------------------------------------
 | Admin Authentication Routes

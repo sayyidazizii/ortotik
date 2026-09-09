@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Layanan Orthosis Prosthesis & Alat Bantu Ortopedi - pediOcare')
-@section('meta_description', 'Dengan kaidah Rehabilitasi Medis, Kami berusaha yang terbaik untuk memberikan solusi yang komprehensif untuk mencapai kualitas hidup Anda.')
+@section('title', 'Layanan Kaki Palsu Jogja & Orthosis Prosthesis Medis - pediOcare')
+@section('meta_description', 'Layanan spesialis pembuatan kaki palsu Jogja, tangan bionik, bracing ortopedi, koreksi skoliosis 3D, dan fisioterapi adaptasi prostesis di pediOcare.')
+@section('meta_keywords', 'layanan kaki palsu jogja, prostetik jogja, ortotik jogja, pembuatan ortosis prostesis yogyakarta, pediocare')
 
 @section('content')
 

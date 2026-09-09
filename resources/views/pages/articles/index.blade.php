@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Artikel & Edukasi Medis - pediOcare')
-@section('meta_description', 'Panduan klinis terpercaya seputar kesehatan tulang, sendi, perawatan prostesis bionik, dan tips terapi postur skoliosis.')
+@section('title', 'Artikel & Edukasi Kaki Palsu Jogja - pediOcare')
+@section('meta_description', 'Kumpulan artikel dan panduan medis seputar pembuatan kaki palsu Jogja, tips merawat prostesis, skoliosis, dan kesehatan muskuloskeletal bersama pediOcare.')
+@section('meta_keywords', 'artikel kaki palsu jogja, edukasi kaki palsu, tips prostetik, info ortotik prostetik jogja, pediocare')
 
 @section('content')
 

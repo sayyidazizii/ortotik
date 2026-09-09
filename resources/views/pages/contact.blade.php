@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Hubungi Kami - pediOcare')
-@section('meta_description', 'Kunjungi klinik resmi pediOcare di Sleman, Yogyakarta atau hubungi WhatsApp 0856 9792 2194 untuk konsultasi langsung.')
+@section('title', 'Kontak & Lokasi Klinik Kaki Palsu Jogja - pediOcare')
+@section('meta_description', 'Kunjungi klinik pembuatan kaki palsu Jogja pediOcare di Jl. Kaliurang KM 8.5 Sleman, Yogyakarta. Konsultasi langsung kaki palsu dan ortotik prostetik via WhatsApp 0856 9792 2194.')
+@section('meta_keywords', 'kontak pediocare, alamat klinik kaki palsu jogja, bengkel kaki palsu jogja, konsultasi kaki palsu jogja, pediocare sleman yogyakarta')
 
 @section('content')
 

@@ -6,7 +6,10 @@
     <title>Login Administrator - Klinik Ortotik & Prostetik</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="{{ asset('logo/logo.jpg') }}"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('logo/icon.ico') }}"/>
+    <link rel="icon" type="image/jpeg" href="{{ asset('logo/icon.jpg') }}"/>
+    <link rel="apple-touch-icon" href="{{ asset('logo/icon.jpg') }}"/>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

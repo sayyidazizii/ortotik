@@ -3,21 +3,125 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@yield('title', ($settings['clinic_name'] ?? 'pediOcare') . ' - ' . ($settings['clinic_tagline'] ?? 'Care your milestone'))</title>
-    <meta name="description" content="@yield('meta_description', $settings['meta_description'] ?? 'Pusat pelayanan Ortotik Prostetik profesional tersertifikasi. Care your milestone.')"/>
-    <meta name="keywords" content="@yield('meta_keywords', $settings['meta_keywords'] ?? 'kaki palsu jogja, ortotik prostetik jogja, klinik kaki palsu jogja, pembuatan kaki palsu yogyakarta, pediocare')"/>
-    
-    <!-- Google Fonts: Plus Jakarta Sans & Material Symbols Outlined -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    
-    <!-- Tailwind CSS CDN with Plugins -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <title>@yield('title', ($settings['meta_title'] ?? (($settings['clinic_name'] ?? 'pediOcare') . ' - Pusat Pembuatan Kaki Palsu Jogja & Ortotik Prostetik')))</title>
+    <meta name="description" content="@yield('meta_description', $settings['meta_description'] ?? 'pediOcare adalah pusat pembuatan kaki palsu Jogja dan pelayanan ortotik prostetik profesional bergaransi di Yogyakarta. Care your milestone.')"/>
+    <meta name="keywords" content="@yield('meta_keywords', $settings['meta_keywords'] ?? 'pediocare, kaki palsu jogja, pembuatan kaki palsu jogja, klinik kaki palsu jogja, ortotik prostetik jogja, kaki palsu yogyakarta, harga kaki palsu jogja, pediocare jogja, bengkel kaki palsu jogja')"/>
+    <meta name="author" content="pediOcare Yogyakarta"/>
+    <meta name="robots" content="@yield('meta_robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1')"/>
+    <link rel="canonical" href="@yield('canonical_url', url()->current())"/>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="{{ asset('logo/logo.jpg') }}"/>
+    <!-- Local SEO Geo Meta Tags (Yogyakarta) -->
+    <meta name="geo.region" content="ID-YO"/>
+    <meta name="geo.placename" content="Sleman, D.I. Yogyakarta, Indonesia"/>
+    <meta name="geo.position" content="-7.7337;110.3846"/>
+    <meta name="ICBM" content="-7.7337, 110.3846"/>
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn Link Previews) -->
+    <meta property="og:locale" content="id_ID"/>
+    <meta property="og:type" content="@yield('og_type', 'website')"/>
+    <meta property="og:title" content="@yield('og_title', View::yieldContent('title', ($settings['clinic_name'] ?? 'pediOcare') . ' - Pusat Pembuatan Kaki Palsu Jogja'))"/>
+    <meta property="og:description" content="@yield('og_description', View::yieldContent('meta_description', 'pediOcare adalah pusat pembuatan kaki palsu Jogja dan pelayanan ortotik prostetik profesional bergaransi di Yogyakarta.'))"/>
+    <meta property="og:url" content="{{ url()->current() }}"/>
+    <meta property="og:site_name" content="pediOcare - Kaki Palsu Jogja"/>
+    <meta property="og:image" content="@yield('og_image', asset('logo/icon.jpg'))"/>
+    <meta property="og:image:secure_url" content="@yield('og_image', asset('logo/icon.jpg'))"/>
+    <meta property="og:image:type" content="image/jpeg"/>
+    <meta property="og:image:width" content="512"/>
+    <meta property="og:image:height" content="512"/>
+    <meta property="og:image:alt" content="pediOcare - Kaki Palsu Jogja"/>
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="@yield('twitter_title', View::yieldContent('title', 'pediOcare - Pusat Pembuatan Kaki Palsu Jogja'))"/>
+    <meta name="twitter:description" content="@yield('twitter_description', View::yieldContent('meta_description', 'Layanan pembuatan kaki palsu Jogja & ortotik prostetik profesional di pediOcare.'))"/>
+    <meta name="twitter:image" content="@yield('twitter_image', asset('logo/icon.jpg'))"/>
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('logo/icon.ico') }}"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('logo/icon.ico') }}"/>
+    <link rel="icon" type="image/jpeg" sizes="32x32" href="{{ asset('logo/icon.jpg') }}"/>
+    <link rel="icon" type="image/jpeg" sizes="192x192" href="{{ asset('logo/icon.jpg') }}"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('logo/icon.jpg') }}"/>
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('logo/icon.jpg') }}"/>
+    <link rel="image_src" href="{{ asset('logo/icon.jpg') }}"/>
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}"/>
+    <meta name="msapplication-TileImage" content="{{ asset('logo/icon.jpg') }}"/>
+    <meta name="msapplication-TileColor" content="#0F2C59"/>
+    <meta name="theme-color" content="#0F2C59"/>
+
+    <!-- Structured Data (JSON-LD) for Local SEO & Rich Snippets -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@graph": [
+            {
+                "@@type": ["MedicalClinic", "LocalBusiness", "MedicalBusiness"],
+                "@@id": "{{ url('/') }}/#clinic",
+                "name": "pediOcare - Pusat Pembuatan Kaki Palsu Jogja & Ortotik Prostetik",
+                "alternateName": ["pediOcare", "Kaki Palsu Jogja pediOcare", "Klinik Ortotik Prostetik Jogja", "Pusat Kaki Palsu Sleman Yogyakarta"],
+                "url": "{{ url('/') }}",
+                "logo": "{{ asset('logo/icon.jpg') }}",
+                "image": "{{ asset('logo/icon.jpg') }}",
+                "description": "Pusat pembuatan kaki palsu Jogja bergaransi 100%, tangan palsu, korset skoliosis, dan alat bantu gerak tubuh ortotik prostetik profesional tersertifikasi resmi Kemenkes RI di Sleman, D.I. Yogyakarta.",
+                "telephone": "{{ $settings['hotline_whatsapp'] ?? '0856 9792 2194' }}",
+                "priceRange": "$$",
+                "address": {
+                    "@@type": "PostalAddress",
+                    "streetAddress": "Jl. Kaliurang KM 8.5, Sinduharjo, Ngaglik",
+                    "addressLocality": "Sleman",
+                    "addressRegion": "Daerah Istimewa Yogyakarta",
+                    "postalCode": "55581",
+                    "addressCountry": "ID"
+                },
+                "geo": {
+                    "@@type": "GeoCoordinates",
+                    "latitude": -7.7337,
+                    "longitude": 110.3846
+                },
+                "openingHoursSpecification": [
+                    {
+                        "@@type": "OpeningHoursSpecification",
+                        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                        "opens": "08:30",
+                        "closes": "17:00"
+                    }
+                ],
+                "areaServed": [
+                    {"@@type": "AdministrativeArea", "name": "Daerah Istimewa Yogyakarta"},
+                    {"@@type": "City", "name": "Yogyakarta"},
+                    {"@@type": "AdministrativeArea", "name": "Sleman"},
+                    {"@@type": "AdministrativeArea", "name": "Bantul"},
+                    {"@@type": "AdministrativeArea", "name": "Kulon Progo"},
+                    {"@@type": "AdministrativeArea", "name": "Gunungkidul"},
+                    {"@@type": "AdministrativeArea", "name": "Jawa Tengah"},
+                    {"@@type": "Country", "name": "Indonesia"}
+                ],
+                "medicalSpecialty": [
+                    "Orthotics",
+                    "Prosthetics",
+                    "Rehabilitation"
+                ],
+                "sameAs": [
+                    "{{ $settings['facebook_url'] ?? 'https://facebook.com/pediocare' }}",
+                    "{{ $settings['instagram_url'] ?? 'https://instagram.com/pediocare' }}",
+                    "{{ $settings['youtube_url'] ?? 'https://youtube.com/@pediocare' }}"
+                ]
+            },
+            {
+                "@@type": "WebSite",
+                "@@id": "{{ url('/') }}/#website",
+                "url": "{{ url('/') }}",
+                "name": "pediOcare - Kaki Palsu Jogja",
+                "description": "Layanan Pembuatan Kaki Palsu Jogja dan Klinik Ortotik Prostetik Terpercaya",
+                "publisher": {
+                    "@@id": "{{ url('/') }}/#clinic"
+                },
+                "inLanguage": "id-ID"
+            }
+        ]
+    }
+    </script>
 
     <!-- Alpine.js CDN -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>

@@ -13,7 +13,7 @@
 @endphp
 
 <!-- Hero Section -->
-<section class="relative text-center mx-auto py-10 md:py-14 px-margin-mobile md:px-margin-desktop text-white w-full overflow-hidden fade-in-up" 
+<section class="relative text-center mx-auto py-10 md:py-14 px-margin-mobile md:px-margin-desktop text-white w-full overflow-hidden fade-in-up"
          style='background-image: linear-gradient(rgba(13, 28, 47, 0.82), rgba(13, 28, 47, 0.82)), url("{{ $heroServicesBg }}"); background-size: cover; background-position: center;'>
     <div class="max-w-container-max mx-auto relative z-10 space-y-2.5 sm:space-y-3">
         <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-white/15 text-primary-fixed border border-surface-white/25 text-[11px] font-bold uppercase tracking-wider backdrop-blur-sm">
@@ -22,9 +22,9 @@
         <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white max-w-3xl mx-auto leading-tight">
             {{ trim(str_ireplace(['& Alat Bantu Ortopedi', 'Dan Alat Bantu Ortopedi', '& alat bantu ortopedi'], '', $settings['hero_services_title'] ?? 'Layanan Orthosis Prosthesis')) ?: 'Layanan Orthosis Prosthesis' }}
         </h1>
-        <p class="text-xs sm:text-sm font-semibold text-primary-fixed uppercase tracking-wider -mt-1">
-            & Alat Bantu Ortopedi
-        </p>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white max-w-3xl mx-auto leading-tight">
+             & Alat Bantu Ortopedi
+        </h1>
         <p class="font-body-md text-body-md leading-relaxed text-slate-200 max-w-2xl mx-auto text-xs sm:text-sm pt-0.5">
             {{ $settings['hero_services_subtitle'] ?? 'Dengan kaidah Rehabilitasi Medis, Kami berusaha yang terbaik untuk memberikan solusi yang komprehensif untuk mencapai kualitas hidup Anda.' }}
         </p>
@@ -34,7 +34,7 @@
 <!-- Main Services Section -->
 <section class="py-16 md:py-24 bg-[#f8f9ff] relative overflow-hidden">
     <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop space-y-16">
-        
+
         <!-- Featured Service Spotlight (Prosthetics with Interactive 9-Step Procedure) -->
         <div class="bg-surface-white rounded-3xl border border-outline-variant/30 p-8 md:p-12 shadow-1 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div class="lg:col-span-7 space-y-6">
@@ -45,7 +45,7 @@
                     </div>
                     <span class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">Standar Kemenkes RI</span>
                 </div>
-                
+
                 <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-on-background tracking-tight">
                     Prostesis (Kaki dan tangan Tiruan)
                 </h2>
@@ -117,8 +117,8 @@
                 }
             @endphp
             <div class="lg:col-span-5 relative rounded-2xl overflow-hidden shadow-lg h-[360px] md:h-[450px] bg-surface-container-low border border-outline-variant/20 group">
-                <img src="{{ $spotlightImg }}" 
-                     alt="Prostesis Kaki dan Tangan Tiruan pediOcare" 
+                <img src="{{ $spotlightImg }}"
+                     alt="Prostesis Kaki dan Tangan Tiruan pediOcare"
                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
                 <div class="absolute top-4 right-4 bg-surface-white/90 backdrop-blur-sm border border-outline-variant/30 text-primary text-xs font-bold px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
                     <span class="w-2 h-2 rounded-full bg-success-emerald animate-pulse"></span>
@@ -135,7 +135,7 @@
                 <div class="relative h-48 sm:h-52 w-full bg-surface-container-low overflow-hidden">
                     <img src="{{ $svc->thumbnail_url }}" alt="{{ $svc->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                    
+
                     <div class="absolute top-4 left-4">
                         <div class="w-11 h-11 rounded-xl bg-white/90 backdrop-blur-sm text-primary shadow-sm flex items-center justify-center">
                             @if(str_contains(strtolower($svc->slug), 'prosthet'))
@@ -167,7 +167,7 @@
                         <h3 class="font-headline-md text-xl font-bold text-on-background mb-2.5 tracking-tight group-hover:text-primary transition-colors">
                             <a href="{{ route('services.show', $svc->slug) }}">{{ $svc->title }}</a>
                         </h3>
-                        
+
                         <p class="text-body-sm text-on-surface-variant leading-relaxed mb-5 line-clamp-3">
                             {{ $svc->summary }}
                         </p>
@@ -225,7 +225,7 @@
             </div>
             <div class="md:w-1/2 relative h-[280px] md:h-[340px] w-full rounded-2xl overflow-hidden border-4 border-surface-white shadow-md bg-slate-900">
                 <img src="{{ asset('images/client_update_rev2/image12.png') }}"
-                     alt="Inovasi Fabrikasi Modern pediOcare" 
+                     alt="Inovasi Fabrikasi Modern pediOcare"
                      class="w-full h-full object-cover"/>
             </div>
         </div>

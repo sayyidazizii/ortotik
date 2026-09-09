@@ -13,7 +13,7 @@
 @endphp
 
 <!-- Hero Section -->
-<section class="relative text-center mx-auto py-10 md:py-14 px-margin-mobile md:px-margin-desktop text-white w-full overflow-hidden fade-in-up" 
+<section class="relative text-center mx-auto py-10 md:py-14 px-margin-mobile md:px-margin-desktop text-white w-full overflow-hidden fade-in-up"
          style='background-image: linear-gradient(rgba(13, 28, 47, 0.82), rgba(13, 28, 47, 0.82)), url("{{ $heroProductsBg }}"); background-size: cover; background-position: center;'>
     <div class="max-w-container-max mx-auto relative z-10 space-y-2.5 sm:space-y-3">
         <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-white/15 text-primary-fixed border border-surface-white/25 text-[11px] font-bold uppercase tracking-wider backdrop-blur-sm">
@@ -23,13 +23,13 @@
             {{ $settings['hero_products_title'] ?? 'E-Katalog Produk Medis & Alat Bantu' }}
         </h1>
         <p class="font-body-md text-body-md leading-relaxed text-slate-200 max-w-2xl mx-auto text-xs sm:text-sm">
-            {{ $settings['hero_products_subtitle'] ?? 'Pilihan alat bantu ortotik dan ortopedi siap pakai dengan standar mutu dan fitting presisi bergaransi.' }}
+            {{ $settings['hero_products_subtitle'] ?? 'Pilihan alat bantu ortotik prostetik siap pakai dengan standar mutu dan fitting presisi bergaransi.' }}
         </p>
     </div>
 </section>
 
 <main class="max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-8 md:py-12 flex flex-col md:flex-row gap-8 relative z-10">
-    
+
 <!-- Mobile Anatomy Filter Dropdown (Visible only on mobile/tablet) -->
     <div class="md:hidden w-full bg-surface-white p-4 rounded-2xl border border-outline-variant/30 shadow-1 space-y-2">
         <label for="mobile-anatomy-select" class="flex items-center gap-2 text-xs font-bold text-primary uppercase tracking-wider">
@@ -37,7 +37,7 @@
             Filter Anatomi / Bagian Tubuh
         </label>
         <div class="relative">
-            <select id="mobile-anatomy-select" 
+            <select id="mobile-anatomy-select"
                     onchange="if (this.value) window.location.href=this.value"
                     class="w-full pl-3.5 pr-10 py-2.5 bg-surface-container-low border border-outline-variant/40 rounded-xl text-xs font-semibold text-on-surface focus:outline-none focus:border-primary appearance-none cursor-pointer">
                 <option value="{{ route('products.index', array_filter(['search' => request('search'), 'sort' => request('sort')])) }}"
@@ -65,7 +65,7 @@
                 <span class="material-symbols-outlined text-primary">filter_list</span>
                 <h2 class="font-headline-md text-lg font-semibold text-primary">Filter Anatomi</h2>
             </div>
-            
+
             <div class="space-y-1.5 relative z-10">
                 <a href="{{ route('products.index', array_filter(['search' => request('search'), 'sort' => request('sort')])) }}"
                    class="flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-colors {{ !$selectedCategory ? 'bg-primary text-white font-bold shadow-xs' : 'text-on-surface-variant hover:bg-surface-container-low font-medium' }}">
@@ -97,7 +97,7 @@
     <!-- Product Grid Area -->
     <section class="flex-grow flex flex-col gap-6 bg-surface-white rounded-3xl p-4 sm:p-8 border border-outline-variant/30 shadow-1 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-1.5 bg-primary"></div>
-        
+
         <!-- Search & Sort Bar -->
         <div class="flex flex-col sm:flex-row justify-between items-center gap-4 bg-surface-container-low p-4 sm:p-5 rounded-2xl border border-outline-variant/20">
             <!-- Search -->
@@ -128,14 +128,14 @@
         <!-- Grid Cards: 2 Columns on Mobile, 3 on Tablet/Desktop, 4 on XL -->
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-4 relative z-10">
             @foreach($products as $prod)
-            <a href="{{ route('products.show', $prod->slug) }}" 
+            <a href="{{ route('products.show', $prod->slug) }}"
                class="bg-surface-white border border-outline-variant/30 hover:border-primary rounded-2xl sm:rounded-3xl p-2.5 sm:p-3 transition-all duration-300 group flex flex-col justify-between h-full shadow-2xs hover:shadow-md hover:-translate-y-1 relative">
-                
+
                 <!-- Inner Image Box (Lapakgaming style with border-radius & padding) -->
                 <div class="relative w-full aspect-square rounded-xl sm:rounded-2xl bg-surface-container-low/70 border border-outline-variant/20 overflow-hidden flex items-center justify-center p-3 group-hover:bg-primary/5 transition-colors">
-                    <img src="{{ $prod->thumbnail_url }}" alt="{{ $prod->name }}" 
+                    <img src="{{ $prod->thumbnail_url }}" alt="{{ $prod->name }}"
                          class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300"/>
-                    
+
                     <!-- Category Badge (Positioned at Bottom of Image) -->
                     <div class="absolute bottom-2 left-2 max-w-[calc(100%-16px)]">
                         <span class="bg-primary/95 text-white font-bold text-[9px] sm:text-[10px] px-2 py-0.5 rounded-md shadow-2xs truncate block leading-tight">
@@ -151,13 +151,13 @@
                     </div>
                     @endif
                 </div>
-                
+
                 <!-- Compact Content Details -->
                 <div class="pt-2.5 pb-0.5 flex flex-col justify-between flex-grow space-y-2">
                     <h3 class="text-xs sm:text-sm font-bold text-on-surface line-clamp-1 group-hover:text-primary transition-colors leading-snug">
                         {{ $prod->name }}
                     </h3>
-                    
+
                     <div class="flex items-center justify-between pt-1.5 border-t border-outline-variant/15 mt-auto gap-1">
                         <div>
                             <span class="text-xs sm:text-sm font-extrabold text-primary block leading-tight">{{ $prod->formatted_price }}</span>

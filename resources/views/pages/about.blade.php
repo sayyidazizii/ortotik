@@ -65,7 +65,7 @@
 
     $fabBadge = $settings['about_fabrication_badge']->value ?? 'pediOcare akan terus berkembang menuju inovasi fabrikasi modern';
     $fabTitle = $settings['about_fabrication_title']->value ?? 'Inovasi Fabrikasi Modern';
-    $fabDesc = $settings['about_fabrication_desc']->value ?? 'Dengan memadukan ketelitian pengrajin ortotik prostetik berpengalaman dan peralatan modern, kami menghasilkan soket dan alat bantu yang memiliki tingkat presisi tinggi, distribusi tumpuan beban yang merata, serta estetika anatomi yang optimal.';
+    $fabDesc = $settings['about_fabrication_desc']->value ?? 'Dengan memadukan ketelitian ortotik prostetik berpengalaman dan peralatan modern, kami menghasilkan soket dan alat bantu yang memiliki tingkat presisi tinggi, distribusi tumpuan beban yang merata, serta estetika anatomi yang optimal.';
     $fabImage = $settings['about_fabrication_image']->value ?? 'images/client_update_rev2/image12.png';
     if (!str_starts_with($fabImage, 'http') && !str_starts_with($fabImage, '/')) {
         $fabImage = asset($fabImage);
@@ -98,7 +98,7 @@
 </section>
 
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 space-y-16">
-    
+
     <!-- Vision & Overview Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         <div class="lg:col-span-6 space-y-6">
@@ -107,7 +107,7 @@
                     pedi<span class="text-secondary">O</span>care
                 </h2>
             </div>
-            
+
             <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
                 {{ $companyDesc }}
             </p>
@@ -139,12 +139,12 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="lg:col-span-6 relative rounded-3xl overflow-hidden shadow-2 h-[400px] md:h-[480px] border border-outline-variant/20 group"
              x-data="{ currentImg: 0, imgs: @js($activityImgs) }"
              x-init="setInterval(() => { if (imgs.length > 1) currentImg = (currentImg + 1) % imgs.length }, 3500)">
             <template x-for="(imgSrc, i) in imgs" :key="i">
-                <img :src="imgSrc" alt="Fasilitas & Pelayanan Klinik pediOcare" 
+                <img :src="imgSrc" alt="Fasilitas & Pelayanan Klinik pediOcare"
                      x-show="currentImg === i"
                      x-transition:enter="transition ease-out duration-700"
                      x-transition:enter-start="opacity-0 scale-95"

@@ -102,10 +102,9 @@
     <!-- Vision & Overview Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         <div class="lg:col-span-6 space-y-6">
-            <div class="space-y-2">
-                <span class="text-xs font-bold uppercase tracking-wider text-primary">{{ $clinicName }}</span>
-                <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-black text-on-background tracking-tight">
-                    {{ $clinicTagline }}
+            <div>
+                <h2 class="font-headline-xl-mobile text-headline-xl-mobile md:font-headline-xl md:text-headline-xl text-on-background leading-tight relative font-black">
+                    pedi<span class="text-secondary">O</span>care
                 </h2>
             </div>
             

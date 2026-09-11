@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /login
 
-Sitemap: /sitemap.xml
+Sitemap: https://pediocare.com/sitemap.xml

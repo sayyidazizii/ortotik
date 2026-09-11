@@ -49,10 +49,10 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title'               => ['required', 'string', 'max:255'],
             'category_id'         => ['nullable', 'exists:categories,id'],
-            'image_file'          => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:5120'],
-            'thumbnail'           => ['nullable', 'string', 'max:500'],
-            'featured_image_path' => ['nullable', 'string', 'max:500'],
-            'summary'             => ['required', 'string', 'max:500'],
+            'image_file'          => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:10240'],
+            'thumbnail'           => ['nullable', 'string', 'max:1000'],
+            'featured_image_path' => ['nullable', 'string', 'max:1000'],
+            'summary'             => ['required', 'string', 'max:1000'],
             'content'             => ['required', 'string'],
             'read_time'           => ['nullable'],
         ]);
@@ -100,10 +100,10 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title'               => ['required', 'string', 'max:255'],
             'category_id'         => ['nullable', 'exists:categories,id'],
-            'image_file'          => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:5120'],
-            'thumbnail'           => ['nullable', 'string', 'max:500'],
-            'featured_image_path' => ['nullable', 'string', 'max:500'],
-            'summary'             => ['required', 'string', 'max:500'],
+            'image_file'          => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg,gif', 'max:10240'],
+            'thumbnail'           => ['nullable', 'string', 'max:1000'],
+            'featured_image_path' => ['nullable', 'string', 'max:1000'],
+            'summary'             => ['required', 'string', 'max:1000'],
             'content'             => ['required', 'string'],
             'read_time'           => ['nullable'],
         ]);

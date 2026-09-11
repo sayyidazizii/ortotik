@@ -18,16 +18,39 @@
 @endphp
 
 <div class="max-w-3xl space-y-6" x-data="{
-    imagePreview: '{{ $currentThumbSrc }}',
+    imageUrl: '{{ old('image', $branch->image) }}',
+    filePreview: '',
+    get displayPreview() {
+        if (this.filePreview) return this.filePreview;
+        if (!this.imageUrl) return '';
+        if (!this.imageUrl.startsWith('http') && !this.imageUrl.startsWith('/')) {
+            return '{{ asset('') }}' + this.imageUrl.replace(/^\/+/, '');
+        }
+        return this.imageUrl;
+    },
     handleFileSelect(e) {
         const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (ev) => {
-                this.imagePreview = ev.target.result;
-            };
-            reader.readAsDataURL(file);
+        if (!file) {
+            this.filePreview = '';
+            return;
         }
+        if (file.size > 10 * 1024 * 1024) {
+            alert('Ukuran foto terlalu besar (maksimal 10MB).');
+            e.target.value = '';
+            this.filePreview = '';
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            this.filePreview = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+        this.imageUrl = '';
+    },
+    clearFile() {
+        this.filePreview = '';
+        const input = document.getElementById('branch_image_file_input');
+        if (input) input.value = '';
     }
 }">
     <div class="flex items-center justify-between">
@@ -62,10 +85,10 @@
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5">
                 <!-- Preview Box -->
                 <div class="w-32 h-24 rounded-2xl bg-white border-2 border-dashed border-slate-300 overflow-hidden flex items-center justify-center relative shrink-0 shadow-xs">
-                    <template x-if="imagePreview">
-                        <img :src="imagePreview" alt="Preview Cabang" class="w-full h-full object-cover">
+                    <template x-if="displayPreview">
+                        <img :src="displayPreview" alt="Preview Cabang" class="w-full h-full object-cover">
                     </template>
-                    <template x-if="!imagePreview">
+                    <template x-if="!displayPreview">
                         <div class="text-center p-2 text-slate-400">
                             <i data-lucide="building" class="w-6 h-6 mx-auto mb-1 stroke-1"></i>
                             <span class="text-[10px] block font-medium">Foto Cabang</span>
@@ -76,18 +99,24 @@
                 <!-- Upload & URL Inputs -->
                 <div class="flex-1 space-y-3 w-full">
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Pilih File Foto Baru (Upload)</label>
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="block text-xs font-bold text-slate-700">Pilih File Foto Baru (Upload)</label>
+                            <button type="button" x-show="filePreview" @click="clearFile()" class="text-[11px] text-rose-500 hover:underline font-semibold">
+                                Batalkan File
+                            </button>
+                        </div>
                         <input type="file" 
+                               id="branch_image_file_input"
                                name="image_file" 
                                accept="image/*"
                                @change="handleFileSelect($event)"
                                class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-medical-50 file:text-medical-700 hover:file:bg-medical-100 cursor-pointer border border-slate-200 rounded-xl bg-white p-1">
-                        <p class="text-[11px] text-slate-400 mt-1">Format: JPG, PNG, WEBP (Maksimal 5MB). Kosongkan jika tidak ingin mengubah foto saat ini.</p>
+                        <p class="text-[11px] text-slate-400 mt-1">Format: JPG, PNG, WEBP (Maksimal 10MB). Kosongkan jika tidak ingin mengubah foto saat ini.</p>
                     </div>
 
                     <div class="pt-2 border-t border-slate-200/60">
                         <label class="block text-[11px] font-bold text-slate-600 mb-1">Atau Ubah URL Gambar</label>
-                        <input type="text" name="image" x-model="imagePreview" value="{{ old('image', $branch->image) }}" placeholder="https://... atau /images/..."
+                        <input type="text" name="image" x-model="imageUrl" @input="clearFile()" placeholder="https://... atau /images/..."
                                class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-medical-500">
                     </div>
                 </div>

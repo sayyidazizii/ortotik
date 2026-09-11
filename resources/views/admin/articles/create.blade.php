@@ -5,16 +5,83 @@
 
 @section('content')
 <div class="max-w-4xl space-y-6" x-data="{
-    imagePreview: '{{ old('thumbnail') ?? '' }}',
+    thumbnailUrl: '{{ old('thumbnail') ?? '' }}',
+    filePreview: '',
+    get displayPreview() {
+        return this.filePreview || this.thumbnailUrl;
+    },
     handleFileSelect(e) {
         const file = e.target.files[0];
-        if (file) {
+        if (!file) {
+            this.filePreview = '';
+            return;
+        }
+
+        if (file.size > 10 * 1024 * 1024) {
+            alert('Ukuran foto terlalu besar (maksimal 10MB). Silakan pilih foto dengan resolusi atau ukuran lebih kecil.');
+            e.target.value = '';
+            this.filePreview = '';
+            return;
+        }
+
+        // Kompres otomatis jika file > 1MB agar upload cepat dan tidak memicu 413
+        if (file.size > 1024 * 1024 && file.type.startsWith('image/')) {
             const reader = new FileReader();
             reader.onload = (ev) => {
-                this.imagePreview = ev.target.result;
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    let w = img.width;
+                    let h = img.height;
+                    const maxDim = 1920;
+                    if (w > maxDim || h > maxDim) {
+                        if (w > h) {
+                            h = Math.round((h * maxDim) / w);
+                            w = maxDim;
+                        } else {
+                            w = Math.round((w * maxDim) / h);
+                            h = maxDim;
+                        }
+                    }
+                    canvas.width = w;
+                    canvas.height = h;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, w, h);
+                    canvas.toBlob((blob) => {
+                        if (blob && blob.size < file.size) {
+                            try {
+                                const newFile = new File([blob], file.name.replace(/\.[^.]+$/, '.webp'), {
+                                    type: 'image/webp',
+                                    lastModified: Date.now()
+                                });
+                                const dt = new DataTransfer();
+                                dt.items.add(newFile);
+                                e.target.files = dt.files;
+                            } catch(err) {}
+                            this.filePreview = canvas.toDataURL('image/webp', 0.85);
+                        } else {
+                            this.filePreview = ev.target.result;
+                        }
+                    }, 'image/webp', 0.85);
+                };
+                img.src = ev.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                this.filePreview = ev.target.result;
             };
             reader.readAsDataURL(file);
         }
+
+        // Kosongkan URL agar tidak dobel/konflik
+        this.thumbnailUrl = '';
+    },
+    clearFile() {
+        this.filePreview = '';
+        const input = document.getElementById('image_file_input');
+        if (input) input.value = '';
     }
 }">
     <div class="flex items-center justify-between">
@@ -48,10 +115,10 @@
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5">
                 <!-- Preview Thumbnail Box -->
                 <div class="w-36 h-24 sm:w-44 sm:h-28 rounded-2xl bg-white border-2 border-dashed border-slate-300 overflow-hidden flex items-center justify-center relative shrink-0 shadow-xs">
-                    <template x-if="imagePreview">
-                        <img :src="imagePreview" alt="Preview Sampul" class="w-full h-full object-cover">
+                    <template x-if="displayPreview">
+                        <img :src="displayPreview" alt="Preview Sampul" class="w-full h-full object-cover">
                     </template>
-                    <template x-if="!imagePreview">
+                    <template x-if="!displayPreview">
                         <div class="text-center p-3 text-slate-400">
                             <i data-lucide="image" class="w-7 h-7 mx-auto mb-1 stroke-1"></i>
                             <span class="text-[10px] block font-medium">Foto Sampul</span>
@@ -62,18 +129,24 @@
                 <!-- Upload & URL Inputs -->
                 <div class="flex-1 space-y-3 w-full">
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Pilih File Foto Sampul (Upload)</label>
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="block text-xs font-bold text-slate-700">Pilih File Foto Sampul (Upload)</label>
+                            <button type="button" x-show="filePreview" @click="clearFile()" class="text-[11px] text-rose-500 hover:underline font-semibold">
+                                Batalkan Pilihan File
+                            </button>
+                        </div>
                         <input type="file" 
+                               id="image_file_input"
                                name="image_file" 
                                accept="image/*"
                                @change="handleFileSelect($event)"
                                class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-medical-50 file:text-medical-700 hover:file:bg-medical-100 cursor-pointer border border-slate-200 rounded-xl bg-white p-1">
-                        <p class="text-[11px] text-slate-400 mt-1">Format: JPG, PNG, WEBP (Maks. 5MB). Rasio lanskap (16:9) direkomendasikan.</p>
+                        <p class="text-[11px] text-slate-400 mt-1">Format: JPG, PNG, WEBP (Maks. 10MB). Foto berukuran besar akan dioptimasi otomatis.</p>
                     </div>
 
                     <div class="pt-2 border-t border-slate-200/60">
                         <label class="block text-[11px] font-bold text-slate-600 mb-1">Atau Gunakan URL Gambar Eksternal</label>
-                        <input type="text" name="thumbnail" x-model="imagePreview" placeholder="https://images.unsplash.com/... atau /images/..."
+                        <input type="text" name="thumbnail" x-model="thumbnailUrl" @input="clearFile()" placeholder="https://images.unsplash.com/... atau /images/..."
                                class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-medical-500">
                     </div>
                 </div>

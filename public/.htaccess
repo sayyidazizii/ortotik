@@ -23,3 +23,7 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# Increase maximum request payload limit to 100MB (prevents 413 Request Entity Too Large)
+LimitRequestBody 104857600
+

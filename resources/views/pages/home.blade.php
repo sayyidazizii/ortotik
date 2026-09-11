@@ -45,7 +45,7 @@
             <div>
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-3">
                     <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
-                    Pusat Pembuatan Kaki Palsu Jogja &amp; Ortotik Medis
+                    Pusat Pembuatan Kaki Palsu &amp; Alat Bantu Ortopedi di Jogja dan Sekitarnya
                 </span>
                 <h1 class="font-headline-xl-mobile text-headline-xl-mobile md:font-headline-xl md:text-headline-xl text-on-background leading-tight relative font-black">
                     pedi<span class="text-secondary">O</span>care
@@ -286,7 +286,7 @@
             <!-- Left: Text Slide In from Left -->
             <div class="fade-in-left delay-100">
                 <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
-                    Dedikasi & Integritas Medis
+                    History, Vision & Mision 
                 </span>
                 <h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background mb-6 font-semibold">
                     Tentang {{ $settings['clinic_name'] ?? 'pediOcare' }}
@@ -388,7 +388,7 @@
                     Layanan Orthosis Prosthesis<br class="hidden sm:inline"> Dan Alat Bantu Ortopedi
                 </h2>
                 <p class="font-body-md text-body-md text-on-surface-variant max-w-xl mt-1">
-                    Solusi komprehensif untuk berbagai kebutuhan ortopedi, prostetik bionik, dan pemulihan gerak.
+                    Solusi komprehensif untuk berbagai kebutuhan Alat Bantu Ortopedi untuk Meningkatkan Kualitas Hidup Anda
                 </p>
             </div>
             
@@ -418,7 +418,7 @@
                         <span class="material-symbols-outlined text-2xl md:text-3xl">accessible_forward</span>
                     </div>
                     <h3 class="font-headline-md text-sm md:text-base font-bold text-on-background group-hover:text-primary transition-colors leading-tight mb-1">
-                        Kaki Palsu &amp; Prostetik
+                        Kaki Palsu &amp; Tangan Palsu
                     </h3>
                     <p class="text-[11px] md:text-xs text-on-surface-variant line-clamp-2 px-2 leading-relaxed">
                         Kaki Palsu Jogja Bawah/Atas Lutut &amp; Bionik
@@ -563,7 +563,7 @@
                     E-Katalog Ready Stock
                 </span>
                 <h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background font-semibold">
-                    Produk Ready Stock Terlaris
+                    Produk Ready Stock
                 </h2>
                 <p class="font-body-md text-body-md text-on-surface-variant max-w-xl mt-1">
                     Pilihan alat bantu ortotik dan ortopedi siap pakai dengan standar mutu dan fitting presisi.
@@ -774,17 +774,23 @@
                 <a href="{{ route('articles.show', $art->slug) }}" 
                    class="bg-surface-white rounded-2xl sm:rounded-3xl border border-outline-variant/30 overflow-hidden flex flex-col justify-between shadow-1 hover:shadow-hover hover:-translate-y-1.5 transition-all duration-300 group">
                     <div>
+                        <!-- Image Container with Aspect Ratio & Relative Positioning -->
+                        <div class="relative bg-surface-container-low aspect-[16/10] overflow-hidden border-b border-outline-variant/15">
                             @php
-                                $thumbRaw = $art->thumbnail ? ltrim($art->thumbnail, '/') : null;
-                                $thumbSrc = ($thumbRaw && file_exists(public_path($thumbRaw)))
-                                    ? asset($thumbRaw)
-                                    : 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80';
+                                $thumb = $art->thumbnail;
+                                if ($thumb && !str_starts_with($thumb, 'http://') && !str_starts_with($thumb, 'https://') && !str_starts_with($thumb, '/')) {
+                                    $thumb = asset($thumb);
+                                }
                             @endphp
-                            <img src="{{ $thumbSrc }}" alt="{{ $art->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute top-3 left-3 bg-surface-white/95 text-primary text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-outline-variant/20 shadow-2xs">
+                            <img src="{{ $thumb ?: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80' }}" 
+                                 alt="{{ $art->title }}" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3.5 left-3.5 bg-surface-white/95 text-primary text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-outline-variant/20 shadow-2xs">
                                 {{ $art->category->name ?? 'Edukasi' }}
                             </span>
                         </div>
+
+                        <!-- Card Content -->
                         <div class="p-6 space-y-2">
                             <span class="text-[11px] text-on-surface-variant flex items-center gap-1.5">
                                 <span class="material-symbols-outlined text-sm">schedule</span>
@@ -798,6 +804,8 @@
                             </p>
                         </div>
                     </div>
+
+                    <!-- Card Footer -->
                     <div class="px-6 pb-6 pt-2">
                         <span class="text-xs font-semibold text-primary inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                             Baca Selengkapnya <span class="material-symbols-outlined text-xs">arrow_forward</span>
@@ -805,6 +813,11 @@
                     </div>
                 </a>
                 @endforeach
+            @else
+                <div class="col-span-full p-12 bg-surface-white rounded-3xl border border-outline-variant/30 text-center space-y-2 shadow-1">
+                    <span class="material-symbols-outlined text-outline-variant text-4xl">article</span>
+                    <p class="text-on-surface-variant text-sm font-medium">Artikel edukasi medis sedang dipersiapkan.</p>
+                </div>
             @endif
         </div>
 

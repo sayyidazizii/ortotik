@@ -397,6 +397,55 @@
                 // Set initial content
                 quill.root.innerHTML = textarea.value || '';
 
+                // Intercept and compress pasted images in Quill to avoid oversized base64 payload (413 Payload Too Large)
+                quill.root.addEventListener('paste', (e) => {
+                    const clipboardData = e.clipboardData || window.clipboardData;
+                    if (!clipboardData) return;
+
+                    const items = clipboardData.items;
+                    if (!items) return;
+
+                    for (let i = 0; i < items.length; i++) {
+                        if (items[i].type && items[i].type.indexOf('image') !== -1) {
+                            const file = items[i].getAsFile();
+                            if (file) {
+                                e.preventDefault();
+                                const reader = new FileReader();
+                                reader.onload = (ev) => {
+                                    const img = new Image();
+                                    img.onload = () => {
+                                        const canvas = document.createElement('canvas');
+                                        let w = img.width;
+                                        let h = img.height;
+                                        const maxDim = 1200;
+                                        if (w > maxDim || h > maxDim) {
+                                            if (w > h) {
+                                                h = Math.round((h * maxDim) / w);
+                                                w = maxDim;
+                                            } else {
+                                                w = Math.round((w * maxDim) / h);
+                                                h = maxDim;
+                                            }
+                                        }
+                                        canvas.width = w;
+                                        canvas.height = h;
+                                        const ctx = canvas.getContext('2d');
+                                        ctx.drawImage(img, 0, 0, w, h);
+                                        const compressedData = canvas.toDataURL('image/jpeg', 0.82);
+                                        
+                                        const range = quill.getSelection(true) || { index: quill.getLength() };
+                                        quill.insertEmbed(range.index, 'image', compressedData);
+                                        quill.setSelection(range.index + 1);
+                                    };
+                                    img.src = ev.target.result;
+                                };
+                                reader.readAsDataURL(file);
+                                break;
+                            }
+                        }
+                    }
+                });
+
                 // Sync on content change
                 quill.on('text-change', () => {
                     textarea.value = quill.root.innerHTML === '<p><br></p>' ? '' : quill.root.innerHTML;
@@ -405,8 +454,18 @@
                 // Sync on submit
                 const form = textarea.closest('form');
                 if (form) {
-                    form.addEventListener('submit', () => {
+                    form.addEventListener('submit', (e) => {
                         textarea.value = quill.root.innerHTML === '<p><br></p>' ? '' : quill.root.innerHTML;
+
+                        // Check if file input is attached and exceeds 10MB
+                        const fileInput = form.querySelector('input[type="file"]');
+                        if (fileInput && fileInput.files && fileInput.files[0]) {
+                            if (fileInput.files[0].size > 10 * 1024 * 1024) {
+                                e.preventDefault();
+                                alert('Ukuran file foto melebihi batas 10MB. Mohon gunakan foto dengan resolusi atau ukuran lebih kecil.');
+                                return false;
+                            }
+                        }
                     });
                 }
             });
